@@ -1,0 +1,1089 @@
+
+
+--- START OF 11. Soportes y Resistencias, Tendencias.pdf ---
+
+Objetivos de la clase:
+Comprender la estructura del mercado 
+Qué es una tendencia y cómo se forman las fases del mercado (alcista, bajista y lateral).
+Identificar soportes y resistencias 
+Definir qué son y cómo se comportan en el gráfico.
+Dibujar correctamente tendencias, soportes y resistencias
+Cómo estos niveles pueden actuar como zonas de entrada y salida en operaciones.
+Validación de soportes y resistencias con indicadores u otras herramientas.
+Evitar errores comunes 
+Sobreanalizar el gráfico.
+T e n d e n c i a s 
+
+Q u e  e s  u n a  T e n d e n c i a s ?
+Una tendencia en el análisis técnico es la dirección general en la que se mueve
+el precio de un activo. Las tendencias pueden ser alcistas, bajistas o laterales
+(también llamadas de rango o de consolidación).
+Identificar correctamente una tendencia permite tomar decisiones alineadas
+con la dirección predominante del mercado, maximizando oportunidades y
+minimizando riesgos.
+Base para tomar decisiones
+Se suele seguir la regla: "La tendencia es tu amiga".
+En una tendencia alcista, se priorizan operaciones de compra (long),
+mientras que en una tendencia bajista, se buscan operaciones de
+venta (short).
+En una tendencia lateral, se puede operar en los niveles de soporte
+y resistencia.
+Tipos de tendencias
+Tendencia Alcista (Bullish Trend)
+    Descripción: El precio del activo está
+subiendo, con máximos y mínimos
+sucesivos cada vez más altos.
+    Identificación: Se trazan líneas de
+tendencia conectando los mínimos
+ascendentes en el gráfico.
+
+T i p o s  d e  t e n d e n c i a s
+Tendencia Bajista (Bearish Trend)
+    Descripción: El precio del activo está
+bajando, con máximos y mínimos
+sucesivos cada vez más bajos.
+    Identificación: Se trazan líneas de
+tendencia conectando los máximos
+descendentes en el gráfico.
+
+Tendencia Lateral (Sideways Trend)
+    Descripción: El precio del activo se mueve en un rango estrecho, sin una
+dirección clara hacia arriba o hacia abajo.
+    Identificación: Se observan máximos y mínimos que se mantienen
+relativamente constantes, formando un canal horizontal.
+Tipos de tendencias
+
+Cambio de Tendencia
+Giro de mercado cuando
+ se rompe estructura
+Confirmación 
+con soportes al alza
+Confirmación 
+con resisitencias a la baja
+Giro de mercado cuando
+ se rompe estructura
+Giro de mercado cuando
+ se rompe estructura
+Identificación de Tendencias
+1 .  M e d i a n t e  L í n e a s  d e  T e n d e n c i a
+    T e n d e n c i a  A l c i s t a :  S e  d i b u j a  u n a  l í n e a  r e c t a  c o n e c t a n d o  d o s  o  m á s
+m í n i m o s  a s c e n d e n t e s .
+    T e n d e n c i a  B a j i s t a :  S e  d i b u j a  u n a  l í n e a  r e c t a  c o n e c t a n d o  d o s  o  m á s
+m á x i m o s  d e s c e n d e n t e s .
+    T e n d e n c i a  L a t e r a l :  S e  d i b u j a n  d o s  l í n e a s  h o r i z o n t a l e s ,  u n a  e n  l o s
+m á x i m o s  y  o t r a  e n  l o s  m í n i m o s ,  q u e  e n c i e r r a n  e l  m o v i m i e n t o  d e l  p r e c i o
+d e n t r o  d e  u n  r a n g o  e s t r e c h o .
+
+Identificación de Tendencias
+2. Mediante Indicadores Técnicos
+    Medias Móviles: Una media móvil simple (SMA) o una media móvil exponencial
+(EMA) puede ayudar a suavizar los datos de precios y resaltar la dirección de la
+tendencia. Por ejemplo:
+        Tendencia Alcista: El precio se mantiene por encima de la media móvil.
+        Tendencia Bajista: El precio se mantiene por debajo de la media móvil.
+        Tendencia Lateral: El precio oscila alrededor de la media móvil sin una
+dirección clara.
+    Indicador de Fuerza Relativa (RSI): Un RSI que sube por encima de 50
+generalmente indica una tendencia alcista, mientras que un RSI que baja por
+debajo de 50 generalmente indica una tendencia bajista.
+
+Identificación de Tendencias
+3. Mediante Patrones de Gráficos
+    Patrones de Continuación: Formaciones como banderas, banderines y
+triángulos que indican que la tendencia existente probablemente continuará.
+    Patrones de Reversión: Formaciones como cabeza y hombros, doble techo y
+doble suelo que indican una posible reversión de la tendencia actual.
+4. Análisis de múltiples temporalidades
+Observa la tendencia en diferentes marcos temporales para confirmar:
+Tendencia a largo plazo (temporalidad diaria o semanal).
+Tendencia a corto plazo (temporalidad de 1 hora o 4 horas).
+Esto te ayuda a evitar errores, como operar contra la tendencia principal.
+    Contexto Económico y Político
+        Las tendencias de los mercados están influenciadas por una variedad de factores
+económicos y políticos, incluyendo decisiones de política monetaria, cambios fiscales,
+eventos geopolíticos, y cambios tecnológicos.
+    Períodos de Tiempo
+        Las tendencias pueden variar dependiendo del marco temporal analizado. Un
+activo puede mostrar una tendencia alcista en el largo plazo, pero dentro de ese
+período puede tener múltiples ciclos de tendencias alcistas y bajistas en el corto y
+mediano plazo.
+    Diversificación
+        Los inversores y traders suelen diversificar sus carteras para manejar mejor las
+fluctuaciones de las tendencias en diferentes mercados y clases de activos.
+Consideraciones
+Soportes y Resistencias
+Definición: El soporte es un nivel de precio donde una tendencia bajista tiende a
+detenerse debido a la concentración de demanda o interés de compra. Se
+considera un "piso" para el precio, porque los compradores tienden a entrar en
+el mercado cuando el precio alcanza este nivel, deteniendo su caída.
+Función: Actúa como un punto de inflexión, donde el precio podría rebotar y
+empezar a subir nuevamente.
+Identificación: Se identifica observando niveles previos en los gráficos donde el
+precio dejó de caer y rebotó hacia arriba.
+Soporte
+
+Impulso bajista
+I m p u l s o  b a j i s t a
+I m p u l s o  a l c i s t a
+S o p o r t e  
+S o p o r t e  
+
+Resistencia
+Definición: La resistencia es un nivel de precio donde una tendencia alcista
+tiende a detenerse debido a la concentración de oferta o interés de venta. Se
+considera un "techo" para el precio, porque los vendedores tienden a entrar
+en el mercado cuando el precio alcanza este nivel, deteniendo su subida.
+Función: Actúa como un punto de inflexión, donde el precio podría rebotar y
+empezar a bajar nuevamente.
+Identificación: Se identifica observando niveles previos en los gráficos donde
+el precio dejó de subir y rebotó hacia abajo.
+
+I m p u l s o  a l c i s t a
+I m p u l s o  a l c i s t a
+Impulso bajista
+Impulso bajista
+Impulso bajista
+R e s i s t e n c i a
+R e s i s t e n c i a
+R e s i s t e n c i a
+
+Operadores y Traders: Utilizan estos niveles para tomar decisiones de compra y venta.
+Por ejemplo, pueden comprar en niveles de soporte y vender en niveles de resistencia.
+Stop-Loss y Take-Profit: Establecer órdenes de stop-loss justo por debajo de un soporte
+o órdenes de take-profit justo por debajo de una resistencia.
+Utilización 
+Tipos de Soportes y Resistencias
+1. Soportes y Resistencias Horizontales
+Descripción: Son niveles de precio fijos que han demostrado ser puntos de reversión en el pasado.
+Identificación: Se trazan líneas horizontales en los gráficos en los puntos donde el precio ha rebotado varias
+veces.
+2. Soportes y Resistencias Dinámicos
+Descripción: Estos niveles cambian con el tiempo y generalmente se basan en medias móviles u otros
+indicadores técnicos.
+Ejemplos: Medias móviles (como la media móvil simple o exponencial) actúan como soporte o resistencia
+dinámica.
+Identificación: Se trazan siguiendo la línea de una media móvil en el gráfico.
+3. Soportes y Resistencias Diagonales (Líneas de Tendencia)
+Descripción: Son líneas inclinadas que indican la dirección de la tendencia y actúan como soporte en tendencias
+alcistas y resistencia en tendencias bajistas.
+Identificación: Se trazan conectando mínimos en una tendencia alcista (soporte) o máximos en una tendencia
+bajista (resistencia).
+4. Soportes y Resistencias de Fibonacci
+Descripción: Basados en los niveles de retroceso de Fibonacci, estos niveles identifican posibles puntos de
+reversión utilizando proporciones matemáticas.
+Identificación: Se trazan utilizando la herramienta de retroceso de Fibonacci en el gráfico, desde un punto alto a un
+punto bajo (o viceversa).
+5. Soportes y Resistencias Psicológicos
+Descripción: Son niveles de precios que tienden a ser importantes debido a factores psicológicos, como números
+redondos (por ejemplo, 100, 1000).
+Identificación: Se identifican observando niveles de precios redondos que tienden a actuar como barreras
+significativas.
+6. Soportes y Resistencias Pivot Points
+Descripción: Calculados a partir de los precios de máximos, mínimos y cierres del período anterior, estos niveles
+se utilizan para predecir soportes y resistencias futuros.
+Identificación: Se calculan usando fórmulas específicas basadas en los precios anteriores y se trazan en el gráfico.
+7. Soportes y Resistencias en Zonas de Congestión
+Descripción: Áreas donde el precio ha pasado mucho tiempo oscilando entre ciertos rangos, creando una zona de
+soporte o resistencia.
+Identificación: Se identifican observando áreas en el gráfico donde el precio ha tenido dificultad para romper
+durante un período prolongado.
+8. Soportes y Resistencias en Patrones Gráficos
+Descripción: Formaciones específicas en los gráficos, como triángulos, rectángulos, y cabezas y hombros, que
+tienen líneas de soporte y resistencia inherentes.
+Identificación: Se identifican observando los patrones formados en los gráficos y trazando líneas en los bordes de
+estos patrones.
+
+
+--- END OF 11. Soportes y Resistencias, Tendencias.pdf ---
+
+
+
+--- START OF 12. Velas Japonesas.pdf ---
+
+Objetivos de la clase:
+C o m p r e n d e r  l a  e s t r u c t u r a  d e  u n a  v e l a  j a p o n e s a
+I n t e r p r e t a r  l a  p s i c o l o g í a  d e t r á s  d e  l a s  v e l a s
+C ó m o  r e f l e j a n  l a  l u c h a  e n t r e  c o m p r a d o r e s  y  v e n d e d o r e s .
+I d e n t i f i c a r  l o s  p r i n c i p a l e s  t i p o s  d e  v e l a s
+R e c o n o c e r  p a t r o n e s  d e  v e l a s  i n d i v i d u a l e s  y  c o m b i n a c i o n e s
+A p r e n d e r  a  l e e r  v e l a s  e n  d i s t i n t o s  c o n t e x t o s
+C ó m o  s e  c o m p o r t a n  l a s  v e l a s  e n  s o p o r t e s ,  r e s i s t e n c i a s  y  t e n d e n c i a s .
+E v i t a r  e r r o r e s  c o m u n e s  a l  i n t e r p r e t a r  v e l a s
+N o  o p e r a r  u n a  v e l a  a i s l a d a  s i n  c o n t e x t o .
+Velas Japonesas
+Que es una Veja Japonesa?
+Es una herramienta de análisis técnico utilizada en el mercado para representar el movimiento
+del precio de un activo durante un periodo de tiempo específico. Cada vela proporciona
+información sobre los precios de apertura, cierre, máximo y mínimo del activo durante ese
+periodo. 
+Cuerpo: El cuerpo de la vela representa la diferencia entre el precio de apertura y el
+precio de cierre del activo. Si el cierre es mayor que la apertura, el cuerpo es
+generalmente de color verde o blanco (vela alcista). Si el cierre es menor que la apertura,
+el cuerpo es de color rojo o negro (vela bajista).
+Mechas (también llamadas sombras o colas): Las líneas finas que se extienden desde el
+cuerpo de la vela hacia arriba y hacia abajo. La sombra superior muestra el precio
+máximo alcanzado durante el periodo, mientras que la sombra inferior muestra el precio
+mínimo.
+Precio de apertura: El precio al que se inició la negociación en el periodo de tiempo de la
+vela.
+Precio de cierre: El precio al que se cerró la negociación en el periodo de tiempo de la
+vela.
+Vela Alcista
+Precio de cierre
+Precio de apertura 
+Precio maximo
+Precio minimo
+Vela Bajista
+Precio de apertura  
+Precio de cierre
+Precio maximo
+Precio minimo
+    Descripción: Una vela con un cuerpo muy
+pequeño, lo que indica que el precio de
+apertura y el precio de cierre estan muy
+cerca.
+    Significado: Puede señalar indecisión en el
+mercado. Dependiendo de su posición en el
+gráfico, puede indicar una posible reversión
+de tendencia.
+Doji
+Descripción: Esta vela tiene un cuerpo largo
+sin mecha, o mechas muy pequeñas. 
+Significado: Indica una fuerte presión de
+compra/venta. Es una señal de
+continuación alcista/bajista o de inicio de
+una tendencia.
+Si se encuentra en el final de un impulso
+muestra agotamiento del mismo.
+Marubozu
+
+    Descripción: Tiene un cuerpo pequeño
+y una mecha inferior larga, con poca o
+ninguna mecha superior.
+  Significado: Indica una posible reversión
+alcista después de una tendencia bajista.
+ Martillo (Hammer)
+ Martillo Invertido
+   Descripción: Similar al martillo, pero con
+la mecha larga por encima del cuerpo y
+poca o ninguna mecha inferior.
+    Significado: Indica una posible reversión
+bajista después de una tendencia alcista.
+Estrella de la Mañana (Morning Star)
+    Descripción: Un patrón de tres velas: una vela
+bajista larga, seguida de una pequeña vela
+(alcista o bajista) y una vela alcista larga.
+    Significado: Señal de una posible reversión
+alcista.
+Patrones de Velas mas importantes
+Estrella al Atardecer (Evening Star)
+    Descripción: Un patrón de tres velas: una
+vela alcista larga, seguida de una pequeña
+vela (alcista o bajista) y una vela bajista larga.
+    Significado: Señal de una posible reversión
+bajista.
+Envolvente Alcista (Bullish Engulfing)
+    Descripción: Una vela bajista pequeña
+seguida por una vela alcista más grande que
+envuelve completamente la vela anterior.
+    Significado: Señal de una posible reversión
+alcista.
+Envolvente Bajista (Bearish Engulfing)
+    Descripción: Una vela alcista pequeña
+seguida por una vela bajista más grande que
+envuelve completamente la vela anterior.
+    Significado: Señal de una posible reversión
+bajista.
+
+Harami Alcista (Bullish Harami)
+    Descripción: Una vela bajista larga
+seguida por una vela alcista más pequeña
+contenida dentro del rango de la vela
+anterior.
+    Significado: Posible señal de reversión
+alcista.
+Harami Bajista (Bearish Harami)
+    Descripción: Una vela alcista larga seguida
+por una vela bajista más pequeña contenida
+dentro del rango de la vela anterior.
+    Significado: Posible señal de reversión
+bajista.
+
+GAP de precio
+Describe una diferencia en el precio de un activo financiero entre dos períodos consecutivos. Este
+fenómeno se observa cuando el precio de apertura de un período es significativamente mayor o
+menor que el precio de cierre del período anterior, dejando un "vacío" en el gráfico.
+Motivos por los que se generan
+Noticias importantes.
+Anuncios económicos, resultados de empresas o eventos geopolíticos inesperados.
+Falta de liquidez.
+En activos con bajo volumen, los gaps pueden ser más frecuentes.
+Apertura del mercado.
+Durante los fines de semana o después de horas de cierre, los eventos externos pueden
+provocar gaps.
+Velas Heiken Ashi
+Del japonés que significa "barra promedio", son un tipo de
+representación gráfica utilizada en análisis técnico,
+especialmente en trading. Son una variante de las velas
+japonesas tradicionales, pero calculadas de forma diferente
+para suavizar las fluctuaciones del mercado y facilitar la
+identificación de tendencias.
+Cada vela Heiken Ashi no representa directamente los
+precios de apertura, cierre, máximo y mínimo como las
+velas tradicionales, sino que utiliza fórmulas que
+promedian los valores para generar una representación
+más fluida.
+
+Graficos de Barras
+Bar Charts, son una representación gráfica del precio de un activo financiero
+durante un período de tiempo específico. Estas barras muestran cuatro
+puntos clave de información para cada periodo: apertura, cierre, máximo y
+mínimo. Aunque no tienen el formato "relleno" de las velas japonesas,
+cumplen un propósito similar en el análisis técnico.
+
+Consideraciones importantes
+Cuerpo de la Vela
+    Tamaño: El tamaño del cuerpo indica la fuerza del movimiento. Un cuerpo largo
+sugiere un movimiento fuerte en la dirección de la vela (alcista o bajista).
+Mechas
+    Longitud: La longitud de las mechas puede indicar la volatilidad y el rango de
+precios durante el periodo. Mechas largas sugieren que el precio se movió
+significativamente.
+    Posición: La posición de las mechas también es relevante. Una mecha superior
+larga indica presión de venta, mientras que una mecha inferior larga indica presión
+de compra.
+
+Contexto del Mercado
+    Tendencia General: Es crucial considerar el contexto general del mercado y la
+tendencia a largo plazo al interpretar las velas.
+    Soportes y Resistencias: La ubicación de las velas en relación con niveles clave de
+soporte y resistencia puede proporcionar información adicional sobre la fuerza del
+movimiento.
+Al interpretar velas japonesas, es importante considerar no solo el patrón en sí, sino
+también el contexto más amplio del mercado, directrices, y confirmar con otros
+indicadores técnicos. La combinación de estos elementos puede mejorar mucho la
+precisión y efectividad en la toma de decisiones.
+
+
+
+--- END OF 12. Velas Japonesas.pdf ---
+
+
+
+--- START OF 13. Estados de Mercado.pdf ---
+
+Objetivos de la clase:
+ Entender los diferentes estados del mercado
+ Diferenciar entre mercado en tendencia y mercadolateral
+ Adaptar estrategias según el estado del mercado
+ Gestionar el riesgo según el estado del mercado
+ Evitar errores comunes en cada tipo de mercado
+ Analizar casos reales y cómo reaccionar en cadasituación
+Estados de Mercado
+Tipos de Estados de Mercados 
+Mercado tranquilo
+Mercado fuerte
+Mercado de mechas
+Mercado volátil
+
+Características
+Velas de cuerpo chico
+Pocas mechas o mechas que muestren fuerza en la dirección de la tendencia
+Pocos o ningún GAP entre velas
+Testeo de zona rápido
+Rupturas con cuerpo de vela
+Desarrollo del precio consistente 
+Velas de fuerza que muestren los impulsos
+Identificación de fractales
+Movimientos predecibles 
+Tendencias claras
+Mercado tranquilo
+
+Ejemplo
+Cuerpos chicos
+Zonas de rechazo claras
+Poca mecha
+Impulsos con velas de cuerpo
+grande
+Mercado fuerte
+Características
+Impulso claro en una tendencia
+Pocas mechas
+Casi sin retroceso o ninguno
+Consecutivas velas al alza o a la baja
+Mechas que indiquen fuerza acompañando el impulso
+Difícil identificación de zonas de Soporte o Resistencia
+Duración prolongada en el tiempo en comparación al estado previo
+El mercado se pone en pendiente y cambia el angulo de desarrollo
+
+Ejemplo
+Sin retrocesos claros
+Velas de descanso
+Continuación de velas alcistas
+Mercado en tendencia bajista con
+impulsos con fuerza y caída acelerada
+
+Mercado de mechas
+Características
+Mercado con tendencia clara
+Estructura del precio entendible
+Velas de cuerpo chico o mediano
+Mechas de ambos lados de la vela
+Retesteos en soportes y resistencias
+Desarrollo de vale lento
+Velas alcistas y bajistas intercaladas en los impulsos
+
+E j e m p l o 
+Mercado con tendencia clara 
+Mechas amplias de ambos
+lados de las velas
+Retesteos en zonas
+Mercado Volatil
+Características
+Mercados laterales
+Movimiento del precio muy fuerte
+Muchas mechas en las velas
+GAPs seguidos
+Velas de cuerpo chico o muy grandes
+Mercado poco armónico
+Testeo múltiple de zonas
+Máximos y mínimos sin tendencia clara
+Falsas rupturas
+
+Ejemplo Mechas largas de ambos lados
+Mercado lateral
+GAPs 
+Cuerpos desproporcionados
+Conclusiones
+    Cuando analizamos el mercado, es un factor clave poder discernir en la
+condición que se esta moviendo el precio, en los estados con mechas o volátiles el
+precio se mueve muy rápido, disminuye la entrada precisa y el movimiento
+posterior del precio puede ser aun mas incierto y violento, de esta forma las
+chances de ganar bajan. 
+     En los mercados fuertes, podemos encontrar oportunidades de reversión.
+     A tener en cuenta que los estados de mercado cambian permanentemente, sin
+previo aviso, por lo cual es necesario esperar a que el precio se desarrolle de tal
+forma en la que podamos comprender  cual es el escenario que se nos esta
+presentando.
+
+
+
+--- END OF 13. Estados de Mercado.pdf ---
+
+
+
+--- START OF 14. Ondas de Elliot.pdf ---
+
+Objetivos de la clase:
+Entender la lógica: los mercados se mueven en patrones de psicología colectiva.
+Identificar estructuras: ondas impulsivas (5) y correctivas (3).
+Aprender reglas básicas: validación de ondas y uso de Fibonacci.
+Comprender la psicología detrás de cada fase del ciclo.
+Aplicar en gráficos reales: practicar conteos sin forzarlos.
+Reconocer limitaciones: usar Elliott como herramienta de contexto, no como
+predicción exacta.
+Ondas de Elliot
+Entender la lógica detrás de la teoría de Elliott
+La base de la teoría de Elliott es que los precios no se mueven de manera
+aleatoria, sino que siguen patrones repetitivos generados por la psicología
+colectiva de los participantes del mercado.
+Ralph Nelson Elliott (década de 1930) observó que los movimientos del mercado
+financiero se repetían en estructuras cíclicas, producto de la conducta humana.
+Esos movimientos se organizan en dos grandes fases:
+Impulsivas: a favor de la tendencia, cuando predomina el optimismo/pesimismo.
+Correctivas: contra la tendencia, cuando el mercado descansa, duda o toma
+ganancias.
+La clave no es “memorizar formas”, sino entender el por qué:
+El mercado sube porque los compradores dominan.
+Se corrige porque muchos toman beneficios o dudan.
+Luego vuelve a subir porque se renueva la confianza, etc.
+En otras palabras: las ondas representan cómo se comportan las masas frente al
+miedo y la codicia.
+ Por eso se repiten en todos los mercados y en cualquier marco temporal:
+acciones, forex, criptos, índices, intradía o largo plazo.
+Identificar estructuras: impulsivas y correctivas
+Ondas impulsivas (5 ondas)
+Avanzan a favor de la tendencia principal.
+Se componen de 5 movimientos:
+Onda 1: inicio de la tendencia.Onda 2: pequeña corrección.Onda 3: el tramo más fuerte y extenso (la mayoría entra al mercado).Onda 4: otra corrección, más débil que la 2.Onda 5: último empuje, donde entra el público tardío.
+Ondas correctivas (3 ondas: A-B-C)
+Se mueven contra la tendencia previa.
+Normalmente son más cortas y confusas.
+Estructura típica:
+A: caída inicial (contraria a la tendencia previa).B: rebote engañoso.C: caída final que completa la corrección.
+O n d a  i m p u l s i v a  
+O n d a  C o r r e c t i v a  
+1
+3
+2
+5
+4
+A
+B
+C
+Reglas básicas 
+Estas no se pueden romper nunca si querés que el conteo sea válido:
+La onda 2 nunca retrocede más del 100% de la onda 1.
+Puede corregir gran parte del avance, pero no superar el inicio.
+1
+2
+La onda 3 tiene que ser mas larga que la onda 1 y 5.
+En la práctica, casi siempre es la más larga y poderosa.
+1
+3
+2
+La onda 4 nunca puede solaparse con el precio de la onda 1.
+Es decir, no debería entrar en el área de la onda 1
+1
+3
+4
+2
+Onda 5 suele mostrar divergencia con indicadores.
+ Ejemplo: el precio hace un nuevo máximo, pero elRSI/MACD no lo confirma.
+1
+3
+2
+5
+4
+Proporciones de Fibonacci comunes:
+La onda 2 corrige entre 50% y 61.8% de la onda 1.
+La onda 3 suele proyectar 161.8% de la onda 1.
+La onda 4 corrige entre 38.2% y 50% de la onda 3.
+La onda 5 puede llegar al 138.2% de la 1-3.
+Psicología del mercado en cada onda
+Las Ondas de Elliott no son solo “rayitas” en un gráfico:
+  Cada una representa el sentimiento colectivo (miedo, codicia, euforia, duda) que mueve alos participantes.
+Ondas impulsivas (1 a 5)
+Onda 1 – Inicio tímidoAparece tras una tendencia bajista o correctiva.Pocos se animan a entrar, suele parecer un “rebote”.Psicología: incredulidad y cautela.
+Onda 2 – Corrección tempranaMuchos creen que la tendencia anterior sigue.Se produce toma de ganancias rápida.Psicología: desconfianza, miedo a que el mercado siga cayendo.
+Onda 3 – Expansión fuerteAcá entra la mayoría de traders e inversores.Gran volumen, fuerte convicción alcista/bajista.Psicología: optimismo y confianza creciente.
+Onda 4 – Corrección moderadaLos operadores toman beneficios, pero no hay miedo real.Suele ser lateral o más compleja.Psicología: paciencia y consolidación.
+Onda 5 – Euforia finalÚltima etapa de la tendencia.Entran los rezagados y el público minorista.Psicología: euforia y codicia, pero con señales de debilidad.
+Ondas correctivas (A-B-C)
+Onda A – Primer golpeEl mercado empieza a girar contra la tendencia previa.Psicología: negación, es solo una corrección.
+Onda B – Rebote engañosoDa la ilusión de que la tendencia principal sigue.Psicología: esperanza y trampa para muchos traders.
+Onda C – Caída finalEl mercado retoma con fuerza la corrección.Psicología: capitulación, donde se rinde la mayoría.
+Limitaciones de la teoría de Elliott
+Subjetividad en el conteoDos traders pueden marcar ondas distintas en el mismo gráfico.No siempre está claro qué tramo pertenece a cada onda.
+No es predictivo al 100%Elliott da escenarios probables, no certezas.El mercado puede invalidar un conteo en cualquier momento.
+Complejidad en tiempo realEn retrospectiva los conteos se ven perfectos, pero en vivo es mucho más caótico.
+Necesita confirmacionesUsar Elliott solo es arriesgado.Se recomienda combinar con soportes/resistencias, volumen, estructura de mercado,Fibonacci o SMC.
+Correcciones confusasLas ondas A-B-C tienen muchas variantes (zigzag, plana, triángulo, combinaciones).Es fácil perderse.
+Requiere experienciaUn trader principiante suele “forzar” ondas en cualquier gráfico.La habilidad viene con la práctica y validación de reglas.
+
+
+--- END OF 14. Ondas de Elliot.pdf ---
+
+
+
+--- START OF 15. Chartismo.pdf ---
+
+Comprender qué es el chartismo y su importancia en elanálisis técnico
+ Identificar los principales patrones chartistas
+ Aprender a validar patrones para evitar falsas señales
+ Dibujar correctamente los patrones en el gráfico
+ Aplicar estrategias de trading basadas en patrones chartistas
+ Evitar errores comunes en el uso del chartismo
+Analizar gráficos en vivo para aplicar los conocimientos
+Objetivos de la clase:
+C h a r t i s m o 
+El chartismo es una herramienta del análisis técnico basado en gráficos, es una
+metodología utilizada en los mercados financieros para analizar y predecir
+movimientos de precios de activos financieros como acciones, divisas, materias
+primas, etc. Esta técnica se basa en la observación de gráficos históricos de precios,
+identificar patrones y tendencias que puedan indicar futuros movimientos de
+precios.
+Que es el Chartismo?
+Los chartistas se diferencian de los analistas fundamentales, que son aquellos que
+estudian los valores fundamentales de los activos en el presente para determinar
+cuál es el mejor momento para comprar y vender. Muchos inversores combinan el
+análisis fundamental y el análisis técnico cuando planifican su estrategia de
+inversión.
+Fundamentos
+El precio lo descuenta todo: 
+Todos los factores que pueden influir en el precio de un activo (económicos, políticos,
+psicológicos, etc.) ya están reflejados en el precio actual.
+El precio se mueve en tendencias: 
+Los precios de los activos tienden a moverse en tendencias (alcistas, bajistas o
+laterales), y estas tendencias pueden continuar durante algún tiempo.
+La historia se repite: 
+Los patrones de precios y comportamientos de los inversores tienden a repetirse con el
+tiempo. Los analistas técnicos buscan identificar estos patrones recurrentes para
+predecir futuros movimientos.
+Tipos de patrones
+      Continuación de tendencia:  es una formación en un gráfico de precios que
+sugiere que la tendencia actual (ya sea alcista o bajista) continuará después
+de una breve pausa o consolidación. Estos patrones indican que, tras una fase
+de consolidación, el precio probablemente seguirá moviéndose en la misma
+dirección que antes.
+      Reversión de tendencia: formación en un gráfico de precios que indica un
+posible cambio en la dirección de la tendencia actual. Estos patrones
+sugieren que una tendencia alcista puede estar terminando y que una
+tendencia bajista está a punto de comenzar, o viceversa.
+Características: Formación con dos líneas de
+tendencia convergentes, formando un triángulo.
+Precedido por un fuerte movimiento de precios.
+Indicador: Sugiere una continuación en la
+dirección de la tendencia previa (alcista o bajista)
+después de la consolidación.
+Patrones de continuación
+Triangulo Simetrico
+
+Bandera
+Características: Formado por un canal pequeño
+inclinado en contra de la tendencia principal,
+precedido por un fuerte movimiento de precios
+(asta de la bandera).
+Indicador: Sugiere una continuación en la
+dirección de la tendencia previa (alcista o
+bajista) después de la consolidación.
+
+Características: Formado por una línea de
+resistencia horizontal en la parte superior y
+una línea de tendencia ascendente en la
+parte inferior.
+Indicador: Generalmente sugiere una
+continuación alcista.
+Triángulo Rectángulo
+Ascendente
+Características: Formado por una línea de
+soporte horizontal en la parte inferior y una
+línea de tendencia descendente en la parte
+superior.
+Indicador: Generalmente sugiere una
+continuación bajista.
+Triángulo Rectángulo
+Descendente
+Características: Formación con dos líneas de
+tendencia convergentes, formando un
+pequeño triángulo. Precedido por un fuerte
+movimiento de precios.
+Indicador: Sugiere una continuación en la
+dirección de la tendencia previa (alcista o
+bajista) después de la consolidación.
+Banderin
+Descripción: Este patrón se forma al final de una tendencia
+alcista y está compuesto por tres picos. El pico central
+(cabeza) es el más alto, y los dos picos laterales (hombros)
+son más bajos y aproximadamente de la misma altura.
+Indicador: Una ruptura por debajo de la línea de cuello (que
+conecta los mínimos de los hombros) sugiere una reversión
+bajista.
+Hombro-Cabeza-Hombro Invertido (HCH Invertido): Este es
+el patrón opuesto, que se forma al final de una tendencia
+bajista y sugiere una reversión alcista.
+Patrones de reversión
+Hombro-Cabeza-Hombro
+
+Descripción: Tres picos en zona de
+resistencia al final de una tendencia
+alcista. El precio no puede quebrar la zona.
+Indicador: Sugiere una reversión bajista.
+Triple Techo
+Descripción: Tres picos en zona de soporte
+al final de una tendencia alcista. El precio
+no puede quebrar la zona.
+Indicador: Sugiere una reversión alcista.
+Triple Suelo
+Descripción: Dos picos en zona de
+resistencia al final de una tendencia
+alcista. El precio no puede quebrar la zona.
+Indicador: Sugiere una reversión bajista.
+Doble Techo
+Descripción: Dos picos en zona de soporte
+al final de una tendencia alcista. El precio
+no puede quebrar la zona.
+Indicador: Sugiere una reversión alcista.
+Doble Suelo
+
+Megáfono
+Descripción: Máximos y mínimos que se
+expanden, creando dos líneas de tendencia
+divergentes.
+Indicador: Finalización de una tendencia
+alcista o bajista, posible reversión de la
+tendencia.
+Descripción: Formado por dos líneas de
+tendencia convergentes. Este patrón puede
+actuar tanto como un patrón de reversión en
+tendencias bajistas o alcista. Encontramos
+mínimos y máximos comprimiéndose.
+Indicador: Cuando esta llegando a la
+convergencia debe definir la dirección potencial
+del precio.
+Cuña
+
+Para operaciones de scalping, los patrones chartistas
+pueden ser herramientas efectivas para identificar
+oportunidades de trading rápidas y precisas. Es importante
+definir los parámetros claros para abrir una operación, ya
+que la efectividad de los patrones varia según la posición y
+el contexto de mercado.
+Conclusión Final
+
+
+--- END OF 15. Chartismo.pdf ---
+
+
+
+--- START OF 16. Indicadores Técnicos.pdf ---
+
+Comprender qué son los indicadores técnicos y su utilidad en el trading
+La diferencia entre análisis técnico con y sin indicadores.
+Entender cómo los indicadores ayudan a interpretar la acción del precio.
+ Clasificar los tipos de indicadores según su función
+Indicadores de tendencia: Medias Móviles, SAR Parabólico.
+Indicadores de momentum: RSI, MACD, Estocástico, ROC.
+Indicadores de volumen: Volumen, VWAP.
+Indicadores de volatilidad: Bandas de Bollinger.
+Indicadores de zonas: Fibonacci
+Aprender a interpretar los indicadores correctamente
+Identificar señales de compra y venta en cada indicador.
+Evitar señales falsas con confirmaciones adicionales.
+ Evitar los errores más comunes al usar indicadores
+No depender de un solo indicador sin contexto del precio.
+No sobrecargar el gráfico con demasiados indicadores.
+No operar señales sin confirmación adicional.
+Objetivos de la clase:
+Indicadores Técnicos
+    Los indicadores técnicos son herramientas utilizadas en el análisis técnico
+para evaluar y predecir el comportamiento futuro de los precios de los activos
+financieros. Son fórmulas matemáticas y estadísticas que se aplican a las series
+de precios y volúmenes con la intención de ayudar a tomar decisiones de
+inversión o a ubicar a los precios en determinadas fases o situaciones.
+Cualquier indicador técnico sirve para ayudarte en tu trading.  
+     Existen dos tipos de indicadores técnicos en el trading, los osciladores, que se
+mueven en un rango entre 0 y 100 y los seguidores de tendencia, que fluctúan
+en función de la tendencia del precio.
+
+Tipos de Indicadores
+Osciladores: se mueven en un rango entre 0 y 100, y nos permiten detectar
+zonas de sobrecompra o sobreventa, divergencias y convergencias que nos
+ayudarán a anticipar cambios de tendencia. Algunos de estos osciladores
+también nos permiten detectar tendencias y la fortaleza de las mismas.
+Seguidores de tendencia: muestran cuando la evolución del precio de un
+activo sigue una tendencia alcista, bajista o lateral. Algunos de estos
+indicadores de tendencia, muestran la fortaleza o debilidad de la tendencia
+del precio. Estos indicadores técnicos de tendencia son muy útiles porque nos
+pueden mostrar cuando se inicia una tendencia y cuándo una tendencia está
+debilitándose.
+
+    Media Móvil (MA): Calcula el precio
+promedio de un activo durante un
+período de tiempo específico.
+    Media Móvil Exponencial (EMA):
+Similar a la media móvil simple, pero
+da más peso a los precios recientes.
+Seguidores de Tendencia
+
+   Media Móvil de Convergencia/Divergencia (MACD): Utiliza dos medias móviles para
+identificar cambios en la tendencia y la fuerza de una tendencia.
+Línea MACD:
+Es la diferencia entre dos medias móviles exponenciales (EMAs):
+Una EMA rápida (por defecto, de 12 períodos).
+Una EMA lenta (por defecto, de 26 períodos).
+Línea de Señal:
+Es una media móvil exponencial de la línea MACD (por defecto, de 9 períodos).
+Sirve como referencia para generar señales de compra o venta cuando cruza la línea MACD.
+Histograma:
+Representa la diferencia entre la línea MACD y la línea de señal.
+Visualmente muestra la fuerza del impulso del mercado.
+Parabolic SAR (Stop And Reverse) es un indicador técnico diseñado para
+identificar la dirección de una tendencia y posibles puntos de reversión del
+precio. Es especialmente útil para seguir tendencias y establecer niveles de
+salida en operaciones.
+Uso principal:
+Detectar la dirección de la tendencia.
+Señalar posibles entradas y salidas.
+Actuar como un stop loss dinámico.
+Cómo interpretarlo:
+Puntos debajo del precio: Tendencia alcista.
+Puntos encima del precio: Tendencia bajista.
+Cruce de puntos con el precio: Posible reversión.
+Ventajas:
+Fácil de interpretar.
+Ideal para mercados con tendencias claras.
+Ayuda a gestionar riesgos.
+    Índice de Fuerza Relativa (RSI): Mide la velocidad y el cambio de los
+movimientos de precio, oscilando entre 0 y 100. Se utilizan los niveles de 30 y
+70 como umbrales. Un valor por debajo de 30 suele indicar que un activo
+está sobrevendido, mientras que un valor por encima de 70 indica que está
+sobrecomprado.
+Indicadores de Momento
+
+El ADX mide la fuerza de una tendencia, no si es alcista o bajista.
+Qué muestra?
+ADX (línea principal): fuerza de tendencia (0 a 100).
++DI: fuerza de movimientos alcistas.
+–DI: fuerza de movimientos bajistas.
+Interpretación del ADX
+0–20: mercado lateral, sin tendencia.
+20–25: tendencia débil.
++25: tendencia fuerte.
++40: tendencia muy fuerte.
+      Estocástico: compara el precio de cierre de un activo con su rango de precios durante un
+período específico. 
+Escala de 0 a 100: El estocástico oscila entre 0 y 100.
+Líneas %K y %D: Consiste en dos líneas: %K, la línea rápida, y %D, la línea lenta (un
+ promedio móvil de %K).
+Líneas de referencia: Los niveles de 20 y 80 son comúnmente utilizados como umbrales.
+Un valor por debajo de 20 indica una condición de sobreventa, mientras que un valor
+por encima de 80 indica una condición de sobrecompra.
+
+      Tasa de Cambio (ROC): Mide la variación porcentual del precio durante
+un período específico. Es un oscilador de momentum que muestra la
+velocidad a la que cambian los precios, y se utiliza para identificar
+condiciones de sobrecompra o sobreventa, así como posibles cambios en la
+tendencia.
+
+Bollinger Bands: Utiliza una media móvil y dos desviaciones estándar para definir
+niveles de precio alto y bajo. 
+Banda Media (Middle Band): Es una media móvil simple (SMA) generalmente de
+20 períodos.
+Banda Superior (Upper Band): Se calcula sumando dos veces la desviación
+estándar del precio al valor de la banda media.
+Banda Inferior (Lower Band): Se calcula restando dos veces la desviación
+estándar del precio al valor de la banda media.
+Indicadores de Volatilidad
+La desviación estándar es una
+medida estadística que indica
+cuánto se dispersan los datos con
+respecto a su promedio.
+    Niveles de Fibonacci: Utiliza ratios
+derivados de la serie de Fibonacci
+para identificar niveles potenciales de
+soporte y resistencia.
+Ratios de Fibonacci: Los niveles más
+comúnmente utilizados en el análisis
+técnico son 23.6%, 38.2%, 50%, 61.8%
+y 100%. Estos ratios se derivan de la
+secuencia de Fibonacci y las
+proporciones matemáticas entre los
+números de la serie.
+Indicadores de Soporte y Resistencia
+
+    Volumen: se utiliza para analizar la actividad de
+negociación de un activo financiero durante un
+período específico. Mientras que los precios en un
+gráfico muestran el movimiento del activo, el
+volumen muestra la cantidad de activos que se han
+negociado durante ese período. Esto proporciona
+información importante sobre la fuerza y la validez
+de una tendencia, así como posibles puntos de
+reversión.
+Indicadores de Volumen
+
+VWAP (Volume Weighted Average Price) es un indicador técnico que calcula el
+precio promedio ponderado por el volumen de un activo durante un período
+de tiempo específico. Es utilizado para determinar si el precio actual está por
+encima o por debajo de su valor promedio en función del volumen negociado.
+Referencia de precios "justos": Ayuda a entender
+si un precio está sobrevalorado o infravalorado
+en comparación con el volumen negociado.
+Simple y eficaz: Fácil de interpretar y aplicar en
+estrategias de trading.
+Se ajusta al mercado: Refleja el impacto del
+volumen, haciendo que sea más representativo
+que solo mirar precios promedio.
+Los indicadores técnicos y la acción del precio son dos enfoques diferentes
+dentro del análisis de mercados financieros. La acción del precio se centra
+exclusivamente en el movimiento de los precios y los patrones que forman en
+los gráficos, sin depender de fórmulas matemáticas o estadísticas adicionales.
+Conclusiones 
+Los indicadores técnicos se basan en datos históricos, lo que significa que su
+señal puede retrasarse con respecto al movimiento actual del precio.
+En última instancia, la elección entre acción del precio y indicadores técnicos
+depende del estilo de trading, su experiencia y preferencias personales.
+
+
+
+--- END OF 16. Indicadores Técnicos.pdf ---
+
+
+
+--- START OF 17. Detallar una Estrategia.pdf ---
+
+Objetivos de la clase:
+ Entender qué es la parametrización
+ Identificar los elementos clave que se pueden parametrizar en una
+estrategia
+ Diferenciar entre sobreoptimización y parametrización efectiva
+ Evitar errores comunes al parametrizar una estrategia
+Detallar una Estrategia
+
+Estrategia de trading discrecionales: 
+Un enfoque en el que el trader toma decisiones de compra o venta basadas en
+su propio juicio y análisis.
+Flexibilidad: Los traders discrecionales pueden adaptar sus estrategias
+en tiempo real según las condiciones del mercado, noticias económicas,
+eventos geopolíticos y demas factores.
+Análisis subjetivo: Las decisiones se basan en la interpretación personal
+de gráficos, indicadores técnicos y análisis fundamental.
+Intuición y experiencia: Los traders experimentados pueden utilizar su
+intuición y conocimientos acumulados para identificar oportunidades y
+riesgos.
+Control emocional: Dado que las decisiones no están completamente
+automatizadas, es crucial que los traders discrecionales mantengan sus
+emociones bajo control para evitar decisiones impulsivas.
+
+Ventajas:
+    Mayor adaptabilidad a las condiciones cambiantes del mercado.
+    Posibilidad de aprovechar oportunidades que una estrategia automatizada
+podría pasar por alto.
+Desventajas:
+    Mayor susceptibilidad a errores humanos y emocionales.
+    Requiere un alto nivel de experiencia y habilidad para ser efectivo.
+    Puede ser más estresante y demandante en términos de tiempo y atención.
+
+Estrategia de trading mecánico:
+También conocida como trading sistemático o automatizado, es un enfoque donde las
+decisiones de compra o venta se basan en reglas y patrones predefinidos. 
+Automatización: Las operaciones se ejecutan con seguridad según las reglas y
+parámetros establecidos en el sistema.
+Consistencia: Elimina el factor emocional y humano, asegurando que las
+decisiones se tomen de manera uniforme.
+Backtesting: Las estrategias pueden probarse en datos históricos para
+evaluar su rendimiento y ajustar los parámetros antes de aplicarlas en
+tiempo real.
+
+Ventajas:
+    Disciplina: Elimina la influencia de las emociones en las decisiones de trading.
+    Eficiencia: Puede manejar un gran volumen de datos y operaciones.
+    Objetividad: Las decisiones se basan en datos y reglas objetivas, no en
+intuiciones o suposiciones.
+Desventajas:
+    Rigidez: Puede no adaptarse bien a condiciones de mercado imprevistas o
+cambiantes.
+    Complejidad en el desarrollo: Crear y mantener un sistema de trading
+mecánico efectivo puede ser complejo y requerir experiencia en análisis técnico.
+
+Claridad y Disciplina: Tener una estrategia definida proporciona claridad
+sobre cuándo y cómo entrar al mercado, lo que ayuda a mantener la
+disciplina y evitar decisiones impulsivas basadas en emociones.
+Que nos proporciona?
+Gestión de Riesgos: Una estrategia bien definida incluye parámetros claros
+para la gestión de riesgos, definiendo el riesgo máximo por operación y
+niveles de interés compuesto. Esto ayuda a proteger el capital y minimizar
+las pérdidas.
+Consistencia: Siguiendo una estrategia establecida, podemos operar de
+manera consistente, clave para evaluar el rendimiento a largo plazo y hacer
+ajustes necesarios basados en resultados objetivos.
+
+Evaluación y Mejora: Una estrategia específica permite realizar un
+seguimiento del rendimiento y evaluar su eficacia. Esto facilita la
+identificación de áreas de mejora y la optimización de la estrategia con el
+tiempo.
+Adaptabilidad: Una estrategia bien definida puede adaptarse a
+diferentes condiciones del mercado. Tener reglas claras permite
+modificar la estrategia según las circunstancias cambiantes sin perder la
+coherencia.
+Reducción del Estrés: Operar con una estrategia clara puede reducir el
+estrés y la ansiedad, ya que elimina la incertidumbre sobre qué
+acciones tomar en diferentes situaciones del mercado.
+Ventaja Competitiva: Una estrategia sólida puede proporcionar una
+ventaja, ya que permite identificar oportunidades de trading que
+otros pueden pasar por alto o no saber cómo aprovechar.
+Como diseñar la estrategia?
+Identificación de Soportes y Resistencias
+    Soportes/Resistencias: : Niveles de precios donde la demanda es lo
+suficientemente fuerte como para evitar que el precio caiga/suba más.
+    Técnica: Identifica estos niveles en el pasado próximo del precio y en
+diferentes marcos temporales para determinar zonas clave de reversión o
+continuación de la tendencia.
+Patrones de Velas Japonesas
+    Velas de Reversión: Como el martillo, estrella fugaz, envolvente
+alcista/bajista.
+    Velas de Continuación: Como el doji, velas con sombra larga.
+    Técnica: Aprende a interpretar estos patrones en el contexto del
+mercado para anticipar posibles movimientos de precios.
+Líneas de Tendencia
+    Tendencia Alcista: Conecta los mínimos más altos.
+    Tendencia Bajista: Conecta los máximos más bajos.
+    Técnica: Utiliza estas líneas para identificar la dirección de la
+tendencia y posibles puntos de reversión.
+Patrones Chartistas
+    Patrones de Continuación: Triángulos, banderas, banderines.
+    Patrones de Reversión: Hombro-cabeza-hombro, triple techo, cuña.
+    Técnica: Identifica estos patrones para predecir la dirección futura del precio y
+establecer puntos de entrada.
+Canales de Precio
+    Canal Ascendente/Descendente: Líneas paralelas que contienen el preciodentro de una tendencia.
+    Canal Lateral: Cuando el precio se mueve lateralmente entre niveles desoporte y resistencia.
+    Técnica: Utiliza los canales para establecer puntos de entrada basados en elsoporte y la resistencia del canal.
+Implementación y Prueba
+    Backtesting: Prueba tu estrategia con datos históricos para ver cómo
+habría funcionado en el pasado.
+    Simulación en Demo: Usa una cuenta demo para aplicar tu estrategia en
+tiempo real sin arriesgar dinero.
+    Registro y Evaluación: Lleva una bitácora de trading para registrar tus
+operaciones, evaluar resultados y ajustar la estrategia según sea necesario.
+https://www.lucidchart.com
+
+
+--- END OF 17. Detallar una Estrategia.pdf ---
+
+
+
+--- START OF 18. Estrategias detalladas.pdf ---
+
+Entender la estructura y componentes de una estrategia.
+Diferenciar estrategias: tendencia, reversión, rango y breakout.
+Identificar las condiciones de mercado ideales para cada una.
+Conocer sus fortalezas y debilidades para elegir la más adecuada.
+Configurar indicadores, timeframes y confirmaciones.
+Evaluar con backtesting sin sobreoptimizar.
+Aplicar en gráficos en vivo y detectar entradas.
+Evitar errores comunes y operar solo en buenas condiciones.
+Objetivos de la clase:
+Estrategias con Parámetros
+Estocástico
+Configuración 16-3-3 - Umbral 20 - 80.
+Media Móvil Simple de 200 periodos para
+medir la tendencia.
+Cuando el precio esta por encima de la
+MM de 200 y el estocástico por debajo de
+20, aguardamos el cruce de la linea señal
+al alza para tomar la entrada.  Stop por
+debajo del ultimo mínimo. 
+Revisar siempre la tendencia en una
+temporalidad superior.
+Salida manual en el cruce inverso en
+sobre compra o por ratio beneficio. 
+En caso de Binarias, entrada a 5 minutos.
+Triangulos/Banderines
+Estrategia de continuación de tendencia.
+Comprobar tendencia en temporalidad
+superior.
+Marcar correctamente las líneas de
+tendencia.
+Extender el asta del triangulo como
+proyección de movimiento.
+Stop por debajo del soporte o resistencia.
+Entrada agresiva cuando una vela cierra por
+encima de las mechas de la ruptura. 
+Entrada conservadora esperar un nuevo
+maximo. 
+Fibonacci
+Retroceso a zona de 61.8%
+Media Móvil Simple de 200 periodos para
+medir la tendencia.
+Revisar siempre la tendencia en una
+temporalidad superior.
+2do o 3er impulso luego de salida de zona
+de consolidación.
+SL en 78.6% y TP en 0%
+En caso de Binarias, entrada a 5 minutos.
+Tendencia estirada-agotada.
+Cuando el máximo o mínimo no supera al
+anterior, hay un fallo en la continuidad.
+Esperar ruptura de nivel.
+Entrada en el retesteo del nivel roto.
+SL por encima o debajo del ultimo
+máximo o mínimo.
+Buscar ratio mínimo de 2:1
+En caso de Binarias, entrada a 5 minutos.
+Cambio de Estructura
+
+
+--- END OF 18. Estrategias detalladas.pdf ---
+
