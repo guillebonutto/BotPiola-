@@ -6,6 +6,7 @@ from datetime import datetime, timezone, timedelta
 from BinaryOptionsToolsV2.pocketoption import PocketOptionAsync
 from analysis import MarketAnalyzer
 from patterns import PatternRecognizer
+from telegram_bot import TelegramNotifier
 
 # Importar estrategias
 from strategy_stochastic import StrategyStochastic
@@ -19,10 +20,11 @@ INTERVAL = 300  # 5 minutos
 LOOKBACK = 100 # Reducido para evitar timeouts
 
 class TradingBot:
-    def __init__(self, ssid):
+    def __init__(self, ssid, telegram_token=None, telegram_chat_id=None):
         self.api = PocketOptionAsync(ssid)
         self.analyzer = MarketAnalyzer()
         self.pattern_recognizer = PatternRecognizer()
+        self.notifier = TelegramNotifier(telegram_token, telegram_chat_id)
         
         # Estado de trading
         self.active_trade_expiry = datetime.min.replace(tzinfo=timezone.utc)
@@ -74,7 +76,6 @@ class TradingBot:
             return df
             
         except asyncio.TimeoutError:
-            print(f"  [WARN] Timeout obteniendo datos de {pair}")
             return pd.DataFrame()
         except Exception as e:
             print(f"Error fetching {pair}: {e}")
@@ -89,7 +90,6 @@ class TradingBot:
 
         # 1. Análisis Fundamental (Noticias)
         news_status = self.analyzer.check_news()
-        # Si hay noticias de alto impacto, podríamos decidir no operar (PENDIENTE de lógica)
         
         # 2. Análisis Técnico (Indicadores)
         df = self.analyzer.compute_indicators(df)
@@ -100,7 +100,6 @@ class TradingBot:
         
         # 4. Estado del Mercado
         market_state = self.analyzer.determine_market_state(df)
-        # print(f"  > Estado Mercado: {market_state}")
 
         # 5. Consultar Estrategias
         signals = []
@@ -139,6 +138,9 @@ class TradingBot:
     async def run(self):
         print("--- INICIANDO BOT DE TRADING AVANZADO ---\n")
         print("--- MODO SEGURO: Máx 1 operación simultánea ---\n")
+        if self.notifier.token:
+            print("--- TELEGRAM ACTIVADO ---\n")
+            await self.notifier.send_message("🤖 **Bot Iniciado**\nListo para operar.")
         
         while True:
             # 0. Chequeo de Concurrencia
@@ -162,21 +164,34 @@ class TradingBot:
                     
                     try:
                         amount = 1.0 # Monto fijo por ahora
-                        if action == 'BUY':
-                            await self.api.buy(asset=pair, amount=amount, time=duration, check_win=False)
-                        else:
-                            await self.api.sell(asset=pair, amount=amount, time=duration, check_win=False)
                         
-                        # Actualizar bloqueo de concurrencia
-                        # Agregamos 5 segundos extra de margen de seguridad
-                        self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=duration + 5)
-                        print(f"  >>> Bloqueando nuevas operaciones por {duration + 5} segundos.")
+                        # Notificar Apertura
+                        await self.notifier.notify_open(pair, action, strat_name, duration, amount)
+
+                        # Ejecutar orden y ESPERAR resultado (check_win=True)
+                        # Nota: Si check_win=True bloquea por 'duration', el bot confirma el resultado.
+                        result = None
+                        if action == 'BUY':
+                             result = await self.api.buy(asset=pair, amount=amount, time=duration, check_win=True)
+                        else:
+                             result = await self.api.sell(asset=pair, amount=amount, time=duration, check_win=True)
+                        
+                        # Procesar Resultado
+                        is_win = bool(result)
+                        profit = amount * 0.92 if is_win else -amount # Estimado 92% payout
+                        
+                        print(f"  >>> Resultado Operación: {'GANADA' if is_win else 'PERDIDA'}")
+                        await self.notifier.notify_close(pair, profit, is_win)
+
+                        # Actualizar bloqueo
+                        self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=5)
                         
                         # Salir del loop de pares para respetar el bloqueo inmediatamente
                         break 
                         
                     except Exception as e:
                         print(f"Error ejecutando orden: {e}")
+                        await self.notifier.send_message(f"⚠️ Error ejecutando orden en {pair}: {e}")
                         
                 else:
                     # print(f"Sin señal clara en {pair}")
@@ -189,7 +204,10 @@ class TradingBot:
 
 async def main():
     ssid = input("Introduce tu SSID de PocketOption: ").strip()
-    bot = TradingBot(ssid)
+    tg_token = input("Introduce tu Token de Telegram (Enter para omitir): ").strip()
+    tg_chat = input("Introduce tu Chat ID de Telegram (Enter para omitir): ").strip()
+    
+    bot = TradingBot(ssid, tg_token, tg_chat)
     await bot.run()
 
 if __name__ == '__main__':
