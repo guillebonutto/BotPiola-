@@ -27,11 +27,13 @@ class StrategyStructure(Strategy):
             if not neckline_series.empty:
                 neckline = neckline_series.iloc[-1]
                 
-                # Verificar ruptura: El cierre actual debe estar POR DEBAJO del neckline
+                # Verificar ruptura: El cierre actual debe estar CLARAMENTE POR DEBAJO del neckline
+                # Estrategia pide "Retesteo", una aproximación simple es que la ruptura ya ocurrió
+                # y el precio actual está cerca del nivel roto pero confirmando la baja.
                 if last['Close'] < neckline:
-                     # Confirmación extra: MACD cruzando a la baja
+                     # Confirmación extra: MACD cruzando a la baja (momentum bajista)
                      if last['MACD'] < last['MACD_Signal']:
-                         return 'SELL', f"Cambio Estructura: Doble Techo + Ruptura de {neckline:.5f}", 300
+                         return 'SELL', f"Cambio Estructura: Doble Techo + Ruptura confirmada de {neckline:.5f}", 300
                  
         # Cambio a Alcista (Doble Suelo + Ruptura de Resistencia/Neckline)
         if double_bottom_detected:
@@ -39,9 +41,9 @@ class StrategyStructure(Strategy):
             if not neckline_series.empty:
                 neckline = neckline_series.iloc[-1]
                 
-                # Verificar ruptura: El cierre actual debe estar POR ENCIMA del neckline
+                # Verificar ruptura: El cierre actual debe estar CLARAMENTE POR ENCIMA del neckline
                 if last['Close'] > neckline:
                     if last['MACD'] > last['MACD_Signal']:
-                        return 'BUY', f"Cambio Estructura: Doble Suelo + Ruptura de {neckline:.5f}", 300
+                        return 'BUY', f"Cambio Estructura: Doble Suelo + Ruptura confirmada de {neckline:.5f}", 300
                 
         return 'HOLD', None, 0

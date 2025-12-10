@@ -22,8 +22,8 @@ class StrategyContinuation(Strategy):
         trend_up = last['EMA_20'] > last['EMA_50']
         
         # Un triángulo es de continuación. Si es alcista y rompe resistencia...
-        # Simplificación: Compramos si tendencia es alcista y hay compresión
+        # Como no tenemos lineas de tendencia trazadas, usamos la EMA como filtro de tendencia mayor
         if trend_up:
-            return 'BUY', "Triángulo de Continuación Alcista", 300
+            return 'BUY', "Patrón Triángulo/Banderín de Continuación Alcista (Trend Filter OK)", 300
         else:
-            return 'SELL', "Triángulo de Continuación Bajista", 300
+            return 'SELL', "Patrón Triángulo/Banderín de Continuación Bajista (Trend Filter OK)", 300

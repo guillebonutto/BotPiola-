@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
-import talib
+import ta
+from ta.trend import SMAIndicator, EMAIndicator, MACD, ADXIndicator
+from ta.momentum import RSIIndicator, StochasticOscillator
+from ta.volatility import BollingerBands, AverageTrueRange
 from datetime import datetime
 
 class MarketAnalyzer:
@@ -12,35 +15,48 @@ class MarketAnalyzer:
         if df.empty:
             return df
         
-        # Tendencia
-        df['SMA_200'] = talib.SMA(df['Close'], timeperiod=200)
-        df['EMA_20'] = talib.EMA(df['Close'], timeperiod=20)
-        df['EMA_50'] = talib.EMA(df['Close'], timeperiod=50)
+        # --- Tendencia ---
+        # SMA 200
+        sma_200 = SMAIndicator(close=df['Close'], window=200)
+        df['SMA_200'] = sma_200.sma_indicator()
         
-        # Osciladores
-        df['RSI'] = talib.RSI(df['Close'], timeperiod=14)
+        # EMA 20
+        ema_20 = EMAIndicator(close=df['Close'], window=20)
+        df['EMA_20'] = ema_20.ema_indicator()
         
-        # Estocástico (16, 3, 3)
-        slowk, slowd = talib.STOCH(df['High'], df['Low'], df['Close'], 
-                                   fastk_period=16, slowk_period=3, slowk_matype=0, 
-                                   slowd_period=3, slowd_matype=0)
-        df['Stoch_K'] = slowk
-        df['Stoch_D'] = slowd
+        # EMA 50
+        ema_50 = EMAIndicator(close=df['Close'], window=50)
+        df['EMA_50'] = ema_50.ema_indicator()
+        
+        # --- Osciladores ---
+        # RSI 14
+        rsi = RSIIndicator(close=df['Close'], window=14)
+        df['RSI'] = rsi.rsi()
+        
+        # Estocástico (16, 3, 3) 
+        # Nota: talib.STOCH usa fastk=16, slowk=3, slowd=3
+        # ta.StochasticOscillator recibe window=14 (por defecto), smooth_window=3
+        stoch = StochasticOscillator(high=df['High'], low=df['Low'], close=df['Close'], 
+                                     window=16, smooth_window=3)
+        df['Stoch_K'] = stoch.stoch()
+        df['Stoch_D'] = stoch.stoch_signal() 
         
         # MACD (12, 26, 9)
-        macd, macdsignal, macdhist = talib.MACD(df['Close'], fastperiod=12, slowperiod=26, signalperiod=9)
-        df['MACD'] = macd
-        df['MACD_Signal'] = macdsignal
-        df['MACD_Hist'] = macdhist
+        macd = MACD(close=df['Close'], window_slow=26, window_fast=12, window_sign=9)
+        df['MACD'] = macd.macd()
+        df['MACD_Signal'] = macd.macd_signal()
+        df['MACD_Hist'] = macd.macd_diff()
         
-        # Bandas de Bollinger (20, 2)
-        upper, middle, lower = talib.BBANDS(df['Close'], timeperiod=20, nbdevup=2, nbdevdn=2, matype=0)
-        df['BB_Upper'] = upper
-        df['BB_Middle'] = middle
-        df['BB_Lower'] = lower
+        # --- Bandas de Bollinger (20, 2) ---
+        bb = BollingerBands(close=df['Close'], window=20, window_dev=2)
+        df['BB_Upper'] = bb.bollinger_hband()
+        df['BB_Middle'] = bb.bollinger_mavg()
+        df['BB_Lower'] = bb.bollinger_lband()
         
-        # Volatilidad
-        df['ATR'] = talib.ATR(df['High'], df['Low'], df['Close'], timeperiod=14)
+        # --- Volatilidad ---
+        # ATR 14
+        atr = AverageTrueRange(high=df['High'], low=df['Low'], close=df['Close'], window=14)
+        df['ATR'] = atr.average_true_range()
         
         return df
 
@@ -55,33 +71,40 @@ class MarketAnalyzer:
         last = df.iloc[-1]
         
         # Filtro ADX para fuerza de tendencia
-        adx = talib.ADX(df['High'], df['Low'], df['Close'], timeperiod=14).iloc[-1]
+        adx_ind = ADXIndicator(high=df['High'], low=df['Low'], close=df['Close'], window=14)
+        # Calculamos ADX para toda la serie para obtener el último valor
+        # Nota: Es eficiente hacerlo una vez, pero aquí se recalcula. 
+        # Idealmente mover al compute_indicators si se usa mucho.
+        adx_series = adx_ind.adx()
+        adx = adx_series.iloc[-1]
         
         # Lógica básica de tendencia con EMAs y ADX
+        # Asegurarse que EMA_20 y EMA_50 existen y no son NaN
+        if pd.isna(last['EMA_20']) or pd.isna(last['EMA_50']):
+             return 'UNKNOWN'
+
         if adx > 25:
             if last['EMA_20'] > last['EMA_50'] and last['Close'] > last['EMA_50']:
                 return 'TRENDING_UP'
             elif last['EMA_20'] < last['EMA_50'] and last['Close'] < last['EMA_50']:
                 return 'TRENDING_DOWN'
         
-        # Lógica de lateralización (Bandas de Bollinger planas o precio dentro de rango)
-        # Una forma simple es ver si el ADX es bajo
+        # Lógica de lateralización
         if adx < 20:
             return 'SIDEWAYS'
             
         # Detección de volatilidad alta (si ATR sube mucho respecto a su media)
-        atr_avg = df['ATR'].rolling(20).mean().iloc[-1]
-        if last['ATR'] > atr_avg * 1.5:
-            return 'VOLATILE'
+        if 'ATR' in df.columns:
+            atr_avg = df['ATR'].rolling(20).mean().iloc[-1]
+            if last['ATR'] > atr_avg * 1.5:
+                return 'VOLATILE'
             
         return 'SIDEWAYS' # Default
 
     def check_news(self):
         """
         Placeholder para análisis fundamental.
-        En el futuro aquí se puede conectar un scraper de Investing.com o ForexFactory.
-        Por ahora retorna NEUTRAL para no bloquear operaciones.
         """
         # TODO: Implementar scraping de calendario económico
-        print(f"[{datetime.now()}] [INFO] Verificando noticias... (Placeholder: Sin noticias de alto impacto)")
+        # print(f"[{datetime.now()}] [INFO] Verificando noticias... (Placeholder: Sin noticias de alto impacto)")
         return 'NEUTRAL'

@@ -110,12 +110,31 @@ class TradingBot:
                 print(f"  >>> SEÑAL DETECTADA en {pair} por {strategy.name}: {action} ({reason})")
                 signals.append((action, duration, strategy.name))
         
+        # Sistema de Votación y Resolución de Conflictos
         if not signals:
             return None
+
+        # Separar señales de COMPRA y VENTA
+        buy_signals = [s for s in signals if s[0] == 'BUY']
+        sell_signals = [s for s in signals if s[0] == 'SELL']
+
+        # 1. Chequeo de Conflicto (Si hay señales opuestas, NO operamos)
+        if buy_signals and sell_signals:
+            print(f"  [ALERTA] Conflicto de estrategias en {pair}: {len(buy_signals)} BUY vs {len(sell_signals)} SELL. Operación cancelada por seguridad.")
+            return None
+
+        # 2. Ejecución por Consenso
+        if buy_signals:
+            print(f"  >>> CONSENSO DE COMPRA ({len(buy_signals)} estrategias coinciden).")
+            # Podríamos priorizar la estrategia con mayor duración o simplemente tomar la primera
+            # Por ahora, retornamos la primera que generó señal
+            return buy_signals[0]
             
-        # Sistema de Votación o Prioridad
-        # Por ahora, tomamos la primera señal válida
-        return signals[0]
+        if sell_signals:
+            print(f"  >>> CONSENSO DE VENTA ({len(sell_signals)} estrategias coinciden).")
+            return sell_signals[0]
+            
+        return signals[0] # Fallback por si acaso
 
     async def run(self):
         print("--- INICIANDO BOT DE TRADING AVANZADO ---\n")
