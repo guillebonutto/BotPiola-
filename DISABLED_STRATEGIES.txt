@@ -1,0 +1,66 @@
+# ESTRATEGIAS DESACTIVADAS
+
+## Cambio de Estructura (MSS) - strategy_structure.py
+**Fecha de desactivación**: 2025-12-10
+**Razón**: Confunde tipos de patrones - no valida tendencia previa antes de clasificar
+
+### Problema Detectado
+La estrategia detecta patrones de Doble Techo/Suelo correctamente, pero:
+1. No diferencia entre cambio de estructura vs continuación de tendencia
+2. Asume que todo Doble Techo = bajista y todo Doble Suelo = alcista
+3. No valida el contexto de la tendencia previa
+
+### Ejemplos de Errores
+- **Trade 1 (GBPUSD SELL - LOSS)**: Confundió zona de resistencia con cambio de estructura
+- **Trade 2 (GBPUSD SELL - WIN)**: Detectó breakout alcista pero lo clasificó como bajista → ejecutó SELL en lugar de BUY
+
+### Cómo Reactivar
+1. Implementar validación de tendencia previa (Higher Highs/Lower Lows)
+2. Diferenciar entre:
+   - Cambio de estructura (reversión)
+   - Rompimiento de S/R (continuación)
+   - Consolidación (lateralización)
+3. Agregar confirmación de volumen
+4. Descomentar en `main.py` línea 43: `StrategyStructure()`
+
+### Código de Desactivación
+```python
+# En main.py, línea 39-44
+self.strategies = [
+    StrategyStochastic(),
+    StrategyContinuation(),
+    StrategyFibonacci(),
+    # StrategyStructure()  # DESACTIVADA - ver DISABLED_STRATEGIES.txt
+]
+```
+
+### Mejoras Necesarias para Reactivar
+1. **Validar tendencia previa**:
+   ```python
+   def detect_trend(df, lookback=20):
+       # Detectar si está en uptrend, downtrend o sideways
+       # Usar Higher Highs/Lower Lows
+       pass
+   ```
+
+2. **Clasificar correctamente el patrón**:
+   ```python
+   if double_top_detected:
+       trend = detect_trend(df)
+       if trend == 'UPTREND':
+           # Doble techo en uptrend = posible reversión
+           return 'SELL', "Cambio de Estructura Bajista"
+       elif trend == 'DOWNTREND':
+           # Doble techo en downtrend = continuación
+           return 'SELL', "Continuación Bajista"
+   ```
+
+3. **Agregar filtro de zonas clave**:
+   - No operar si está en zona de consolidación
+   - Verificar que el breakout sea significativo (> 0.5% ATR)
+
+### Estadísticas
+- **Trades ejecutados**: 2
+- **Clasificaciones correctas**: 0/2 (0%)
+- **Profit neto**: -$0.47 (-$1.00 + $0.53)
+- **Estrategias alternativas funcionando**: Continuación (2/2 correctas)

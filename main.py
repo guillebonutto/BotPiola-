@@ -7,6 +7,7 @@ from BinaryOptionsToolsV2.pocketoption import PocketOptionAsync
 from analysis import MarketAnalyzer
 from patterns import PatternRecognizer
 from telegram_bot import TelegramNotifier
+from feedback_db import FeedbackDB
 
 # Importar estrategias
 from strategy_stochastic import StrategyStochastic
@@ -24,7 +25,12 @@ class TradingBot:
         self.api = PocketOptionAsync(ssid)
         self.analyzer = MarketAnalyzer()
         self.pattern_recognizer = PatternRecognizer()
-        self.notifier = TelegramNotifier(telegram_token, telegram_chat_id)
+        
+        # Inicializar base de datos de feedback
+        self.feedback_db = FeedbackDB()
+        
+        # Inicializar Telegram con referencia a la DB
+        self.notifier = TelegramNotifier(telegram_token, telegram_chat_id, self.feedback_db)
         
         # Estado de trading
         self.active_trade_expiry = datetime.min.replace(tzinfo=timezone.utc)
@@ -34,7 +40,7 @@ class TradingBot:
             StrategyStochastic(),
             StrategyContinuation(),
             StrategyFibonacci(),
-            StrategyStructure()
+            # StrategyStructure()  # DESACTIVADA - ver DISABLED_STRATEGIES.txt
         ]
 
     async def fetch_data(self, pair):
@@ -141,6 +147,10 @@ class TradingBot:
         if self.notifier.token:
             print("--- TELEGRAM ACTIVADO ---\n")
             await self.notifier.send_message("🤖 **Bot Iniciado**\nListo para operar.")
+            
+            # Iniciar listener de Telegram en background
+            asyncio.create_task(self.notifier.start_listening())
+            print("--- FEEDBACK SYSTEM ACTIVADO ---\n")
         
         while True:
             # 0. Chequeo de Concurrencia
@@ -165,11 +175,13 @@ class TradingBot:
                     try:
                         amount = 1.0 # Monto fijo por ahora
                         
+                        # Calcular timeframe para mostrar (5min = 300seg)
+                        timeframe = f"{duration // 60}min" if duration >= 60 else f"{duration}seg"
+                        
                         # Notificar Apertura
-                        await self.notifier.notify_open(pair, action, strat_name, duration, amount)
+                        await self.notifier.notify_open(pair, action, strat_name, timeframe, amount)
 
                         # Ejecutar orden y ESPERAR resultado (check_win=True)
-                        # Nota: Si check_win=True bloquea por 'duration', el bot confirma el resultado.
                         result = None
                         if action == 'BUY':
                              result = await self.api.buy(asset=pair, amount=amount, time=duration, check_win=True)
@@ -177,11 +189,82 @@ class TradingBot:
                              result = await self.api.sell(asset=pair, amount=amount, time=duration, check_win=True)
                         
                         # Procesar Resultado
-                        is_win = bool(result)
-                        profit = amount * 0.92 if is_win else -amount # Estimado 92% payout
+                        # La API devuelve una tupla: (trade_id, trade_info_dict)
+                        # El diccionario contiene 'result': 'win' o 'loss' y 'profit': valor_real
                         
-                        print(f"  >>> Resultado Operación: {'GANADA' if is_win else 'PERDIDA'}")
+                        is_win = False  # Default a pérdida por seguridad
+                        profit = -amount  # Default a pérdida del monto
+                        
+                        if isinstance(result, tuple) and len(result) >= 2:
+                            # Extraer el diccionario (segundo elemento de la tupla)
+                            trade_info = result[1]
+                            if isinstance(trade_info, dict):
+                                result_str = trade_info.get('result', '').lower()
+                                is_win = result_str == 'win'
+                                
+                                # Obtener profit real de la API
+                                if is_win:
+                                    profit = trade_info.get('profit', amount * 0.92)
+                                else:
+                                    # En pérdida, el profit es negativo (perdemos el monto apostado)
+                                    profit = -amount
+                                
+                                print(f"  [DEBUG] Extracted result: {result_str} -> is_win: {is_win}, profit: {profit}")
+                        elif result is True:
+                            is_win = True
+                            profit = amount * 0.92  # Fallback
+                        elif result is False:
+                            is_win = False
+                            profit = -amount
+                        elif isinstance(result, dict):
+                            result_str = result.get('result', '').lower()
+                            is_win = result_str == 'win' or result.get('win', False)
+                            if is_win:
+                                profit = result.get('profit', amount * 0.92)
+                            else:
+                                profit = -amount
+                        elif isinstance(result, str):
+                            is_win = result.lower() in ['win', 'won', 'ganada', 'true']
+                            profit = amount * 0.92 if is_win else -amount
+                        elif isinstance(result, (int, float)):
+                            is_win = result > 0
+                            profit = amount * 0.92 if is_win else -amount
+                        else:
+                            print(f"  [WARN] Resultado desconocido de la API: {result}")
+                        
+                        print(f"  >>> Resultado Operación: {'GANADA ✅' if is_win else 'PERDIDA ❌'}")
+                        
+                        # Notificar cierre
                         await self.notifier.notify_close(pair, profit, is_win)
+                        
+                        # Guardar operación en la base de datos
+                        if isinstance(result, tuple) and len(result) >= 2:
+                            trade_id = result[0]  # Primer elemento de la tupla es el trade_id
+                            trade_info = result[1]  # Segundo elemento es el diccionario con info
+                            open_price = trade_info.get('openPrice', 0)
+                            close_price = trade_info.get('closePrice', 0)
+                        else:
+                            trade_id = f"trade_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                            open_price = 0
+                            close_price = 0
+                        
+                        # Solicitar feedback y obtener el message_id del mensaje de feedback
+                        feedback_message_id = await self.notifier.request_feedback()
+                        
+                        trade_data = {
+                            'trade_id': trade_id,
+                            'pair': pair,
+                            'action': action,
+                            'strategy': strat_name,
+                            'timeframe': timeframe,
+                            'amount': amount,
+                            'open_price': open_price,
+                            'close_price': close_price,
+                            'result': 'win' if is_win else 'loss',
+                            'profit': profit,
+                            'telegram_message_id': feedback_message_id
+                        }
+                        self.feedback_db.save_trade(trade_data)
 
                         # Actualizar bloqueo
                         self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=5)
