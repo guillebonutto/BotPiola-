@@ -18,7 +18,7 @@ from strategy_structure import StrategyStructure
 # --- Configuración ---
 PAIRS = ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc']
 INTERVAL = 300  # 5 minutos
-LOOKBACK = 100 # Reducido para evitar timeouts
+LOOKBACK = 300 # Aumentado para permitir cálculo de SMA_200
 
 class TradingBot:
     def __init__(self, ssid, telegram_token=None, telegram_chat_id=None):

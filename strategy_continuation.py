@@ -16,14 +16,28 @@ class StrategyContinuation(Strategy):
         
         if not has_triangle:
              return 'HOLD', None, 0
-             
-        # Si hay triángulo, operamos a favor de la ruptura o tendencia previa
-        # Miramos la tendencia de corto plazo (EMA 20 vs 50)
+        
+        # Obtener niveles de ruptura del patrón
+        # Si no existen (por versión anterior de patterns.py), usar infinito o 0 para evitar falsos positivos
+        tri_upper = last.get('Pattern_Triangle_Upper', float('inf'))
+        tri_lower = last.get('Pattern_Triangle_Lower', 0)
+        
+        current_close = last['Close']
+
+        # Si hay triángulo, operamos SOLO si hay ruptura confirmada
+        # Miramos la tendencia de corto plazo (EMA 20 vs 50) como filtro adicional
         trend_up = last['EMA_20'] > last['EMA_50']
         
-        # Un triángulo es de continuación. Si es alcista y rompe resistencia...
-        # Como no tenemos lineas de tendencia trazadas, usamos la EMA como filtro de tendencia mayor
-        if trend_up:
-            return 'BUY', "Patrón Triángulo/Banderín de Continuación Alcista (Trend Filter OK)", 300
-        else:
-            return 'SELL', "Patrón Triángulo/Banderín de Continuación Bajista (Trend Filter OK)", 300
+        # Confirmación de Ruptura Alcista
+        # 1. Close actual > Resistencia del triángulo
+        # 2. Tendencia a favor (opcional pero recomendado)
+        if current_close > tri_upper and trend_up:
+            return 'BUY', f"Ruptura Triángulo Alcista Confirmada (Close {current_close:.5f} > {tri_upper:.5f})", 300
+            
+        # Confirmación de Ruptura Bajista
+        # 1. Close actual < Soporte del triángulo
+        # 2. Tendencia a favor
+        elif current_close < tri_lower and not trend_up:
+            return 'SELL', f"Ruptura Triángulo Bajista Confirmada (Close {current_close:.5f} < {tri_lower:.5f})", 300
+            
+        return 'HOLD', None, 0

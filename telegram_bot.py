@@ -4,9 +4,23 @@ from pathlib import Path
 
 class TelegramNotifier:
     def __init__(self, token, chat_id, feedback_db=None):
-        self.token = token
+        # Sanitize token: remove 'bot' prefix if user included it
+        if token and token.lower().startswith('bot'):
+            self.token = token[3:]
+        else:
+            self.token = token
+            
         self.chat_id = chat_id
-        self.base_url = f"https://api.telegram.org/bot{self.token}"
+        
+        # Verify and log configuration
+        if self.token:
+            masked = f"{self.token[:4]}...{self.token[-4:]}" if len(self.token) > 8 else "***"
+            print(f"[Telegram] Configurado con token: {masked}")
+            self.base_url = f"https://api.telegram.org/bot{self.token}"
+        else:
+            print("[Telegram] Token no proporcionado.")
+            self.base_url = ""
+
         self.feedback_db = feedback_db
         self.last_update_id = 0
         self.listening = False
@@ -14,7 +28,7 @@ class TelegramNotifier:
     async def send_message(self, message, reply_to_message_id=None):
         """Envía un mensaje a Telegram de forma asíncrona."""
         if not self.token or not self.chat_id:
-            print("[Telegram] No configurado (Falta Token o Chat ID).")
+            # print("[Telegram] No configurado (Falta Token o Chat ID).")
             return None
 
         payload = {
