@@ -119,8 +119,6 @@ class PatternRecognizer:
         df['Pattern_DoubleBottom'] = 0
         df['Pattern_DoubleBottom_Neck'] = np.nan
         df['Pattern_Triangle'] = 0
-        df['Pattern_Triangle_Upper'] = np.nan
-        df['Pattern_Triangle_Lower'] = np.nan
 
         window = 10
         # Rolling de Pandas
@@ -203,12 +201,6 @@ class PatternRecognizer:
              
              # Maximos decrecientes Y mínimos crecientes
              if p_max2 < p_max1 and p_min2 > p_min1:
-                 col_tri = df.columns.get_loc('Pattern_Triangle')
-                 col_up = df.columns.get_loc('Pattern_Triangle_Upper')
-                 col_low = df.columns.get_loc('Pattern_Triangle_Lower')
-                 
-                 df.iloc[-1, col_tri] = 1
-                 df.iloc[-1, col_up] = p_max2 # Resistencia (Neck supeior)
-                 df.iloc[-1, col_low] = p_min2 # Soporte (Neck inferior)
+                 df.iloc[-1, df.columns.get_loc('Pattern_Triangle')] = 1
                  
         return df

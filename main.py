@@ -141,7 +141,7 @@ class TradingBot:
         if self.notifier.token:
             print("--- TELEGRAM ACTIVADO ---\n")
             await self.notifier.send_message("🤖 **Bot Iniciado**\nListo para operar.")
-        
+            
         while True:
             # 0. Chequeo de Concurrencia
             now_utc = datetime.now(timezone.utc)
