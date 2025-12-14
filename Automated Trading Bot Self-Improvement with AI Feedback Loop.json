@@ -1,0 +1,390 @@
+{
+  "name": "Automated Trading Bot Self-Improvement with AI Feedback Loop",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 2
+            }
+          ]
+        }
+      },
+      "id": "223e40d9-ec3b-45a9-a2d1-1e11b21f0fa6",
+      "name": "Schedule Analysis",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        4352,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-3",
+              "name": "analysisWindow",
+              "value": 7,
+              "type": "number"
+            },
+            {
+              "id": "id-5",
+              "name": "dbFilePath",
+              "value": "C:\\Users\\Guille\\Desktop\\NuevoBot\\feedback.db",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "botFilePath",
+              "value": "C:\\Users\\Guille\\Desktop\\NuevoBot\\main.py",
+              "type": "string"
+            },
+            {
+              "id": "id-7",
+              "name": "botBackupPath",
+              "value": "C:\\Users\\Guille\\Desktop\\NuevoBot\\backups\\main_backup.py",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "restartCommand",
+              "value": "echo RESTART > C:\\Users\\Guille\\Desktop\\NuevoBot\\restart.signal",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "signalFilePath",
+              "value": "C:\\Users\\Guille\\Desktop\\NuevoBot\\restart.signal",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "8bb642f9-0006-4fa0-aed4-249af3470ebd",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4576,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const operations = $input.all();\n\n// Calculate statistics\nconst totalOps = operations.length;\nconst profitable = operations.filter(op => op.json.profit > 0).length;\nconst losses = operations.filter(op => op.json.profit < 0).length;\nconst avgProfit = operations.reduce((sum, op) => sum + (op.json.profit || 0), 0) / totalOps;\n\n// Identify patterns\nconst byStrategy = {};\noperations.forEach(op => {\n  const strategy = op.json.strategy || 'unknown';\n  if (!byStrategy[strategy]) {\n    byStrategy[strategy] = { count: 0, totalProfit: 0, wins: 0, losses: 0 };\n  }\n  byStrategy[strategy].count++;\n  byStrategy[strategy].totalProfit += op.json.profit || 0;\n  if (op.json.profit > 0) byStrategy[strategy].wins++;\n  else if (op.json.profit < 0) byStrategy[strategy].losses++;\n});\n\nreturn [{\n  json: {\n    totalOperations: totalOps,\n    profitableOps: profitable,\n    lossOps: losses,\n    winRate: (profitable / totalOps * 100).toFixed(2),\n    avgProfit: avgProfit.toFixed(2),\n    strategyPerformance: byStrategy,\n    rawOperations: operations.map(op => op.json)\n  }\n}];"
+      },
+      "id": "79f5b739-742d-4bc1-910f-db98bf3ecb88",
+      "name": "Prepare Analysis Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5248,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ JSON.stringify($json) }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an expert trading bot analyst specialized in algorithmic trading optimization.\n\nYour task is to:\n1. Analyze the trading operations data provided\n2. Identify patterns in profitable vs losing trades\n3. Detect which strategies are underperforming\n4. Recommend specific parameter adjustments (stop loss, take profit, entry conditions, position sizing)\n5. Suggest code improvements or new logic to implement\n6. Prioritize recommendations by potential impact\n\nFocus on actionable insights that can be directly implemented in the Python trading bot code. Be specific with numerical recommendations when possible."
+        }
+      },
+      "id": "60a8dbaa-6591-47c3-a19d-8cfe79370738",
+      "name": "AI Trading Analyst",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        5472,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "a4c776c9-28d7-4664-81a4-d850a23df336",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        5480,
+        976
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "TdnNQWAeJgE9lPT4",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"needsImprovement\": {\n      \"type\": \"boolean\",\n      \"description\": \"Whether the bot needs adjustments based on analysis\"\n    },\n    \"summary\": {\n      \"type\": \"string\",\n      \"description\": \"Brief summary of findings\"\n    },\n    \"recommendations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"priority\": {\n            \"type\": \"string\",\n            \"enum\": [\"high\", \"medium\", \"low\"]\n          },\n          \"category\": {\n            \"type\": \"string\",\n            \"description\": \"Category like risk_management, entry_logic, exit_strategy, position_sizing\"\n          },\n          \"issue\": {\n            \"type\": \"string\",\n            \"description\": \"What problem was identified\"\n          },\n          \"recommendation\": {\n            \"type\": \"string\",\n            \"description\": \"Specific change to implement\"\n          },\n          \"codeSnippet\": {\n            \"type\": \"string\",\n            \"description\": \"Python code example if applicable\"\n          }\n        }\n      }\n    }\n  },\n  \"required\": [\"needsImprovement\", \"summary\", \"recommendations\"]\n}"
+      },
+      "id": "bdcdcd25-0b67-4d9d-9ea9-4d8b6f525f6c",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        5608,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const analysis = $input.first().json;\n\nif (!analysis.needsImprovement) {\n  return [{\n    json: {\n      action: 'no_update_needed',\n      message: 'Bot performance is acceptable, no changes required',\n      summary: analysis.summary\n    }\n  }];\n}\n\n// Generate improvement report\nconst improvements = {\n  action: 'update_required',\n  timestamp: new Date().toISOString(),\n  summary: analysis.summary,\n  highPriorityChanges: analysis.recommendations.filter(r => r.priority === 'high'),\n  mediumPriorityChanges: analysis.recommendations.filter(r => r.priority === 'medium'),\n  lowPriorityChanges: analysis.recommendations.filter(r => r.priority === 'low'),\n  allRecommendations: analysis.recommendations\n};\n\nreturn [{ json: improvements }];"
+      },
+      "id": "1a539e05-354b-47c3-8009-8f3d0b308571",
+      "name": "Generate Improvement Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5824,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $('Workflow Configuration').first().json.dbFilePath }}",
+        "options": {}
+      },
+      "id": "ba781cf5-66e7-4f23-a231-d7cec969b710",
+      "name": "Read SQLite Database",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        4800,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import sqlite3\nimport json\nfrom datetime import datetime, timedelta\n\n# Get binary data from previous node\ndb_binary = _input.first().binary['data']\n\n# Write to temporary file\nimport tempfile\nimport os\ntemp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')\ntemp_db.write(db_binary)\ntemp_db.close()\n\ntry:\n    # Connect to SQLite database\n    conn = sqlite3.connect(temp_db.name)\n    cursor = conn.cursor()\n    \n    # Get analysis window from config\n    analysis_days = _input.first().json.get('analysisWindow', 7)\n    cutoff_date = (datetime.now() - timedelta(days=analysis_days)).isoformat()\n    \n    # Query trading operations (adjust table/column names as needed)\n    cursor.execute('''\n        SELECT * FROM trading_operations \n        WHERE created_at >= ? \n        ORDER BY created_at DESC\n    ''', (cutoff_date,))\n    \n    columns = [description[0] for description in cursor.description]\n    rows = cursor.fetchall()\n    \n    # Convert to list of dicts\n    operations = []\n    for row in rows:\n        operations.append(dict(zip(columns, row)))\n    \n    conn.close()\n    os.unlink(temp_db.name)\n    \n    return operations\n    \nexcept Exception as e:\n    os.unlink(temp_db.name)\n    raise Exception(f'Error querying SQLite: {str(e)}')"
+      },
+      "id": "64ba72fe-b5c6-41a6-99ee-fdc68ac4413e",
+      "name": "Query SQLite Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5024,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $('Workflow Configuration').first().json.botFilePath }}",
+        "options": {}
+      },
+      "id": "8d58e753-1304-4b1a-ab3a-69a1f394d9ed",
+      "name": "Read Python Bot Code",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        6048,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const improvements = $input.first().json;\nconst botCode = $input.first().binary.data.toString('utf-8');\n\nif (improvements.action === 'no_update_needed') {\n  return [{\n    json: {\n      updated: false,\n      message: 'No improvements needed',\n      originalCode: botCode\n    }\n  }];\n}\n\n// Create improvement instructions for AI\nconst improvementInstructions = improvements.allRecommendations\n  .filter(r => r.priority === 'high' || r.priority === 'medium')\n  .map(r => `${r.category}: ${r.recommendation}${r.codeSnippet ? '\\n' + r.codeSnippet : ''}`)\n  .join('\\n\\n');\n\nreturn [{\n  json: {\n    updated: true,\n    originalCode: botCode,\n    improvementInstructions: improvementInstructions,\n    recommendations: improvements.allRecommendations,\n    summary: improvements.summary\n  }\n}];"
+      },
+      "id": "93de087f-1c1c-4f9d-b8de-6d47aa4eb463",
+      "name": "Apply Code Improvements",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6272,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('Workflow Configuration').first().json.botFilePath }}",
+        "options": {}
+      },
+      "id": "fb4dd0dc-39dd-44f7-a4ae-d45cc61cf885",
+      "name": "Write Updated Bot Code",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        6496,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import os\n\n# Get signal file path from configuration\nsignal_file = 'C:\\\\Users\\\\Guille\\\\Desktop\\\\NuevoBot\\\\restart.signal'\n\ntry:\n    # Create the restart signal file\n    with open(signal_file, 'w') as f:\n        f.write('RESTART')\n    \n    return [{\n        'json': {\n            'success': True,\n            'message': 'Restart signal file created',\n            'signal_file': signal_file\n        }\n    }]\nexcept Exception as e:\n    return [{\n        'json': {\n            'success': False,\n            'error': str(e),\n            'signal_file': signal_file\n        }\n    }]"
+      },
+      "id": "652e84b1-9454-40a3-a6ca-d93d201d7ba8",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6720,
+        752
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Analysis": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Read SQLite Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Analysis Context": {
+      "main": [
+        [
+          {
+            "node": "AI Trading Analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Trading Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Trading Analyst",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Trading Analyst": {
+      "main": [
+        [
+          {
+            "node": "Generate Improvement Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Improvement Code": {
+      "main": [
+        [
+          {
+            "node": "Read Python Bot Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read SQLite Database": {
+      "main": [
+        [
+          {
+            "node": "Query SQLite Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query SQLite Data": {
+      "main": [
+        [
+          {
+            "node": "Prepare Analysis Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Python Bot Code": {
+      "main": [
+        [
+          {
+            "node": "Apply Code Improvements",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply Code Improvements": {
+      "main": [
+        [
+          {
+            "node": "Write Updated Bot Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Updated Bot Code": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "eb9007a5-6d67-4ab0-9aea-88c3c261e030",
+  "meta": {
+    "instanceId": "fd00143cfa317cb786cafb04e369fc77a6f54cc9d6105303ddb7cbc38daef3c7"
+  },
+  "id": "nXtMFp1uvRVSBHjJ",
+  "tags": []
+}
