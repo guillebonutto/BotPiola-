@@ -7,3 +7,23 @@ env/
 venv/
 .env
 .ipynb_checkpoints
+
+# PDFs de documentación
+*.pdf
+
+# Base de datos y backups
+*.db
+*.db-journal
+backups/
+
+# Configuración sensible
+config.json
+
+# Archivos de feedback
+feedback_images/
+restart.signal
+
+# Exportaciones
+feedback_export_*.json
+PERFORMANCE_REPORT.md
+
