@@ -20,7 +20,7 @@ class StrategyStochastic(Strategy):
         
     def get_signal(self, df):
         if df.empty or len(df) < 200:
-            return 'HOLD', None, 0
+            return 'HOLD', "Insufficient Data (<200 candles)", 0
             
         last = df.iloc[-1]
         prev = df.iloc[-2]
