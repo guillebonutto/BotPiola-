@@ -1,14 +1,11 @@
 import asyncio
 import pandas as pd
+import html
 from datetime import datetime, timezone, timedelta
-
-# Importar módulos propios
 from BinaryOptionsToolsV2.pocketoption import PocketOptionAsync
 from analysis import MarketAnalyzer
 from patterns import PatternRecognizer
 from telegram_bot import TelegramNotifier
-
-# Importar estrategias
 from strategy_stochastic import StrategyStochastic
 from strategy_continuation import StrategyContinuation
 from strategy_fibonacci import StrategyFibonacci
@@ -87,11 +84,13 @@ class TradingBot:
     async def analyze_pair(self, pair):
         """Pipeline completo de análisis para un par."""
         print(f"Analizando {pair}...")
-        cycle_log = f"<b>{pair}:</b> "
+        
+        # --- NUEVO FORMATO DE MENSAJE: Cabecera del Par ---
+        cycle_log = f"\n🔹 <b>{pair}</b>"
         
         df = await self.fetch_data(pair)
         if df.empty:
-            return None, cycle_log + "<i>Sin datos</i>"
+            return None, cycle_log + "\n   ⚠️ <i>Sin datos disponibles</i>"
 
         # 1. Análisis Fundamental (Noticias)
         news_status = self.analyzer.check_news()
@@ -112,19 +111,26 @@ class TradingBot:
         
         for strategy in self.strategies:
             action, reason, duration = strategy.get_signal(df)
+            
+            # Sanitizar textos para Telegram (escapar <, >, &)
+            safe_reason = html.escape(str(reason)) if reason else ""
+            safe_strat_name = html.escape(strategy.name)
+            
             if action in ['BUY', 'SELL']:
                 print(f"  >>> SEÑAL DETECTADA en {pair} por {strategy.name}: {action} ({reason})")
                 signals.append((action, duration, strategy.name))
-                strategy_logs.append(f"🔥 <b>{action}</b> ({strategy.name})")
+                # Formato lista indentada
+                strategy_logs.append(f"   🔥 <b>{action}</b>: {safe_strat_name}\n      <i>{safe_reason}</i>")
             elif VERBOSE:
                 print(f"  [{strategy.name}] HOLD: {reason}")
-                # Simplificamos el log para Telegram (solo la razón corta) si es muy largo
-                strategy_logs.append(f"⏱ {reason}")
+                # Simplificamos "HOLD" para no llenar pantalla, solo icono y texto
+                strategy_logs.append(f"   ⏱ {safe_reason}")
         
         if strategy_logs:
-            cycle_log += " | ".join(strategy_logs)
+            # Unir con saltos de línea
+            cycle_log += "\n" + "\n".join(strategy_logs)
         else:
-            cycle_log += "Sin señales"
+            cycle_log += "\n   <i>Sin señales</i>"  
 
         # Sistema de Votación y Resolución de Conflictos
         if not signals:
@@ -137,7 +143,7 @@ class TradingBot:
         # 1. Chequeo de Conflicto (Si hay señales opuestas, NO operamos)
         if buy_signals and sell_signals:
             print(f"  [ALERTA] Conflicto de estrategias en {pair}: {len(buy_signals)} BUY vs {len(sell_signals)} SELL. Operación cancelada por seguridad.")
-            return None, cycle_log + " (CONFLICTO)"
+            return None, cycle_log + "\n   ⛔ <b>CONFLICTO DE ESTRATEGIAS</b>"
 
         # 2. Ejecución por Consenso
         if buy_signals:

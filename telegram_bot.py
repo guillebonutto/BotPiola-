@@ -4,23 +4,29 @@ from pathlib import Path
 
 class TelegramNotifier:
     def __init__(self, token, chat_id, feedback_db=None):
-        # Sanitize token: remove 'bot' prefix if user included it
-        if token and token.lower().startswith('bot'):
-            self.token = token[3:]
-        else:
-            self.token = token
+        # Sanitize token
+        if token:
+            # Eliminar prefijo 'bot' si existe (case insensitive)
+            if token.lower().startswith('bot'):
+                token = token[3:]
+            # Limpiar espacios y caracteres extraños
+            token = token.strip()
             
-        self.chat_id = chat_id
-        
-        # Verify and log configuration
-        if self.token:
+            # Validación simple de formato (números:caracteres)
+            import re
+            if not re.match(r'^\d+:[A-Za-z0-9_-]+$', token):
+                print(f"[Telegram] ⚠️ ADVERTENCIA: El token '{token}' no parece válido. Formato esperado: '123456:ABC-DEF...'")
+                
+            self.token = token
             masked = f"{self.token[:4]}...{self.token[-4:]}" if len(self.token) > 8 else "***"
             print(f"[Telegram] Configurado con token: {masked}")
             self.base_url = f"https://api.telegram.org/bot{self.token}"
         else:
+            self.token = None
             print("[Telegram] Token no proporcionado.")
             self.base_url = ""
 
+        self.chat_id = chat_id
         self.feedback_db = feedback_db
         self.last_update_id = 0
         self.listening = False
@@ -31,6 +37,7 @@ class TelegramNotifier:
             # print("[Telegram] No configurado (Falta Token o Chat ID).")
             return None
 
+        # Preparar payload base
         payload = {
             'chat_id': self.chat_id,
             'text': message,
@@ -40,17 +47,34 @@ class TelegramNotifier:
         if reply_to_message_id:
             payload['reply_to_message_id'] = reply_to_message_id
 
-        try:
+        async def _do_send(current_payload):
             async with aiohttp.ClientSession() as session:
-                async with session.post(f"{self.base_url}/sendMessage", json=payload) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        return data.get('result', {}).get('message_id')
-                    else:
-                        print(f"[Telegram] Error enviando mensaje: {response.status}")
-                        text = await response.text()
-                        print(f"[Telegram] Respuesta: {text}")
-                        return None
+                async with session.post(f"{self.base_url}/sendMessage", json=current_payload) as response:
+                    return response.status, await response.text(), await response.json() if response.status == 200 else {}
+
+        try:
+            status, text, data = await _do_send(payload)
+            
+            if status == 200:
+                return data.get('result', {}).get('message_id')
+            
+            # Manejo de Errores
+            print(f"[Telegram] Error enviando mensaje (HTML): {status} - {text}")
+            
+            # Reintento automágico en Texto Plano (si falló por formato, ej 400 Bad Request)
+            if status == 400 and "parse" in text.lower():
+                print("[Telegram] Intentando re-enviar como Texto Plano...")
+                payload.pop('parse_mode') # Quitar modo HTML
+                
+                status_retry, text_retry, data_retry = await _do_send(payload)
+                if status_retry == 200:
+                    print("[Telegram] ✅ Reenvio exitoso en Texto Plano.")
+                    return data_retry.get('result', {}).get('message_id')
+                else:
+                    print(f"[Telegram] Falló reenvio en Texto Plano: {status_retry}")
+            
+            return None
+            
         except Exception as e:
             print(f"[Telegram] Excepción al enviar: {e}")
             return None
