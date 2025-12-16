@@ -15,7 +15,7 @@ from strategy_structure import StrategyStructure
 # --- Configuración ---
 PAIRS = ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc']
 INTERVAL = 300  # 5 minutos
-LOOKBACK = 100 # Reducido para evitar timeouts
+LOOKBACK = 300 # Aumentado a 300 para cubrir SMA 200
 VERBOSE = True # Modo Depuración: Imprimir todas las razones de HOLD
 VERBOSE_TELEGRAM = True # Enviar reporte de DEBUG a Telegram (Resumen por ciclo)
 
@@ -41,8 +41,56 @@ class TradingBot:
         """Obtiene velas y prepara el DataFrame."""
         offset = INTERVAL * LOOKBACK
         try:
-            # Añadido timeout de 10 segundos
+            # Añadido timeout de 20 segundos total
+            print(f"  [DEBUG] Fetching {pair} (Chunk 1)...")
             candles = await asyncio.wait_for(self.api.get_candles(pair, INTERVAL, offset), timeout=10.0)
+            
+            # Paginación si faltan datos (Límite API suele ser ~150)
+            if len(candles) > 0 and len(candles) < 200:
+                print(f"  [DEBUG] {pair}: Got {len(candles)} candles. Keys: {list(candles[0].keys())}")
+                
+                try:
+                    # Detectar clave de tiempo (puede ser 'time', 'Time', 'timestamp')
+                    time_key = next((k for k in candles[0].keys() if k.lower() in ['time', 'timestamp', 'date']), None)
+                    
+                    if not time_key:
+                        print(f"  [WARN] No time key found in candle data for {pair}")
+                    else:
+                        # Asumimos orden ascendente [Oldest ... Newest]
+                        # ERROR FIX: Castear a int porque el API requiere entero, y a veces viene como float
+                        oldest_time = int(candles[0][time_key])
+                        print(f"  [DEBUG] Fetching Chunk 2 (Previous) ending at {oldest_time}...")
+                        
+                        # Pedimos otro bloque terminando en el tiempo más viejo del bloque 1
+                        chunk2 = await asyncio.wait_for(
+                            self.api.get_candles_advanced(pair, INTERVAL, offset, oldest_time), 
+                            timeout=10.0
+                        )
+                        print(f"  [DEBUG] {pair}: Chunk 2 got {len(chunk2)} candles.")
+                        
+                        # Combinar: Chunk2 (Viejo) + Chunk1 (Nuevo)
+                        full_data = chunk2 + candles
+                        
+                        # Usar la misma clave para de-duplicar
+                        seen = set()
+                        candles = []
+                        for c in full_data:
+                            # Asegurar que el chunk2 tenga la misma key (debería)
+                            tk = next((k for k in c.keys() if k.lower() in ['time', 'timestamp', 'date']), time_key)
+                            t_val = c.get(tk)
+                            
+                            if t_val is not None and t_val not in seen:
+                                candles.append(c)
+                                seen.add(t_val)
+                        
+                        # Re-ordenar por tiempo
+                        candles.sort(key=lambda x: x.get(time_key, 0))
+                        print(f"  [DEBUG] {pair}: Total combined candles: {len(candles)}")
+                    
+                except Exception as e:
+                    print(f"  [WARN] Failed fetching chunk 2 for {pair}: {e}")
+                    # Continuamos con lo que tenemos por si acaso
+            
             df = pd.DataFrame(candles)
             if df.empty:
                 print(f"  [WARN] Dataframe vacío para {pair}")
