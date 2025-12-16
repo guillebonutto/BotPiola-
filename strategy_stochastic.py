@@ -33,12 +33,11 @@ class StrategyStochastic(Strategy):
         # Cruce exacto: K anterior < D anterior Y K actual > D actual
         if trend == 'BULL':
             if prev['Stoch_K'] < 20 and prev['Stoch_K'] < prev['Stoch_D'] and last['Stoch_K'] > last['Stoch_D']:
-                 return 'BUY', "Cruce Estocástico en Sobreventa + Tendencia Alcista", 300 # 5 min
+                 return 'BUY', "Cruce Estocástico en Sobreventa + Tendencia Alcista", 300
                  
         # 3. Señal de Venta (Tendencia Bajista)
-        # Estocástico estaba en sobrecompra (>80) y cruza hacia abajo su media
         if trend == 'BEAR':
             if prev['Stoch_K'] > 80 and prev['Stoch_K'] > prev['Stoch_D'] and last['Stoch_K'] < last['Stoch_D']:
                 return 'SELL', "Cruce Estocástico en Sobrecompra + Tendencia Bajista", 300
                 
-        return 'HOLD', None, 0
+        return 'HOLD', f"Trend {trend} | Stoch K={last['Stoch_K']:.1f}", 0

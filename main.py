@@ -15,9 +15,12 @@ from strategy_fibonacci import StrategyFibonacci
 from strategy_structure import StrategyStructure
 
 # --- Configuración ---
+# --- Configuración ---
 PAIRS = ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc']
 INTERVAL = 300  # 5 minutos
 LOOKBACK = 100 # Reducido para evitar timeouts
+VERBOSE = True # Modo Depuración: Imprimir todas las razones de HOLD
+VERBOSE_TELEGRAM = True # Enviar reporte de DEBUG a Telegram (Resumen por ciclo)
 
 class TradingBot:
     def __init__(self, ssid, telegram_token=None, telegram_chat_id=None):
@@ -84,9 +87,11 @@ class TradingBot:
     async def analyze_pair(self, pair):
         """Pipeline completo de análisis para un par."""
         print(f"Analizando {pair}...")
+        cycle_log = f"<b>{pair}:</b> "
+        
         df = await self.fetch_data(pair)
         if df.empty:
-            return None
+            return None, cycle_log + "<i>Sin datos</i>"
 
         # 1. Análisis Fundamental (Noticias)
         news_status = self.analyzer.check_news()
@@ -103,15 +108,27 @@ class TradingBot:
 
         # 5. Consultar Estrategias
         signals = []
+        strategy_logs = []
+        
         for strategy in self.strategies:
             action, reason, duration = strategy.get_signal(df)
             if action in ['BUY', 'SELL']:
                 print(f"  >>> SEÑAL DETECTADA en {pair} por {strategy.name}: {action} ({reason})")
                 signals.append((action, duration, strategy.name))
+                strategy_logs.append(f"🔥 <b>{action}</b> ({strategy.name})")
+            elif VERBOSE:
+                print(f"  [{strategy.name}] HOLD: {reason}")
+                # Simplificamos el log para Telegram (solo la razón corta) si es muy largo
+                strategy_logs.append(f"⏱ {reason}")
         
+        if strategy_logs:
+            cycle_log += " | ".join(strategy_logs)
+        else:
+            cycle_log += "Sin señales"
+
         # Sistema de Votación y Resolución de Conflictos
         if not signals:
-            return None
+            return None, cycle_log
 
         # Separar señales de COMPRA y VENTA
         buy_signals = [s for s in signals if s[0] == 'BUY']
@@ -120,20 +137,18 @@ class TradingBot:
         # 1. Chequeo de Conflicto (Si hay señales opuestas, NO operamos)
         if buy_signals and sell_signals:
             print(f"  [ALERTA] Conflicto de estrategias en {pair}: {len(buy_signals)} BUY vs {len(sell_signals)} SELL. Operación cancelada por seguridad.")
-            return None
+            return None, cycle_log + " (CONFLICTO)"
 
         # 2. Ejecución por Consenso
         if buy_signals:
             print(f"  >>> CONSENSO DE COMPRA ({len(buy_signals)} estrategias coinciden).")
-            # Podríamos priorizar la estrategia con mayor duración o simplemente tomar la primera
-            # Por ahora, retornamos la primera que generó señal
-            return buy_signals[0]
+            return buy_signals[0], cycle_log
             
         if sell_signals:
             print(f"  >>> CONSENSO DE VENTA ({len(sell_signals)} estrategias coinciden).")
-            return sell_signals[0]
+            return sell_signals[0], cycle_log
             
-        return signals[0] # Fallback por si acaso
+        return signals[0], cycle_log
 
     async def run(self):
         print("--- INICIANDO BOT DE TRADING AVANZADO ---\n")
@@ -150,13 +165,15 @@ class TradingBot:
                 print(f"[{now_utc.strftime('%H:%M:%S')}] Operación en curso. Esperando {int(remaining)}s para finalizar...")
                 await asyncio.sleep(5)
                 continue
-
+            
+            cycle_report = []
             for pair in PAIRS:
                 # Chequeo doble por si se tardó mucho en el loop anterior
                 if datetime.now(timezone.utc) < self.active_trade_expiry:
                     break
                     
-                signal = await self.analyze_pair(pair)
+                signal, log_msg = await self.analyze_pair(pair)
+                cycle_report.append(log_msg)
                 
                 if signal:
                     action, duration, strat_name = signal
@@ -199,6 +216,14 @@ class TradingBot:
                 
                 await asyncio.sleep(2) # Pausa entre pares para no saturar
             
+            # --- Reporte Telegram (Al final del ciclo) ---
+            if VERBOSE_TELEGRAM and cycle_report and self.notifier.token:
+                full_report = "📊 <b>Reporte de Ciclo</b>\n\n" + "\n".join(cycle_report)
+                try:
+                    await self.notifier.send_message(full_report)
+                except Exception as e:
+                    print(f"Error enviando reporte Telegram: {e}")
+
             print("Ciclo completado. Esperando...")
             await asyncio.sleep(10)
 

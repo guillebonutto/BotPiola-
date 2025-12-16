@@ -46,4 +46,4 @@ class StrategyStructure(Strategy):
                     if last['MACD'] > last['MACD_Signal']:
                         return 'BUY', f"Cambio Estructura: Doble Suelo + Ruptura confirmada de {neckline:.5f}", 300
                 
-        return 'HOLD', None, 0
+        return 'HOLD', f"No Confirmed Pattern (DT={double_top_detected}, DB={double_bottom_detected})", 0

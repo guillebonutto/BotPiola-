@@ -27,7 +27,7 @@ class StrategyContinuation(Strategy):
         has_triangle = last.get('Pattern_Triangle', 0) == 1
         
         if not has_triangle:
-            return 'HOLD', None, 0
+            return 'HOLD', "No Triangle Pattern", 0
 
         # 4. CONFIRMACIÓN DE RUPTURA (Breakout) - Clave según feedback
         # Buscamos los máximos/mínimos recientes para definir la zona de ruptura

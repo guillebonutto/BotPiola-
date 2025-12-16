@@ -52,4 +52,4 @@ class StrategyFibonacci(Strategy):
                  if df.iloc[-1]['Close'] < df.iloc[-1]['Open']:
                      return 'SELL', "Rechazo en Fibonacci 61.8%", 300
                      
-        return 'HOLD', None, 0
+        return 'HOLD', f"Price {current_price:.4f} vs SMA {trend_sma:.4f} (No Fib signal)", 0
