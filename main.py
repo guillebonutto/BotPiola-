@@ -10,6 +10,8 @@ from strategy_stochastic import StrategyStochastic
 from strategy_continuation import StrategyContinuation
 from strategy_fibonacci import StrategyFibonacci
 from strategy_structure import StrategyStructure
+from trade_logger import trade_logger
+import uuid
 
 # --- Configuración ---
 # --- Configuración ---
@@ -138,7 +140,7 @@ class TradingBot:
         
         df = await self.fetch_data(pair)
         if df.empty:
-            return None, cycle_log + "\n   ⚠️ <i>Sin datos disponibles</i>"
+            return None, {}, cycle_log + "\n   ⚠️ <i>Sin datos disponibles</i>"
 
         # 1. Análisis Fundamental (Noticias)
         news_status = self.analyzer.check_news()
@@ -181,8 +183,10 @@ class TradingBot:
             cycle_log += "\n   <i>Sin señales</i>"  
 
         # Sistema de Votación y Resolución de Conflictos
+        latest_candle = df.iloc[-1].to_dict()
+
         if not signals:
-            return None, cycle_log
+            return None, latest_candle, cycle_log
 
         # Separar señales de COMPRA y VENTA
         buy_signals = [s for s in signals if s[0] == 'BUY']
@@ -191,18 +195,18 @@ class TradingBot:
         # 1. Chequeo de Conflicto (Si hay señales opuestas, NO operamos)
         if buy_signals and sell_signals:
             print(f"  [ALERTA] Conflicto de estrategias en {pair}: {len(buy_signals)} BUY vs {len(sell_signals)} SELL. Operación cancelada por seguridad.")
-            return None, cycle_log + "\n   ⛔ <b>CONFLICTO DE ESTRATEGIAS</b>"
+            return None, latest_candle, cycle_log + "\n   ⛔ <b>CONFLICTO DE ESTRATEGIAS</b>"
 
         # 2. Ejecución por Consenso
         if buy_signals:
             print(f"  >>> CONSENSO DE COMPRA ({len(buy_signals)} estrategias coinciden).")
-            return buy_signals[0], cycle_log
+            return buy_signals[0], latest_candle, cycle_log
             
         if sell_signals:
             print(f"  >>> CONSENSO DE VENTA ({len(sell_signals)} estrategias coinciden).")
-            return sell_signals[0], cycle_log
+            return sell_signals[0], latest_candle, cycle_log
             
-        return signals[0], cycle_log
+        return signals[0], latest_candle, cycle_log
 
     async def run(self):
         print("--- INICIANDO BOT DE TRADING AVANZADO ---\n")
@@ -226,7 +230,7 @@ class TradingBot:
                 if datetime.now(timezone.utc) < self.active_trade_expiry:
                     break
                     
-                signal, log_msg = await self.analyze_pair(pair)
+                signal, latest_data, log_msg = await self.analyze_pair(pair)
                 cycle_report.append(log_msg)
                 
                 if signal:
@@ -235,24 +239,62 @@ class TradingBot:
                     
                     try:
                         amount = 1.0 # Monto fijo por ahora
+                        trade_id = str(uuid.uuid4())[:8]
+
+                        # --- LOGGING PREVIO ---
+                        trade_data = {
+                            'timestamp': datetime.now(timezone.utc),
+                            'trade_id': trade_id,
+                            'pair': pair,
+                            'timeframe': INTERVAL,
+                            'decision': action,
+                            'pattern_detected': strat_name, # Usamos el nombre de la estrategia
+                            'price': latest_data.get('Close', 0),
+                            'ema': latest_data.get('EMA_20', 0), 
+                            'rsi': latest_data.get('RSI', 0), 
+                            'atr': latest_data.get('ATR', 0),
+                            'result': 'PENDING',
+                            'expiry_time': duration,
+                            # Agregar más campos si analyzer los provee en df
+                        }
+                        trade_logger.log_trade(trade_data)
                         
                         # Notificar Apertura
                         await self.notifier.notify_open(pair, action, strat_name, duration, amount)
 
                         # Ejecutar orden y ESPERAR resultado (check_win=True)
                         # Nota: Si check_win=True bloquea por 'duration', el bot confirma el resultado.
-                        result = None
+                        trade_result = None
                         if action == 'BUY':
-                             result = await self.api.buy(asset=pair, amount=amount, time=duration, check_win=True)
+                             trade_result = await self.api.buy(asset=pair, amount=amount, time=duration, check_win=True)
                         else:
-                             result = await self.api.sell(asset=pair, amount=amount, time=duration, check_win=True)
+                             trade_result = await self.api.sell(asset=pair, amount=amount, time=duration, check_win=True)
                         
                         # Procesar Resultado
-                        is_win = bool(result)
-                        profit = amount * 0.92 if is_win else -amount # Estimado 92% payout
+                        # El API retorna (trade_id, details_dict)
+                        is_win = False
+                        profit = 0.0
+                        
+                        if isinstance(trade_result, tuple) and len(trade_result) == 2:
+                            _, details = trade_result
+                            is_win = details.get('result') == 'win'
+                            profit = details.get('profit', 0.0)
+                        else:
+                            # Fallback por si cambia la API
+                             print(f"  [WARN] Formato de resultado inesperado: {trade_result}")
+                             is_win = False
+                             profit = -amount
                         
                         print(f"  >>> Resultado Operación: {'GANADA' if is_win else 'PERDIDA'}")
                         await self.notifier.notify_close(pair, profit, is_win)
+
+                        # --- ACTUALIZAR LOG ---
+                        trade_logger.update_trade_result(
+                            trade_id=trade_id,
+                            result='WIN' if is_win else 'LOSS',
+                            profit_loss=profit
+                        )
+
 
                         # Actualizar bloqueo
                         self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=5)
