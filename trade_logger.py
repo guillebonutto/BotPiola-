@@ -29,7 +29,7 @@ class TradeLogger:
         return self.logs_dir / self.filename_pattern.format(date=date_str)
     
     def _ensure_file(self):
-        """Crear archivo si no existe."""
+        """Crear archivo si no existe o si tiene headers incorrectos."""
         filename = self._get_filename()
         
         # Cambiar de archivo si pasamos a nuevo día
@@ -37,7 +37,22 @@ class TradeLogger:
             self.current_file = filename
             self.headers = self._get_headers()
             
-            # Si es archivo nuevo, crear con headers
+            # Si el archivo existe, verificar headers
+            if filename.exists():
+                try:
+                    with open(filename, 'r', encoding='utf-8') as f:
+                        reader = csv.reader(f)
+                        existing_headers = next(reader, [])
+                        
+                    # Si los headers no coinciden (ej. por corrupción de test), renombrar
+                    if len(existing_headers) < len(self.headers):
+                        print(f"⚠️ Headers de log incorrectos en {filename.name}. Renombrando...")
+                        backup_name = filename.with_suffix(f".corrupted_{int(datetime.now().timestamp())}.csv")
+                        filename.rename(backup_name)
+                except Exception as e:
+                    print(f"⚠️ Error verificando headers: {e}")
+
+            # Si es archivo nuevo (o renombrado), crear con headers
             if not filename.exists():
                 with open(filename, 'w', newline='', encoding='utf-8') as f:
                     writer = csv.DictWriter(f, fieldnames=self.headers)

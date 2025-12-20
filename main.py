@@ -22,11 +22,16 @@ VERBOSE = True # Modo Depuración: Imprimir todas las razones de HOLD
 VERBOSE_TELEGRAM = True # Enviar reporte de DEBUG a Telegram (Resumen por ciclo)
 
 class TradingBot:
-    def __init__(self, ssid, telegram_token=None, telegram_chat_id=None):
+    def __init__(self, ssid, telegram_token=None, telegram_chat_id=None, telegram_owner_id=None):
         self.api = PocketOptionAsync(ssid)
         self.analyzer = MarketAnalyzer()
         self.pattern_recognizer = PatternRecognizer()
-        self.notifier = TelegramNotifier(telegram_token, telegram_chat_id)
+        self.notifier = TelegramNotifier(
+            telegram_token, 
+            telegram_chat_id, 
+            telegram_owner_id,
+            get_balance_callback=self.get_balance
+        )
         
         # Estado de trading
         self.active_trade_expiry = datetime.min.replace(tzinfo=timezone.utc)
@@ -38,6 +43,14 @@ class TradingBot:
             StrategyFibonacci(),
             StrategyStructure()
         ]
+
+    async def get_balance(self):
+        """Obtiene el balance actual de la cuenta."""
+        try:
+            return await self.api.balance()
+        except Exception as e:
+            print(f"[Bot] Error obteniendo balance: {e}")
+            return "Error"
 
     async def fetch_data(self, pair):
         """Obtiene velas y prepara el DataFrame."""
@@ -214,6 +227,8 @@ class TradingBot:
         if self.notifier.token:
             print("--- TELEGRAM ACTIVADO ---\n")
             await self.notifier.send_message("🤖 **Bot Iniciado**\nListo para operar.")
+            # Iniciar el listener en segundo plano
+            asyncio.create_task(self.notifier.start_listening())
         
         while True:
             # 0. Chequeo de Concurrencia
@@ -314,11 +329,34 @@ class TradingBot:
             
             # --- Reporte Telegram (Al final del ciclo) ---
             if VERBOSE_TELEGRAM and cycle_report and self.notifier.token:
-                full_report = "📊 <b>Reporte de Ciclo</b>\n\n" + "\n".join(cycle_report)
-                try:
-                    await self.notifier.send_message(full_report)
-                except Exception as e:
-                    print(f"Error enviando reporte Telegram: {e}")
+                header = "📊 <b>Reporte de Ciclo</b>\n\n"
+                full_report = "\n".join(cycle_report)
+                
+                # Telegram tiene un límite de 4096 caracteres
+                MAX_LEN = 4000 
+                if len(header + full_report) > MAX_LEN:
+                    # Enviar por partes si es muy largo
+                    parts = []
+                    current_part = header
+                    for line in cycle_report:
+                        if len(current_part + line) + 1 > MAX_LEN:
+                            parts.append(current_part)
+                            current_part = line
+                        else:
+                            current_part += "\n" + line
+                    parts.append(current_part)
+                    
+                    for p in parts:
+                        try:
+                            await self.notifier.send_message(p)
+                            await asyncio.sleep(1) # Evitar flood
+                        except Exception as e:
+                            print(f"Error enviando parte del reporte: {e}")
+                else:
+                    try:
+                        await self.notifier.send_message(header + full_report)
+                    except Exception as e:
+                        print(f"Error enviando reporte Telegram: {e}")
 
             print("Ciclo completado. Esperando...")
             await asyncio.sleep(10)
@@ -327,8 +365,9 @@ async def main():
     ssid = input("Introduce tu SSID de PocketOption: ").strip()
     tg_token = input("Introduce tu Token de Telegram (Enter para omitir): ").strip()
     tg_chat = input("Introduce tu Chat ID de Telegram (Enter para omitir): ").strip()
+    tg_owner = input("Introduce tu Telegram Owner ID (opcional, usa coma para varios): ").strip()
     
-    bot = TradingBot(ssid, tg_token, tg_chat)
+    bot = TradingBot(ssid, tg_token, tg_chat, tg_owner)
     await bot.run()
 
 if __name__ == '__main__':

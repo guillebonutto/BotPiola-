@@ -1,9 +1,19 @@
 import aiohttp
 import asyncio
+import io
+import os
+import glob
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+# Configurar matplotlib para backend no interactivo
+plt.switch_backend('Agg')
+
 class TelegramNotifier:
-    def __init__(self, token, chat_id, feedback_db=None):
+    def __init__(self, token, chat_id, owner_id=None, feedback_db=None, get_balance_callback=None, get_stats_callback=None):
         # Sanitize token
         if token:
             # Eliminar prefijo 'bot' si existe (case insensitive)
@@ -27,19 +37,43 @@ class TelegramNotifier:
             self.base_url = ""
 
         self.chat_id = chat_id
+        
+        # Procesar owner_id (puede ser int, str, o lista/tupla de ellos)
+        self.owner_ids = []
+        if owner_id:
+            if isinstance(owner_id, (list, tuple)):
+                self.owner_ids = [int(i) for i in owner_id]
+            elif isinstance(owner_id, str) and ',' in owner_id:
+                self.owner_ids = [int(i.strip()) for i in owner_id.split(',')]
+            else:
+                self.owner_ids = [int(owner_id)]
+        
         self.feedback_db = feedback_db
+        self.get_balance_callback = get_balance_callback
+        self.get_stats_callback = get_stats_callback
         self.last_update_id = 0
         self.listening = False
+        self.logs_dir = Path("logs/trades")
 
-    async def send_message(self, message, reply_to_message_id=None):
+    async def send_message(self, message, reply_to_message_id=None, target_chat_id=None):
         """Envía un mensaje a Telegram de forma asíncrona."""
-        if not self.token or not self.chat_id:
+        # Si target_chat_id es una lista/tupla, enviar a todos
+        if isinstance(target_chat_id, (list, tuple)):
+            results = []
+            for tid in target_chat_id:
+                res = await self.send_message(message, reply_to_message_id, tid)
+                results.append(res)
+            return results[0] if results else None
+
+        dest_chat_id = target_chat_id if target_chat_id else self.chat_id
+
+        if not self.token or not dest_chat_id:
             # print("[Telegram] No configurado (Falta Token o Chat ID).")
             return None
 
         # Preparar payload base
         payload = {
-            'chat_id': self.chat_id,
+            'chat_id': dest_chat_id,
             'text': message,
             'parse_mode': 'HTML'
         }
@@ -55,12 +89,25 @@ class TelegramNotifier:
         try:
             status, text, data = await _do_send(payload)
             
+            # --- MANEJO DE RATE LIMIT (429) ---
+            if status == 429:
+                retry_after = data.get('parameters', {}).get('retry_after', 30)
+                print(f"[Telegram] ⏳ Rate limit alcanzado. Esperando {retry_after}s...")
+                await asyncio.sleep(retry_after + 1)
+                status, text, data = await _do_send(payload) # Reintento
+
             if status == 200:
                 return data.get('result', {}).get('message_id')
             
             # Manejo de Errores
             print(f"[Telegram] Error enviando mensaje (HTML): {status} - {text}")
             
+            # --- MANEJO ESPECÍFICO DE CHAT NOT FOUND ---
+            if status == 400 and "chat not found" in text.lower():
+                print(f"[Telegram] ❌ ERROR: El Chat ID '{dest_chat_id}' no es válido o el bot no ha sido iniciado allí.")
+                print(f"[Telegram] 💡 TIP: Asegúrate de que el ID sea correcto y de haber enviado /start al bot en ese chat.")
+                return None
+
             # Reintento automágico en Texto Plano (si falló por formato, ej 400 Bad Request)
             if status == 400 and "parse" in text.lower():
                 print("[Telegram] Intentando re-enviar como Texto Plano...")
@@ -77,6 +124,51 @@ class TelegramNotifier:
             
         except Exception as e:
             print(f"[Telegram] Excepción al enviar: {e}")
+            return None
+
+    async def send_photo(self, photo_buffer, caption=None, target_chat_id=None):
+        """Envía una foto a Telegram de forma asíncrona."""
+        dest_chat_id = target_chat_id if target_chat_id else self.chat_id
+
+        if not self.token or not dest_chat_id:
+            return None
+
+        data = aiohttp.FormData()
+        data.add_field('chat_id', str(dest_chat_id))
+        data.add_field('photo', photo_buffer, filename='chart.png', content_type='image/png')
+        if caption:
+            data.add_field('caption', caption)
+        data.add_field('parse_mode', 'HTML')
+
+        async def _do_send_photo(current_data):
+            async with aiohttp.ClientSession() as session:
+                async with session.post(f"{self.base_url}/sendPhoto", data=current_data) as response:
+                    return response.status, await response.text(), await response.json() if response.status == 200 else {}
+
+        try:
+            status, text, data = await _do_send_photo(data)
+            
+            # --- MANEJO DE RATE LIMIT (429) ---
+            if status == 429:
+                retry_after = data.get('parameters', {}).get('retry_after', 30)
+                print(f"[Telegram] ⏳ Rate limit alcanzado en foto. Esperando {retry_after}s...")
+                await asyncio.sleep(retry_after + 1)
+                # Re-crear FormData porque aiohttp no permite reusarlo si ya se leyó
+                data_retry = aiohttp.FormData()
+                data_retry.add_field('chat_id', str(dest_chat_id))
+                data_retry.add_field('photo', photo_buffer, filename='chart.png', content_type='image/png')
+                if caption:
+                    data_retry.add_field('caption', caption)
+                data_retry.add_field('parse_mode', 'HTML')
+                status, text, data = await _do_send_photo(data_retry)
+
+            if status == 200:
+                return data.get('result', {}).get('message_id')
+            else:
+                print(f"[Telegram] Error enviando foto: {status} - {text}")
+                return None
+        except Exception as e:
+            print(f"[Telegram] Excepción al enviar foto: {e}")
             return None
 
     async def notify_open(self, pair, action, strategy, timeframe, amount):
@@ -202,14 +294,61 @@ class TelegramNotifier:
         if not message:
             return
         
-        # Verificar que el mensaje es del chat correcto
-        if str(message.get('chat', {}).get('id')) != str(self.chat_id):
+        user_id = message.get('from', {}).get('id')
+        user_name = message.get('from', {}).get('first_name', 'Unknown')
+        text = message.get('text', '').lower()
+        chat_type = message.get('chat', {}).get('type', 'private')
+        is_command = text.startswith('/')
+
+        # --- VERIFICACIÓN DE SEGURIDAD (OWNER ONLY) ---
+        # Solo verificamos si es un comando o si es un chat privado
+        # Esto evita responder "Acceso Denegado" a cada mensaje de un grupo
+        if self.owner_ids and user_id not in self.owner_ids:
+            if is_command or chat_type == 'private':
+                # Si alguien más intenta usarlo, el bot le responde y te avisa a ti
+                await self.send_message("❌ Acceso denegado. Este bot es privado.")
+                await self.send_message(
+                    message=f"🚨 <b>Intento de acceso no autorizado:</b>\nUser: {user_name}\nID: {user_id}\nTexto: {text}",
+                    target_chat_id=self.owner_ids
+                )
+                return
+            else:
+                # En grupos, ignoramos silenciosamente si no es el owner y no es comando
+                return
+
+        # --- DETECTOR DE AMENAZAS ---
+        threat_keywords = ["hacked", "hackeado", "token"]
+        if any(kw in text for kw in threat_keywords):
+             await self.send_message(
+                message=f"⚠️ <b>ALERTA DE SEGURIDAD</b>\nEl usuario {user_id} ({user_name}) mencionó términos sensibles: <i>{text}</i>",
+                target_chat_id=self.owner_ids
+            )
+
+        # Verificar que el mensaje es del chat correcto (o es uno de los owners)
+        if str(message.get('chat', {}).get('id')) != str(self.chat_id) and user_id not in self.owner_ids:
             return
-        
+
+        # --- COMANDOS ---
+        if text == "/balance":
+            await self._handle_balance(user_id)
+            return
+        elif text == "/info":
+            await self._handle_info(user_id)
+            return
+        elif text == "/info_details":
+            await self._handle_info_details(user_id)
+            return
+        elif text == "/range_detailed":
+            await self._handle_range_detailed(user_id)
+            return
+
         # Verificar si es una respuesta a un mensaje del bot
         reply_to = message.get('reply_to_message')
         if not reply_to:
-            return  # Solo procesamos respuestas
+            # Si es uno de los owners y no es reply, podemos darle un saludo o ayuda
+            if user_id in self.owner_ids and text == "/start":
+                await self.send_message("Hola Jefe. Sistema de defensa activo.")
+            return  
         
         replied_message_id = reply_to.get('message_id')
         
@@ -268,3 +407,312 @@ class TelegramNotifier:
             print(f"[Feedback] Error descargando imagen: {e}")
         
         return None
+
+    async def _handle_balance(self, chat_id):
+        """Manejar comando /balance."""
+        balance = "Desconocido"
+        if self.get_balance_callback:
+            try:
+                # El callback puede ser asíncrono o síncrono
+                if asyncio.iscoroutinefunction(self.get_balance_callback):
+                    balance = await self.get_balance_callback()
+                else:
+                    balance = self.get_balance_callback()
+            except Exception as e:
+                balance = f"Error: {e}"
+        
+        if isinstance(balance, (int, float)):
+            msg = f"💰 <b>Balance Actual:</b> ${balance:.2f}"
+        else:
+            msg = f"💰 <b>Balance Actual:</b> {balance}"
+        
+        await self.send_message(msg, target_chat_id=chat_id)
+
+    async def _handle_info(self, chat_id):
+        """Manejar comando /info (estadísticas + gráfico)."""
+        await self.send_message("⏳ Generando reporte histórico...", target_chat_id=chat_id)
+        
+        # 1. Obtener estadísticas
+        stats = self._get_stats()
+        
+        # 2. Generar gráfico
+        chart_buffer = self._generate_chart()
+        
+        # 3. Enviar mensaje con estadísticas
+        start_date = stats.get('start_date', 'N/A')
+        
+        msg = (
+            f"<b>📊 REPORTE HISTÓRICO</b>\n"
+            f"<i>Desde: {start_date}</i>\n\n"
+            f"<b>💰 Balance Actual:</b> ${stats['balance']:.2f}\n\n"
+            f"<b>🏆 GLOBAL (Todo el historial)</b>\n"
+            f"• Trades: {stats['total_trades']}\n"
+            f"• Winrate: {stats['total_winrate']:.1f}%\n"
+            f"• P&L: {stats['total_pnl']:+.2f}\n\n"
+            f"<b>📅 HOY</b>\n"
+            f"• Trades: {stats['today_trades']}\n"
+            f"• Winrate: {stats['today_winrate']:.1f}%\n"
+            f"• P&L: {stats['today_pnl']:+.2f}\n\n"
+            f"<i>Generado: {datetime.now().strftime('%H:%M:%S')}</i>"
+        )
+        
+        if chart_buffer:
+            await self.send_photo(chart_buffer, caption=msg, target_chat_id=chat_id)
+        else:
+            await self.send_message(msg, target_chat_id=chat_id)
+
+    def _get_stats(self):
+        """Calcular estadísticas desde los logs."""
+        stats = {
+            'balance': 0.0,
+            'today_trades': 0,
+            'today_winrate': 0.0,
+            'today_pnl': 0.0,
+            'total_trades': 0,
+            'total_winrate': 0.0,
+            'total_pnl': 0.0,
+            'start_date': 'N/A'
+        }
+        
+        # Obtener balance actual
+        if self.get_balance_callback:
+            try:
+                # Nota: Aquí usamos el callback de forma síncrona si es posible, 
+                # pero como _get_stats es síncrona y el callback puede ser asíncrono,
+                # esto es un poco delicado. En main.py nos aseguraremos de que 
+                # el callback de balance sea síncrono si se llama desde aquí, 
+                # o manejaremos la asincronía.
+                # Para simplificar, asumiremos que el balance se pasa o se obtiene de un estado cacheado.
+                # Pero mejor, hagamos que _handle_info obtenga el balance antes.
+                pass
+            except:
+                pass
+        
+        # Cargar trades
+        try:
+            all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
+            if not all_files:
+                return stats
+            
+            dfs = []
+            for f in all_files:
+                try:
+                    df_temp = pd.read_csv(f)
+                    if not df_temp.empty and not df_temp.isna().all().all():
+                        dfs.append(df_temp)
+                except Exception:
+                    continue
+            
+            if not dfs:
+                return stats
+                
+            df = pd.concat(dfs, ignore_index=True)
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            
+            # Filtrar completados
+            completed = df[df['result'].isin(['WIN', 'LOSS'])]
+            
+            if len(completed) > 0:
+                stats['start_date'] = completed['timestamp'].min().strftime('%d/%m/%Y')
+                stats['total_trades'] = len(completed)
+                wins = len(completed[completed['result'] == 'WIN'])
+                stats['total_winrate'] = (wins / len(completed)) * 100
+                if 'profit_loss' in completed.columns:
+                    stats['total_pnl'] = completed['profit_loss'].sum()
+            
+            # Trades de hoy
+            today = datetime.now().date()
+            df_today = completed[completed['timestamp'].dt.date == today]
+            
+            if len(df_today) > 0:
+                stats['today_trades'] = len(df_today)
+                wins_today = len(df_today[df_today['result'] == 'WIN'])
+                stats['today_winrate'] = (wins_today / len(df_today)) * 100
+                if 'profit_loss' in df_today.columns:
+                    stats['today_pnl'] = df_today['profit_loss'].sum()
+                    
+        except Exception as e:
+            print(f"[Telegram] Error calculando stats: {e}")
+        
+        return stats
+
+    def _generate_chart(self):
+        """Generar gráfico de balance/P&L acumulado."""
+        try:
+            all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
+            if not all_files:
+                return None
+            
+            dfs = []
+            for f in all_files:
+                try:
+                    df_temp = pd.read_csv(f)
+                    if not df_temp.empty and not df_temp.isna().all().all():
+                        dfs.append(df_temp)
+                except Exception:
+                    continue
+            
+            if not dfs:
+                return None
+                
+            df = pd.concat(dfs, ignore_index=True)
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df = df.sort_values('timestamp')
+            
+            # Filtrar completados con P&L
+            if 'profit_loss' not in df.columns:
+                return None
+            
+            df = df[df['result'].isin(['WIN', 'LOSS'])].copy()
+            
+            if len(df) == 0:
+                return None
+            
+            # Calcular P&L acumulado
+            df['cumulative_pnl'] = df['profit_loss'].cumsum()
+            
+            # Crear gráfico
+            plt.figure(figsize=(10, 5))
+            plt.style.use('dark_background') # Estilo premium
+            
+            # Graficar línea principal
+            plt.plot(df['timestamp'], df['cumulative_pnl'], label='P&L Acumulado', color='#00ff88', linewidth=2)
+            
+            # Relleno suave
+            plt.fill_between(df['timestamp'], df['cumulative_pnl'], alpha=0.2, color='#00ff88')
+            
+            # Línea de cero (breakeven)
+            plt.axhline(y=0, color='white', linestyle='--', alpha=0.3, linewidth=1)
+            
+            # Títulos y etiquetas
+            plt.title(f'Crecimiento de la Cuenta (Total: ${df["cumulative_pnl"].iloc[-1]:.2f})', fontsize=12, color='white')
+            plt.xlabel('Fecha', fontsize=10, color='white')
+            plt.ylabel('Ganancia Neta ($)', fontsize=10, color='white')
+            
+            # Grid suave
+            plt.grid(True, alpha=0.1, linestyle='--')
+            
+            # Formato de fechas
+            plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
+            plt.gcf().autofmt_xdate()
+            
+            plt.tight_layout()
+            
+            # Guardar en buffer
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png', dpi=100)
+            buf.seek(0)
+            plt.close()
+            
+            return buf
+        except Exception as e:
+            print(f"[Telegram] Error generando gráfico: {e}")
+            return None
+
+    async def _handle_info_details(self, chat_id):
+        """Manejar comando /info_details (desglose por par y estrategia)."""
+        await self.send_message("⏳ Generando desglose detallado...", target_chat_id=chat_id)
+        
+        try:
+            all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
+            if not all_files:
+                await self.send_message("❌ No hay datos suficientes para generar el desglose.", target_chat_id=chat_id)
+                return
+            
+            dfs = []
+            for f in all_files:
+                try:
+                    df_temp = pd.read_csv(f)
+                    if not df_temp.empty:
+                        dfs.append(df_temp)
+                except: continue
+            
+            if not dfs:
+                await self.send_message("❌ No hay datos suficientes.", target_chat_id=chat_id)
+                return
+                
+            df = pd.concat(dfs, ignore_index=True)
+            df = df[df['result'].isin(['WIN', 'LOSS'])]
+            
+            if df.empty:
+                await self.send_message("❌ No hay operaciones completadas aún.", target_chat_id=chat_id)
+                return
+
+            # 1. Desglose por Par
+            msg = "<b>📊 DESGLOSE POR PAR</b>\n\n"
+            pair_stats = df.groupby('pair').agg({
+                'result': lambda x: (x == 'WIN').sum() / len(x) * 100,
+                'profit_loss': 'sum',
+                'trade_id': 'count'
+            }).rename(columns={'trade_id': 'count', 'result': 'winrate', 'profit_loss': 'pnl'})
+            
+            for pair, row in pair_stats.iterrows():
+                msg += f"• <b>{pair}</b>: {row['count']} tr | {row['winrate']:.1f}% WR | {row['pnl']:+.2f}$\n"
+            
+            # 2. Desglose por Estrategia
+            msg += "\n<b>🧠 DESGLOSE POR ESTRATEGIA</b>\n\n"
+            # Limpiar nombres de patrones (a veces vienen con detalles extra)
+            df['strategy_clean'] = df['pattern_detected'].apply(lambda x: str(x).split(':')[0] if ':' in str(x) else str(x))
+            
+            strat_stats = df.groupby('strategy_clean').agg({
+                'result': lambda x: (x == 'WIN').sum() / len(x) * 100,
+                'profit_loss': 'sum',
+                'trade_id': 'count'
+            }).rename(columns={'trade_id': 'count', 'result': 'winrate', 'profit_loss': 'pnl'})
+            
+            for strat, row in strat_stats.iterrows():
+                msg += f"• <b>{strat}</b>: {row['count']} tr | {row['winrate']:.1f}% WR | {row['pnl']:+.2f}$\n"
+            
+            await self.send_message(msg, target_chat_id=chat_id)
+            
+        except Exception as e:
+            print(f"[Telegram] Error en info_details: {e}")
+            await self.send_message(f"❌ Error generando detalles: {e}", target_chat_id=chat_id)
+
+    async def _handle_range_detailed(self, chat_id):
+        """Manejar comando /range_detailed (últimos 10 trades)."""
+        try:
+            all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
+            if not all_files:
+                await self.send_message("❌ No hay historial de trades.", target_chat_id=chat_id)
+                return
+            
+            # Ordenar archivos por fecha (descendente)
+            all_files.sort(reverse=True)
+            
+            dfs = []
+            for f in all_files:
+                try:
+                    df_temp = pd.read_csv(f)
+                    if not df_temp.empty:
+                        dfs.append(df_temp)
+                        if len(pd.concat(dfs)) >= 20: # Suficiente para los últimos 10
+                            break
+                except: continue
+            
+            if not dfs:
+                await self.send_message("❌ No hay datos.", target_chat_id=chat_id)
+                return
+                
+            df = pd.concat(dfs, ignore_index=True)
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df = df.sort_values('timestamp', ascending=False)
+            
+            last_10 = df.head(10)
+            
+            msg = "<b>📝 ÚLTIMOS 10 TRADES</b>\n\n"
+            for _, row in last_10.iterrows():
+                res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
+                pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
+                time_str = row['timestamp'].strftime('%H:%M')
+                
+                # Limpiar nombre estrategia
+                strat = str(row['pattern_detected']).split(':')[0] if ':' in str(row['pattern_detected']) else str(row['pattern_detected'])
+                
+                msg += f"{res_icon} <b>{row['pair']}</b> | {pnl_str} | {strat} | {time_str}\n"
+            
+            await self.send_message(msg, target_chat_id=chat_id)
+            
+        except Exception as e:
+            print(f"[Telegram] Error en range_detailed: {e}")
+            await self.send_message(f"❌ Error: {e}", target_chat_id=chat_id)
