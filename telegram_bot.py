@@ -243,6 +243,21 @@ class TelegramNotifier:
         from datetime import datetime, timezone, timedelta
         tz = timezone(timedelta(hours=-3)) 
         return datetime.now(tz).strftime('%Y-%m-%d %H:%M:%S')
+
+    def _parse_date_range(self, text):
+        """Parsea un rango de fechas del texto del comando."""
+        # Formato: /comando DD/MM/YYYY HH:MM DD/MM/YYYY HH:MM
+        import re
+        pattern = r'(\d{2}/\d{2}/\d{4} \d{2}:\d{2})'
+        matches = re.findall(pattern, text)
+        if len(matches) >= 2:
+            try:
+                start_dt = datetime.strptime(matches[0], '%d/%m/%Y %H:%M')
+                end_dt = datetime.strptime(matches[1], '%d/%m/%Y %H:%M')
+                return start_dt, end_dt
+            except:
+                return None, None
+        return None, None
     
     async def start_listening(self):
         """Inicia el listener de mensajes de Telegram en background."""
@@ -329,17 +344,28 @@ class TelegramNotifier:
             return
 
         # --- COMANDOS ---
-        if text == "/balance":
-            await self._handle_balance(user_id)
+        chat_id = message.get('chat', {}).get('id')
+        cmd_parts = text.split()
+        full_cmd = cmd_parts[0] if cmd_parts else ""
+        # Limpiar nombre del bot si existe (ej: /info@botname -> /info)
+        cmd = full_cmd.split('@')[0] if '@' in full_cmd else full_cmd
+        
+        if cmd.startswith('/'):
+            print(f"[Telegram] Comando recibido: {cmd} en chat {chat_id}")
+
+        if cmd == "/balance":
+            await self._handle_balance(chat_id)
             return
-        elif text == "/info":
-            await self._handle_info(user_id)
+        elif cmd == "/info":
+            await self._handle_info(chat_id)
             return
-        elif text == "/info_details":
-            await self._handle_info_details(user_id)
+        elif cmd == "/info_details" or cmd == "/range_stats":
+            start_dt, end_dt = self._parse_date_range(text)
+            await self._handle_info_details(chat_id, start_dt, end_dt)
             return
-        elif text == "/range_detailed":
-            await self._handle_range_detailed(user_id)
+        elif cmd == "/range_detailed":
+            start_dt, end_dt = self._parse_date_range(text)
+            await self._handle_range_detailed(chat_id, start_dt, end_dt)
             return
 
         # Verificar si es una respuesta a un mensaje del bot
@@ -609,9 +635,12 @@ class TelegramNotifier:
             print(f"[Telegram] Error generando gráfico: {e}")
             return None
 
-    async def _handle_info_details(self, chat_id):
+    async def _handle_info_details(self, chat_id, start_dt=None, end_dt=None):
         """Manejar comando /info_details (desglose por par y estrategia)."""
-        await self.send_message("⏳ Generando desglose detallado...", target_chat_id=chat_id)
+        if start_dt and end_dt:
+            await self.send_message(f"⏳ Generando desglose detallado para el rango:\n{start_dt.strftime('%d/%m/%Y %H:%M')} - {end_dt.strftime('%d/%m/%Y %H:%M')}", target_chat_id=chat_id)
+        else:
+            await self.send_message("⏳ Generando desglose detallado de hoy...", target_chat_id=chat_id)
         
         try:
             all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
@@ -631,15 +660,42 @@ class TelegramNotifier:
                 await self.send_message("❌ No hay datos suficientes.", target_chat_id=chat_id)
                 return
                 
-            df = pd.concat(dfs, ignore_index=True)
-            df = df[df['result'].isin(['WIN', 'LOSS'])]
+            df_all = pd.concat(dfs, ignore_index=True)
+            df_all['timestamp'] = pd.to_datetime(df_all['timestamp'], errors='coerce')
+            df_all = df_all.dropna(subset=['timestamp'])
+            
+            if df_all.empty:
+                await self.send_message("❌ No hay datos válidos en los logs.", target_chat_id=chat_id)
+                return
+                
+            # Rango de días total (Actividad)
+            first_day = df_all['timestamp'].min().strftime('%d/%m/%Y')
+            last_day = df_all['timestamp'].max().strftime('%d/%m/%Y')
+            
+            if start_dt and end_dt:
+                # Filtrar por rango personalizado
+                df = df_all[(df_all['timestamp'] >= start_dt) & (df_all['timestamp'] <= end_dt) & (df_all['result'].isin(['WIN', 'LOSS']))].copy()
+                msg = f"📊 <b>REPORTE PERSONALIZADO</b>\n"
+                msg += f"🕒 <b>Rango:</b> {start_dt.strftime('%d/%m/%Y %H:%M')} - {end_dt.strftime('%d/%m/%Y %H:%M')}\n"
+            else:
+                # Filtrar por HOY
+                today = datetime.now().date()
+                df = df_all[(df_all['timestamp'].dt.date == today) & (df_all['result'].isin(['WIN', 'LOSS']))].copy()
+                msg = f"📅 <b>REPORTE DE HOY ({today.strftime('%d/%m/%Y')})</b>\n"
+                if not df.empty:
+                    start_time = df['timestamp'].min().strftime('%H:%M')
+                    end_time = df['timestamp'].max().strftime('%H:%M')
+                    msg += f"🕒 <b>Rango horario:</b> {start_time} - {end_time}\n"
+            
+            msg += f"🗓 <b>Actividad total:</b> {first_day} al {last_day}\n\n"
             
             if df.empty:
-                await self.send_message("❌ No hay operaciones completadas aún.", target_chat_id=chat_id)
+                msg += "❌ No se registraron operaciones completadas en este periodo."
+                await self.send_message(msg, target_chat_id=chat_id)
                 return
 
             # 1. Desglose por Par
-            msg = "<b>📊 DESGLOSE POR PAR</b>\n\n"
+            msg += "<b>📊 DESGLOSE POR PAR</b>\n"
             pair_stats = df.groupby('pair').agg({
                 'result': lambda x: (x == 'WIN').sum() / len(x) * 100,
                 'profit_loss': 'sum',
@@ -650,8 +706,8 @@ class TelegramNotifier:
                 msg += f"• <b>{pair}</b>: {row['count']} tr | {row['winrate']:.1f}% WR | {row['pnl']:+.2f}$\n"
             
             # 2. Desglose por Estrategia
-            msg += "\n<b>🧠 DESGLOSE POR ESTRATEGIA</b>\n\n"
-            # Limpiar nombres de patrones (a veces vienen con detalles extra)
+            msg += "\n<b>🧠 DESGLOSE POR ESTRATEGIA</b>\n"
+            # Limpiar nombres de patrones
             df['strategy_clean'] = df['pattern_detected'].apply(lambda x: str(x).split(':')[0] if ':' in str(x) else str(x))
             
             strat_stats = df.groupby('strategy_clean').agg({
@@ -663,14 +719,31 @@ class TelegramNotifier:
             for strat, row in strat_stats.iterrows():
                 msg += f"• <b>{strat}</b>: {row['count']} tr | {row['winrate']:.1f}% WR | {row['pnl']:+.2f}$\n"
             
+            # 3. Detalle de Operaciones
+            msg += "\n<b>📝 DETALLE DE OPERACIONES</b>\n"
+            # Ordenar por hora descendente
+            df_sorted = df.sort_values('timestamp', ascending=False)
+            for _, row in df_sorted.iterrows():
+                res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
+                pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
+                
+                # Si es un rango de varios días, mostrar fecha corta
+                if start_dt and end_dt and (end_dt - start_dt).days >= 1:
+                    time_str = row['timestamp'].strftime('%d/%m %H:%M')
+                else:
+                    time_str = row['timestamp'].strftime('%H:%M')
+                    
+                strat = str(row['pattern_detected']).split(':')[0] if ':' in str(row['pattern_detected']) else str(row['pattern_detected'])
+                msg += f"{res_icon} <b>{row['pair']}</b> | {pnl_str} | {strat} | {time_str}\n"
+
             await self.send_message(msg, target_chat_id=chat_id)
             
         except Exception as e:
             print(f"[Telegram] Error en info_details: {e}")
             await self.send_message(f"❌ Error generando detalles: {e}", target_chat_id=chat_id)
 
-    async def _handle_range_detailed(self, chat_id):
-        """Manejar comando /range_detailed (últimos 10 trades)."""
+    async def _handle_range_detailed(self, chat_id, start_dt=None, end_dt=None):
+        """Manejar comando /range_detailed (últimos 10 trades o rango)."""
         try:
             all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
             if not all_files:
@@ -686,7 +759,7 @@ class TelegramNotifier:
                     df_temp = pd.read_csv(f)
                     if not df_temp.empty:
                         dfs.append(df_temp)
-                        if len(pd.concat(dfs)) >= 20: # Suficiente para los últimos 10
+                        if not start_dt and len(pd.concat(dfs)) >= 20: # Suficiente para los últimos 10
                             break
                 except: continue
             
@@ -696,15 +769,31 @@ class TelegramNotifier:
                 
             df = pd.concat(dfs, ignore_index=True)
             df['timestamp'] = pd.to_datetime(df['timestamp'])
-            df = df.sort_values('timestamp', ascending=False)
             
-            last_10 = df.head(10)
+            if start_dt and end_dt:
+                # Filtrar por rango
+                trades_to_show = df[(df['timestamp'] >= start_dt) & (df['timestamp'] <= end_dt)].sort_values('timestamp', ascending=False)
+                msg = f"<b>📝 OPERACIONES EN RANGO</b>\n"
+                msg += f"🕒 {start_dt.strftime('%d/%m/%Y %H:%M')} - {end_dt.strftime('%d/%m/%Y %H:%M')}\n\n"
+            else:
+                # Últimos 10
+                trades_to_show = df.sort_values('timestamp', ascending=False).head(10)
+                msg = "<b>📝 ÚLTIMOS 10 TRADES</b>\n\n"
             
-            msg = "<b>📝 ÚLTIMOS 10 TRADES</b>\n\n"
-            for _, row in last_10.iterrows():
+            if trades_to_show.empty:
+                msg += "❌ No se encontraron operaciones en este rango."
+                await self.send_message(msg, target_chat_id=chat_id)
+                return
+
+            for _, row in trades_to_show.iterrows():
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
-                time_str = row['timestamp'].strftime('%H:%M')
+                
+                # Formato de hora/fecha
+                if start_dt and end_dt and (end_dt - start_dt).days >= 1:
+                    time_str = row['timestamp'].strftime('%d/%m %H:%M')
+                else:
+                    time_str = row['timestamp'].strftime('%H:%M')
                 
                 # Limpiar nombre estrategia
                 strat = str(row['pattern_detected']).split(':')[0] if ':' in str(row['pattern_detected']) else str(row['pattern_detected'])
