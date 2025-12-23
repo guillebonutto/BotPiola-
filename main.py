@@ -11,6 +11,7 @@ from strategy_continuation import StrategyContinuation
 from strategy_fibonacci import StrategyFibonacci
 from strategy_structure import StrategyStructure
 from trade_logger import trade_logger
+from feedback_db import FeedbackDB
 import uuid
 
 # --- Configuración ---
@@ -43,6 +44,10 @@ class TradingBot:
             StrategyFibonacci(),
             StrategyStructure()
         ]
+        
+        # Base de datos de feedback y mantenimiento
+        self.db = FeedbackDB()
+        self.db.maintain()
 
     async def get_balance(self):
         """Obtiene el balance actual de la cuenta."""
@@ -326,6 +331,11 @@ class TradingBot:
                     pass
                 
                 await asyncio.sleep(2) # Pausa entre pares para no saturar
+            
+            # --- Mantenimiento Periódico (Una vez al día) ---
+            if datetime.now().hour == 0 and datetime.now().minute < 5:
+                self.db.maintain()
+                # trade_logger.cleanup_old_logs() # Desactivado por pedido del usuario
             
             # --- Reporte Telegram (Al final del ciclo) ---
             if VERBOSE_TELEGRAM and cycle_report and self.notifier.token:
