@@ -1,7 +1,9 @@
 import sqlite3
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
+import shutil
+import os
 
 class FeedbackDB:
     def __init__(self, db_path='feedback.db'):
@@ -147,3 +149,61 @@ class FeedbackDB:
             json.dump(trades, f, indent=2, ensure_ascii=False)
         
         return output_file
+
+    def maintain(self, days_to_keep=None):
+        """Ejecuta tareas de mantenimiento: backup y optimización."""
+        print("--- Iniciando mantenimiento de base de datos ---")
+        self.backup()
+        # self.prune_old_data(days_to_keep) # Desactivado por pedido del usuario
+        self.optimize()
+        print("--- Mantenimiento completado ---")
+
+    def backup(self):
+        """Crea una copia de seguridad de la base de datos."""
+        try:
+            backup_dir = Path("backups")
+            backup_dir.mkdir(exist_ok=True)
+            
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            backup_path = backup_dir / f"feedback_backup_{timestamp}.db"
+            
+            shutil.copy2(self.db_path, backup_path)
+            print(f"✅ Backup creado: {backup_path.name}")
+            
+            # Limpiar backups viejos (mantener solo los últimos 5)
+            backups = sorted(list(backup_dir.glob("feedback_backup_*.db")), key=os.path.getmtime)
+            if len(backups) > 5:
+                for old_backup in backups[:-5]:
+                    old_backup.unlink()
+                    print(f"🗑️ Backup antiguo eliminado: {old_backup.name}")
+                    
+        except Exception as e:
+            print(f"⚠️ Error creando backup: {e}")
+
+    def prune_old_data(self, days):
+        """Elimina registros más antiguos que N días."""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            
+            cutoff_date = (datetime.now() - timedelta(days=days)).isoformat()
+            
+            cursor.execute("DELETE FROM trades WHERE timestamp < ?", (cutoff_date,))
+            rows_deleted = cursor.rowcount
+            
+            conn.commit()
+            conn.close()
+            print(f"✅ Limpieza: {rows_deleted} registros eliminados (anteriores a {days} días)")
+        except Exception as e:
+            print(f"⚠️ Error en limpieza de datos: {e}")
+
+    def optimize(self):
+        """Optimiza el archivo de base de datos."""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            conn.execute("VACUUM")
+            conn.execute("ANALYZE")
+            conn.close()
+            print("✅ Base de datos optimizada (VACUUM/ANALYZE)")
+        except Exception as e:
+            print(f"⚠️ Error optimizando base de datos: {e}")

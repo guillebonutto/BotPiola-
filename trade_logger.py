@@ -10,6 +10,8 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 import pandas as pd
+import json
+from supabase import create_client, Client
 
 
 class TradeLogger:
@@ -22,6 +24,29 @@ class TradeLogger:
         self.current_file = None
         self.headers = None
         self._ensure_file()
+        self._init_supabase()
+    
+    def _init_supabase(self):
+        """Inicializar cliente de Supabase."""
+        try:
+            config_path = Path('config.json')
+            if config_path.exists():
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                
+                url = config.get("supabase_url")
+                key = config.get("supabase_key")
+                
+                if url and key:
+                    self.supabase: Client = create_client(url, key)
+                    print("✅ Supabase conectado en TradeLogger")
+                else:
+                    self.supabase = None
+            else:
+                self.supabase = None
+        except Exception as e:
+            print(f"⚠️ Error inicializando Supabase en TradeLogger: {e}")
+            self.supabase = None
     
     def _get_filename(self):
         """Obtener nombre del archivo basado en la fecha."""
@@ -153,6 +178,20 @@ class TradeLogger:
         except Exception as e:
             print(f"❌ Error escribiendo trade log: {e}")
             return False
+        finally:
+            self._sync_to_supabase(row)
+
+    def _sync_to_supabase(self, row):
+        """Sincronizar una fila con Supabase."""
+        if not hasattr(self, 'supabase') or not self.supabase:
+            return
+        
+        try:
+            # Limpiar datos para Supabase (reemplazar strings vacíos por None)
+            clean_row = {k: (v if v != '' else None) for k, v in row.items()}
+            self.supabase.table("trades").upsert(clean_row).execute()
+        except Exception as e:
+            print(f"⚠️ Error sincronizando con Supabase: {e}")
     
     def update_trade_result(self, trade_id, result, profit_loss=None, notes=None):
         """
@@ -181,6 +220,20 @@ class TradeLogger:
                 
                 # Guardar
                 df.to_csv(self.current_file, index=False, encoding='utf-8')
+                
+                # Sincronizar actualización con Supabase
+                if hasattr(self, 'supabase') and self.supabase:
+                    try:
+                        update_data = {'result': result}
+                        if profit_loss is not None:
+                            update_data['profit_loss'] = profit_loss
+                        if notes is not None:
+                            update_data['notes'] = notes
+                        
+                        self.supabase.table("trades").update(update_data).eq("trade_id", str(trade_id)).execute()
+                    except Exception as e:
+                        print(f"⚠️ Error actualizando Supabase: {e}")
+                
                 return True
         except Exception as e:
             print(f"❌ Error actualizando trade result: {e}")
@@ -226,6 +279,18 @@ class TradeLogger:
             stats['winrate'] = 0
         
         return stats
+
+    def cleanup_old_logs(self, days=30):
+        """Elimina archivos de log más antiguos que N días."""
+        try:
+            cutoff = datetime.now() - timedelta(days=days)
+            for log_file in self.logs_dir.glob("trades_*.csv"):
+                file_time = datetime.fromtimestamp(log_file.stat().st_mtime)
+                if file_time < cutoff:
+                    log_file.unlink()
+                    print(f"🗑️ Log antiguo eliminado: {log_file.name}")
+        except Exception as e:
+            print(f"⚠️ Error limpiando logs: {e}")
 
 
 # Instancia global
