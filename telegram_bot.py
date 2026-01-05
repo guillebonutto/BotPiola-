@@ -354,18 +354,18 @@ class TelegramNotifier:
             print(f"[Telegram] Comando recibido: {cmd} en chat {chat_id}")
 
         if cmd == "/balance":
-            await self._handle_balance(chat_id)
+            await self._handle_balance(user_id)
             return
         elif cmd == "/info":
-            await self._handle_info(chat_id)
+            await self._handle_info(user_id)
             return
         elif cmd == "/info_details" or cmd == "/range_stats":
             start_dt, end_dt = self._parse_date_range(text)
-            await self._handle_info_details(chat_id, start_dt, end_dt)
+            await self._handle_info_details(user_id, start_dt, end_dt)
             return
         elif cmd == "/range_detailed":
             start_dt, end_dt = self._parse_date_range(text)
-            await self._handle_range_detailed(chat_id, start_dt, end_dt)
+            await self._handle_range_detailed(user_id, start_dt, end_dt)
             return
 
         # Verificar si es una respuesta a un mensaje del bot

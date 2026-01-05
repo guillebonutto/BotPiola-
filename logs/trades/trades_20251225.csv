@@ -1,0 +1,6 @@
+timestamp,trade_id,pair,timeframe,decision,signal_score,pattern_detected,price,ema,rsi,ema_conf,tf_signal,atr,triangle_active,reversal_candle,near_support,near_resistance,support_level,resistance_level,htf_signal,result,profit_loss,expiry_time,notes
+2025-12-25 00:15:23,85f69099,EURUSD_otc,300,BUY,,Cambio de Estructura (MSS),1.16582,1.164853115919964,57.248393175240615,,,0.0008904075512972,,,,,,,,LOSS,-1.0,300,
+2025-12-25 00:20:38,8f259867,EURUSD_otc,300,BUY,,Cambio de Estructura (MSS),1.16626,1.1649871048799676,60.05244695693644,,,0.0008775212976302,,,,,,,,LOSS,-1.0,300,
+2025-12-25 00:30:04,caa8812e,AUDUSD_otc,300,BUY,,Estocástico + SMA200,0.69809,0.6987960926460051,46.33054090499939,,,0.0011519966071537,,,,,,,,WIN,0.92,300,
+2025-12-25 00:40:06,3a92d93d,USDCOP_otc,300,BUY,,Cambio de Estructura (MSS),3644.06,3637.7944207168966,60.313872185451416,,,3.571965217840212,,,,,,,,WIN,0.86,300,
+2025-12-25 00:45:26,555a1e9c,AUDUSD_otc,300,BUY,,Estocástico + SMA200,0.69858,0.6985788294416317,49.99347711289845,,,0.001171580373885713,,,,,,,,PENDING,,300,
