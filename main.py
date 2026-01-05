@@ -263,7 +263,7 @@ class TradingBot:
 
                         # --- LOGGING PREVIO ---
                         trade_data = {
-                            'timestamp': datetime.now(timezone.utc),
+                            'timestamp': datetime.now(timezone(timedelta(hours=-3))),
                             'trade_id': trade_id,
                             'pair': pair,
                             'timeframe': INTERVAL,

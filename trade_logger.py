@@ -7,7 +7,7 @@ Guarda cada operación en CSV con indicadores técnicos.
 
 import csv
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import pandas as pd
 import json
@@ -50,7 +50,9 @@ class TradeLogger:
     
     def _get_filename(self):
         """Obtener nombre del archivo basado en la fecha."""
-        date_str = datetime.now(timezone.utc).strftime("%Y%m%d")
+        # GMT-3
+        tz = timezone(timedelta(hours=-3))
+        date_str = datetime.now(tz).strftime("%Y%m%d")
         return self.logs_dir / self.filename_pattern.format(date=date_str)
     
     def _ensure_file(self):
