@@ -458,13 +458,24 @@ class TelegramNotifier:
         """Manejar comando /info (estadísticas + gráfico)."""
         await self.send_message("⏳ Generando reporte histórico...", target_chat_id=chat_id)
         
-        # 1. Obtener estadísticas
-        stats = self._get_stats()
+        # 1. Obtener balance actual primero (asíncrono)
+        balance = 0.0
+        if self.get_balance_callback:
+            try:
+                if asyncio.iscoroutinefunction(self.get_balance_callback):
+                    balance = await self.get_balance_callback()
+                else:
+                    balance = self.get_balance_callback()
+            except Exception as e:
+                print(f"[Telegram] Error obteniendo balance para reporte: {e}")
+
+        # 2. Obtener estadísticas pasándole el balance
+        stats = self._get_stats(current_balance=balance)
         
-        # 2. Generar gráfico
+        # 3. Generar gráfico
         chart_buffer = self._generate_chart()
         
-        # 3. Enviar mensaje con estadísticas
+        # 4. Enviar mensaje con estadísticas
         start_date = stats.get('start_date', 'N/A')
         
         msg = (
@@ -479,7 +490,7 @@ class TelegramNotifier:
             f"• Trades: {stats['today_trades']}\n"
             f"• Winrate: {stats['today_winrate']:.1f}%\n"
             f"• P&L: {stats['today_pnl']:+.2f}\n\n"
-            f"<i>Generado: {datetime.now().strftime('%H:%M:%S')}</i>"
+            f"<i>Generado (UTC-3): {self._get_time()}</i>"
         )
         
         if chart_buffer:
@@ -487,10 +498,10 @@ class TelegramNotifier:
         else:
             await self.send_message(msg, target_chat_id=chat_id)
 
-    def _get_stats(self):
+    def _get_stats(self, current_balance=0.0):
         """Calcular estadísticas desde los logs."""
         stats = {
-            'balance': 0.0,
+            'balance': current_balance,
             'today_trades': 0,
             'today_winrate': 0.0,
             'today_pnl': 0.0,
@@ -499,20 +510,6 @@ class TelegramNotifier:
             'total_pnl': 0.0,
             'start_date': 'N/A'
         }
-        
-        # Obtener balance actual
-        if self.get_balance_callback:
-            try:
-                # Nota: Aquí usamos el callback de forma síncrona si es posible, 
-                # pero como _get_stats es síncrona y el callback puede ser asíncrono,
-                # esto es un poco delicado. En main.py nos aseguraremos de que 
-                # el callback de balance sea síncrono si se llama desde aquí, 
-                # o manejaremos la asincronía.
-                # Para simplificar, asumiremos que el balance se pasa o se obtiene de un estado cacheado.
-                # Pero mejor, hagamos que _handle_info obtenga el balance antes.
-                pass
-            except:
-                pass
         
         # Cargar trades
         try:
@@ -727,11 +724,14 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 
+                # Mostrar siempre en UTC-3 para el usuario
+                local_ts = row['timestamp'] - timedelta(hours=3)
+                
                 # Si es un rango de varios días, mostrar fecha corta
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
-                    time_str = row['timestamp'].strftime('%d/%m %H:%M')
+                    time_str = local_ts.strftime('%d/%m %H:%M')
                 else:
-                    time_str = row['timestamp'].strftime('%H:%M')
+                    time_str = local_ts.strftime('%H:%M')
                     
                 strat = str(row['pattern_detected']).split(':')[0] if ':' in str(row['pattern_detected']) else str(row['pattern_detected'])
                 msg += f"{res_icon} <b>{row['pair']}</b> | {pnl_str} | {strat} | {time_str}\n"
@@ -789,11 +789,14 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 
+                # Mostrar siempre en UTC-3 para el usuario
+                local_ts = row['timestamp'] - timedelta(hours=3)
+                
                 # Formato de hora/fecha
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
-                    time_str = row['timestamp'].strftime('%d/%m %H:%M')
+                    time_str = local_ts.strftime('%d/%m %H:%M')
                 else:
-                    time_str = row['timestamp'].strftime('%H:%M')
+                    time_str = local_ts.strftime('%H:%M')
                 
                 # Limpiar nombre estrategia
                 strat = str(row['pattern_detected']).split(':')[0] if ':' in str(row['pattern_detected']) else str(row['pattern_detected'])
