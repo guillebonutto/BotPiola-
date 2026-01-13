@@ -16,15 +16,20 @@ import uuid
 import json
 from pathlib import Path
 
-# --- Configuración ---
-PAIRS = ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc']
-INTERVAL = 300  # 5 minutos
-LOOKBACK = 300 # Aumentado a 300 para cubrir SMA 200
-VERBOSE = True # Modo Depuración: Imprimir todas las razones de HOLD
-VERBOSE_TELEGRAM = True # Enviar reporte de DEBUG a Telegram (Resumen por ciclo)
+# --- Configuración (Valores por defecto, se sobrescriben con config.json) ---
+DEFAULT_CONFIG = {
+    "pairs": ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc'],
+    "interval": 300,
+    "lookback": 300,
+    "verbose": True,
+    "verbose_telegram": True,
+    "amount": 1.0,
+    "daily_stop_loss": -15.0,
+    "daily_take_profit": 10.0
+}
 
 class TradingBot:
-    def __init__(self, ssid, telegram_token=None, telegram_chat_id=None, telegram_owner_id=None):
+    def __init__(self, ssid, telegram_token=None, telegram_chat_id=None, telegram_owner_id=None, config=None):
         self.api = PocketOptionAsync(ssid)
         self.analyzer = MarketAnalyzer()
         self.pattern_recognizer = PatternRecognizer()
@@ -34,6 +39,15 @@ class TradingBot:
             telegram_owner_id,
             get_balance_callback=self.get_balance
         )
+        
+        # Configuración dinámica
+        self.config = config or DEFAULT_CONFIG
+        self.pairs = self.config.get('pairs', DEFAULT_CONFIG['pairs'])
+        self.interval = self.config.get('interval', DEFAULT_CONFIG['interval'])
+        self.lookback = self.config.get('lookback', DEFAULT_CONFIG['lookback'])
+        self.verbose = self.config.get('verbose', DEFAULT_CONFIG['verbose'])
+        self.verbose_telegram = self.config.get('verbose_telegram', DEFAULT_CONFIG['verbose_telegram'])
+        self.amount = self.config.get('amount', DEFAULT_CONFIG['amount'])
         
         # Estado de trading
         self.active_trade_expiry = datetime.min.replace(tzinfo=timezone.utc)
@@ -54,8 +68,8 @@ class TradingBot:
         self.intelligence = self._load_intelligence()
 
         # --- GESTIÓN DE RIESGO ---
-        self.daily_stop_loss = -15.0  # Parar si perdemos $15 en la sesión
-        self.daily_take_profit = 10.0 # Asegurar ganancias si ganamos $10
+        self.daily_stop_loss = self.config.get('daily_stop_loss', DEFAULT_CONFIG['daily_stop_loss'])
+        self.daily_take_profit = self.config.get('daily_take_profit', DEFAULT_CONFIG['daily_take_profit'])
         self.session_profit = 0.0
         self.strategy_fails = {}      # Seguimiento de rachas negativas por sesión
 
@@ -74,21 +88,37 @@ class TradingBot:
 
     def is_allowed_by_ai(self, pair, strategy):
         """Verifica si la IA aprueba esta operación basada en el historial y racha."""
-        if not self.intelligence:
-            return True, "No intelligence data"
-            
-        current_hour = datetime.now().hour
-        
         # 1. Filtro de Racha Negativa (Session)
         if self.strategy_fails.get(strategy, 0) >= 3:
             return False, f"Estrategia en racha negativa (Session Fails: {self.strategy_fails[strategy]})"
 
-        # 2. Verificar Zonas de Riesgo por Hora/Par
+        # 2. Filtro por Feedback Reciente (Dinámico)
+        try:
+            recent_trades = self.db.get_all_trades(limit=20)
+            bad_feedback_count = 0
+            for t in recent_trades:
+                # Si hay feedback negativo o mención de volatilidad/falso positivo
+                fb = str(t.get('feedback_text', '')).lower()
+                if t['strategy'] == strategy and ('mal' in fb or 'volatilidad' in fb or 'falso' in fb):
+                    bad_feedback_count += 1
+            
+            if bad_feedback_count >= 2:
+                return False, f"Feedback negativo reciente ({bad_feedback_count} alertas)"
+        except Exception as e:
+            print(f"⚠️ Error en filtro de feedback: {e}")
+
+        # 3. Filtro de Inteligencia Estática (trading_intelligence.json)
+        if not self.intelligence:
+            return True, "Approved (No intelligence data)"
+            
+        current_hour = datetime.now().hour
+        
+        # Verificar Zonas de Riesgo por Hora/Par
         for zone in self.intelligence.get('risk_zones', []):
             if zone['hour'] == current_hour and zone['pair'] == pair:
                 return False, f"Zona de Riesgo (Histórico WR: {zone['win_rate']*100:.1f}%)"
         
-        # 3. Filtro de Rendimiento Histórico por Estrategia
+        # Filtro de Rendimiento Histórico por Estrategia
         for s_stats in self.intelligence.get('strategy_performance', []):
             if s_stats['strategy'] == strategy and s_stats['win_rate'] < 0.48:
                 return False, f"Bajo rendimiento histórico ({s_stats['win_rate']*100:.1f}% WR)"
@@ -105,11 +135,11 @@ class TradingBot:
 
     async def fetch_data(self, pair):
         """Obtiene velas y prepara el DataFrame."""
-        offset = INTERVAL * LOOKBACK
+        offset = self.interval * self.lookback
         try:
             # Añadido timeout de 20 segundos total
             print(f"  [DEBUG] Fetching {pair} (Chunk 1)...")
-            candles = await asyncio.wait_for(self.api.get_candles(pair, INTERVAL, offset), timeout=10.0)
+            candles = await asyncio.wait_for(self.api.get_candles(pair, self.interval, offset), timeout=10.0)
             
             # Paginación si faltan datos (Límite API suele ser ~150)
             if len(candles) > 0 and len(candles) < 200:
@@ -129,7 +159,7 @@ class TradingBot:
                         
                         # Pedimos otro bloque terminando en el tiempo más viejo del bloque 1
                         chunk2 = await asyncio.wait_for(
-                            self.api.get_candles_advanced(pair, INTERVAL, offset, oldest_time), 
+                            self.api.get_candles_advanced(pair, self.interval, offset, oldest_time), 
                             timeout=10.0
                         )
                         print(f"  [DEBUG] {pair}: Chunk 2 got {len(chunk2)} candles.")
@@ -235,7 +265,7 @@ class TradingBot:
                 signals.append((action, duration, strategy.name))
                 # Formato lista indentada
                 strategy_logs.append(f"   🔥 <b>{action}</b>: {safe_strat_name}\n      <i>{safe_reason}</i>")
-            elif VERBOSE:
+            if self.verbose:
                 print(f"  [{strategy.name}] HOLD: {reason}")
                 # Simplificamos "HOLD" para no llenar pantalla, solo icono y texto
                 strategy_logs.append(f"   ⏱ {safe_reason}")
@@ -305,15 +335,19 @@ class TradingBot:
                 continue
             
             cycle_report = []
-            for pair in PAIRS:
-                # Chequeo doble por si se tardó mucho en el loop anterior
-                if datetime.now(timezone.utc) < self.active_trade_expiry:
-                    break
-                    
-                signal, latest_data, log_msg = await self.analyze_pair(pair)
+            # --- ANÁLISIS EN PARALELO ---
+            tasks = [self.analyze_pair(pair) for pair in self.pairs]
+            results = await asyncio.gather(*tasks)
+            
+            for i, (signal, latest_data, log_msg) in enumerate(results):
+                pair = self.pairs[i]
                 cycle_report.append(log_msg)
                 
                 if signal:
+                    # Si ya hay una operación en curso (por un par anterior en este mismo ciclo), ignorar
+                    if datetime.now(timezone.utc) < self.active_trade_expiry:
+                        continue
+
                     action, duration, strat_name = signal
                     
                     # --- FILTRO IA ---
@@ -326,7 +360,7 @@ class TradingBot:
                     print(f"EJECUTANDO ORDEN: {action} en {pair} por {duration}s. Estrategia: {strat_name}")
                     
                     try:
-                        amount = 1.0 # Monto fijo por ahora
+                        amount = self.amount
                         trade_id = str(uuid.uuid4())[:8]
 
                         # --- BLOQUEO PROACTIVO (Antes de la API) ---
@@ -339,7 +373,7 @@ class TradingBot:
                             'timestamp': datetime.now(timezone(timedelta(hours=-3))),
                             'trade_id': trade_id,
                             'pair': pair,
-                            'timeframe': INTERVAL,
+                            'timeframe': self.interval,
                             'decision': action,
                             'pattern_detected': strat_name, # Usamos el nombre de la estrategia
                             'price': latest_data.get('Close', 0),
@@ -379,7 +413,7 @@ class TradingBot:
                              profit = -amount
                         
                         print(f"  >>> Resultado Operación: {'GANADA' if is_win else 'PERDIDA'}")
-                        await self.notifier.notify_close(pair, profit, is_win)
+                        await self.notifier.notify_close(pair, profit, is_win, trade_id=trade_id)
 
                         # --- ACTUALIZAR MÉTRICAS DE SESIÓN ---
                         self.session_profit += profit
@@ -435,7 +469,7 @@ class TradingBot:
                 # trade_logger.cleanup_old_logs() # Desactivado por pedido del usuario
             
             # --- Reporte Telegram (Al final del ciclo) ---
-            if VERBOSE_TELEGRAM and cycle_report and self.notifier.token:
+            if self.verbose_telegram and cycle_report and self.notifier.token:
                 header = "📊 <b>Reporte de Ciclo</b>\n\n"
                 full_report = "\n".join(cycle_report)
                 
@@ -485,7 +519,7 @@ async def main():
     tg_chat = config.get('telegram_chat_id') or input("Introduce tu Chat ID de Telegram (Enter para omitir): ").strip()
     tg_owner = config.get('telegram_owner_id') or input("Introduce tu Telegram Owner ID (opcional, usa coma para varios): ").strip()
     
-    bot = TradingBot(ssid, tg_token, tg_chat, tg_owner)
+    bot = TradingBot(ssid, tg_token, tg_chat, tg_owner, config=config.get('trading', config))
     await bot.run()
 
 if __name__ == '__main__':

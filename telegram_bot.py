@@ -81,6 +81,9 @@ class TelegramNotifier:
         if reply_to_message_id:
             payload['reply_to_message_id'] = reply_to_message_id
 
+        if 'reply_markup' in kwargs:
+            payload['reply_markup'] = kwargs['reply_markup']
+
         async def _do_send(current_payload):
             async with aiohttp.ClientSession() as session:
                 async with session.post(f"{self.base_url}/sendMessage", json=current_payload) as response:
@@ -187,7 +190,7 @@ class TelegramNotifier:
         )
         await self.send_message(msg)
 
-    async def notify_close(self, pair, profit, is_win):
+    async def notify_close(self, pair, profit, is_win, trade_id=None):
         icon = "✅" if is_win else "❌"
         result_text = "GANADA" if is_win else "PERDIDA"
         pair_emoji = self._get_pair_emoji(pair)
@@ -199,7 +202,19 @@ class TelegramNotifier:
             f"🤑 <b>Profit:</b> ${profit:.2f}\n\n"
             f"🕓 <b>Fecha y hora:</b> {self._get_time()}"
         )
-        message_id = await self.send_message(msg)
+        
+        # Añadir botones de feedback si tenemos trade_id
+        reply_markup = None
+        if trade_id:
+            reply_markup = {
+                'inline_keyboard': [[
+                    {'text': '👍 Bien', 'callback_data': f'fb_{trade_id}_good'},
+                    {'text': '👎 Mal', 'callback_data': f'fb_{trade_id}_bad'},
+                    {'text': '📝 Comentar', 'callback_data': f'fb_{trade_id}_comment'}
+                ]]
+            }
+
+        message_id = await self.send_message(msg, reply_markup=reply_markup)
         return message_id
     
     async def request_feedback(self):
