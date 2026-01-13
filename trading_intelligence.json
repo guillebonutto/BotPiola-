@@ -1,0 +1,540 @@
+{
+    "last_update": "2026-01-09T17:11:03.671288",
+    "total_trades_analyzed": 1799,
+    "risk_zones": [
+        {
+            "hour": 0,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.42857142857142855,
+            "count": 7
+        },
+        {
+            "hour": 0,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.4117647058823529,
+            "count": 17
+        },
+        {
+            "hour": 0,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.375,
+            "count": 8
+        },
+        {
+            "hour": 1,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.2222222222222222,
+            "count": 9
+        },
+        {
+            "hour": 1,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.42857142857142855,
+            "count": 14
+        },
+        {
+            "hour": 1,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.16666666666666666,
+            "count": 6
+        },
+        {
+            "hour": 1,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.2857142857142857,
+            "count": 7
+        },
+        {
+            "hour": 2,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 2,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 9
+        },
+        {
+            "hour": 2,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 6
+        },
+        {
+            "hour": 2,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.25,
+            "count": 4
+        },
+        {
+            "hour": 3,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.0,
+            "count": 3
+        },
+        {
+            "hour": 3,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.2,
+            "count": 5
+        },
+        {
+            "hour": 5,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.0,
+            "count": 3
+        },
+        {
+            "hour": 5,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.4375,
+            "count": 16
+        },
+        {
+            "hour": 5,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.4,
+            "count": 20
+        },
+        {
+            "hour": 5,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.0,
+            "count": 6
+        },
+        {
+            "hour": 5,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 6,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.25,
+            "count": 8
+        },
+        {
+            "hour": 6,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.0,
+            "count": 4
+        },
+        {
+            "hour": 7,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 7,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.2222222222222222,
+            "count": 9
+        },
+        {
+            "hour": 7,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.29411764705882354,
+            "count": 17
+        },
+        {
+            "hour": 7,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 8,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 3
+        },
+        {
+            "hour": 8,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.0,
+            "count": 3
+        },
+        {
+            "hour": 8,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 3
+        },
+        {
+            "hour": 9,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 3
+        },
+        {
+            "hour": 9,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 6
+        },
+        {
+            "hour": 10,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 3
+        },
+        {
+            "hour": 10,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.375,
+            "count": 8
+        },
+        {
+            "hour": 10,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.0,
+            "count": 4
+        },
+        {
+            "hour": 11,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 12,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.0,
+            "count": 3
+        },
+        {
+            "hour": 12,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.25,
+            "count": 4
+        },
+        {
+            "hour": 12,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.16666666666666666,
+            "count": 6
+        },
+        {
+            "hour": 12,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 13,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 3
+        },
+        {
+            "hour": 13,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.0,
+            "count": 5
+        },
+        {
+            "hour": 13,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.0,
+            "count": 4
+        },
+        {
+            "hour": 13,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 14,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.25,
+            "count": 4
+        },
+        {
+            "hour": 14,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.4,
+            "count": 10
+        },
+        {
+            "hour": 14,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.2857142857142857,
+            "count": 7
+        },
+        {
+            "hour": 14,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 9
+        },
+        {
+            "hour": 15,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.16666666666666666,
+            "count": 6
+        },
+        {
+            "hour": 15,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.4,
+            "count": 10
+        },
+        {
+            "hour": 15,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.38461538461538464,
+            "count": 13
+        },
+        {
+            "hour": 15,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.42857142857142855,
+            "count": 28
+        },
+        {
+            "hour": 15,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.0,
+            "count": 4
+        },
+        {
+            "hour": 16,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.3888888888888889,
+            "count": 18
+        },
+        {
+            "hour": 17,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 18,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.3793103448275862,
+            "count": 29
+        },
+        {
+            "hour": 18,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.42857142857142855,
+            "count": 7
+        },
+        {
+            "hour": 19,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.4,
+            "count": 15
+        },
+        {
+            "hour": 19,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.25,
+            "count": 4
+        },
+        {
+            "hour": 20,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 20,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.2222222222222222,
+            "count": 9
+        },
+        {
+            "hour": 20,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.375,
+            "count": 8
+        },
+        {
+            "hour": 20,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.4,
+            "count": 5
+        },
+        {
+            "hour": 21,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.2,
+            "count": 10
+        },
+        {
+            "hour": 21,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.375,
+            "count": 8
+        },
+        {
+            "hour": 22,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.16666666666666666,
+            "count": 6
+        },
+        {
+            "hour": 22,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.4444444444444444,
+            "count": 9
+        },
+        {
+            "hour": 23,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 6
+        },
+        {
+            "hour": 23,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.3333333333333333,
+            "count": 9
+        },
+        {
+            "hour": 23,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.25,
+            "count": 4
+        }
+    ],
+    "confidence_zones": [
+        {
+            "hour": 0,
+            "pair": "USDCAD_otc",
+            "win_rate": 1.0,
+            "count": 3
+        },
+        {
+            "hour": 1,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.7142857142857143,
+            "count": 7
+        },
+        {
+            "hour": 1,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.8,
+            "count": 5
+        },
+        {
+            "hour": 2,
+            "pair": "AUDUSD_otc",
+            "win_rate": 0.75,
+            "count": 16
+        },
+        {
+            "hour": 4,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.75,
+            "count": 4
+        },
+        {
+            "hour": 6,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.75,
+            "count": 4
+        },
+        {
+            "hour": 9,
+            "pair": "GBPUSD_otc",
+            "win_rate": 0.7083333333333334,
+            "count": 24
+        },
+        {
+            "hour": 9,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.8,
+            "count": 5
+        },
+        {
+            "hour": 11,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.75,
+            "count": 4
+        },
+        {
+            "hour": 12,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.8333333333333334,
+            "count": 6
+        },
+        {
+            "hour": 14,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.7142857142857143,
+            "count": 28
+        },
+        {
+            "hour": 15,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.75,
+            "count": 8
+        },
+        {
+            "hour": 16,
+            "pair": "USDCOP_otc",
+            "win_rate": 0.8571428571428571,
+            "count": 7
+        },
+        {
+            "hour": 17,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.7333333333333333,
+            "count": 15
+        },
+        {
+            "hour": 18,
+            "pair": "USDCOP_otc",
+            "win_rate": 1.0,
+            "count": 3
+        },
+        {
+            "hour": 20,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.7857142857142857,
+            "count": 14
+        },
+        {
+            "hour": 21,
+            "pair": "USDCOP_otc",
+            "win_rate": 1.0,
+            "count": 4
+        },
+        {
+            "hour": 23,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.75,
+            "count": 4
+        }
+    ],
+    "strategy_performance": [
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "win_rate": 0.5119825708061002,
+            "count": 918
+        },
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "win_rate": 0.5,
+            "count": 532
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "win_rate": 0.5384615384615384,
+            "count": 286
+        },
+        {
+            "strategy": "Patrones de Continuaci\u00f3n (Chartismo)",
+            "win_rate": 0.49206349206349204,
+            "count": 63
+        }
+    ]
+}

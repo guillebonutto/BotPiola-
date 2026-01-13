@@ -1,0 +1,4 @@
+timestamp,trade_id,pair,timeframe,decision,signal_score,pattern_detected,price,ema,rsi,ema_conf,tf_signal,atr,triangle_active,reversal_candle,near_support,near_resistance,support_level,resistance_level,htf_signal,result,profit_loss,expiry_time,notes
+2026-01-13 05:15:13,17ea9a1c,EURUSD_otc,300,SELL,,Patrones de Continuación (Chartismo),1.1067,1.1090323505045627,26.336497303001664,,,0.0008510429356363,,,,,,,,LOSS,-1.0,300,
+2026-01-13 06:35:13,ed30bd6d,AUDUSD_otc,300,BUY,,Patrones de Continuación (Chartismo),0.67755,0.6764790510094163,59.84966107916954,,,0.0009733435343041,,,,,,,,LOSS,-1.0,300,
+2026-01-13 16:05:13,97dbd121,EURUSD_otc,300,BUY,,Patrones de Continuación (Chartismo),1.10797,1.106553229069127,60.697645600696966,,,0.0010032611919304,,,,,,,,LOSS,-1.0,300,

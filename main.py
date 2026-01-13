@@ -13,8 +13,9 @@ from strategy_structure import StrategyStructure
 from trade_logger import trade_logger
 from feedback_db import FeedbackDB
 import uuid
+import json
+from pathlib import Path
 
-# --- Configuración ---
 # --- Configuración ---
 PAIRS = ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc']
 INTERVAL = 300  # 5 minutos
@@ -48,6 +49,51 @@ class TradingBot:
         # Base de datos de feedback y mantenimiento
         self.db = FeedbackDB()
         self.db.maintain()
+        
+        # Inteligencia Artificial (Filtros Históricos)
+        self.intelligence = self._load_intelligence()
+
+        # --- GESTIÓN DE RIESGO ---
+        self.daily_stop_loss = -15.0  # Parar si perdemos $15 en la sesión
+        self.daily_take_profit = 10.0 # Asegurar ganancias si ganamos $10
+        self.session_profit = 0.0
+        self.strategy_fails = {}      # Seguimiento de rachas negativas por sesión
+
+    def _load_intelligence(self):
+        """Carga el mapa de confianza generado por analyze_best_times.py."""
+        try:
+            path = Path('trading_intelligence.json')
+            if path.exists():
+                with open(path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    print(f"🧠 Inteligencia de trading cargada (Actualizada: {data.get('last_update', 'N/A')})")
+                    return data
+        except Exception as e:
+            print(f"⚠️ Error cargando inteligencia: {e}")
+        return None
+
+    def is_allowed_by_ai(self, pair, strategy):
+        """Verifica si la IA aprueba esta operación basada en el historial y racha."""
+        if not self.intelligence:
+            return True, "No intelligence data"
+            
+        current_hour = datetime.now().hour
+        
+        # 1. Filtro de Racha Negativa (Session)
+        if self.strategy_fails.get(strategy, 0) >= 3:
+            return False, f"Estrategia en racha negativa (Session Fails: {self.strategy_fails[strategy]})"
+
+        # 2. Verificar Zonas de Riesgo por Hora/Par
+        for zone in self.intelligence.get('risk_zones', []):
+            if zone['hour'] == current_hour and zone['pair'] == pair:
+                return False, f"Zona de Riesgo (Histórico WR: {zone['win_rate']*100:.1f}%)"
+        
+        # 3. Filtro de Rendimiento Histórico por Estrategia
+        for s_stats in self.intelligence.get('strategy_performance', []):
+            if s_stats['strategy'] == strategy and s_stats['win_rate'] < 0.48:
+                return False, f"Bajo rendimiento histórico ({s_stats['win_rate']*100:.1f}% WR)"
+
+        return True, "Approved"
 
     async def get_balance(self):
         """Obtiene el balance actual de la cuenta."""
@@ -236,8 +282,22 @@ class TradingBot:
             asyncio.create_task(self.notifier.start_listening())
         
         while True:
-            # 0. Chequeo de Concurrencia
+            # 0. Chequeo de Concurrencia y Riesgo
             now_utc = datetime.now(timezone.utc)
+            
+            # --- CONTROL DE RIESGO DIARIO ---
+            if self.session_profit <= self.daily_stop_loss:
+                msg = f"🛑 <b>STOP LOSS ALCANZADO:</b> ${self.session_profit:.2f}. Deteniendo operaciones por hoy."
+                print(msg)
+                await self.notifier.send_message(msg)
+                break # Sale del bot
+            
+            if self.session_profit >= self.daily_take_profit:
+                msg = f"🎯 <b>TAKE PROFIT ALCANZADO:</b> ${self.session_profit:.2f}. Asegurando ganancias."
+                print(msg)
+                await self.notifier.send_message(msg)
+                break
+
             if now_utc < self.active_trade_expiry:
                 remaining = (self.active_trade_expiry - now_utc).total_seconds()
                 print(f"[{now_utc.strftime('%H:%M:%S')}] Operación en curso. Esperando {int(remaining)}s para finalizar...")
@@ -255,11 +315,24 @@ class TradingBot:
                 
                 if signal:
                     action, duration, strat_name = signal
+                    
+                    # --- FILTRO IA ---
+                    allowed, reason = self.is_allowed_by_ai(pair, strat_name)
+                    if not allowed:
+                        print(f"  [AI FILTER] Operación bloqueada: {reason}")
+                        cycle_report[-1] += f"\n   🛡️ <b>IA BLOCK:</b> {reason}"
+                        continue
+
                     print(f"EJECUTANDO ORDEN: {action} en {pair} por {duration}s. Estrategia: {strat_name}")
                     
                     try:
                         amount = 1.0 # Monto fijo por ahora
                         trade_id = str(uuid.uuid4())[:8]
+
+                        # --- BLOQUEO PROACTIVO (Antes de la API) ---
+                        # Bloqueamos el bot por la duración del trade + 10s de margen
+                        self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=duration + 10)
+                        print(f"  [LOCK] Bot bloqueado hasta {self.active_trade_expiry.strftime('%H:%M:%S')} UTC")
 
                         # --- LOGGING PREVIO ---
                         trade_data = {
@@ -308,17 +381,41 @@ class TradingBot:
                         print(f"  >>> Resultado Operación: {'GANADA' if is_win else 'PERDIDA'}")
                         await self.notifier.notify_close(pair, profit, is_win)
 
-                        # --- ACTUALIZAR LOG ---
+                        # --- ACTUALIZAR MÉTRICAS DE SESIÓN ---
+                        self.session_profit += profit
+                        if is_win:
+                            self.strategy_fails[strat_name] = 0 # Reset racha
+                        else:
+                            self.strategy_fails[strat_name] = self.strategy_fails.get(strat_name, 0) + 1
+
+                        # --- ACTUALIZAR LOG CSV ---
                         trade_logger.update_trade_result(
                             trade_id=trade_id,
                             result='WIN' if is_win else 'LOSS',
                             profit_loss=profit
                         )
 
+                        # --- GUARDAR EN BASE DE DATOS SQL (Restaurado) ---
+                        try:
+                            timeframe_str = f"{duration // 60}min" if duration >= 60 else f"{duration}seg"
+                            trade_db_data = {
+                                'trade_id': trade_id,
+                                'pair': pair,
+                                'action': action,
+                                'strategy': strat_name,
+                                'timeframe': timeframe_str,
+                                'amount': amount,
+                                'open_price': latest_data.get('Close', 0), # Estimado de la vela
+                                'close_price': latest_data.get('Close', 0) + (profit if is_win else -amount), # Estimado
+                                'result': 'win' if is_win else 'loss',
+                                'profit': profit,
+                                'telegram_message_id': None # Se actualizará si hay feedback manual
+                            }
+                            self.db.save_trade(trade_db_data)
+                            print(f"  [DB] Operación {trade_id} guardada en feedback.db")
+                        except Exception as db_e:
+                            print(f"  [WARN] Error guardando en DB: {db_e}")
 
-                        # Actualizar bloqueo
-                        self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=5)
-                        
                         # Salir del loop de pares para respetar el bloqueo inmediatamente
                         break 
                         
@@ -372,10 +469,21 @@ class TradingBot:
             await asyncio.sleep(10)
 
 async def main():
-    ssid = input("Introduce tu SSID de PocketOption: ").strip()
-    tg_token = input("Introduce tu Token de Telegram (Enter para omitir): ").strip()
-    tg_chat = input("Introduce tu Chat ID de Telegram (Enter para omitir): ").strip()
-    tg_owner = input("Introduce tu Telegram Owner ID (opcional, usa coma para varios): ").strip()
+    # Intentar cargar desde config.json
+    config = {}
+    config_path = Path('config.json')
+    if config_path.exists():
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                print("✅ Configuración cargada desde config.json")
+        except Exception as e:
+            print(f"⚠️ Error leyendo config.json: {e}")
+
+    ssid = config.get('ssid') or input("Introduce tu SSID de PocketOption: ").strip()
+    tg_token = config.get('telegram_token') or input("Introduce tu Token de Telegram (Enter para omitir): ").strip()
+    tg_chat = config.get('telegram_chat_id') or input("Introduce tu Chat ID de Telegram (Enter para omitir): ").strip()
+    tg_owner = config.get('telegram_owner_id') or input("Introduce tu Telegram Owner ID (opcional, usa coma para varios): ").strip()
     
     bot = TradingBot(ssid, tg_token, tg_chat, tg_owner)
     await bot.run()
