@@ -71,7 +71,9 @@ class TradingBot:
         self.daily_stop_loss = self.config.get('daily_stop_loss', DEFAULT_CONFIG['daily_stop_loss'])
         self.daily_take_profit = self.config.get('daily_take_profit', DEFAULT_CONFIG['daily_take_profit'])
         self.session_profit = 0.0
+        self.session_profit = 0.0
         self.strategy_fails = {}      # Seguimiento de rachas negativas por sesión
+        self.consecutive_losses = {}  # Seguimiento de Martingala por par {pair: count}
         
         # --- MTF CACHE ---
         self.mtf_cache = {} # { (pair, interval): (timestamp, dataframe) }
@@ -134,7 +136,39 @@ class TradingBot:
             return await self.api.balance()
         except Exception as e:
             print(f"[Bot] Error obteniendo balance: {e}")
+            print(f"[Bot] Error obteniendo balance: {e}")
             return "Error"
+
+    async def calculate_trade_amount(self, pair):
+        """Calcula el monto de la operación según la gestión de riesgo."""
+        mm_config = self.config.get('money_management', {})
+        mode = mm_config.get('mode', 'fixed')
+        
+        # 1. Modo Fijo (Default)
+        amount = mm_config.get('fixed_amount', self.amount)
+        
+        # 2. Interés Compuesto (% del balance)
+        if mode == 'compound':
+            balance = await self.get_balance()
+            if isinstance(balance, (int, float)):
+                pct = mm_config.get('compound_percentage', 0.01)
+                amount = balance * pct
+                amount = max(1.0, round(amount, 2)) # Mínimo $1
+                
+        # 3. Martingala (Multiplicador tras pérdida)
+        elif mode == 'martingale':
+            losses = self.consecutive_losses.get(pair, 0)
+            max_steps = mm_config.get('martingale_max_steps', 3)
+            multiplier = mm_config.get('martingale_multiplier', 2.0)
+            
+            if losses > 0 and losses <= max_steps:
+                amount = amount * (multiplier ** losses)
+                print(f"  [MARTINGALE] {pair}: {losses} losses. Increasing amount to ${amount:.2f}")
+            elif losses > max_steps:
+                print(f"  [MARTINGALE] {pair}: Max steps reached ({max_steps}). Resetting to base amount.")
+                self.consecutive_losses[pair] = 0
+                
+        return amount
 
     async def fetch_data(self, pair, interval=None):
         """Obtiene velas y prepara el DataFrame."""
@@ -281,6 +315,17 @@ class TradingBot:
         strategy_logs = []
         
         for strategy in self.strategies:
+            # --- FILTRO DE RÉGIMEN DE MERCADO ---
+            # Si el mercado está en TENDENCIA, evitamos estrategias de REVERSIÓN
+            if 'TRENDING' in market_state and getattr(strategy, 'type', '') == 'REVERSION':
+                if self.verbose: print(f"  [REGIME] Skipping {strategy.name} (Reversion) in Trending Market")
+                continue
+            
+            # Si el mercado está LATERAL, evitamos estrategias de TENDENCIA
+            if market_state == 'SIDEWAYS' and getattr(strategy, 'type', '') == 'TREND':
+                if self.verbose: print(f"  [REGIME] Skipping {strategy.name} (Trend) in Sideways Market")
+                continue
+
             action, reason, duration = strategy.get_signal(df)
             
             # Sanitizar textos para Telegram (escapar <, >, &)
@@ -412,7 +457,7 @@ class TradingBot:
                     print(f"EJECUTANDO ORDEN: {action} en {pair} por {duration}s. Estrategia: {strat_name}")
                     
                     try:
-                        amount = self.amount
+                        amount = await self.calculate_trade_amount(pair)
                         trade_id = str(uuid.uuid4())[:8]
 
                         # --- BLOQUEO PROACTIVO (Antes de la API) ---
@@ -471,8 +516,10 @@ class TradingBot:
                         self.session_profit += profit
                         if is_win:
                             self.strategy_fails[strat_name] = 0 # Reset racha
+                            self.consecutive_losses[pair] = 0   # Reset Martingala
                         else:
                             self.strategy_fails[strat_name] = self.strategy_fails.get(strat_name, 0) + 1
+                            self.consecutive_losses[pair] = self.consecutive_losses.get(pair, 0) + 1
 
                         # --- ACTUALIZAR LOG CSV ---
                         trade_logger.update_trade_result(

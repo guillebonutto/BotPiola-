@@ -4,6 +4,7 @@ from ta.trend import ADXIndicator
 class StrategyContinuation(Strategy):
     def __init__(self):
         super().__init__("Patrones de Continuación (Chartismo)")
+        self.type = 'TREND'
         
     def get_signal(self, df):
         if len(df) < 50:

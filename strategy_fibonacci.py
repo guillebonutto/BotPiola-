@@ -4,6 +4,7 @@ import numpy as np
 class StrategyFibonacci(Strategy):
     def __init__(self):
         super().__init__("Fibonacci Retracement 61.8%")
+        self.type = 'TREND'
         
     def get_signal(self, df):
         if df.empty or len(df) < 50:

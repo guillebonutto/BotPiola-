@@ -3,6 +3,7 @@ from strategy_stochastic import Strategy
 class StrategyStructure(Strategy):
     def __init__(self):
         super().__init__("Cambio de Estructura (MSS)")
+        self.type = 'REVERSION'
         
     def get_signal(self, df):
         if df.empty or len(df) < 20:

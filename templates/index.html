@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotPiola Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { margin-bottom: 20px; border: none; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .metric-value { font-size: 2.5rem; font-weight: bold; }
+        .win { color: #198754; }
+        .loss { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">🤖 BotPiola Dashboard</h1>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card p-3 text-center">
+                    <h5>Win Rate Total</h5>
+                    <div class="metric-value" id="winRate">--%</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3 text-center">
+                    <h5>Profit Total</h5>
+                    <div class="metric-value" id="totalProfit">$0.00</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3 text-center">
+                    <h5>Total Trades</h5>
+                    <div class="metric-value" id="totalTrades">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card p-3">
+                    <h5>Curva de Equidad</h5>
+                    <canvas id="equityChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Win Rate por Estrategia</h5>
+                    <canvas id="strategyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/stats');
+                const data = await response.json();
+                
+                // Update Metrics
+                document.getElementById('winRate').innerText = data.win_rate + '%';
+                document.getElementById('winRate').className = 'metric-value ' + (data.win_rate >= 50 ? 'win' : 'loss');
+                
+                document.getElementById('totalProfit').innerText = '$' + data.total_profit;
+                document.getElementById('totalProfit').className = 'metric-value ' + (data.total_profit >= 0 ? 'win' : 'loss');
+                
+                document.getElementById('totalTrades').innerText = data.total_trades;
+
+                // Update Equity Chart
+                new Chart(document.getElementById('equityChart'), {
+                    type: 'line',
+                    data: {
+                        labels: data.equity_curve.labels,
+                        datasets: [{
+                            label: 'Profit Acumulado ($)',
+                            data: data.equity_curve.data,
+                            borderColor: '#0d6efd',
+                            tension: 0.1,
+                            fill: true,
+                            backgroundColor: 'rgba(13, 110, 253, 0.1)'
+                        }]
+                    }
+                });
+
+                // Update Strategy Chart
+                const strategies = Object.keys(data.strategy_stats);
+                const winRates = Object.values(data.strategy_stats);
+                
+                new Chart(document.getElementById('strategyChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: strategies,
+                        datasets: [{
+                            label: 'Win Rate (%)',
+                            data: winRates,
+                            backgroundColor: winRates.map(wr => wr >= 50 ? '#198754' : '#dc3545')
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        scales: { x: { min: 0, max: 100 } }
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error loading stats:", error);
+            }
+        }
+
+        loadStats();
+        // Refresh every 30 seconds
+        setInterval(loadStats, 30000);
+    </script>
+</body>
+</html>

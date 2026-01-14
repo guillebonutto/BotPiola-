@@ -100,7 +100,8 @@ class MarketAnalyzer:
             if last['ATR'] > atr_avg * 1.5:
                 return 'VOLATILE'
             
-        return 'SIDEWAYS' # Default
+        # Default: Si ADX está entre 20 y 25, o no hay tendencia clara
+        return 'SIDEWAYS'
 
     def check_news(self, pair, window_minutes=15):
         """
