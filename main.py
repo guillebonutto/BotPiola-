@@ -72,6 +72,9 @@ class TradingBot:
         self.daily_take_profit = self.config.get('daily_take_profit', DEFAULT_CONFIG['daily_take_profit'])
         self.session_profit = 0.0
         self.strategy_fails = {}      # Seguimiento de rachas negativas por sesión
+        
+        # --- MTF CACHE ---
+        self.mtf_cache = {} # { (pair, interval): (timestamp, dataframe) }
 
     def _load_intelligence(self):
         """Carga el mapa de confianza generado por analyze_best_times.py."""
@@ -133,13 +136,14 @@ class TradingBot:
             print(f"[Bot] Error obteniendo balance: {e}")
             return "Error"
 
-    async def fetch_data(self, pair):
+    async def fetch_data(self, pair, interval=None):
         """Obtiene velas y prepara el DataFrame."""
-        offset = self.interval * self.lookback
+        target_interval = interval if interval else self.interval
+        offset = target_interval * self.lookback
         try:
             # Añadido timeout de 20 segundos total
-            print(f"  [DEBUG] Fetching {pair} (Chunk 1)...")
-            candles = await asyncio.wait_for(self.api.get_candles(pair, self.interval, offset), timeout=10.0)
+            print(f"  [DEBUG] Fetching {pair} @ {target_interval}s (Chunk 1)...")
+            candles = await asyncio.wait_for(self.api.get_candles(pair, target_interval, offset), timeout=10.0)
             
             # Paginación si faltan datos (Límite API suele ser ~150)
             if len(candles) > 0 and len(candles) < 200:
@@ -236,9 +240,32 @@ class TradingBot:
         if df.empty:
             return None, {}, cycle_log + "\n   ⚠️ <i>Sin datos disponibles</i>"
 
+        # --- ANÁLISIS MULTI-TIMEFRAME (MTF) ---
+        mtf_settings = self.config.get('mtf_settings', {})
+        if mtf_settings.get('enabled', True):
+            macro_int = mtf_settings.get('macro_interval', 3600)
+            meso_int = mtf_settings.get('meso_interval', 900)
+            
+            # Actualizar Cache si es necesario
+            df_1h = await self.get_cached_mtf(pair, macro_int, 1800) # 30 min
+            df_15m = await self.get_cached_mtf(pair, meso_int, 600)  # 10 min
+            
+            context, context_msg = self.analyzer.get_market_context(df, df_15m, df_1h)
+            
+            if context == 'CONFLICT':
+                return None, {}, cycle_log + f"\n   ⚠️ <b>HOLD (MTF Conflict)</b>\n      <i>{context_msg}</i>"
+            
+            # Usar variable local para evitar condiciones de carrera en ejecución paralela
+            market_context = context
+            cycle_log += f"\n   🌐 <b>Contexto:</b> {context}"
+        else:
+            market_context = 'NEUTRAL'
+
         # 1. Análisis Fundamental (Noticias)
-        news_status = self.analyzer.check_news()
-        
+        news_status, news_msg = self.analyzer.check_news(pair, window_minutes=self.config.get('news_window', 15))
+        if news_status == 'HIGH_IMPACT':
+            return None, {}, cycle_log + f"\n   ⚠️ <b>HOLD (Noticias)</b>\n      <i>{news_msg}</i>"
+
         # 2. Análisis Técnico (Indicadores)
         df = self.analyzer.compute_indicators(df)
         
@@ -261,6 +288,15 @@ class TradingBot:
             safe_strat_name = html.escape(strategy.name)
             
             if action in ['BUY', 'SELL']:
+                # --- FILTRO DE CONTEXTO MTF ---
+                if market_context != 'NEUTRAL':
+                    if action == 'BUY' and 'SELL' in market_context:
+                        strategy_logs.append(f"   🛡️ <b>{action} BLOQUEADO</b> (Tendencia Bajista)")
+                        continue
+                    if action == 'SELL' and 'BUY' in market_context:
+                        strategy_logs.append(f"   🛡️ <b>{action} BLOQUEADO</b> (Tendencia Alcista)")
+                        continue
+
                 print(f"  >>> SEÑAL DETECTADA en {pair} por {strategy.name}: {action} ({reason})")
                 signals.append((action, duration, strategy.name))
                 # Formato lista indentada
@@ -301,6 +337,22 @@ class TradingBot:
             return sell_signals[0], latest_candle, cycle_log
             
         return signals[0], latest_candle, cycle_log
+
+    async def get_cached_mtf(self, pair, interval, ttl_seconds):
+        """Obtiene datos de MTF usando un sistema de cache simple."""
+        now = datetime.now().timestamp()
+        cache_key = (pair, interval)
+        
+        if cache_key in self.mtf_cache:
+            ts, df = self.mtf_cache[cache_key]
+            if now - ts < ttl_seconds:
+                return df
+        
+        # Si no está en cache o expiró, descargar
+        df = await self.fetch_data(pair, interval)
+        if not df.empty:
+            self.mtf_cache[cache_key] = (now, df)
+        return df
 
     async def run(self):
         print("--- INICIANDO BOT DE TRADING AVANZADO ---\n")

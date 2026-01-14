@@ -5,10 +5,11 @@ from ta.trend import SMAIndicator, EMAIndicator, MACD, ADXIndicator
 from ta.momentum import RSIIndicator, StochasticOscillator
 from ta.volatility import BollingerBands, AverageTrueRange
 from datetime import datetime
+from news_fetcher import NewsFetcher
 
 class MarketAnalyzer:
     def __init__(self):
-        pass
+        self.news_fetcher = NewsFetcher()
 
     def compute_indicators(self, df):
         """Calcula todos los indicadores técnicos necesarios."""
@@ -101,10 +102,83 @@ class MarketAnalyzer:
             
         return 'SIDEWAYS' # Default
 
-    def check_news(self):
+    def check_news(self, pair, window_minutes=15):
         """
-        Placeholder para análisis fundamental.
+        Verifica si hay noticias de alto impacto para las monedas del par.
         """
-        # TODO: Implementar scraping de calendario económico
-        # print(f"[{datetime.now()}] [INFO] Verificando noticias... (Placeholder: Sin noticias de alto impacto)")
+        try:
+            high_impact_events = self.news_fetcher.get_upcoming_high_impact_news(pair, window_minutes)
+            if high_impact_events:
+                # Retornar el primer evento encontrado como razón
+                event = high_impact_events[0]
+                return 'HIGH_IMPACT', f"Noticia: {event['event']} ({event['currency']}) a las {event['time'].strftime('%H:%M')}"
+            return 'NEUTRAL', "Sin noticias de alto impacto cercanas"
+        except Exception as e:
+            print(f"⚠️ Error al verificar noticias: {e}")
+            return 'NEUTRAL', "Error en verificación de noticias"
+
+    def get_trend(self, df, timeframe='meso'):
+        """
+        Determina la tendencia de un dataframe basado en el timeframe.
+        Macro (1h): EMA 200 + MACD
+        Meso (15m): EMA 50 + RSI
+        """
+        if df is None or df.empty or len(df) < 200:
+            return 'NEUTRAL'
+
+        close = df['Close']
+        
+        if timeframe == 'macro':
+            ema_200 = EMAIndicator(close, window=200).ema_indicator()
+            macd_obj = MACD(close)
+            macd = macd_obj.macd()
+            macd_signal = macd_obj.macd_signal()
+            
+            last_close = close.iloc[-1]
+            last_ema = ema_200.iloc[-1]
+            last_macd = macd.iloc[-1]
+            last_signal = macd_signal.iloc[-1]
+            
+            if last_close > last_ema and last_macd > last_signal:
+                return 'BULLISH'
+            elif last_close < last_ema and last_macd < last_signal:
+                return 'BEARISH'
+            
+        elif timeframe == 'meso':
+            ema_50 = EMAIndicator(close, window=50).ema_indicator()
+            rsi = RSIIndicator(close, window=14).rsi()
+            
+            last_close = close.iloc[-1]
+            last_ema = ema_50.iloc[-1]
+            last_rsi = rsi.iloc[-1]
+            
+            if last_close > last_ema and last_rsi > 50:
+                return 'BULLISH'
+            elif last_close < last_ema and last_rsi < 50:
+                return 'BEARISH'
+                
         return 'NEUTRAL'
+
+    def get_market_context(self, df_5m, df_15m, df_1h):
+        """
+        Consenso de múltiples timeframes (Triple Screen).
+        """
+        macro = self.get_trend(df_1h, 'macro')
+        meso = self.get_trend(df_15m, 'meso')
+        
+        # Lógica de Consenso
+        if macro == 'BULLISH' and meso == 'BULLISH':
+            return 'STRONG_BUY', f"Macro: {macro}, Meso: {meso}"
+        elif macro == 'BEARISH' and meso == 'BEARISH':
+            return 'STRONG_SELL', f"Macro: {macro}, Meso: {meso}"
+        elif macro == 'NEUTRAL' and meso == 'NEUTRAL':
+            return 'NEUTRAL', "Mercado sin tendencia clara"
+        
+        # Casos de conflicto o tendencia débil
+        if macro != 'NEUTRAL' and meso == 'NEUTRAL':
+            return f'ONLY_{macro}', f"Macro: {macro}, Meso: Neutral"
+        
+        if macro != meso and macro != 'NEUTRAL' and meso != 'NEUTRAL':
+            return 'CONFLICT', f"Macro: {macro}, Meso: {meso} (Conflicto)"
+            
+        return 'NEUTRAL', f"Macro: {macro}, Meso: {meso}"
