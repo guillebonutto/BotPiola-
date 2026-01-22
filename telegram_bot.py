@@ -55,7 +55,7 @@ class TelegramNotifier:
         self.listening = False
         self.logs_dir = Path("logs/trades")
 
-    async def send_message(self, message, reply_to_message_id=None, target_chat_id=None):
+    async def send_message(self, message, reply_to_message_id=None, target_chat_id=None, **kwargs):
         """Envía un mensaje a Telegram de forma asíncrona."""
         # Si target_chat_id es una lista/tupla, enviar a todos
         if isinstance(target_chat_id, (list, tuple)):

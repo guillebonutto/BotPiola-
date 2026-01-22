@@ -34,10 +34,10 @@ class StrategyFibonacci(Strategy):
             threshold = price_range * 0.05 # 5% de tolerancia
             
             if dist < threshold:
-                # Verificar señal de giro (ej. martillo o vela verde reciente)
-                # Por simplicidad, entramos si la vela actual es verde (Close > Open)
-                if df.iloc[-1]['Close'] > df.iloc[-1]['Open']:
-                     return 'BUY', "Rebote en Fibonacci 61.8%", 300
+                # Verificar señal de giro: Martillo o Envolvente Alcista
+                has_pattern = last.get('CDL_HAMMER', 0) == 100 or last.get('CDL_ENGULFING', 0) == 100
+                if has_pattern or (last['Close'] > last['Open'] and last['Close'] > df.iloc[-2]['High']):
+                     return 'BUY', "Rebote en Fibonacci 61.8% + Confirmación", 300
 
         # Contexto Bajista
         # Impulso fue de High a Low. Retroceso sube hasta 61.8%

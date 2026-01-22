@@ -1,0 +1,4 @@
+timestamp,trade_id,pair,timeframe,decision,signal_score,pattern_detected,price,ema,rsi,ema_conf,tf_signal,atr,triangle_active,reversal_candle,near_support,near_resistance,support_level,resistance_level,htf_signal,result,profit_loss,expiry_time,notes
+2026-01-22 14:20:01,63c0d5b5,AUDCAD_otc,300,SELL,,Cambio de Estructura (MSS),0.93259,0.9374078004294648,34.80254067569771,,,0.0023837474371024,,,,,,,,WIN,0.92,300,
+2026-01-22 14:27:15,b6cb5121,AUDCAD_otc,300,SELL,,Cambio de Estructura (MSS),0.93291,0.9367478363991152,38.11585931402468,,,0.0024472619383718,,,,,,,,LOSS,-1.0,300,
+2026-01-22 14:35:10,c70ec9dd,AUDCAD_otc,300,SELL,,Cambio de Estructura (MSS),0.93135,0.9362337570652024,35.14968589179705,,,0.0024260341928044,,,,,,,,LOSS,-1.0,300,

@@ -90,18 +90,18 @@ class MarketAnalyzer:
             elif last['EMA_20'] < last['EMA_50'] and last['Close'] < last['EMA_50']:
                 return 'TRENDING_DOWN'
         
-        # Lógica de lateralización
-        if adx < 20:
+        # Lógica de lateralización (Relajada: ADX < 18 en lugar de 20)
+        if adx < 18:
             return 'SIDEWAYS'
             
-        # Detección de volatilidad alta (si ATR sube mucho respecto a su media)
+        # Detección de volatilidad alta
         if 'ATR' in df.columns:
             atr_avg = df['ATR'].rolling(20).mean().iloc[-1]
-            if last['ATR'] > atr_avg * 1.5:
+            if last['ATR'] > atr_avg * 1.8: # Más tolerante (1.8 en lugar de 1.5)
                 return 'VOLATILE'
             
-        # Default: Si ADX está entre 20 y 25, o no hay tendencia clara
-        return 'SIDEWAYS'
+        # Zona de transición (Neutral)
+        return 'NEUTRAL'
 
     def check_news(self, pair, window_minutes=15):
         """
@@ -169,17 +169,17 @@ class MarketAnalyzer:
         
         # Lógica de Consenso
         if macro == 'BULLISH' and meso == 'BULLISH':
-            return 'STRONG_BUY', f"Macro: {macro}, Meso: {meso}"
+            return 'STRONG_BUY', f"🟢 Macro: {macro}, Meso: {meso} (Alineados)"
         elif macro == 'BEARISH' and meso == 'BEARISH':
-            return 'STRONG_SELL', f"Macro: {macro}, Meso: {meso}"
+            return 'STRONG_SELL', f"🔴 Macro: {macro}, Meso: {meso} (Alineados)"
         elif macro == 'NEUTRAL' and meso == 'NEUTRAL':
-            return 'NEUTRAL', "Mercado sin tendencia clara"
+            return 'NEUTRAL', "⚪ Mercado sin tendencia clara"
         
         # Casos de conflicto o tendencia débil
         if macro != 'NEUTRAL' and meso == 'NEUTRAL':
-            return f'ONLY_{macro}', f"Macro: {macro}, Meso: Neutral"
+            return f'ONLY_{macro}', f"🟡 Macro: {macro}, Meso: Neutral (Tendencia Débil)"
         
         if macro != meso and macro != 'NEUTRAL' and meso != 'NEUTRAL':
-            return 'CONFLICT', f"Macro: {macro}, Meso: {meso} (Conflicto)"
+            return 'CONFLICT', f"⚠️ Macro: {macro}, Meso: {meso} (Conflicto de Tendencias)"
             
-        return 'NEUTRAL', f"Macro: {macro}, Meso: {meso}"
+        return 'NEUTRAL', f"⚪ Macro: {macro}, Meso: {meso}"

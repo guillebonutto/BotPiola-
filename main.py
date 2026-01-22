@@ -133,9 +133,12 @@ class TradingBot:
     async def get_balance(self):
         """Obtiene el balance actual de la cuenta."""
         try:
-            return await self.api.balance()
+            balance = await self.api.balance()
+            if balance == -1.0:
+                print("[Bot] ❌ ERROR: SSID Inválido o Expirado (Balance: -1.0)")
+                return "SSID Expirado"
+            return balance
         except Exception as e:
-            print(f"[Bot] Error obteniendo balance: {e}")
             print(f"[Bot] Error obteniendo balance: {e}")
             return "Error"
 
@@ -258,9 +261,12 @@ class TradingBot:
             return df
             
         except asyncio.TimeoutError:
+            print(f"  [ERR] Timeout fetching {pair} - Verifica tu conexión o SSID")
             return pd.DataFrame()
         except Exception as e:
-            print(f"Error fetching {pair}: {e}")
+            print(f"  [ERR] Error fetching {pair}: {e}")
+            if "auth" in str(e).lower() or "session" in str(e).lower():
+                print(f"  [ERR] 💡 Posible problema de autenticación (SSID)")
             return pd.DataFrame()
 
     async def analyze_pair(self, pair):
@@ -272,7 +278,7 @@ class TradingBot:
         
         df = await self.fetch_data(pair)
         if df.empty:
-            return None, {}, cycle_log + "\n   ⚠️ <i>Sin datos disponibles</i>"
+            return None, {}, cycle_log + "\n   ⚠️ <b>Sin datos disponibles</b> (Error de conexión o API)"
 
         # --- ANÁLISIS MULTI-TIMEFRAME (MTF) ---
         mtf_settings = self.config.get('mtf_settings', {})
@@ -319,11 +325,13 @@ class TradingBot:
             # Si el mercado está en TENDENCIA, evitamos estrategias de REVERSIÓN
             if 'TRENDING' in market_state and getattr(strategy, 'type', '') == 'REVERSION':
                 if self.verbose: print(f"  [REGIME] Skipping {strategy.name} (Reversion) in Trending Market")
+                strategy_logs.append(f"   🛡️ <b>{strategy.name}</b>: Saltada (Mercado en Tendencia)")
                 continue
             
             # Si el mercado está LATERAL, evitamos estrategias de TENDENCIA
             if market_state == 'SIDEWAYS' and getattr(strategy, 'type', '') == 'TREND':
                 if self.verbose: print(f"  [REGIME] Skipping {strategy.name} (Trend) in Sideways Market")
+                strategy_logs.append(f"   🛡️ <b>{strategy.name}</b>: Saltada (Mercado Lateral)")
                 continue
 
             action, reason, duration = strategy.get_signal(df)
@@ -369,8 +377,9 @@ class TradingBot:
 
         # 1. Chequeo de Conflicto (Si hay señales opuestas, NO operamos)
         if buy_signals and sell_signals:
-            print(f"  [ALERTA] Conflicto de estrategias en {pair}: {len(buy_signals)} BUY vs {len(sell_signals)} SELL. Operación cancelada por seguridad.")
-            return None, latest_candle, cycle_log + "\n   ⛔ <b>CONFLICTO DE ESTRATEGIAS</b>"
+            conflict_msg = f"⚔️ <b>CONFLICTO:</b> {len(buy_signals)} BUY vs {len(sell_signals)} SELL"
+            print(f"  [ALERTA] {conflict_msg} en {pair}. Operación cancelada.")
+            return None, latest_candle, cycle_log + f"\n   ⛔ {conflict_msg}"
 
         # 2. Ejecución por Consenso
         if buy_signals:
@@ -409,7 +418,15 @@ class TradingBot:
             asyncio.create_task(self.notifier.start_listening())
         
         while True:
-            # 0. Chequeo de Concurrencia y Riesgo
+            # 0. Verificación de Conexión (SSID)
+            balance = await self.get_balance()
+            if balance == "SSID Expirado":
+                print("🛑 El bot no puede continuar sin un SSID válido. Por favor, actualiza config.json.")
+                if self.notifier.token:
+                    await self.notifier.send_message("🛑 <b>ERROR CRÍTICO:</b> El SSID ha expirado o es inválido. Por favor, actualiza la configuración.")
+                break # Detener el bot
+
+            # 1. Chequeo de Concurrencia y Riesgo
             now_utc = datetime.now(timezone.utc)
             
             # --- CONTROL DE RIESGO DIARIO ---
