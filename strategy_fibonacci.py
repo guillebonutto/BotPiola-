@@ -7,8 +7,10 @@ class StrategyFibonacci(Strategy):
         self.type = 'TREND'
         
     def get_signal(self, df):
-        if df.empty or len(df) < 50:
-            return 'HOLD', None, 0
+        if df.empty or len(df) < 200:
+            return 'HOLD', "Insufficient Data (<200 candles)", 0
+            
+        last = df.iloc[-1]
             
         # Detectar el último impulso grande
         # Buscamos min y max recientes (window 50)

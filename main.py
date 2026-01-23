@@ -77,6 +77,7 @@ class TradingBot:
         
         # --- MTF CACHE ---
         self.mtf_cache = {} # { (pair, interval): (timestamp, dataframe) }
+        self.api_semaphore = asyncio.Semaphore(3) # Máximo 3 peticiones simultáneas a la API
 
     def _load_intelligence(self):
         """Carga el mapa de confianza generado por analyze_best_times.py."""
@@ -177,97 +178,69 @@ class TradingBot:
         """Obtiene velas y prepara el DataFrame."""
         target_interval = interval if interval else self.interval
         offset = target_interval * self.lookback
-        try:
-            # Añadido timeout de 20 segundos total
-            print(f"  [DEBUG] Fetching {pair} @ {target_interval}s (Chunk 1)...")
-            candles = await asyncio.wait_for(self.api.get_candles(pair, target_interval, offset), timeout=10.0)
-            
-            # Paginación si faltan datos (Límite API suele ser ~150)
-            if len(candles) > 0 and len(candles) < 200:
-                print(f"  [DEBUG] {pair}: Got {len(candles)} candles. Keys: {list(candles[0].keys())}")
+        
+        async with self.api_semaphore:
+            try:
+                # Añadido timeout de 30 segundos total
+                if self.verbose: print(f"  [DEBUG] Fetching {pair} @ {target_interval}s (Chunk 1)...")
+                candles = await asyncio.wait_for(self.api.get_candles(pair, target_interval, offset), timeout=30.0)
                 
-                try:
-                    # Detectar clave de tiempo (puede ser 'time', 'Time', 'timestamp')
-                    time_key = next((k for k in candles[0].keys() if k.lower() in ['time', 'timestamp', 'date']), None)
-                    
-                    if not time_key:
-                        print(f"  [WARN] No time key found in candle data for {pair}")
-                    else:
-                        # Asumimos orden ascendente [Oldest ... Newest]
-                        # ERROR FIX: Castear a int porque el API requiere entero, y a veces viene como float
-                        oldest_time = int(candles[0][time_key])
-                        print(f"  [DEBUG] Fetching Chunk 2 (Previous) ending at {oldest_time}...")
-                        
-                        # Pedimos otro bloque terminando en el tiempo más viejo del bloque 1
-                        chunk2 = await asyncio.wait_for(
-                            self.api.get_candles_advanced(pair, self.interval, offset, oldest_time), 
-                            timeout=10.0
-                        )
-                        print(f"  [DEBUG] {pair}: Chunk 2 got {len(chunk2)} candles.")
-                        
-                        # Combinar: Chunk2 (Viejo) + Chunk1 (Nuevo)
-                        full_data = chunk2 + candles
-                        
-                        # Usar la misma clave para de-duplicar
-                        seen = set()
-                        candles = []
-                        for c in full_data:
-                            # Asegurar que el chunk2 tenga la misma key (debería)
-                            tk = next((k for k in c.keys() if k.lower() in ['time', 'timestamp', 'date']), time_key)
-                            t_val = c.get(tk)
+                # Paginación si faltan datos (Límite API suele ser ~150)
+                if 0 < len(candles) < 200:
+                    try:
+                        time_key = next((k for k in candles[0].keys() if k.lower() in ['time', 'timestamp', 'date']), None)
+                        if time_key:
+                            oldest_time = int(candles[0][time_key])
+                            if self.verbose: print(f"  [DEBUG] Fetching Chunk 2 (Previous) ending at {oldest_time}...")
                             
-                            if t_val is not None and t_val not in seen:
-                                candles.append(c)
-                                seen.add(t_val)
-                        
-                        # Re-ordenar por tiempo
-                        candles.sort(key=lambda x: x.get(time_key, 0))
-                        print(f"  [DEBUG] {pair}: Total combined candles: {len(candles)}")
-                    
-                except Exception as e:
-                    print(f"  [WARN] Failed fetching chunk 2 for {pair}: {e}")
-                    # Continuamos con lo que tenemos por si acaso
-            
-            df = pd.DataFrame(candles)
-            if df.empty:
-                print(f"  [WARN] Dataframe vacío para {pair}")
-                return df
-            
-            # Normalizar columnas (manejar minúsculas/mayúsculas)
-            df.columns = [c.lower() for c in df.columns]
-            
-            # Mapeo esperado
-            rename_map = {'time': 'Timestamp', 'open': 'Open', 'close': 'Close', 'high': 'High', 'low': 'Low'}
-            df.rename(columns=rename_map, inplace=True)
-            
-            # Verificar que existan las columnas críticas
-            required = ['Open', 'High', 'Low', 'Close']
-            if not all(col in df.columns for col in required):
-                print(f"  [ERR] Columnas faltantes en {pair}. Las que hay: {df.columns.tolist()}")
-                return pd.DataFrame()
+                            chunk2 = await asyncio.wait_for(
+                                self.api.get_candles_advanced(pair, target_interval, offset, oldest_time), 
+                                timeout=30.0
+                            )
+                            
+                            full_data = chunk2 + candles
+                            seen = set()
+                            candles = []
+                            for c in full_data:
+                                tk = next((k for k in c.keys() if k.lower() in ['time', 'timestamp', 'date']), time_key)
+                                t_val = c.get(tk)
+                                if t_val is not None and t_val not in seen:
+                                    candles.append(c)
+                                    seen.add(t_val)
+                            
+                            candles.sort(key=lambda x: x.get(time_key, 0))
+                            if self.verbose: print(f"  [DEBUG] {pair}: Total combined candles: {len(candles)}")
+                    except Exception as e:
+                        if self.verbose: print(f"  [WARN] Failed fetching chunk 2 for {pair}: {repr(e)}")
+
+                df = pd.DataFrame(candles)
+                if df.empty: return df
                 
-            # Convertir Timestamp
-            if 'Timestamp' in df.columns:
-                 # Fix DeprecationWarning by using timezone-aware now
-                 df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s', utc=True)
-            else:
-                 # Fallback if no timestamp
-                 df['Timestamp'] = pd.Timestamp.now(tz=timezone.utc)
-            
-            # Convertir a numeric
-            for c in required:
-                df[c] = pd.to_numeric(df[c])
-            
-            return df
-            
-        except asyncio.TimeoutError:
-            print(f"  [ERR] Timeout fetching {pair} - Verifica tu conexión o SSID")
-            return pd.DataFrame()
-        except Exception as e:
-            print(f"  [ERR] Error fetching {pair}: {e}")
-            if "auth" in str(e).lower() or "session" in str(e).lower():
-                print(f"  [ERR] 💡 Posible problema de autenticación (SSID)")
-            return pd.DataFrame()
+                df.columns = [c.lower() for c in df.columns]
+                rename_map = {'time': 'Timestamp', 'open': 'Open', 'close': 'Close', 'high': 'High', 'low': 'Low'}
+                df.rename(columns=rename_map, inplace=True)
+                
+                required = ['Open', 'High', 'Low', 'Close']
+                if not all(col in df.columns for col in required): return pd.DataFrame()
+                
+                if 'timestamp' in df.columns:
+                    df['Timestamp'] = pd.to_datetime(df['timestamp'], unit='s', utc=True)
+                elif 'Timestamp' in df.columns:
+                    df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s', utc=True)
+                else:
+                    df['Timestamp'] = pd.Timestamp.now(tz=timezone.utc)
+                
+                for c in required:
+                    df[c] = pd.to_numeric(df[c])
+                
+                return df
+
+            except asyncio.TimeoutError:
+                if self.verbose: print(f"  [TIMEOUT] {pair} @ {target_interval}s fetch timed out.")
+                return pd.DataFrame()
+            except Exception as e:
+                print(f"Error fetching {pair}: {e}")
+                return pd.DataFrame()
 
     async def analyze_pair(self, pair):
         """Pipeline completo de análisis para un par."""

@@ -13,3 +13,4 @@ yarl==1.18.3
 uuid
 supabase
 BinaryOptionsToolsV2
+cloudscraper
