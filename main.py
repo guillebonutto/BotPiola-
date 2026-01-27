@@ -20,7 +20,7 @@ from pathlib import Path
 DEFAULT_CONFIG = {
     "pairs": ['EURUSD_otc', 'GBPUSD_otc', 'AUDUSD_otc', 'USDCAD_otc', 'AUDCAD_otc', 'USDMXN_otc', 'USDCOP_otc'],
     "interval": 300,
-    "lookback": 300,
+    "lookback": 400,
     "verbose": True,
     "verbose_telegram": True,
     "amount": 1.0,
@@ -175,72 +175,83 @@ class TradingBot:
         return amount
 
     async def fetch_data(self, pair, interval=None):
-        """Obtiene velas y prepara el DataFrame."""
+        """Obtiene velas y prepara el DataFrame con reintentos."""
         target_interval = interval if interval else self.interval
         offset = target_interval * self.lookback
         
-        async with self.api_semaphore:
-            try:
-                # Añadido timeout de 30 segundos total
-                if self.verbose: print(f"  [DEBUG] Fetching {pair} @ {target_interval}s (Chunk 1)...")
-                candles = await asyncio.wait_for(self.api.get_candles(pair, target_interval, offset), timeout=30.0)
-                
-                # Paginación si faltan datos (Límite API suele ser ~150)
-                if 0 < len(candles) < 200:
-                    try:
-                        time_key = next((k for k in candles[0].keys() if k.lower() in ['time', 'timestamp', 'date']), None)
-                        if time_key:
-                            oldest_time = int(candles[0][time_key])
-                            if self.verbose: print(f"  [DEBUG] Fetching Chunk 2 (Previous) ending at {oldest_time}...")
-                            
-                            chunk2 = await asyncio.wait_for(
-                                self.api.get_candles_advanced(pair, target_interval, offset, oldest_time), 
-                                timeout=30.0
-                            )
-                            
-                            full_data = chunk2 + candles
-                            seen = set()
-                            candles = []
-                            for c in full_data:
-                                tk = next((k for k in c.keys() if k.lower() in ['time', 'timestamp', 'date']), time_key)
-                                t_val = c.get(tk)
-                                if t_val is not None and t_val not in seen:
-                                    candles.append(c)
-                                    seen.add(t_val)
-                            
-                            candles.sort(key=lambda x: x.get(time_key, 0))
-                            if self.verbose: print(f"  [DEBUG] {pair}: Total combined candles: {len(candles)}")
-                    except Exception as e:
-                        if self.verbose: print(f"  [WARN] Failed fetching chunk 2 for {pair}: {repr(e)}")
+        for attempt in range(2): # Hasta 2 intentos
+            async with self.api_semaphore:
+                try:
+                    if self.verbose: print(f"  [DEBUG] Fetching {pair} @ {target_interval}s {'(Retry '+str(attempt)+')' if attempt > 0 else '(Chunk 1)'}...")
+                    candles = await asyncio.wait_for(self.api.get_candles(pair, target_interval, offset), timeout=25.0)
+                    
+                    if 0 < len(candles) < 200:
+                        try:
+                            time_key = next((k for k in candles[0].keys() if k.lower() in ['time', 'timestamp', 'date']), None)
+                            if time_key:
+                                oldest_time = int(candles[0][time_key])
+                                if self.verbose: print(f"  [DEBUG] Fetching Chunk 2 (Previous) ending at {oldest_time}...")
+                                
+                                chunk2 = await asyncio.wait_for(
+                                    self.api.get_candles_advanced(pair, target_interval, offset, oldest_time), 
+                                    timeout=20.0
+                                )
+                                
+                                full_data = chunk2 + candles
+                                seen = set()
+                                candles = []
+                                for c in full_data:
+                                    tk = next((k for k in c.keys() if k.lower() in ['time', 'timestamp', 'date']), time_key)
+                                    t_val = c.get(tk)
+                                    if t_val is not None and t_val not in seen:
+                                        candles.append(c)
+                                        seen.add(t_val)
+                                
+                                candles.sort(key=lambda x: x.get(time_key, 0))
+                        except Exception as e:
+                            if self.verbose: print(f"  [WARN] Failed fetching chunk 2 for {pair}: {repr(e)}")
 
-                df = pd.DataFrame(candles)
-                if df.empty: return df
-                
-                df.columns = [c.lower() for c in df.columns]
-                rename_map = {'time': 'Timestamp', 'open': 'Open', 'close': 'Close', 'high': 'High', 'low': 'Low'}
-                df.rename(columns=rename_map, inplace=True)
-                
-                required = ['Open', 'High', 'Low', 'Close']
-                if not all(col in df.columns for col in required): return pd.DataFrame()
-                
-                if 'timestamp' in df.columns:
-                    df['Timestamp'] = pd.to_datetime(df['timestamp'], unit='s', utc=True)
-                elif 'Timestamp' in df.columns:
-                    df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s', utc=True)
-                else:
-                    df['Timestamp'] = pd.Timestamp.now(tz=timezone.utc)
-                
-                for c in required:
-                    df[c] = pd.to_numeric(df[c])
-                
-                return df
+                    df = pd.DataFrame(candles)
+                    if df.empty: 
+                        if attempt == 0: continue # Reintentar si vino vacío
+                        return df
+                    
+                    df.columns = [c.lower() for c in df.columns]
+                    rename_map = {'time': 'Timestamp', 'open': 'Open', 'close': 'Close', 'high': 'High', 'low': 'Low'}
+                    df.rename(columns=rename_map, inplace=True)
+                    
+                    required = ['open', 'high', 'low', 'close'] # Usar minúsculas por si acaso
+                    # Asegurar que las columnas requeridas existen (renombradas o no)
+                    if not all(col.capitalize() in df.columns for col in required):
+                         return pd.DataFrame()
+                    
+                    # Normalizar a mayúsculas para el resto del bot
+                    df.rename(columns={c: c.capitalize() for c in required if c in df.columns}, inplace=True)
 
-            except asyncio.TimeoutError:
-                if self.verbose: print(f"  [TIMEOUT] {pair} @ {target_interval}s fetch timed out.")
-                return pd.DataFrame()
-            except Exception as e:
-                print(f"Error fetching {pair}: {e}")
-                return pd.DataFrame()
+                    if 'timestamp' in df.columns:
+                        df['Timestamp'] = pd.to_datetime(df['timestamp'], unit='s', utc=True)
+                    elif 'Timestamp' in df.columns:
+                         df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s', utc=True)
+                    else:
+                        df['Timestamp'] = pd.Timestamp.now(tz=timezone.utc)
+                    
+                    for c in ['Open', 'High', 'Low', 'Close']:
+                        df[c] = pd.to_numeric(df[c])
+                    
+                    return df
+
+                except asyncio.TimeoutError:
+                    if self.verbose: print(f"  [TIMEOUT] {pair} @ {target_interval}s attempt {attempt+1} timed out.")
+                    if attempt == 0:
+                        await asyncio.sleep(2) # Esperar un poco antes de reintentar
+                        continue
+                    return pd.DataFrame()
+                except Exception as e:
+                    print(f"Error fetching {pair} (Attempt {attempt+1}): {e}")
+                    if attempt == 0: continue
+                    return pd.DataFrame()
+        
+        return pd.DataFrame()
 
     async def analyze_pair(self, pair):
         """Pipeline completo de análisis para un par."""
@@ -591,25 +602,65 @@ class TradingBot:
             print("Ciclo completado. Esperando...")
             await asyncio.sleep(10)
 
-async def main():
-    # Intentar cargar desde config.json
-    config = {}
-    config_path = Path('config.json')
-    if config_path.exists():
-        try:
-            with open(config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
-                print("✅ Configuración cargada desde config.json")
-        except Exception as e:
-            print(f"⚠️ Error leyendo config.json: {e}")
+import os
+try:
+    from aiohttp import web
+except ImportError:
+    web = None
 
-    ssid = config.get('ssid') or input("Introduce tu SSID de PocketOption: ").strip()
-    tg_token = config.get('telegram_token') or input("Introduce tu Token de Telegram (Enter para omitir): ").strip()
-    tg_chat = config.get('telegram_chat_id') or input("Introduce tu Chat ID de Telegram (Enter para omitir): ").strip()
-    tg_owner = config.get('telegram_owner_id') or input("Introduce tu Telegram Owner ID (opcional, usa coma para varios): ").strip()
+async def main():
+    # 1. Intentar cargar configuración desde Variables de Entorno (Modo Nube)
+    config = {}
+    env_config = os.getenv('BOT_CONFIG')
     
+    if env_config:
+        try:
+            config = json.loads(env_config)
+            print("🌐 Configuración cargada desde Variable de Entorno (BOT_CONFIG)")
+        except Exception as e:
+            print(f"⚠️ Error parseando BOT_CONFIG: {e}")
+    
+    # 2. Si no hay en env, intentar desde config.json (Modo Local)
+    if not config:
+        config_path = Path('config.json')
+        if config_path.exists():
+            try:
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    print("🏠 Configuración cargada desde config.json")
+            except Exception as e:
+                print(f"⚠️ Error leyendo config.json: {e}")
+
+    # 3. Extraer valores (Sin inputs para evitar que la nube se bloquee)
+    ssid = config.get('ssid')
+    tg_token = config.get('telegram_token')
+    tg_chat = config.get('telegram_chat_id')
+    tg_owner = config.get('telegram_owner_id')
+    
+    if not ssid:
+        print("❌ CRÍTICO: No se encontró SSID en config.json ni en las variables de entorno.")
+        return
+
+    # 4. Servidor Web Minimalista (Keep-alive para Koyeb/Render)
+    if web:
+        async def handle(request):
+            return web.Response(text="Bot is running!")
+
+        app = web.Application()
+        app.router.add_get('/', handle)
+        port = int(os.getenv("PORT", 8080))
+        runner = web.AppRunner(app)
+        await runner.setup()
+        site = web.TCPSite(runner, '0.0.0.0', port)
+        asyncio.create_task(site.start())
+        print(f"📡 Servidor keep-alive iniciado en puerto {port}")
+
+    # 5. Iniciar el Bot
     bot = TradingBot(ssid, tg_token, tg_chat, tg_owner, config=config.get('trading', config))
     await bot.run()
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nBot detenido manualmente.")

@@ -1,29 +1,8 @@
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.env
-.ipynb_checkpoints
-
-# PDFs de documentación
-*.pdf
-
-# Base de datos y backups
-*.db
-*.db-journal
-backups/
-
-# Configuración sensible
 config.json
-
-# Archivos de feedback
+feedback.db
 feedback_images/
-restart.signal
-
-# Exportaciones
-feedback_export_*.json
-PERFORMANCE_REPORT.md
-
+logs/
+__pycache__/
+*.db
+*.log
+.env

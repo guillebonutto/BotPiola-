@@ -17,7 +17,7 @@ class Strategy(ABC):
 class StrategyStochastic(Strategy):
     def __init__(self):
         super().__init__("Estocástico + SMA200")
-        self.type = 'REVERSION'
+        self.type = 'TREND'
         
     def get_signal(self, df):
         if df.empty or len(df) < 200:
