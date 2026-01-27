@@ -11,6 +11,6 @@ six
 ta
 yarl
 supabase
-BinaryOptionsToolsV2
+./binaryoptionstoolsv2
 cloudscraper
 brotli
