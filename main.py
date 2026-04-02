@@ -119,15 +119,20 @@ class TradingBot:
             
         current_hour = datetime.now().hour
         
-        # Verificar Zonas de Riesgo por Hora/Par
-        for zone in self.intelligence.get('risk_zones', []):
-            if zone['hour'] == current_hour and zone['pair'] == pair:
-                return False, f"Zona de Riesgo (Histórico WR: {zone['win_rate']*100:.1f}%)"
-        
         # Filtro de Rendimiento Histórico por Estrategia
         for s_stats in self.intelligence.get('strategy_performance', []):
             if s_stats['strategy'] == strategy and s_stats['win_rate'] < 0.48:
                 return False, f"Bajo rendimiento histórico ({s_stats['win_rate']*100:.1f}% WR)"
+
+        # MODO ESTRICTO: Solo operar si el par y la hora están en las zonas de confianza (>70% WR)
+        in_confidence_zone = False
+        for zone in self.intelligence.get('confidence_zones', []):
+            if zone['hour'] == current_hour and zone['pair'] == pair:
+                in_confidence_zone = True
+                break
+                
+        if not in_confidence_zone:
+            return False, f"No es horario óptimo para {pair} (solo zonas >70% WR)"
 
         return True, "Approved"
 

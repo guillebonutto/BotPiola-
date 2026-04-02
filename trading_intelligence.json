@@ -1,6 +1,6 @@
 {
-    "last_update": "2026-01-09T17:11:03.671288",
-    "total_trades_analyzed": 1799,
+    "last_update": "2026-04-02T00:21:39.562122",
+    "total_trades_analyzed": 1914,
     "risk_zones": [
         {
             "hour": 0,
@@ -17,6 +17,12 @@
         {
             "hour": 0,
             "pair": "GBPUSD_otc",
+            "win_rate": 0.375,
+            "count": 8
+        },
+        {
+            "hour": 0,
+            "pair": "USDMXN_otc",
             "win_rate": 0.375,
             "count": 8
         },
@@ -112,6 +118,12 @@
         },
         {
             "hour": 6,
+            "pair": "EURUSD_otc",
+            "win_rate": 0.4375,
+            "count": 16
+        },
+        {
+            "hour": 6,
             "pair": "GBPUSD_otc",
             "win_rate": 0.25,
             "count": 8
@@ -145,6 +157,18 @@
             "pair": "GBPUSD_otc",
             "win_rate": 0.4,
             "count": 5
+        },
+        {
+            "hour": 7,
+            "pair": "USDMXN_otc",
+            "win_rate": 0.42857142857142855,
+            "count": 14
+        },
+        {
+            "hour": 8,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.4166666666666667,
+            "count": 12
         },
         {
             "hour": 8,
@@ -220,6 +244,12 @@
         },
         {
             "hour": 12,
+            "pair": "USDCAD_otc",
+            "win_rate": 0.4444444444444444,
+            "count": 9
+        },
+        {
+            "hour": 12,
             "pair": "USDCOP_otc",
             "win_rate": 0.4,
             "count": 5
@@ -247,6 +277,12 @@
             "pair": "USDCAD_otc",
             "win_rate": 0.4,
             "count": 5
+        },
+        {
+            "hour": 14,
+            "pair": "AUDCAD_otc",
+            "win_rate": 0.14285714285714285,
+            "count": 7
         },
         {
             "hour": 14,
@@ -409,26 +445,20 @@
         {
             "hour": 0,
             "pair": "USDCAD_otc",
-            "win_rate": 1.0,
-            "count": 3
+            "win_rate": 0.75,
+            "count": 4
         },
         {
             "hour": 1,
             "pair": "AUDCAD_otc",
-            "win_rate": 0.7142857142857143,
-            "count": 7
+            "win_rate": 0.7777777777777778,
+            "count": 9
         },
         {
             "hour": 1,
             "pair": "USDMXN_otc",
             "win_rate": 0.8,
             "count": 5
-        },
-        {
-            "hour": 2,
-            "pair": "AUDUSD_otc",
-            "win_rate": 0.75,
-            "count": 16
         },
         {
             "hour": 4,
@@ -447,12 +477,6 @@
             "pair": "GBPUSD_otc",
             "win_rate": 0.7083333333333334,
             "count": 24
-        },
-        {
-            "hour": 9,
-            "pair": "USDMXN_otc",
-            "win_rate": 0.8,
-            "count": 5
         },
         {
             "hour": 11,
@@ -499,42 +523,36 @@
         {
             "hour": 20,
             "pair": "AUDCAD_otc",
-            "win_rate": 0.7857142857142857,
-            "count": 14
+            "win_rate": 0.8,
+            "count": 15
         },
         {
             "hour": 21,
             "pair": "USDCOP_otc",
             "win_rate": 1.0,
             "count": 4
-        },
-        {
-            "hour": 23,
-            "pair": "USDCAD_otc",
-            "win_rate": 0.75,
-            "count": 4
         }
     ],
     "strategy_performance": [
         {
             "strategy": "Cambio de Estructura (MSS)",
-            "win_rate": 0.5119825708061002,
-            "count": 918
+            "win_rate": 0.5078698845750262,
+            "count": 953
         },
         {
             "strategy": "Estoc\u00e1stico + SMA200",
-            "win_rate": 0.5,
-            "count": 532
+            "win_rate": 0.5051546391752577,
+            "count": 582
         },
         {
             "strategy": "Fibonacci Retracement 61.8%",
-            "win_rate": 0.5384615384615384,
-            "count": 286
+            "win_rate": 0.5286195286195287,
+            "count": 297
         },
         {
             "strategy": "Patrones de Continuaci\u00f3n (Chartismo)",
-            "win_rate": 0.49206349206349204,
-            "count": 63
+            "win_rate": 0.45121951219512196,
+            "count": 82
         }
     ]
 }

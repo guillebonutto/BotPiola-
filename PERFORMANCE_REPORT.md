@@ -1,37 +1,19 @@
 # 🤖 Reporte de Rendimiento del Bot
-**Fecha:** 2026-01-09 17:10:41
+**Fecha:** 2026-04-02 00:22:12
 
 ## 📊 Resumen General
-- **Total Operaciones:** 103
-- **Win Rate Global:** 50.49%
-- **Profit Total:** $-5.88
-- **Wins:** 52 | **Losses:** 50
+- **Total Operaciones:** 2
+- **Win Rate Global:** 50.00%
+- **Profit Total:** $-0.31
+- **Wins:** 1 | **Losses:** 1
 
 ## 📈 Rendimiento por Estrategia
 
-### ❌ Fibonacci Retracement 61.8%
-- **Operaciones:** 20
-- **Win Rate:** 40.00%
-- **Profit:** $-5.40
-- **Wins/Losses:** 8/12
-
 ### ❌ Estocástico + SMA200
-- **Operaciones:** 31
-- **Win Rate:** 51.61%
-- **Profit:** $-0.40
-- **Wins/Losses:** 16/15
-
-### ✅ Cambio de Estructura (MSS)
-- **Operaciones:** 48
-- **Win Rate:** 56.25%
-- **Profit:** $2.31
-- **Wins/Losses:** 27/21
-
-### ❌ Patrones de Continuación (Chartismo)
-- **Operaciones:** 4
-- **Win Rate:** 25.00%
-- **Profit:** $-2.39
-- **Wins/Losses:** 1/3
+- **Operaciones:** 2
+- **Win Rate:** 50.00%
+- **Profit:** $-0.31
+- **Wins/Losses:** 1/1
 
 ## 📝 Feedback de Usuarios (Últimos 10)
 No hay feedback registrado recientemente.
