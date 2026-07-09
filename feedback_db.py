@@ -35,8 +35,28 @@ class FeedbackDB:
                 feedback_timestamp TEXT
             )
         ''')
-        
         conn.commit()
+
+        # Verificar y agregar columnas adicionales si no existen (migración dinámica)
+        try:
+            cursor.execute("PRAGMA table_info(trades)")
+            columns = [info[1] for info in cursor.fetchall()]
+            
+            additional_columns = {
+                'ai_decision': 'TEXT',
+                'ai_confidence': 'INTEGER',
+                'ai_reason': 'TEXT',
+                'ai_snapshot': 'TEXT'
+            }
+            
+            for col_name, col_type in additional_columns.items():
+                if col_name not in columns:
+                    cursor.execute(f"ALTER TABLE trades ADD COLUMN {col_name} {col_type}")
+                    print(f"[DB Migration] Columna '{col_name}' añadida con éxito a la tabla 'trades'.")
+            conn.commit()
+        except Exception as e:
+            print(f"[DB Migration] Error durante la migración dinámica de columnas de IA: {e}")
+        
         conn.close()
     
     def save_trade(self, trade_data):
@@ -45,7 +65,8 @@ class FeedbackDB:
         
         Args:
             trade_data: dict con keys: trade_id, pair, action, strategy, timeframe, 
-                       amount, result, profit, telegram_message_id
+                       amount, result, profit, telegram_message_id,
+                       ai_decision, ai_confidence, ai_reason, ai_snapshot
         
         Returns:
             trade_id de la operación guardada
@@ -56,11 +77,12 @@ class FeedbackDB:
         cursor.execute('''
             INSERT INTO trades (
                 trade_id, timestamp, pair, action, strategy, timeframe,
-                amount, open_price, close_price, result, profit, telegram_message_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                amount, open_price, close_price, result, profit, telegram_message_id,
+                ai_decision, ai_confidence, ai_reason, ai_snapshot
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             trade_data['trade_id'],
-            datetime.now().isoformat(),
+            trade_data.get('timestamp') or datetime.now().isoformat(),
             trade_data['pair'],
             trade_data['action'],
             trade_data['strategy'],
@@ -70,7 +92,11 @@ class FeedbackDB:
             trade_data.get('close_price'),
             trade_data['result'],
             trade_data['profit'],
-            trade_data.get('telegram_message_id')
+            trade_data.get('telegram_message_id'),
+            trade_data.get('ai_decision'),
+            trade_data.get('ai_confidence'),
+            trade_data.get('ai_reason'),
+            trade_data.get('ai_snapshot')
         ))
         
         conn.commit()
@@ -168,17 +194,17 @@ class FeedbackDB:
             backup_path = backup_dir / f"feedback_backup_{timestamp}.db"
             
             shutil.copy2(self.db_path, backup_path)
-            print(f"✅ Backup creado: {backup_path.name}")
+            print(f"[OK] Backup creado: {backup_path.name}")
             
             # Limpiar backups viejos (mantener solo los últimos 5)
             backups = sorted(list(backup_dir.glob("feedback_backup_*.db")), key=os.path.getmtime)
             if len(backups) > 5:
                 for old_backup in backups[:-5]:
                     old_backup.unlink()
-                    print(f"🗑️ Backup antiguo eliminado: {old_backup.name}")
+                    print(f"[INFO] Backup antiguo eliminado: {old_backup.name}")
                     
         except Exception as e:
-            print(f"⚠️ Error creando backup: {e}")
+            print(f"[WARN] Error creando backup: {e}")
 
     def prune_old_data(self, days):
         """Elimina registros más antiguos que N días."""
@@ -193,9 +219,9 @@ class FeedbackDB:
             
             conn.commit()
             conn.close()
-            print(f"✅ Limpieza: {rows_deleted} registros eliminados (anteriores a {days} días)")
+            print(f"[OK] Limpieza: {rows_deleted} registros eliminados (anteriores a {days} días)")
         except Exception as e:
-            print(f"⚠️ Error en limpieza de datos: {e}")
+            print(f"[WARN] Error en limpieza de datos: {e}")
 
     def optimize(self):
         """Optimiza el archivo de base de datos."""
@@ -204,6 +230,6 @@ class FeedbackDB:
             conn.execute("VACUUM")
             conn.execute("ANALYZE")
             conn.close()
-            print("✅ Base de datos optimizada (VACUUM/ANALYZE)")
+            print("[OK] Base de datos optimizada (VACUUM/ANALYZE)")
         except Exception as e:
-            print(f"⚠️ Error optimizando base de datos: {e}")
+            print(f"[WARN] Error optimizando base de datos: {e}")

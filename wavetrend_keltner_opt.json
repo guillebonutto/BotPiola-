@@ -1,0 +1,77 @@
+{
+    "best_config": {
+        "wt_limit": 50,
+        "kc_multiplier": 1.5,
+        "wt_cross_lookback": 1
+    },
+    "overall_win_rate": 51.87424425634825,
+    "total_trades": 827,
+    "recommendations": [
+        {
+            "pair": "AUDCAD_otc",
+            "interval": 300,
+            "win_rate": 64.86486486486487,
+            "trades": 37
+        },
+        {
+            "pair": "AUDCAD_otc",
+            "interval": 900,
+            "win_rate": 57.692307692307686,
+            "trades": 26
+        },
+        {
+            "pair": "AUDJPY_otc",
+            "interval": 60,
+            "win_rate": 56.25,
+            "trades": 16
+        },
+        {
+            "pair": "EURUSD_otc",
+            "interval": 300,
+            "win_rate": 57.57575757575758,
+            "trades": 33
+        },
+        {
+            "pair": "EURUSD_otc",
+            "interval": 60,
+            "win_rate": 55.55555555555556,
+            "trades": 18
+        },
+        {
+            "pair": "EURUSD_otc",
+            "interval": 900,
+            "win_rate": 61.29032258064516,
+            "trades": 31
+        },
+        {
+            "pair": "GBPJPY_otc",
+            "interval": 900,
+            "win_rate": 55.00000000000001,
+            "trades": 40
+        },
+        {
+            "pair": "NZDUSD_otc",
+            "interval": 60,
+            "win_rate": 55.55555555555556,
+            "trades": 18
+        },
+        {
+            "pair": "NZDUSD_otc",
+            "interval": 900,
+            "win_rate": 65.71428571428571,
+            "trades": 35
+        },
+        {
+            "pair": "USDCAD_otc",
+            "interval": 60,
+            "win_rate": 64.70588235294117,
+            "trades": 17
+        },
+        {
+            "pair": "USDCAD_otc",
+            "interval": 900,
+            "win_rate": 55.55555555555556,
+            "trades": 36
+        }
+    ]
+}

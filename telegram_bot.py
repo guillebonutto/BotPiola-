@@ -86,7 +86,11 @@ class TelegramNotifier:
 
         async def _do_send(current_payload):
             async with aiohttp.ClientSession() as session:
-                async with session.post(f"{self.base_url}/sendMessage", json=current_payload) as response:
+                async with session.post(
+                    f"{self.base_url}/sendMessage", 
+                    json=current_payload,
+                    timeout=aiohttp.ClientTimeout(total=8.0)
+                ) as response:
                     return response.status, await response.text(), await response.json() if response.status == 200 else {}
 
         try:
@@ -145,7 +149,11 @@ class TelegramNotifier:
 
         async def _do_send_photo(current_data):
             async with aiohttp.ClientSession() as session:
-                async with session.post(f"{self.base_url}/sendPhoto", data=current_data) as response:
+                async with session.post(
+                    f"{self.base_url}/sendPhoto", 
+                    data=current_data,
+                    timeout=aiohttp.ClientTimeout(total=8.0)
+                ) as response:
                     return response.status, await response.text(), await response.json() if response.status == 200 else {}
 
         try:
@@ -450,61 +458,94 @@ class TelegramNotifier:
         return None
 
     async def _handle_balance(self, chat_id):
-        """Manejar comando /balance."""
-        balance = "Desconocido"
+        """Manejar comando /balance (muestra balances de PocketOption y Alpaca)."""
+        balance_po = "Desconocido"
         if self.get_balance_callback:
             try:
-                # El callback puede ser asíncrono o síncrono
                 if asyncio.iscoroutinefunction(self.get_balance_callback):
-                    balance = await self.get_balance_callback()
+                    balance_po = await self.get_balance_callback()
                 else:
-                    balance = self.get_balance_callback()
+                    balance_po = self.get_balance_callback()
             except Exception as e:
-                balance = f"Error: {e}"
-        
-        if isinstance(balance, (int, float)):
-            msg = f"💰 <b>Balance Actual:</b> ${balance:.2f}"
+                balance_po = f"Error: {e}"
+                
+        # Intentar leer balance de Alpaca del archivo compartido
+        balance_alpaca = None
+        try:
+            import json
+            status_path = Path('alpaca_status.json')
+            if status_path.exists():
+                with open(status_path, 'r', encoding='utf-8') as sf:
+                    shared = json.load(sf)
+                    balance_alpaca = shared.get('balance')
+        except Exception:
+            pass
+            
+        msg = "💰 <b>BALANCES ACTUALES</b>\n\n"
+        if isinstance(balance_po, (int, float)):
+            msg += f"🟢 <b>PocketOption (Binarias):</b> ${balance_po:.2f}\n"
         else:
-            msg = f"💰 <b>Balance Actual:</b> {balance}"
-        
+            msg += f"🟢 <b>PocketOption (Binarias):</b> {balance_po}\n"
+            
+        if balance_alpaca is not None:
+            if isinstance(balance_alpaca, (int, float)):
+                msg += f"🔸 <b>Alpaca (Forex/Acciones):</b> ${balance_alpaca:.2f}\n"
+            else:
+                msg += f"🔸 <b>Alpaca (Forex/Acciones):</b> {balance_alpaca}\n"
+        else:
+            msg += f"🔸 <b>Alpaca (Forex/Acciones):</b> Desconectado/Sin Datos\n"
+            
         await self.send_message(msg, target_chat_id=chat_id)
 
     async def _handle_info(self, chat_id):
-        """Manejar comando /info (estadísticas + gráfico)."""
-        await self.send_message("⏳ Generando reporte histórico...", target_chat_id=chat_id)
+        """Manejar comando /info (estadísticas de ambos brókers + gráfico de rendimiento)."""
+        await self.send_message("⏳ Generando reporte de rendimiento dual...", target_chat_id=chat_id)
         
-        # 1. Obtener balance actual primero (asíncrono)
-        balance = 0.0
+        # 1. Obtener balance de PocketOption
+        balance_po = 0.0
         if self.get_balance_callback:
             try:
                 if asyncio.iscoroutinefunction(self.get_balance_callback):
-                    balance = await self.get_balance_callback()
+                    balance_po = await self.get_balance_callback()
                 else:
-                    balance = self.get_balance_callback()
-            except Exception as e:
-                print(f"[Telegram] Error obteniendo balance para reporte: {e}")
+                    balance_po = self.get_balance_callback()
+                if not isinstance(balance_po, (int, float)):
+                    balance_po = 0.0
+            except Exception:
+                pass
 
-        # 2. Obtener estadísticas pasándole el balance
-        stats = self._get_stats(current_balance=balance)
+        # 2. Obtener balance de Alpaca
+        balance_alpaca = 0.0
+        try:
+            import json
+            status_path = Path('alpaca_status.json')
+            if status_path.exists():
+                with open(status_path, 'r', encoding='utf-8') as sf:
+                    shared = json.load(sf)
+                    balance_alpaca = float(shared.get('balance', 0.0))
+        except Exception:
+            pass
+
+        # 3. Calcular estadísticas por broker
+        stats_po = self._get_stats_for_broker("config")
+        stats_alpaca = self._get_stats_for_broker("alpaca")
         
-        # 3. Generar gráfico
-        chart_buffer = self._generate_chart()
-        
-        # 4. Enviar mensaje con estadísticas
-        start_date = stats.get('start_date', 'N/A')
+        # 4. Generar gráfico comparativo
+        chart_buffer = self._generate_combined_chart()
         
         msg = (
-            f"<b>📊 REPORTE HISTÓRICO</b>\n"
-            f"<i>Desde: {start_date}</i>\n\n"
-            f"<b>💰 Balance Actual:</b> ${stats['balance']:.2f}\n\n"
-            f"<b>🏆 GLOBAL (Todo el historial)</b>\n"
-            f"• Trades: {stats['total_trades']}\n"
-            f"• Winrate: {stats['total_winrate']:.1f}%\n"
-            f"• P&L: {stats['total_pnl']:+.2f}\n\n"
-            f"<b>📅 HOY</b>\n"
-            f"• Trades: {stats['today_trades']}\n"
-            f"• Winrate: {stats['today_winrate']:.1f}%\n"
-            f"• P&L: {stats['today_pnl']:+.2f}\n\n"
+            f"<b>📊 REPORTE DE RENDIMIENTO DUAL</b>\n\n"
+            f"🟢 <b>POCKETOPTION (Binarias)</b>\n"
+            f"• Balance: ${balance_po:.2f}\n"
+            f"• Hoy: {stats_po['today_trades']} trades | {stats_po['today_winrate']:.1f}% WR | {stats_po['today_pnl']:+.2f} USD\n"
+            f"• Total: {stats_po['trades']} trades | {stats_po['winrate']:.1f}% WR | {stats_po['pnl']:+.2f} USD\n\n"
+            f"🔸 <b>ALPACA (Forex Spot)</b>\n"
+            f"• Balance: ${balance_alpaca:.2f}\n"
+            f"• Hoy: {stats_alpaca['today_trades']} trades | {stats_alpaca['today_winrate']:.1f}% WR | {stats_alpaca['today_pnl']:+.2f} USD\n"
+            f"• Total: {stats_alpaca['trades']} trades | {stats_alpaca['winrate']:.1f}% WR | {stats_alpaca['pnl']:+.2f} USD\n\n"
+            f"🏆 <b>GLOBAL</b>\n"
+            f"• Total Trades: {stats_po['trades'] + stats_alpaca['trades']}\n"
+            f"• P&L Neto: {stats_po['pnl'] + stats_alpaca['pnl']:+.2f} USD\n\n"
             f"<i>Generado (UTC-3): {self._get_time()}</i>"
         )
         
@@ -513,138 +554,136 @@ class TelegramNotifier:
         else:
             await self.send_message(msg, target_chat_id=chat_id)
 
-    def _get_stats(self, current_balance=0.0):
-        """Calcular estadísticas desde los logs."""
+    def _get_stats_for_broker(self, broker_suffix="config"):
+        """Calcula estadísticas para un bróker específico basándose en el prefijo del CSV."""
         stats = {
-            'balance': current_balance,
+            'trades': 0,
+            'winrate': 0.0,
+            'pnl': 0.0,
             'today_trades': 0,
             'today_winrate': 0.0,
-            'today_pnl': 0.0,
-            'total_trades': 0,
-            'total_winrate': 0.0,
-            'total_pnl': 0.0,
-            'start_date': 'N/A'
+            'today_pnl': 0.0
         }
-        
-        # Cargar trades
         try:
             all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
             if not all_files:
                 return stats
-            
+                
             dfs = []
             for f in all_files:
+                f_name = Path(f).name
+                if broker_suffix == "alpaca":
+                    if "alpaca" not in f_name:
+                        continue
+                else:
+                    if "alpaca" in f_name:
+                        continue
                 try:
                     df_temp = pd.read_csv(f)
                     if not df_temp.empty and not df_temp.isna().all().all():
                         dfs.append(df_temp)
-                except Exception:
+                except:
                     continue
-            
+                    
             if not dfs:
                 return stats
                 
             df = pd.concat(dfs, ignore_index=True)
             df['timestamp'] = pd.to_datetime(df['timestamp'])
-            
-            # Filtrar completados
             completed = df[df['result'].isin(['WIN', 'LOSS'])]
             
             if len(completed) > 0:
-                stats['start_date'] = completed['timestamp'].min().strftime('%d/%m/%Y')
-                stats['total_trades'] = len(completed)
+                stats['trades'] = len(completed)
                 wins = len(completed[completed['result'] == 'WIN'])
-                stats['total_winrate'] = (wins / len(completed)) * 100
+                stats['winrate'] = (wins / len(completed)) * 100
                 if 'profit_loss' in completed.columns:
-                    stats['total_pnl'] = completed['profit_loss'].sum()
-            
-            # Trades de hoy
-            today = datetime.now().date()
+                    stats['pnl'] = completed['profit_loss'].sum()
+                    
+            # Hoy (GMT-3)
+            tz = timezone(timedelta(hours=-3))
+            today = datetime.now(tz).date()
             df_today = completed[completed['timestamp'].dt.date == today]
-            
             if len(df_today) > 0:
                 stats['today_trades'] = len(df_today)
                 wins_today = len(df_today[df_today['result'] == 'WIN'])
                 stats['today_winrate'] = (wins_today / len(df_today)) * 100
                 if 'profit_loss' in df_today.columns:
                     stats['today_pnl'] = df_today['profit_loss'].sum()
-                    
         except Exception as e:
-            print(f"[Telegram] Error calculando stats: {e}")
-        
+            print(f"[Telegram] Error en _get_stats_for_broker ({broker_suffix}): {e}")
         return stats
 
-    def _generate_chart(self):
-        """Generar gráfico de balance/P&L acumulado."""
+    def _generate_combined_chart(self):
+        """Genera un gráfico comparativo de P&L acumulado de ambos brókers."""
         try:
             all_files = glob.glob(str(self.logs_dir / "trades_*.csv"))
             if not all_files:
                 return None
-            
-            dfs = []
+                
+            dfs_po = []
+            dfs_alpaca = []
             for f in all_files:
+                f_name = Path(f).name
                 try:
                     df_temp = pd.read_csv(f)
                     if not df_temp.empty and not df_temp.isna().all().all():
-                        dfs.append(df_temp)
-                except Exception:
+                        if "alpaca" in f_name:
+                            dfs_alpaca.append(df_temp)
+                        else:
+                            dfs_po.append(df_temp)
+                except:
                     continue
+                    
+            plt.figure(figsize=(10, 5))
+            plt.style.use('dark_background')
             
-            if not dfs:
+            has_data = False
+            
+            # Graficar PocketOption
+            if dfs_po:
+                df_po = pd.concat(dfs_po, ignore_index=True)
+                df_po['timestamp'] = pd.to_datetime(df_po['timestamp'])
+                df_po = df_po.sort_values('timestamp')
+                df_po = df_po[df_po['result'].isin(['WIN', 'LOSS'])].copy()
+                if not df_po.empty and 'profit_loss' in df_po.columns:
+                    df_po['cumulative_pnl'] = df_po['profit_loss'].cumsum()
+                    plt.plot(df_po['timestamp'], df_po['cumulative_pnl'], label='PocketOption (Binarias)', color='#00ff88', linewidth=2)
+                    plt.fill_between(df_po['timestamp'], df_po['cumulative_pnl'], alpha=0.1, color='#00ff88')
+                    has_data = True
+                    
+            # Graficar Alpaca
+            if dfs_alpaca:
+                df_alpaca = pd.concat(dfs_alpaca, ignore_index=True)
+                df_alpaca['timestamp'] = pd.to_datetime(df_alpaca['timestamp'])
+                df_alpaca = df_alpaca.sort_values('timestamp')
+                df_alpaca = df_alpaca[df_alpaca['result'].isin(['WIN', 'LOSS'])].copy()
+                if not df_alpaca.empty and 'profit_loss' in df_alpaca.columns:
+                    df_alpaca['cumulative_pnl'] = df_alpaca['profit_loss'].cumsum()
+                    plt.plot(df_alpaca['timestamp'], df_alpaca['cumulative_pnl'], label='Alpaca (Forex/Acciones)', color='#ff9900', linewidth=2)
+                    plt.fill_between(df_alpaca['timestamp'], df_alpaca['cumulative_pnl'], alpha=0.1, color='#ff9900')
+                    has_data = True
+                    
+            if not has_data:
+                plt.close()
                 return None
                 
-            df = pd.concat(dfs, ignore_index=True)
-            df['timestamp'] = pd.to_datetime(df['timestamp'])
-            df = df.sort_values('timestamp')
-            
-            # Filtrar completados con P&L
-            if 'profit_loss' not in df.columns:
-                return None
-            
-            df = df[df['result'].isin(['WIN', 'LOSS'])].copy()
-            
-            if len(df) == 0:
-                return None
-            
-            # Calcular P&L acumulado
-            df['cumulative_pnl'] = df['profit_loss'].cumsum()
-            
-            # Crear gráfico
-            plt.figure(figsize=(10, 5))
-            plt.style.use('dark_background') # Estilo premium
-            
-            # Graficar línea principal
-            plt.plot(df['timestamp'], df['cumulative_pnl'], label='P&L Acumulado', color='#00ff88', linewidth=2)
-            
-            # Relleno suave
-            plt.fill_between(df['timestamp'], df['cumulative_pnl'], alpha=0.2, color='#00ff88')
-            
-            # Línea de cero (breakeven)
             plt.axhline(y=0, color='white', linestyle='--', alpha=0.3, linewidth=1)
-            
-            # Títulos y etiquetas
-            plt.title(f'Crecimiento de la Cuenta (Total: ${df["cumulative_pnl"].iloc[-1]:.2f})', fontsize=12, color='white')
+            plt.title('Curva de Ganancias Acumuladas (P&L)', fontsize=12, color='white')
             plt.xlabel('Fecha', fontsize=10, color='white')
-            plt.ylabel('Ganancia Neta ($)', fontsize=10, color='white')
-            
-            # Grid suave
+            plt.ylabel('P&L Neto ($)', fontsize=10, color='white')
+            plt.legend(loc='upper left')
             plt.grid(True, alpha=0.1, linestyle='--')
-            
-            # Formato de fechas
             plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
             plt.gcf().autofmt_xdate()
-            
             plt.tight_layout()
             
-            # Guardar en buffer
             buf = io.BytesIO()
             plt.savefig(buf, format='png', dpi=100)
             buf.seek(0)
             plt.close()
-            
             return buf
         except Exception as e:
-            print(f"[Telegram] Error generando gráfico: {e}")
+            print(f"[Telegram] Error generando gráfico combinado: {e}")
             return None
 
     async def _handle_info_details(self, chat_id, start_dt=None, end_dt=None):
@@ -690,8 +729,9 @@ class TelegramNotifier:
                 msg = f"📊 <b>REPORTE PERSONALIZADO</b>\n"
                 msg += f"🕒 <b>Rango:</b> {start_dt.strftime('%d/%m/%Y %H:%M')} - {end_dt.strftime('%d/%m/%Y %H:%M')}\n"
             else:
-                # Filtrar por HOY
-                today = datetime.now().date()
+                # Filtrar por HOY (GMT-3)
+                tz = timezone(timedelta(hours=-3))
+                today = datetime.now(tz).date()
                 df = df_all[(df_all['timestamp'].dt.date == today) & (df_all['result'].isin(['WIN', 'LOSS']))].copy()
                 msg = f"📅 <b>REPORTE DE HOY ({today.strftime('%d/%m/%Y')})</b>\n"
                 if not df.empty:
@@ -739,8 +779,8 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 
-                # Mostrar siempre en UTC-3 para el usuario
-                local_ts = row['timestamp'] - timedelta(hours=3)
+                # Los logs ya están guardados en UTC-3
+                local_ts = row['timestamp']
                 
                 # Si es un rango de varios días, mostrar fecha corta
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
@@ -804,8 +844,8 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 
-                # Mostrar siempre en UTC-3 para el usuario
-                local_ts = row['timestamp'] - timedelta(hours=3)
+                # Los logs ya están guardados en UTC-3
+                local_ts = row['timestamp']
                 
                 # Formato de hora/fecha
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:

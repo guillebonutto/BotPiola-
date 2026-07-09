@@ -59,6 +59,22 @@ class MarketAnalyzer:
         atr = AverageTrueRange(high=df['High'], low=df['Low'], close=df['Close'], window=14)
         df['ATR'] = atr.average_true_range()
         
+        # --- Canales de Keltner (20, 10, 1.5) ---
+        kc_middle = EMAIndicator(close=df['Close'], window=20).ema_indicator()
+        atr_10 = AverageTrueRange(high=df['High'], low=df['Low'], close=df['Close'], window=10).average_true_range()
+        df['KC_Middle'] = kc_middle
+        df['KC_Upper'] = kc_middle + (1.5 * atr_10)
+        df['KC_Lower'] = kc_middle - (1.5 * atr_10)
+        
+        # --- WaveTrend Oscillator (10, 21) ---
+        ap = (df['High'] + df['Low'] + df['Close']) / 3.0
+        esa = ap.ewm(span=10, adjust=False).mean()
+        d = abs(ap - esa).ewm(span=10, adjust=False).mean()
+        d_clipped = d.clip(lower=1e-9)
+        ci = (ap - esa) / (0.015 * d_clipped)
+        df['WT1'] = ci.ewm(span=21, adjust=False).mean()
+        df['WT2'] = df['WT1'].rolling(window=4).mean()
+        
         return df
 
     def determine_market_state(self, df):
@@ -107,6 +123,8 @@ class MarketAnalyzer:
         """
         Verifica si hay noticias de alto impacto para las monedas del par.
         """
+        if pair.endswith('_otc'):
+            return 'NEUTRAL', "Sin noticias de alto impacto cercanas (Activo OTC)"
         try:
             high_impact_events = self.news_fetcher.get_upcoming_high_impact_news(pair, window_minutes)
             if high_impact_events:
@@ -115,8 +133,9 @@ class MarketAnalyzer:
                 return 'HIGH_IMPACT', f"Noticia: {event['event']} ({event['currency']}) a las {event['time'].strftime('%H:%M')}"
             return 'NEUTRAL', "Sin noticias de alto impacto cercanas"
         except Exception as e:
-            print(f"⚠️ Error al verificar noticias: {e}")
+            print(f"[WARN] Error al verificar noticias: {e}")
             return 'NEUTRAL', "Error en verificación de noticias"
+
 
     def get_trend(self, df, timeframe='meso'):
         """

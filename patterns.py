@@ -108,7 +108,7 @@ class PatternRecognizer:
         
         return df
 
-    def find_chart_patterns(self, df, lookback=30):
+    def find_chart_patterns(self, df, lookback=60):
         """
         Intenta identificar patrones chartistas simples como Doble Techo/Suelo y Triángulos.
         Mejorado para evitar falsos positivos en consolidaciones.
@@ -119,12 +119,20 @@ class PatternRecognizer:
         df['Pattern_DoubleBottom'] = 0
         df['Pattern_DoubleBottom_Neck'] = np.nan
         df['Pattern_Triangle'] = 0
-
-        window = 10
-        # Rolling de Pandas
-        df['max_local'] = df['High'].rolling(window, center=True).max() == df['High']
-        df['min_local'] = df['Low'].rolling(window, center=True).min() == df['Low']
-    
+        # Evitamos center=True para eliminar el Lookahead Bias (Repainting).
+        # Un máximo/mínimo local se confirma retrospectivamente basándonos en un desplazamiento hacia atrás (shift).
+        # Para una ventana de 11 velas, confirmamos el pico de la vela en el centro (hace 5 periodos)
+        # cuando la ventana de 11 velas termina de cerrarse en la vela actual.
+        window = 11
+        half_window = 5
+        
+        # El valor de hace 5 velas es el máximo/mínimo si es el mayor/menor de la ventana de 11 velas
+        max_in_window = df['High'].rolling(window).max()
+        min_in_window = df['Low'].rolling(window).min()
+        
+        # Desplazamos para comparar el High de hace 5 periodos con el valor máximo de la ventana que terminó hoy
+        df['max_local'] = (df['High'].shift(half_window) == max_in_window)
+        df['min_local'] = (df['Low'].shift(half_window) == min_in_window)
         
         if len(df) < lookback:
             return df
@@ -136,13 +144,19 @@ class PatternRecognizer:
         # --- Doble Techo ---
         if len(maxs) >= 2:
             last_peaks = maxs.tail(2)
-            p1_idx = last_peaks.index[0]
-            p2_idx = last_peaks.index[1]
-            p1_price = last_peaks.iloc[0]['High']
-            p2_price = last_peaks.iloc[1]['High']
+            p1_confirm = last_peaks.index[0]
+            p2_confirm = last_peaks.index[1]
             
-            # 1. Similitud de precio (Tolerancia 0.1%)
-            price_match = abs(p1_price - p2_price) / p1_price < 0.001
+            # Los picos reales ocurrieron 5 velas antes de la confirmación
+            p1_idx = p1_confirm - 5
+            p2_idx = p2_confirm - 5
+            
+            p1_price = df.loc[p1_idx]['High']
+            p2_price = df.loc[p2_idx]['High']
+            
+            # 1. Similitud de precio basada en ATR (máximo 0.25 * ATR)
+            atr_current = df.loc[p2_confirm].get('ATR', 0.0002)
+            price_match = abs(p1_price - p2_price) < (atr_current * 0.25)
             
             # 2. Separación temporal (mínimo 5 velas entre picos)
             pos1 = df.index.get_loc(p1_idx)
@@ -150,29 +164,35 @@ class PatternRecognizer:
             separation = pos2 - pos1
             time_check = separation > 5
             
-            # 3. Valle significativo entre picos
+            # 3. Valle significativo entre picos (mínimo 0.25 * ATR)
             if time_check:
-                valley_min = df.iloc[pos1:pos2]['Low'].min()
-                valley_depth = (p1_price - valley_min) / p1_price
-                valley_check = valley_depth > 0.002
+                valley_min = df.loc[p1_idx:p2_idx]['Low'].min()
+                valley_depth = p1_price - valley_min
+                valley_check = valley_depth > (atr_current * 0.25)
             else:
                 valley_check = False
                 valley_min = np.nan
                 
             if price_match and time_check and valley_check:
-                # Marcar en la última vela (asumimos que acabamos de completar el patrón)
-                df.iloc[-1, df.columns.get_loc('Pattern_DoubleTop')] = 1
-                df.iloc[-1, df.columns.get_loc('Pattern_DoubleTop_Neck')] = valley_min
+                # Marcar en la vela de confirmación actual (p2_confirm)
+                df.iloc[p2_confirm, df.columns.get_loc('Pattern_DoubleTop')] = 1
+                df.iloc[p2_confirm, df.columns.get_loc('Pattern_DoubleTop_Neck')] = valley_min
                 
         # --- Doble Suelo ---
         if len(mins) >= 2:
             last_troughs = mins.tail(2)
-            p1_idx = last_troughs.index[0]
-            p2_idx = last_troughs.index[1]
-            p1_price = last_troughs.iloc[0]['Low']
-            p2_price = last_troughs.iloc[1]['Low']
+            p1_confirm = last_troughs.index[0]
+            p2_confirm = last_troughs.index[1]
             
-            price_match = abs(p1_price - p2_price) / p1_price < 0.001
+            # Los valles reales ocurrieron 5 velas antes de la confirmación
+            p1_idx = p1_confirm - 5
+            p2_idx = p2_confirm - 5
+            
+            p1_price = df.loc[p1_idx]['Low']
+            p2_price = df.loc[p2_idx]['Low']
+            
+            atr_current = df.loc[p2_confirm].get('ATR', 0.0002)
+            price_match = abs(p1_price - p2_price) < (atr_current * 0.25)
             
             pos1 = df.index.get_loc(p1_idx)
             pos2 = df.index.get_loc(p2_idx)
@@ -180,27 +200,59 @@ class PatternRecognizer:
             time_check = separation > 5
             
             if time_check:
-                peak_max = df.iloc[pos1:pos2]['High'].max()
-                peak_height = (peak_max - p1_price) / p1_price
-                peak_check = peak_height > 0.002
+                peak_max = df.loc[p1_idx:p2_idx]['High'].max()
+                peak_height = peak_max - p1_price
+                peak_check = peak_height > (atr_current * 0.25)
             else:
                 peak_check = False
                 peak_max = np.nan
-
+ 
             if price_match and time_check and peak_check:
-                df.iloc[-1, df.columns.get_loc('Pattern_DoubleBottom')] = 1
-                df.iloc[-1, df.columns.get_loc('Pattern_DoubleBottom_Neck')] = peak_max
+                # Marcar en la vela de confirmación actual (p2_confirm)
+                df.iloc[p2_confirm, df.columns.get_loc('Pattern_DoubleBottom')] = 1
+                df.iloc[p2_confirm, df.columns.get_loc('Pattern_DoubleBottom_Neck')] = peak_max
 
-                
         # --- Triángulo (Compresión) ---
-        if len(maxs) >= 2 and len(mins) >= 2:
-             p_max1 = maxs.iloc[-2]['High']
-             p_max2 = maxs.iloc[-1]['High']
-             p_min1 = mins.iloc[-2]['Low']
-             p_min2 = mins.iloc[-1]['Low']
+        if len(maxs) >= 3 and len(mins) >= 3:
+             # Obtener los 3 picos y 3 valles más recientes en orden cronológico
+             p1_idx = maxs.index[-3] - 5
+             p2_idx = maxs.index[-2] - 5
+             p3_idx = maxs.index[-1] - 5
              
-             # Maximos decrecientes Y mínimos crecientes
-             if p_max2 < p_max1 and p_min2 > p_min1:
-                 df.iloc[-1, df.columns.get_loc('Pattern_Triangle')] = 1
+             v1_idx = mins.index[-3] - 5
+             v2_idx = mins.index[-2] - 5
+             v3_idx = mins.index[-1] - 5
+             
+             # Asegurarnos de que los índices sean válidos
+             if p1_idx >= 0 and v1_idx >= 0:
+                 p_max1 = df.loc[p1_idx]['High']
+                 p_max2 = df.loc[p2_idx]['High']
+                 p_max3 = df.loc[p3_idx]['High']
                  
+                 p_min1 = df.loc[v1_idx]['Low']
+                 p_min2 = df.loc[v2_idx]['Low']
+                 p_min3 = df.loc[v3_idx]['Low']
+                 
+                 # 1. Máximos decrecientes Y mínimos crecientes (Compresión)
+                 peaks_decreasing = p_max1 > p_max2 > p_max3
+                 troughs_increasing = p_min1 < p_min2 < p_min3
+                 
+                 # 2. Reducción de Rango (la amplitud disminuye)
+                 range1 = p_max1 - p_min1
+                 range2 = p_max2 - p_min2
+                 range3 = p_max3 - p_min3
+                 range_decreasing = range1 > range2 > range3
+                 
+                 # 3. Compresión de ATR
+                 # ATR actual < promedio de las últimas 20 velas
+                 if 'ATR' in df.columns and len(df) >= 20:
+                     atr_current = df.iloc[-1]['ATR']
+                     atr_avg_20 = df['ATR'].rolling(20).mean().iloc[-1]
+                     atr_compress = atr_current < atr_avg_20
+                 else:
+                     atr_compress = True  # Fallback si no hay ATR
+                     
+                 if peaks_decreasing and troughs_increasing and range_decreasing and atr_compress:
+                     df.iloc[-1, df.columns.get_loc('Pattern_Triangle')] = 1
+                  
         return df

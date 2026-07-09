@@ -9,7 +9,7 @@ escaped = html.escape(raw_reason)
 print(f"Original: {raw_reason}")
 print(f"Escaped:  {escaped}")
 assert "&lt;" in escaped, "Escaping failed"
-print("✅ Escaping works")
+print("[OK] Escaping works")
 
 print("\n--- 2. Testing Token Cleaning in Class ---")
 # Mocking init
@@ -21,7 +21,7 @@ t2 = TelegramNotifier("  456:DEF  ", "chat_id")
 print(f"Input '  456:DEF  ' -> Stored '{t2.token}'")
 assert t2.token == "456:DEF", "Token stripping failed"
 
-print("✅ Token cleaning works")
+print("[OK] Token cleaning works")
 
 print("\n--- 3. Testing Logic is importable ---")
 print("All modules imported successfully.")

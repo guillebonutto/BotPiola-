@@ -1,0 +1,261 @@
+[
+    {
+        "pair": "USDCAD_otc",
+        "strategy": "Fibonacci Retracement 61.8%",
+        "interval": 60,
+        "win_rate": 69.23,
+        "count": 13
+    },
+    {
+        "pair": "AUDCAD_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 63.86,
+        "count": 83
+    },
+    {
+        "pair": "GBPJPY_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 900,
+        "win_rate": 63.64,
+        "count": 11
+    },
+    {
+        "pair": "#MSFT_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 900,
+        "win_rate": 63.41,
+        "count": 41
+    },
+    {
+        "pair": "#BA_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 900,
+        "win_rate": 61.9,
+        "count": 21
+    },
+    {
+        "pair": "GBPJPY_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 900,
+        "win_rate": 60.71,
+        "count": 28
+    },
+    {
+        "pair": "#INTC_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 300,
+        "win_rate": 59.09,
+        "count": 44
+    },
+    {
+        "pair": "#MSFT_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 900,
+        "win_rate": 58.82,
+        "count": 17
+    },
+    {
+        "pair": "#PFE_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 900,
+        "win_rate": 58.82,
+        "count": 17
+    },
+    {
+        "pair": "EURUSD_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 300,
+        "win_rate": 57.89,
+        "count": 38
+    },
+    {
+        "pair": "#PFE_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 900,
+        "win_rate": 57.69,
+        "count": 26
+    },
+    {
+        "pair": "AUDCAD_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 300,
+        "win_rate": 57.5,
+        "count": 40
+    },
+    {
+        "pair": "AUDJPY_otc",
+        "strategy": "Fibonacci Retracement 61.8%",
+        "interval": 60,
+        "win_rate": 57.14,
+        "count": 14
+    },
+    {
+        "pair": "USDCOP_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 300,
+        "win_rate": 56.0,
+        "count": 75
+    },
+    {
+        "pair": "EURUSD_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 54.67,
+        "count": 75
+    },
+    {
+        "pair": "#MSFT_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 900,
+        "win_rate": 54.55,
+        "count": 22
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 300,
+        "win_rate": 63.33,
+        "count": 30
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 300,
+        "win_rate": 66.67,
+        "count": 15
+    },
+    {
+        "pair": "#FB_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 900,
+        "win_rate": 75.0,
+        "count": 12
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 60,
+        "win_rate": 72.73,
+        "count": 11
+    },
+    {
+        "pair": "#FB_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 300,
+        "win_rate": 66.67,
+        "count": 18
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 900,
+        "win_rate": 65.0,
+        "count": 20
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 900,
+        "win_rate": 60.98,
+        "count": 41
+    },
+    {
+        "pair": "#INTC_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 60.0,
+        "count": 30
+    },
+    {
+        "pair": "#MCD_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 300,
+        "win_rate": 60.0,
+        "count": 15
+    },
+    {
+        "pair": "#MCD_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 300,
+        "win_rate": 60.0,
+        "count": 15
+    },
+    {
+        "pair": "#INTC_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 300,
+        "win_rate": 59.26,
+        "count": 27
+    },
+    {
+        "pair": "#INTC_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 900,
+        "win_rate": 58.33,
+        "count": 36
+    },
+    {
+        "pair": "#PFE_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 58.33,
+        "count": 36
+    },
+    {
+        "pair": "#PFE_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 300,
+        "win_rate": 57.89,
+        "count": 19
+    },
+    {
+        "pair": "#INTC_otc",
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "interval": 900,
+        "win_rate": 57.14,
+        "count": 14
+    },
+    {
+        "pair": "#PFE_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 60,
+        "win_rate": 56.25,
+        "count": 16
+    },
+    {
+        "pair": "#FB_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 56.0,
+        "count": 25
+    },
+    {
+        "pair": "#MSFT_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 300,
+        "win_rate": 55.26,
+        "count": 38
+    },
+    {
+        "pair": "#MCD_otc",
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "interval": 900,
+        "win_rate": 55.17,
+        "count": 29
+    },
+    {
+        "pair": "#MCD_otc",
+        "strategy": "Expert Vision Donchian Reversion",
+        "interval": 900,
+        "win_rate": 55.0,
+        "count": 20
+    },
+    {
+        "pair": "#INTC_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 60,
+        "win_rate": 55.0,
+        "count": 20
+    }
+]

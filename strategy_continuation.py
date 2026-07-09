@@ -28,24 +28,25 @@ class StrategyContinuation(Strategy):
         trend_down = ema_20 < ema_50
         
         # 3. Datos informativos de Volatilidad
-        adx = ADXIndicator(df['High'], df['Low'], df['Close'], window=14).adx().iloc[-1]
-
-
-
-
+        # Usamos el ATR para confirmar que la ruptura sea fuerte (no solo una mecha microscópica)
+        atr = last.get('ATR', 0.0002)
+        min_breakout = atr * 0.25  # Exigimos al menos un 25% del ATR diario en la ruptura
+        
         # 4. CONFIRMACIÓN DE RUPTURA (Breakout) - Clave según feedback
         # Buscamos los máximos/mínimos recientes para definir la zona de ruptura
         recent_high = df['High'].iloc[-10:-1].max()
         recent_low = df['Low'].iloc[-10:-1].min()
         close = last['Close']
         
-        # Señal de Compra: Tendencia Alcista + Triángulo + Ruptura de Resistencia Reciente
-        if trend_up and close > recent_high:
-            return 'BUY', f"Ruptura Triángulo Alcista (Close > {recent_high:.5f}) + ADX {adx:.1f}", 300
+        max_breakout = atr * 0.45
+        
+        # Señal de Compra: Tendencia Alcista + Triángulo + Ruptura de Resistencia Reciente con fuerza controlada
+        if trend_up and min_breakout < (close - recent_high) <= max_breakout:
+            return 'BUY', f"Ruptura Triángulo Alcista (Breakout: {(close - recent_high):.5f} | Rango: [{min_breakout:.5f}, {max_breakout:.5f}])", 300
             
-        # Señal de Venta: Tendencia Bajista + Triángulo + Ruptura de Soporte Reciente
-        elif trend_down and close < recent_low:
-            return 'SELL', f"Ruptura Triángulo Bajista (Close < {recent_low:.5f}) + ADX {adx:.1f}", 300
-
-        # Si hay patrón pero no rompe, esperamos (HOLD)
-        return 'HOLD', "Patrón en formación (Esperando ruptura)", 0
+        # Señal de Venta: Tendencia Bajista + Triángulo + Ruptura de Soporte Reciente con fuerza controlada
+        elif trend_down and min_breakout < (recent_low - close) <= max_breakout:
+            return 'SELL', f"Ruptura Triángulo Bajista (Breakout: {(recent_low - close):.5f} | Rango: [{min_breakout:.5f}, {max_breakout:.5f}])", 300
+ 
+        # Si hay patrón pero no rompe con la fuerza adecuada, esperamos (HOLD)
+        return 'HOLD', "Patrón en formación (Esperando ruptura en zona óptima)", 0

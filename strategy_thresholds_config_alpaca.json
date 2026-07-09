@@ -1,0 +1,65 @@
+{
+    "Estoc\u00e1stico + SMA200": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "WaveTrend + Keltner Channel Reversion": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Cambio de Estructura (MSS)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Expert Vision Donchian Reversion": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Fibonacci Retracement 61.8%": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Patrones de Continuaci\u00f3n (Chartismo)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    }
+}

@@ -26,12 +26,24 @@ class TradeLogger:
         self._ensure_file()
         self._init_supabase()
     
-    def _init_supabase(self):
+    def configure(self, filename_pattern=None, logs_dir=None, config_path=None):
+        """Configura dinámicamente el directorio, patrón de nombres de archivo e inicializa Supabase."""
+        if logs_dir is not None:
+            self.logs_dir = Path(logs_dir)
+            self.logs_dir.mkdir(parents=True, exist_ok=True)
+        if filename_pattern is not None:
+            self.filename_pattern = filename_pattern
+        self.current_file = None  # Forzar recreación del archivo
+        self._ensure_file()
+        if config_path is not None:
+            self._init_supabase(config_path)
+
+    def _init_supabase(self, config_path=None):
         """Inicializar cliente de Supabase."""
         try:
-            config_path = Path('config.json')
-            if config_path.exists():
-                with open(config_path, 'r') as f:
+            path = Path(config_path or 'config.json')
+            if path.exists():
+                with open(path, 'r') as f:
                     config = json.load(f)
                 
                 url = config.get("supabase_url")
@@ -39,13 +51,13 @@ class TradeLogger:
                 
                 if url and key:
                     self.supabase: Client = create_client(url, key)
-                    print("✅ Supabase conectado en TradeLogger")
+                    print("[OK] Supabase conectado en TradeLogger")
                 else:
                     self.supabase = None
             else:
                 self.supabase = None
         except Exception as e:
-            print(f"⚠️ Error inicializando Supabase en TradeLogger: {e}")
+            print(f"[WARN] Error inicializando Supabase en TradeLogger: {e}")
             self.supabase = None
     
     def _get_filename(self):
@@ -73,11 +85,11 @@ class TradeLogger:
                         
                     # Si los headers no coinciden (ej. por corrupción de test), renombrar
                     if len(existing_headers) < len(self.headers):
-                        print(f"⚠️ Headers de log incorrectos en {filename.name}. Renombrando...")
+                        print(f"[WARN] Headers de log incorrectos en {filename.name}. Renombrando...")
                         backup_name = filename.with_suffix(f".corrupted_{int(datetime.now().timestamp())}.csv")
                         filename.rename(backup_name)
                 except Exception as e:
-                    print(f"⚠️ Error verificando headers: {e}")
+                    print(f"[WARN] Error verificando headers: {e}")
 
             # Si es archivo nuevo (o renombrado), crear con headers
             if not filename.exists():
@@ -178,22 +190,28 @@ class TradeLogger:
                 writer.writerow(row)
             return True
         except Exception as e:
-            print(f"❌ Error escribiendo trade log: {e}")
+            print(f"[ERR] Error escribiendo trade log: {e}")
             return False
         finally:
             self._sync_to_supabase(row)
 
     def _sync_to_supabase(self, row):
-        """Sincronizar una fila con Supabase."""
+        """Sincronizar una fila con Supabase en un hilo de fondo (no bloqueante)."""
         if not hasattr(self, 'supabase') or not self.supabase:
             return
         
-        try:
-            # Limpiar datos para Supabase (reemplazar strings vacíos por None)
-            clean_row = {k: (v if v != '' else None) for k, v in row.items()}
-            self.supabase.table("trades").upsert(clean_row).execute()
-        except Exception as e:
-            print(f"⚠️ Error sincronizando con Supabase: {e}")
+        import threading
+
+        def _do_sync():
+            try:
+                clean_row = {k: (v if v != '' else None) for k, v in row.items()}
+                self.supabase.table("trades").upsert(clean_row).execute()
+            except Exception as e:
+                print(f"[WARN] Error sincronizando con Supabase: {e}")
+
+        # Hilo daemon: muere si el proceso principal termina, sin bloquear el event loop
+        t = threading.Thread(target=_do_sync, daemon=True)
+        t.start()
     
     def update_trade_result(self, trade_id, result, profit_loss=None, notes=None):
         """
@@ -223,22 +241,26 @@ class TradeLogger:
                 # Guardar
                 df.to_csv(self.current_file, index=False, encoding='utf-8')
                 
-                # Sincronizar actualización con Supabase
+                # Sincronizar actualización con Supabase en hilo daemon (no bloqueante)
                 if hasattr(self, 'supabase') and self.supabase:
-                    try:
-                        update_data = {'result': result}
-                        if profit_loss is not None:
-                            update_data['profit_loss'] = profit_loss
-                        if notes is not None:
-                            update_data['notes'] = notes
-                        
-                        self.supabase.table("trades").update(update_data).eq("trade_id", str(trade_id)).execute()
-                    except Exception as e:
-                        print(f"⚠️ Error actualizando Supabase: {e}")
+                    import threading
+                    update_data = {'result': result}
+                    if profit_loss is not None:
+                        update_data['profit_loss'] = profit_loss
+                    if notes is not None:
+                        update_data['notes'] = notes
+                    
+                    def _do_update(_upd=update_data, _tid=trade_id):
+                        try:
+                            self.supabase.table("trades").update(_upd).eq("trade_id", str(_tid)).execute()
+                        except Exception as _e:
+                            print(f"[WARN] Error actualizando Supabase: {_e}")
+                    
+                    threading.Thread(target=_do_update, daemon=True).start()
                 
                 return True
         except Exception as e:
-            print(f"❌ Error actualizando trade result: {e}")
+            print(f"[ERR] Error actualizando trade result: {e}")
         
         return False
     
@@ -250,7 +272,7 @@ class TradeLogger:
             df = pd.read_csv(self.current_file)
             return df
         except Exception as e:
-            print(f"❌ Error leyendo trades: {e}")
+            print(f"[ERR] Error leyendo trades: {e}")
             return pd.DataFrame()
     
     def get_stats(self):
@@ -290,9 +312,9 @@ class TradeLogger:
                 file_time = datetime.fromtimestamp(log_file.stat().st_mtime)
                 if file_time < cutoff:
                     log_file.unlink()
-                    print(f"🗑️ Log antiguo eliminado: {log_file.name}")
+                    print(f"[INFO] Log antiguo eliminado: {log_file.name}")
         except Exception as e:
-            print(f"⚠️ Error limpiando logs: {e}")
+            print(f"[WARN] Error limpiando logs: {e}")
 
 
 # Instancia global

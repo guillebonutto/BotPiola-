@@ -17,7 +17,7 @@ def main():
         # Ejecutar el bot usando el mismo intérprete de Python actual
         try:
             # sys.executable asegura que usamos el mismo python que lanzó este script
-            process = subprocess.run([sys.executable, BOT_SCRIPT])
+            process = subprocess.run([sys.executable, "-u", BOT_SCRIPT] + sys.argv[1:])
             
             exit_code = process.returncode
             print(f"[Supervisor] Bot finalizado con código: {exit_code}")

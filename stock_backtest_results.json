@@ -1,0 +1,857 @@
+[
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 2,
+        "win_rate": 100.0,
+        "profit": 1.84
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 1,
+        "win_rate": 100.0,
+        "profit": 0.92
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 2,
+        "win_rate": 100.0,
+        "profit": 1.84
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 6,
+        "win_rate": 83.33333333333334,
+        "profit": 3.6
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 12,
+        "win_rate": 75.0,
+        "profit": 5.28
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 11,
+        "win_rate": 72.72727272727273,
+        "profit": 4.36
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 7,
+        "win_rate": 71.42857142857143,
+        "profit": 2.6
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 15,
+        "win_rate": 66.66666666666666,
+        "profit": 4.2
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 18,
+        "win_rate": 66.66666666666666,
+        "profit": 5.040000000000001
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 3,
+        "win_rate": 66.66666666666666,
+        "profit": 0.8400000000000001
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 3,
+        "win_rate": 66.66666666666666,
+        "profit": 0.8400000000000001
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 9,
+        "win_rate": 66.66666666666666,
+        "profit": 2.5200000000000005
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 20,
+        "win_rate": 65.0,
+        "profit": 4.960000000000001
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 41,
+        "win_rate": 63.41463414634146,
+        "profit": 8.920000000000002
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 30,
+        "win_rate": 63.33333333333333,
+        "profit": 6.48
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 8,
+        "win_rate": 62.5,
+        "profit": 1.6
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 8,
+        "win_rate": 62.5,
+        "profit": 1.6
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 21,
+        "win_rate": 61.904761904761905,
+        "profit": 3.9600000000000004
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 41,
+        "win_rate": 60.97560975609756,
+        "profit": 7.000000000000001
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 30,
+        "win_rate": 60.0,
+        "profit": 4.5600000000000005
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 15,
+        "win_rate": 60.0,
+        "profit": 2.2800000000000002
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 15,
+        "win_rate": 60.0,
+        "profit": 2.2800000000000002
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 27,
+        "win_rate": 59.25925925925925,
+        "profit": 3.7200000000000006
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 17,
+        "win_rate": 58.82352941176471,
+        "profit": 2.2
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 17,
+        "win_rate": 58.82352941176471,
+        "profit": 2.2
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 36,
+        "win_rate": 58.333333333333336,
+        "profit": 4.320000000000001
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 36,
+        "win_rate": 58.333333333333336,
+        "profit": 4.320000000000001
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 19,
+        "win_rate": 57.89473684210527,
+        "profit": 2.1200000000000006
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 26,
+        "win_rate": 57.692307692307686,
+        "profit": 2.8000000000000007
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 14,
+        "win_rate": 57.14285714285714,
+        "profit": 1.3600000000000003
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 7,
+        "win_rate": 57.14285714285714,
+        "profit": 0.6800000000000002
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 7,
+        "win_rate": 57.14285714285714,
+        "profit": 0.6800000000000002
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 16,
+        "win_rate": 56.25,
+        "profit": 1.2800000000000002
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 25,
+        "win_rate": 56.00000000000001,
+        "profit": 1.8800000000000006
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 38,
+        "win_rate": 55.26315789473685,
+        "profit": 2.3200000000000007
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 29,
+        "win_rate": 55.172413793103445,
+        "profit": 1.7200000000000006
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 20,
+        "win_rate": 55.00000000000001,
+        "profit": 1.1200000000000006
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 20,
+        "win_rate": 55.00000000000001,
+        "profit": 1.1200000000000006
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 22,
+        "win_rate": 54.54545454545454,
+        "profit": 1.0400000000000005
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 13,
+        "win_rate": 53.84615384615385,
+        "profit": 0.4400000000000003
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 21,
+        "win_rate": 52.38095238095239,
+        "profit": 0.12000000000000044
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 23,
+        "win_rate": 52.17391304347826,
+        "profit": 0.04000000000000048
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 29,
+        "win_rate": 51.724137931034484,
+        "profit": -0.1999999999999994
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 33,
+        "win_rate": 51.515151515151516,
+        "profit": -0.3599999999999993
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 2,
+        "win_rate": 50.0,
+        "profit": -0.07999999999999996
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 10,
+        "win_rate": 50.0,
+        "profit": -0.3999999999999998
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 28,
+        "win_rate": 50.0,
+        "profit": -1.1199999999999994
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 2,
+        "win_rate": 50.0,
+        "profit": -0.07999999999999996
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 28,
+        "win_rate": 50.0,
+        "profit": -1.1199999999999994
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 8,
+        "win_rate": 50.0,
+        "profit": -0.31999999999999984
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 34,
+        "win_rate": 50.0,
+        "profit": -1.3599999999999994
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 8,
+        "win_rate": 50.0,
+        "profit": -0.31999999999999984
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 6,
+        "win_rate": 50.0,
+        "profit": -0.23999999999999988
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 12,
+        "win_rate": 50.0,
+        "profit": -0.47999999999999976
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 4,
+        "win_rate": 50.0,
+        "profit": -0.15999999999999992
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 10,
+        "win_rate": 50.0,
+        "profit": -0.3999999999999998
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 2,
+        "win_rate": 50.0,
+        "profit": -0.07999999999999996
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 16,
+        "win_rate": 50.0,
+        "profit": -0.6399999999999997
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 8,
+        "win_rate": 50.0,
+        "profit": -0.31999999999999984
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 41,
+        "win_rate": 48.78048780487805,
+        "profit": -2.599999999999999
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 31,
+        "win_rate": 48.38709677419355,
+        "profit": -2.1999999999999993
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 27,
+        "win_rate": 48.148148148148145,
+        "profit": -2.0399999999999996
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 21,
+        "win_rate": 47.61904761904761,
+        "profit": -1.7999999999999996
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 15,
+        "win_rate": 46.666666666666664,
+        "profit": -1.5599999999999996
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 15,
+        "win_rate": 46.666666666666664,
+        "profit": -1.5599999999999996
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 24,
+        "win_rate": 45.83333333333333,
+        "profit": -2.8799999999999994
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 35,
+        "win_rate": 45.714285714285715,
+        "profit": -4.279999999999999
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 35,
+        "win_rate": 45.714285714285715,
+        "profit": -4.279999999999999
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 22,
+        "win_rate": 45.45454545454545,
+        "profit": -2.8
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 11,
+        "win_rate": 45.45454545454545,
+        "profit": -1.4
+    },
+    {
+        "pair": "#AAPL_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 31,
+        "win_rate": 45.16129032258064,
+        "profit": -4.119999999999999
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 18,
+        "win_rate": 44.44444444444444,
+        "profit": -2.6399999999999997
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 18,
+        "win_rate": 44.44444444444444,
+        "profit": -2.6399999999999997
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 34,
+        "win_rate": 44.11764705882353,
+        "profit": -5.199999999999999
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 7,
+        "win_rate": 42.857142857142854,
+        "profit": -1.2399999999999998
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 12,
+        "win_rate": 41.66666666666667,
+        "profit": -2.4
+    },
+    {
+        "pair": "#FB_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 36,
+        "win_rate": 41.66666666666667,
+        "profit": -7.199999999999999
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 22,
+        "win_rate": 40.909090909090914,
+        "profit": -4.72
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 15,
+        "win_rate": 40.0,
+        "profit": -3.4799999999999995
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 5,
+        "win_rate": 40.0,
+        "profit": -1.16
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 5,
+        "win_rate": 40.0,
+        "profit": -1.16
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 21,
+        "win_rate": 38.095238095238095,
+        "profit": -5.64
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 8,
+        "win_rate": 37.5,
+        "profit": -2.2399999999999998
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Estoc\u00e1stico + SMA200",
+        "trades": 16,
+        "win_rate": 37.5,
+        "profit": -4.4799999999999995
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Expert Vision Donchian Reversion",
+        "trades": 27,
+        "win_rate": 37.03703703703704,
+        "profit": -7.8
+    },
+    {
+        "pair": "#MSFT_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "trades": 11,
+        "win_rate": 36.36363636363637,
+        "profit": -3.32
+    },
+    {
+        "pair": "#MCD_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 12,
+        "win_rate": 33.33333333333333,
+        "profit": -4.32
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 16,
+        "win_rate": 31.25,
+        "profit": -6.3999999999999995
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 18,
+        "win_rate": 27.77777777777778,
+        "profit": -8.4
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "trades": 7,
+        "win_rate": 14.285714285714285,
+        "profit": -5.08
+    },
+    {
+        "pair": "#BA_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 2,
+        "win_rate": 0.0,
+        "profit": -2.0
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M15 (15 Minutos)",
+        "interval": 900,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 1,
+        "win_rate": 0.0,
+        "profit": -1.0
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M5 (5 Minutos)",
+        "interval": 300,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 2,
+        "win_rate": 0.0,
+        "profit": -2.0
+    },
+    {
+        "pair": "#INTC_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 1,
+        "win_rate": 0.0,
+        "profit": -1.0
+    },
+    {
+        "pair": "#PFE_otc",
+        "timeframe": "M1 (1 Minuto)",
+        "interval": 60,
+        "strategy": "Fibonacci Retracement 61.8%",
+        "trades": 3,
+        "win_rate": 0.0,
+        "profit": -3.0
+    }
+]
