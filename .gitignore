@@ -2,6 +2,8 @@ config.json
 feedback.db
 feedback_images/
 logs/
+!logs/trades/
+!logs/trades/*.csv
 __pycache__/
 *.db
 *.log
