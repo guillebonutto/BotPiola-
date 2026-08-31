@@ -14,6 +14,11 @@ from strategy_structure import StrategyStructure
 from strategy_expert_vision import StrategyExpertVision
 from strategy_alpha_convergence import StrategyAlphaConvergence
 from strategy_wavetrend_keltner import StrategyWaveTrendKeltner
+from strategy_ttm_squeeze import StrategyTTMSqueeze
+from strategy_hybrid_sniper import StrategyHybridSniper
+from strategy_bollinger_rsi import StrategyBollingerRSI
+from strategy_price_action_engulfing import StrategyPriceActionEngulfing
+from strategy_trend_pullback import StrategyTrendPullback
 
 from trade_logger import trade_logger
 from feedback_db import FeedbackDB
@@ -36,7 +41,7 @@ DEFAULT_CONFIG = {
     "intervals": [300],
     "lookback": 400,
     "verbose": True,
-    "verbose_telegram": True,
+    "verbose_telegram": False,
     "amount": 1.0,
     "daily_stop_loss": -15.0,
     "daily_take_profit": 10.0
@@ -51,7 +56,8 @@ class TradingBot:
         # Configurar logger dinámicamente según configuración
         logger_suffix = Path(self.config_path).stem
         if logger_suffix == "config":
-            logger_suffix = "pocketoption"
+            tbl_cfg = self.root_config.get('supabase_table', '')
+            logger_suffix = "pocketoption_real" if "real" in tbl_cfg else "pocketoption"
         trade_logger.configure(
             filename_pattern=f"trades_{logger_suffix}_{{date}}.csv",
             config_path=self.config_path
@@ -69,11 +75,15 @@ class TradingBot:
             
         self.analyzer = MarketAnalyzer()
         self.pattern_recognizer = PatternRecognizer()
+        
+        gemini_key = self.root_config.get('gemini_api_key') or (config or {}).get('gemini_api_key') or os.getenv('GEMINI_API_KEY')
         self.notifier = TelegramNotifier(
             telegram_token, 
             telegram_chat_id, 
             telegram_owner_id,
-            get_balance_callback=self.get_balance
+            get_balance_callback=self.get_balance,
+            gemini_api_key=gemini_key,
+            bot_ref=self
         )
         
         # Configuración dinámica
@@ -94,12 +104,18 @@ class TradingBot:
         # Inicializar lista de estrategias activas
         is_alpaca = self.broker == 'alpaca'
         all_strategies = [
+            StrategyHybridSniper(bypass_filter=is_alpaca),
+            StrategyBollingerRSI(bypass_filter=is_alpaca),
+            StrategyPriceActionEngulfing(bypass_filter=is_alpaca),
+            StrategyTrendPullback(bypass_filter=is_alpaca),
+            StrategyWaveTrendKeltner(bypass_filter=is_alpaca),
+            StrategyTTMSqueeze(bypass_filter=is_alpaca),
             StrategyStochastic(bypass_filter=is_alpaca),
+            StrategyAlphaConvergence(bypass_filter=is_alpaca),
             StrategyFibonacci(bypass_filter=is_alpaca),
             StrategyStructure(),
             StrategyExpertVision(bypass_filter=is_alpaca),
-            StrategyAlphaConvergence(bypass_filter=is_alpaca),
-            StrategyWaveTrendKeltner(bypass_filter=is_alpaca)
+            StrategyContinuation()
         ]
         
         enabled_list = self.config.get('enabled_strategies')
@@ -257,7 +273,11 @@ class TradingBot:
                             except Exception as intel_e:
                                 print(f"[Alpaca Monitor] Error actualizando inteligencia: {intel_e}")
                         else:
-                            print(f"[Alpaca Monitor] [WARN] No se encontró el trade {placed_id} en la base de datos.")
+                            print(f"[Alpaca Monitor] Trade sincronizado {placed_id} finalizado. Profit: ${profit:.2f}. Notificando en Telegram...")
+                            self.session_profit += profit
+                            if pair in self.active_trade_expiry_dict:
+                                self.active_trade_expiry_dict[pair] = datetime.min.replace(tzinfo=timezone.utc)
+                            await self.notifier.notify_close(pair, profit, is_win, trade_id=str(placed_id))
                         conn.close()
                     except Exception as db_e:
                         print(f"[Alpaca Monitor] Error actualizando base de datos para {placed_id}: {db_e}")
@@ -286,8 +306,29 @@ class TradingBot:
                     self.amount = trading_config.get('amount', self.amount)
                     self.daily_stop_loss = trading_config.get('daily_stop_loss', self.daily_stop_loss)
                     self.daily_take_profit = trading_config.get('daily_take_profit', self.daily_take_profit)
+                    self.use_gemini_live = trading_config.get('use_gemini_live', new_config.get('use_gemini_live', False))
                     
                     self.config = trading_config
+                    
+                    enabled_list = trading_config.get('enabled_strategies')
+                    if enabled_list is not None:
+                        is_alpaca = self.broker == 'alpaca'
+                        all_strats = [
+                            StrategyHybridSniper(bypass_filter=is_alpaca),
+                            StrategyBollingerRSI(bypass_filter=is_alpaca),
+                            StrategyPriceActionEngulfing(bypass_filter=is_alpaca),
+                            StrategyTrendPullback(bypass_filter=is_alpaca),
+                            StrategyWaveTrendKeltner(bypass_filter=is_alpaca),
+                            StrategyTTMSqueeze(bypass_filter=is_alpaca),
+                            StrategyStochastic(bypass_filter=is_alpaca),
+                            StrategyAlphaConvergence(bypass_filter=is_alpaca),
+                            StrategyFibonacci(bypass_filter=is_alpaca),
+                            StrategyStructure(),
+                            StrategyExpertVision(bypass_filter=is_alpaca),
+                            StrategyContinuation()
+                        ]
+                        self.strategies = [s for s in all_strats if s.name in enabled_list]
+                        print(f"[Bot] Estrategias activas recargadas: {[s.name for s in self.strategies]}")
                     
                 # Recargar inteligencia estática en memoria
                 self.intelligence = self._load_intelligence()
@@ -472,53 +513,10 @@ class TradingBot:
 
     def local_risk_fallback(self, snapshot):
         """
-        Filtro técnico local estricto de respaldo cuando la API de Gemini falla,
-        está rate-limited, o está completamente desactivada (Opción B).
-        Aplica reglas básicas de capital para evitar entrar en señales de alto riesgo.
+        Filtro técnico local directo cuando Gemini está desactivado (Modo Cuantitativo Puro de Backtest).
+        Permite la ejecución 1:1 idéntica a los modelos validados en el backtesting.
         """
-        action = snapshot.get("action")
-        rsi = snapshot.get("rsi", 50)
-        stoch_k = snapshot.get("stoch_k", 50)
-        close = snapshot.get("close", 0)
-        ema_20 = snapshot.get("ema_20", 0)
-        atr = snapshot.get("atr", 0)
-        mtf = snapshot.get("multi_timeframe", {})
-        
-        # 1. Agotamiento Extremo (RSI / Stochastic)
-        if action == "BUY":
-            if rsi > 70:
-                return False, "Bloqueo Local: Agotamiento alcista extremo (RSI > 70)"
-            if stoch_k > 90:
-                return False, "Bloqueo Local: Agotamiento alcista extremo (Stoch_K > 90)"
-        elif action == "SELL":
-            if rsi < 30:
-                return False, "Bloqueo Local: Agotamiento bajista extremo (RSI < 30)"
-            if stoch_k < 10:
-                return False, "Bloqueo Local: Agotamiento bajista extremo (Stoch_K < 10)"
-
-        # 2. Cuchillo cayendo / Subida vertical (Fuerte momentum en contra)
-        # Si compramos pero el precio está cayendo con fuerza por debajo de la EMA 20
-        # (Close muy por debajo de EMA 20 y RSI es bajo)
-        if action == "BUY":
-            if close < ema_20 and (ema_20 - close) > (1.8 * atr) and rsi < 38:
-                return False, f"Bloqueo Local: Falling Knife (Precio demasiado lejos de EMA 20, RSI={rsi})"
-        elif action == "SELL":
-            if close > ema_20 and (close - ema_20) > (1.8 * atr) and rsi > 62:
-                return False, f"Bloqueo Local: Rising Knife (Precio demasiado lejos de EMA 20, RSI={rsi})"
-
-        # 3. Alineación Mínima de Tendencia MTF
-        # Evitar operar a contra-tendencia total en H1 y M15
-        h1_trend = mtf.get("1h_trend", "NEUTRAL")
-        m15_trend = mtf.get("15m_trend", "NEUTRAL")
-        
-        if action == "BUY":
-            if h1_trend == "BEARISH" and m15_trend == "BEARISH":
-                return False, "Bloqueo Local: Contra-tendencia absoluta en H1 y M15 (BEARISH)"
-        elif action == "SELL":
-            if h1_trend == "BULLISH" and m15_trend == "BULLISH":
-                return False, "Bloqueo Local: Contra-tendencia absoluta en H1 y M15 (BULLISH)"
-
-        return True, "Aprobado Local: Filtros técnicos básicos correctos"
+        return True, "Aprobado (Modo Cuantitativo Puro de Backtest)"
 
     async def validate_signal_with_ai(self, pair, action, strategy_name, latest_candle, rich_ctx):
         """
@@ -581,23 +579,26 @@ class TradingBot:
             self.gemini_cache[cache_key] = fallback_res
             return fallback_res
 
-        prompt = f"""Eres un filtro inteligente de riesgo extremo para un bot de opciones binarias (PocketOption). Analiza esta señal y responde SOLO con un objeto JSON.
+        prompt = f"""Eres un filtro inteligente de riesgo para un bot de trading algorítmico (PocketOption). Analiza esta señal técnica y responde SOLO con un objeto JSON.
 
 SEÑAL PROPUESTA Y CONTEXTO COMPLETO:
 {json.dumps(snapshot, indent=2)}
 
-REGLAS CRÍTICAS PARA TU ROL (FILTRO DE RIESGO Y CUIDADO DEL CAPITAL):
-1. Analiza el contexto de régimen de mercado ('market_state') y la tendencia en múltiples timeframes ('multi_timeframe').
-2. BLOQUEA la señal si detectas alguna de las siguientes situaciones de alto riesgo técnico:
-   - "Cuchillo Cayendo" (Falling Knife): Señal de COMPRA (BUY) cuando el precio está cayendo con fuerza (ej. Close muy por debajo de la EMA 20 y RSI < 38) sin confirmación de giro o soporte.
-   - "Subida Vertical" (Rising Knife): Señal de VENTA (SELL) cuando el precio está subiendo con fuerza (ej. Close muy por encima de la EMA 20 y RSI > 62) sin confirmación de resistencia.
-   - Contra-Tendencia Absoluta: Ir en contra de la tendencia principal ('1h_trend') en mercados con fuerte direccionalidad (TRENDING_UP / TRENDING_DOWN).
-   - Agotamiento Extremo: Señales de COMPRA con RSI > 75 o Stoch_K > 95, o señales de VENTA con RSI < 25 o Stoch_K < 5, ya que hay alta probabilidad de retroceso inmediato (mortal para opciones de 5 minutos).
-   - Consolidación sin Volumen (Chop Market): Rango muy estrecho o ATR plano donde el precio oscila sin dirección clara, aumentando falsos breakouts.
-3. Si el contexto técnico muestra alineación de tendencias, soporte/resistencia respetados y osciladores saliendo de zonas de sobrecompra/sobreventa de manera saludable, tu veredicto debe ser APPROVED.
+INSTRUCCIONES DE EVALUACIÓN SEGÚN TIPO DE ESTRATEGIA:
+1. Si la estrategia es de REVERSIÓN / SOBRECOMPRA-SOBREVENTA ('REVERSION' como WaveTrend, Alpha Convergence, Estocástico, Fibonacci, Expert Vision):
+   - Es NORMAL y ESPERADO que para una VENTA (SELL) el precio esté alto (RSI > 55, Stoch > 75) y para una COMPRA (BUY) el precio esté bajo (RSI < 45, Stoch < 25). NO bloquees por estas condiciones normales de giro.
+   - SOLO BLOQUEA si el mercado está en una tendencia macro H1 imparable y violenta en contra (ej: VENDER en una tendencia alcista agresiva 'TRENDING_UP' con velas gigantes sin mechas de rechazo), o en consolidación sin volatilidad (ATR plano).
 
-Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
-{{"decision": "APPROVED" o "BLOCKED", "confidence": 1-100, "reason": "Una línea concisa en español explicando el riesgo crítico si bloqueas, o por qué se aprueba"}}"""
+2. Si la estrategia es de TENDENCIA / CONTINUACIÓN ('TREND' como Patrones de Continuación):
+   - BLOQUEA si intenta COMPRAR en el pico máximo de sobrecompra extrema (RSI > 75, Stoch > 95) o VENDER en el piso de sobreventa extrema (RSI < 25, Stoch < 5).
+   - BLOQUEA si va en contra de la dirección del régimen macro.
+
+3. REGLA GENERAL:
+   - Si la señal es coherente técnicamente con el propósito de su estrategia, tu veredicto DEBE SER "APPROVED".
+   - Reserva "BLOCKED" únicamente para trampas de mercado evidentes o riesgos extremos.
+
+Devuelve SOLO este JSON:
+{{"decision": "APPROVED" o "BLOCKED", "confidence": 1-100, "reason": "Una frase concisa en español explicando por qué se aprueba o el riesgo exacto por el que se bloquea"}}"""
 
         try:
             response = await asyncio.to_thread(
@@ -639,47 +640,87 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
             return fallback_res
 
     async def get_balance(self):
-        """Obtiene el balance actual de la cuenta."""
-        try:
-            balance = await self.api.balance()
-            if balance == -1.0:
-                print("[Bot] [ERR] ERROR: SSID Invalido o Expirado (Balance: -1.0)")
-                return "SSID Expirado"
-            return balance
-        except Exception as e:
-            print(f"[Bot] Error obteniendo balance: {e}")
-            return "Error"
+        """Obtiene el balance actual de la cuenta con reintentos para permitir el handshake del WebSocket."""
+        for attempt in range(4):
+            try:
+                balance = await self.api.balance()
+                if balance > -1.0:
+                    return balance
+                # Si devuelve -1.0 en el primer segundo, dar tiempo al handshake del WebSocket
+                await asyncio.sleep(1.5)
+            except Exception as e:
+                if self.verbose:
+                    print(f"[Bot] Intento {attempt+1} obteniendo balance: {e}")
+                await asyncio.sleep(1.5)
+                
+        print("[Bot] [ERR] ERROR: SSID Invalido o Expirado tras 4 intentos (Balance: -1.0)")
+        return "SSID Expirado"
 
     async def calculate_trade_amount(self, pair):
-        """Calcula el monto de la operación según la gestión de riesgo."""
+        """Calcula el monto de la operación según la gestión de capital configurada.
+        Soporta:
+          - progressive_smart_compound / martingale_smart:
+              * Fase 1 (Saldo < $60.00): Martingala Inteligente ($1 base + 1 paso recuperación a $2).
+              * Fase 2 (Saldo >= $60.00): Interés compuesto al 5% entero (floor), sin martingala.
+          - compound: Interés compuesto basado en porcentaje del saldo real.
+          - fixed: Monto fijo por operación.
+        """
+        import math
         mm_config = self.config.get('money_management', {})
-        mode = mm_config.get('mode', 'fixed')
+        mode = mm_config.get('mode', 'progressive_smart_compound')
+        balance = await self.get_balance()
         
-        # 1. Modo Fijo (Default)
-        amount = mm_config.get('fixed_amount', self.amount)
-        
-        # 2. Interés Compuesto (% del balance)
-        if mode == 'compound':
-            balance = await self.get_balance()
-            if isinstance(balance, (int, float)):
-                pct = mm_config.get('compound_percentage', 0.01)
-                amount = balance * pct
-                amount = max(1.0, round(amount, 2)) # Mínimo $1
+        phase2_threshold = float(mm_config.get('phase2_balance_threshold', 60.0))
+        raw_pct = float(mm_config.get('compound_percentage', 0.05))
+        pct = min(raw_pct, 0.05) # Límite estricto 5%
+        base_amount = float(mm_config.get('fixed_amount', self.amount))
+
+        # 1. Modo Progresivo Inteligente (Fase 1 Martingale Smart < $60 -> Fase 2 Compuesto 5% >= $60)
+        if mode in ['progressive_smart_compound', 'martingale_smart', 'progressive']:
+            if isinstance(balance, (int, float)) and balance >= phase2_threshold:
+                # --- FASE 2: INTERÉS COMPUESTO 5% ENTERO (FLOOR) ---
+                compound_amount = float(max(1, math.floor(balance * pct)))
+                print(f"  [Gestión de Capital - FASE 2] {pair}: Saldo actual ${balance:.2f} >= ${phase2_threshold:.2f} -> Interés Compuesto 5% Entero (Floor): ${compound_amount:.2f} USD")
+                return compound_amount
+            else:
+                # --- FASE 1: MARTINGALE SMART ($1 BASE + 1 PASO A $2) ---
+                losses = self.consecutive_losses.get(pair, 0)
+                max_steps = mm_config.get('martingale_max_steps', 1)
+                multiplier = mm_config.get('martingale_multiplier', 2.0)
+                bal_display = f"${balance:.2f}" if isinstance(balance, (int, float)) else str(balance)
                 
-        # 3. Martingala (Multiplicador tras pérdida)
-        elif mode == 'martingale':
+                if 0 < losses <= max_steps:
+                    trade_amount = float(math.floor(base_amount * (multiplier ** losses)))
+                    trade_amount = max(1.0, trade_amount)
+                    print(f"  [Gestión de Capital - FASE 1] {pair}: Recuperación Martingale Smart (Paso {losses}/{max_steps} | Saldo: {bal_display}) -> ${trade_amount:.2f} USD")
+                    return trade_amount
+                elif losses > max_steps:
+                    print(f"  [Gestión de Capital - FASE 1] {pair}: Límite de {max_steps} pasos alcanzado. Reiniciando a base (${base_amount:.2f} | Saldo: {bal_display})")
+                    self.consecutive_losses[pair] = 0
+                    return max(1.0, base_amount)
+
+                print(f"  [Gestión de Capital - FASE 1] {pair}: Operación base (${base_amount:.2f} USD | Saldo: {bal_display})")
+                return max(1.0, base_amount)
+
+        # 2. Modo Compuesto Puro
+        if mode == 'compound' and isinstance(balance, (int, float)) and balance > 0:
+            compound_amount = float(max(1, math.floor(balance * pct)))
+            print(f"  [Gestión de Capital] {pair}: Interés compuesto {pct*100:.1f}% (${balance:.2f}) -> ${compound_amount:.2f} USD")
+            return compound_amount
+
+        # 3. Martingala Estándar
+        if mode in ['martingale', 'martingale_limited']:
             losses = self.consecutive_losses.get(pair, 0)
-            max_steps = mm_config.get('martingale_max_steps', 3)
+            max_steps = mm_config.get('martingale_max_steps', 1)
             multiplier = mm_config.get('martingale_multiplier', 2.0)
-            
-            if losses > 0 and losses <= max_steps:
-                amount = amount * (multiplier ** losses)
-                print(f"  [MARTINGALE] {pair}: {losses} losses. Increasing amount to ${amount:.2f}")
-            elif losses > max_steps:
-                print(f"  [MARTINGALE] {pair}: Max steps reached ({max_steps}). Resetting to base amount.")
+            if 0 < losses <= max_steps:
+                trade_amount = float(math.floor(base_amount * (multiplier ** losses)))
+                return max(1.0, trade_amount)
+            else:
                 self.consecutive_losses[pair] = 0
-                
-        return amount
+                return max(1.0, base_amount)
+
+        return max(1.0, base_amount)
 
     async def fetch_data(self, pair, interval=None):
         """Obtiene velas y prepara el DataFrame con reintentos."""
@@ -856,8 +897,8 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                 # Protegemos el capital evitando operaciones durante volatilidad descontrolada
                 allowed_types = []
             elif market_state == 'NEUTRAL':
-                # En transiciones o mercados sin tendencia, permitimos solo reversión
-                allowed_types = ['REVERSION']
+                # En transiciones o mercados sin tendencia, permitimos reversión y rupturas de compresión
+                allowed_types = ['REVERSION', 'TREND']
             else:
                 allowed_types = []
 
@@ -950,7 +991,7 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
         print("--- MODO SEGURO: Max 1 operacion simultanea ---\n")
         if self.notifier.token:
             print("--- TELEGRAM ACTIVADO ---\n")
-            await self.notifier.send_message("🤖 **Bot Iniciado**\nListo para operar.")
+            await self.notifier.send_message("🤖 <b>Bot Started</b>\nReady to trade.")
             # Iniciar el listener en segundo plano si está habilitado
             if self.config.get('telegram_listen', True):
                 asyncio.create_task(self.notifier.start_listening())
@@ -977,9 +1018,13 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
             balance = await self.get_balance()
             if self.broker == 'alpaca' and isinstance(balance, (int, float)):
                 try:
+                    active_trades_data = {}
+                    if hasattr(self.api, 'active_trades'):
+                        active_trades_data = {k: v for k, v in self.api.active_trades.items()}
                     with open('alpaca_status.json', 'w', encoding='utf-8') as sf:
                         json.dump({
                             'balance': balance,
+                            'active_trades': active_trades_data,
                             'last_updated': datetime.now(timezone.utc).isoformat()
                         }, sf)
                 except Exception as sf_err:
@@ -990,24 +1035,41 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                 await asyncio.sleep(10)
                 continue
             elif balance == "SSID Expirado" or (self.broker == 'alpaca' and balance == -1.0):
-                msg = "[ERR] El bot no puede continuar sin credenciales de Alpaca válidas." if self.broker == 'alpaca' else "[ERR] El bot no puede continuar sin un SSID válido. Por favor, actualiza config.json."
+                msg = "[ERR] The bot cannot continue without valid Alpaca credentials." if self.broker == 'alpaca' else "[ERR] The bot cannot continue without a valid SSID. Please update config.json."
                 print(msg)
                 if self.notifier.token:
-                    await self.notifier.send_message(f"🛑 <b>ERROR CRÍTICO:</b> {msg}")
+                    await self.notifier.send_message(f"🛑 <b>CRITICAL ERROR:</b> {msg}")
                 break # Detener el bot
+
+            # Guardar balance de PocketOption en archivo de status
+            if self.broker == 'pocketoption' and isinstance(balance, (int, float)):
+                try:
+                    with open('pocketoption_status.json', 'w', encoding='utf-8') as sf:
+                        json.dump({
+                            'balance': balance,
+                            'last_updated': datetime.now(timezone.utc).isoformat()
+                        }, sf)
+                except Exception as sf_err:
+                    print(f"[PocketOption Status] Error escribiendo status compartido: {sf_err}")
 
             # 1. Chequeo de Concurrencia y Riesgo
             now_utc = datetime.now(timezone.utc)
             
+            # --- VERIFICACIÓN DE PAUSA ---
+            if getattr(self, 'is_paused', False) or (self.notifier and getattr(self.notifier, 'is_paused', False)):
+                print(f"[{now_utc.strftime('%H:%M:%S')}] ⏸️ Bot en pausa. Esperando comando /reanudar desde Telegram...")
+                await asyncio.sleep(10)
+                continue
+
             # --- CONTROL DE RIESGO DIARIO ---
             if self.session_profit <= self.daily_stop_loss:
-                msg = f"🛑 <b>STOP LOSS ALCANZADO:</b> ${self.session_profit:.2f}. Deteniendo operaciones por hoy."
+                msg = f"🛑 <b>STOP LOSS REACHED:</b> ${self.session_profit:.2f}. Stopping trading session for today."
                 print(msg)
                 await self.notifier.send_message(msg)
                 break # Sale del bot
             
             if self.session_profit >= self.daily_take_profit:
-                msg = f"🎯 <b>TAKE PROFIT ALCANZADO:</b> ${self.session_profit:.2f}. Asegurando ganancias."
+                msg = f"🎯 <b>TAKE PROFIT REACHED:</b> ${self.session_profit:.2f}. Securing profits and stopping trading session."
                 print(msg)
                 await self.notifier.send_message(msg)
                 break
@@ -1048,23 +1110,20 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
  
                     action, duration, strat_name = signal
                     
-                    # --- FILTRO DE WHITELIST DE BACKTESTING ---
-                    # DESACTIVADO TEMPORALMENTE por pedido del usuario para operar basándose únicamente en análisis técnico.
-                    # if self.whitelist is not None:
-                    #     # Mapear el nombre del par para compatibilidad con la whitelist (que usa nombres de PocketOption OTC)
-                    #     pair_mapped = pair
-                    #     if not pair.endswith('_otc'):
-                    #         if len(pair) == 6 and not pair.startswith('#'):
-                    #             pair_mapped = f"{pair}_otc"
-                    #         else:
-                    #             pair_mapped = f"#{pair}_otc"
-                    #     
-                    #     sig_key = (pair_mapped, strat_name, int(interval))
-                    #     if sig_key not in self.whitelist:
-                    #         print(f"  [WHITELIST FILTER] Señal bloqueada: {pair} (mapeado a {pair_mapped}) | {strat_name} | {interval}s no está en la whitelist de backtesting.")
-                    #         cycle_report[-1] += f"\n   🚫 <b>WHITELIST BLOCK:</b> {strat_name} no permitida en {pair} ({interval}s)"
-                    #         continue
-                    pass
+                    # --- FILTRO DE WHITELIST DE BACKTESTING (>= 70% Win Rate) ---
+                    if self.whitelist is not None:
+                        pair_mapped = pair
+                        if not pair.endswith('_otc'):
+                            if len(pair) == 6 and not pair.startswith('#'):
+                                pair_mapped = f"{pair}_otc"
+                            else:
+                                pair_mapped = f"#{pair}_otc"
+                        
+                        sig_key = (pair_mapped, strat_name, int(interval))
+                        if sig_key not in self.whitelist:
+                            print(f"  [WHITELIST FILTER] Señal bloqueada: {pair} (mapeado a {pair_mapped}) | {strat_name} | {interval}s no cumple el umbral estricto de Win Rate (>=70%).")
+                            cycle_report[-1] += f"\n   🚫 <b>WHITELIST BLOCK:</b> {strat_name} no permitida en {pair} ({interval}s) por WR &lt; 70%"
+                            continue
                             
                     # --- FILTRO IA HISTÓRICO (trading_intelligence.json) ---
                     allowed, reason = self.is_allowed_by_ai(pair, strat_name, interval)
@@ -1174,8 +1233,7 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                                 "asset": pair, 
                                 "amount": amount, 
                                 "time": duration_alpaca, 
-                                "check_win": False,
-                                "latest_candle": latest_data
+                                "check_win": False
                             }
                             try:
                                 if action == 'BUY':
@@ -1277,7 +1335,6 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                                     'close_price': close_val,
                                     'result': 'PENDING',
                                     'profit': 0.0,
-                                    'telegram_message_id': None,
                                     'ai_decision': 'APPROVED',
                                     'ai_confidence': ai_confidence,
                                     'ai_reason': ai_reason,
@@ -1293,6 +1350,7 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
 
                         # --- PROCESO EXCLUSIVO POCKETOPTION (Bloqueante con Espera) ---
                         placed_id = None
+                        balance_before = await self.get_balance()
                         try:
                             buy_kwargs = {"asset": pair, "amount": amount, "time": duration, "check_win": False}
                             if action == 'BUY':
@@ -1314,60 +1372,128 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                             self.active_trade_expiry = datetime.now(timezone.utc)
                             continue
 
-                        print(f"  [OK] Orden colocada. API trade_id: {placed_id or 'desconocido'}")
+                        print(f"  [OK] Orden colocada. API trade_id: {placed_id or 'desconocido'} (Balance inicial: ${balance_before if isinstance(balance_before, (int, float)) else 'N/A'})")
                         
                         # --- ESPERAR DURACIÓN DEL TRADE ---
                         print(f"  [WAIT] Esperando {duration}s para confirmar resultado...")
-                        await asyncio.sleep(duration + 5)  # +5s de margen para que cierre
+                        await asyncio.sleep(duration + 4)  # Margen para que expire la opción
                         
-                        # --- CONSULTAR RESULTADO VÍA closed_deals (sin depender del WebSocket bloqueante) ---
+                        # --- SISTEMA MULTI-CAPA DE CONFIRMACIÓN DE RESULTADOS ---
                         is_win = False
                         profit = 0.0
                         result_confirmed = False
                         
-                        try:
-                            closed = await asyncio.wait_for(self.api.closed_deals(), timeout=10.0)
-                            # Buscar el trade por el ID de la API o por el más reciente del par
-                            matched = None
-                            if placed_id:
-                                matched = next((d for d in closed if str(d.get('id', '')) == str(placed_id)), None)
-                            if not matched and closed:
-                                # Fallback: el trade más reciente del mismo par
-                                recent = sorted(
-                                    [d for d in closed if d.get('asset', '').replace('-', '_') == pair or d.get('asset') == pair],
-                                    key=lambda x: x.get('close_time', 0),
-                                    reverse=True
-                                )
-                                if recent:
-                                    matched = recent[0]
-                            
-                            if matched:
-                                profit = float(matched.get('profit', 0.0))
-                                is_win = profit > 0
-                                result_confirmed = True
-                                print(f"  [OK] Resultado confirmado via closed_deals: {'WIN' if is_win else 'LOSS'} | Profit: {profit:.2f}")
-                            else:
-                                print(f"  [WARN] No se encontro el trade en closed_deals. Marcando resultado como desconocido.")
-                        except asyncio.TimeoutError:
-                            print(f"  [WARN] Timeout consultando closed_deals. Resultado no confirmado.")
-                        except Exception as e:
-                            print(f"  [WARN] Error consultando closed_deals: {e}")
-                        
-                        if not result_confirmed:
-                            # Último recurso: intentar check_win con el ID de API
-                            if placed_id:
-                                try:
-                                    details = await asyncio.wait_for(self.api.check_win(placed_id), timeout=10.0)
-                                    profit = float(details.get('profit', 0.0))
-                                    is_win = profit > 0
+                        # CAPA 1: Consultar closed_deals()
+                        for attempt in range(3):
+                            try:
+                                closed = await asyncio.wait_for(self.api.closed_deals(), timeout=8.0)
+                                if isinstance(closed, dict):
+                                    closed_list = list(closed.values())
+                                elif isinstance(closed, list):
+                                    closed_list = closed
+                                else:
+                                    closed_list = []
+
+                                matched = None
+                                if placed_id:
+                                    placed_str = str(placed_id).lower()
+                                    matched = next(
+                                        (
+                                            d for d in closed_list 
+                                            if isinstance(d, dict) and (
+                                                str(d.get('id', '')).lower() == placed_str or 
+                                                str(d.get('request_id', '')).lower() == placed_str or 
+                                                str(d.get('copy_ticket', '')).lower() == placed_str
+                                            )
+                                        ),
+                                        None
+                                    )
+                                if not matched and closed_list:
+                                    clean_pair = pair.replace('-', '_').upper()
+                                    recent = [
+                                        d for d in closed_list 
+                                        if isinstance(d, dict) and str(d.get('asset', '')).replace('-', '_').upper() == clean_pair
+                                    ]
+                                    if recent:
+                                        matched = recent[-1]
+                                
+                                if matched:
+                                    deal_amount = float(matched.get('amount', amount))
+                                    raw_profit = float(matched.get('profit', 0.0))
+                                    
+                                    if raw_profit > deal_amount:
+                                        is_win = True
+                                        profit = round(raw_profit - deal_amount, 2)
+                                    elif raw_profit > 0 and raw_profit < deal_amount:
+                                        is_win = True
+                                        profit = round(raw_profit, 2)
+                                    elif raw_profit == deal_amount:
+                                        is_win = True
+                                        profit = 0.0
+                                    elif raw_profit > 0:
+                                        is_win = True
+                                        profit = round(raw_profit, 2)
+                                    else:
+                                        is_win = False
+                                        profit = -round(deal_amount, 2)
+                                        
                                     result_confirmed = True
-                                    print(f"  [OK] Resultado via check_win: {'WIN' if is_win else 'LOSS'}")
-                                except Exception:
-                                    print(f"  [WARN] check_win tambien fallo. Registrando como pendiente.")
-                                    profit = 0.0
-                                    is_win = False
+                                    print(f"  [OK] Resultado confirmado via closed_deals: {'WIN' if is_win else 'LOSS'} | Net Profit: ${profit:+.2f}")
+                                    break
+                            except Exception as e:
+                                if self.verbose:
+                                    print(f"  [DEBUG] Intento {attempt+1}/3 closed_deals: {e}")
+                            await asyncio.sleep(1.5)
+
+                        # CAPA 2: Intentar check_win con ID si Capa 1 no confirmó
+                        if not result_confirmed and placed_id:
+                            try:
+                                details = await asyncio.wait_for(self.api.check_win(placed_id), timeout=6.0)
+                                deal_amount = float(details.get('amount', amount))
+                                raw_profit = float(details.get('profit', 0.0))
+                                
+                                if raw_profit > deal_amount:
+                                    is_win = True
+                                    profit = round(raw_profit - deal_amount, 2)
+                                    result_confirmed = True
+                                elif raw_profit > 0:
+                                    is_win = True
+                                    profit = round(raw_profit, 2)
+                                    result_confirmed = True
+                                elif str(details.get('result', '')).lower() == 'win':
+                                    is_win = True
+                                    profit = round(deal_amount * 0.85, 2)
+                                    result_confirmed = True
+                            except Exception:
+                                pass
+
+                        # CAPA 3 (VERDAD DEFINITIVA): Comparación de Delta de Balance Real
+                        balance_after = await self.get_balance()
+                        if isinstance(balance_before, (int, float)) and isinstance(balance_after, (int, float)):
+                            balance_delta = round(balance_after - balance_before, 2)
+                            if balance_delta > 0.05:
+                                is_win = True
+                                profit = balance_delta
+                                result_confirmed = True
+                                print(f"  [OK] Resultado verificado por Balance Delta: GANADA (+${profit:.2f}) [${balance_before:.2f} -> ${balance_after:.2f}]")
+                            elif balance_delta < -0.05:
+                                is_win = False
+                                profit = balance_delta
+                                result_confirmed = True
+                                print(f"  [OK] Resultado verificado por Balance Delta: PERDIDA (${profit:.2f}) [${balance_before:.2f} -> ${balance_after:.2f}]")
+                            elif abs(balance_delta) <= 0.05 and not result_confirmed:
+                                is_win = True
+                                profit = 0.0
+                                result_confirmed = True
+                                print(f"  [OK] Resultado verificado por Balance Delta: EMPATE / REFUND ($0.00)")
+
+                        if not result_confirmed:
+                            # Fallback por acción del precio si la red falló
+                            profit = -amount
+                            is_win = False
+                            print(f"  [WARN] No se pudo verificar resultado con broker. Asignando pérdida estimada (-${amount:.2f}).")
                         
-                        print(f"  >>> Resultado Operacion: {'GANADA' if is_win else 'PERDIDA'}")
+                        print(f"  >>> Resultado Operacion: {'GANADA' if is_win else 'PERDIDA'} (${profit:+.2f})")
                         await self.notifier.notify_close(pair, profit, is_win, trade_id=trade_id)
 
                         # --- ACTUALIZAR MÉTRICAS DE SESIÓN ---
@@ -1427,7 +1553,7 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                         
                     except Exception as e:
                         print(f"Error ejecutando orden: {e}")
-                        await self.notifier.send_message(f"⚠️ Error ejecutando orden en {pair}: {e}")
+                        await self.notifier.send_message(f"⚠️ Error executing order on {pair}: {e}")
                         
                 else:
                     # print(f"Sin señal clara en {pair}")
@@ -1435,14 +1561,28 @@ Devuelve SOLO este JSON, sin explicaciones ni formato markdown fuera del bloque:
                 
                 await asyncio.sleep(2) # Pausa entre pares para no saturar
             
-            # --- Mantenimiento Periódico (Una vez al día) ---
-            if datetime.now().hour == 0 and datetime.now().minute < 5:
+            # --- Mantenimiento Periódico y Reporte de Fin de Día ---
+            now_dt = datetime.now()
+            today_date = now_dt.date()
+            
+            if now_dt.hour == 0 and now_dt.minute < 5:
                 self.db.maintain()
-                # trade_logger.cleanup_old_logs() # Desactivado por pedido del usuario
+            
+            if getattr(self, '_last_daily_report_date', None) != today_date:
+                if now_dt.hour == 0 and now_dt.minute <= 15:
+                    yesterday = today_date - timedelta(days=1)
+                    if getattr(self, '_last_daily_report_sent_for', None) != yesterday:
+                        print(f"[{now_dt.strftime('%H:%M:%S')}] 📢 Generando y enviando reporte de cierre diario para {yesterday}...")
+                        try:
+                            await self.notifier.send_daily_report(target_date=yesterday)
+                            self._last_daily_report_sent_for = yesterday
+                        except Exception as dre:
+                            print(f"[Daily Report Error] {dre}")
+                    self._last_daily_report_date = today_date
             
             # --- Reporte Telegram (Al final del ciclo) ---
             if self.verbose_telegram and cycle_report and self.notifier.token:
-                header = "📊 <b>Reporte de Ciclo</b>\n\n"
+                header = "📊 <b>Cycle Report</b>\n\n"
                 full_report = "\n".join(cycle_report)
                 
                 # Telegram tiene un límite de 4096 caracteres
