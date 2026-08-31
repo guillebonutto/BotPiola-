@@ -1,0 +1,6 @@
+timestamp,trade_id,pair,timeframe,decision,signal_score,pattern_detected,price,ema,rsi,ema_conf,tf_signal,atr,triangle_active,reversal_candle,near_support,near_resistance,support_level,resistance_level,htf_signal,result,profit_loss,expiry_time,notes
+2026-01-27 00:00:15,6776de65,USDMXN_otc,300,BUY,,Estocástico + SMA200,18.9192,18.98995934916194,38.83773673688726,,,0.0394211800305626,,,,,,,,LOSS,-1.0,300,
+2026-01-27 00:16:24,47a9cde2,USDMXN_otc,300,BUY,,Estocástico + SMA200,18.9291,18.97248471827035,41.15663154249251,,,0.037425011853828,,,,,,,,LOSS,-1.0,300,
+2026-01-27 00:54:41,4f26cb3f,USDMXN_otc,300,BUY,,Estocástico + SMA200,18.8553,18.924712218520103,35.24326135884823,,,0.0382368929407537,,,,,,,,WIN,0.73,300,
+2026-01-27 01:20:25,cd0f6c1f,AUDUSD_otc,300,BUY,,Estocástico + SMA200,0.67794,0.6784716485002591,48.182660411723326,,,0.001035514014806,,,,,,,,WIN,0.92,300,
+2026-01-27 01:40:28,a3c74fd5,AUDUSD_otc,300,BUY,,Estocástico + SMA200,0.6769,0.6781312320699825,40.798055576388265,,,0.0010210783469744,,,,,,,,WIN,0.92,300,

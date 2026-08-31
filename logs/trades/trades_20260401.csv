@@ -1,0 +1,2 @@
+timestamp,trade_id,pair,timeframe,decision,signal_score,pattern_detected,price,ema,rsi,ema_conf,tf_signal,atr,triangle_active,reversal_candle,near_support,near_resistance,support_level,resistance_level,htf_signal,result,profit_loss,expiry_time,notes
+2026-04-01 23:57:37,84ed5d13,USDCAD_otc,300,SELL,,Estocástico + SMA200,1.37761,1.3778248778307804,47.17654539145915,,,0.0010135212464161317,,,,,,,,PENDING,,300,
