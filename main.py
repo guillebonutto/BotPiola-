@@ -1706,7 +1706,7 @@ async def main():
     # 4. Servidor Web Minimalista (Keep-alive para Koyeb/Render)
     if web:
         async def handle(request):
-            return web.Response(text="Bot is running!")
+            return web.Response(text="Bot is running in Dual Mode!")
 
         app = web.Application()
         app.router.add_get('/', handle)
@@ -1726,9 +1726,47 @@ async def main():
                 
         asyncio.create_task(start_server())
 
-    # 5. Iniciar el Bot
-    bot = TradingBot(ssid, tg_token, tg_chat, tg_owner, config=config.get('trading', config), root_config=config, config_path=config_file)
-    await bot.run()
+    # 5. Cargar e iniciar bots (Modo Dual: PocketOption + Alpaca en paralelo)
+    tasks = []
+    
+    # 5a. Instancia PocketOption
+    po_ssid = config.get('ssid')
+    if po_ssid and po_ssid != "PONER_SSID_AQUI":
+        bot_po = TradingBot(po_ssid, tg_token, tg_chat, tg_owner, config=config.get('trading', config), root_config=config, config_path='config.json')
+        tasks.append(asyncio.create_task(bot_po.run()))
+        print("🟢 Instancia PocketOption preparada.")
+    else:
+        print("⚠️ Instancia PocketOption omitida (sin SSID válido).")
+        
+    # 5b. Instancia Alpaca
+    alpaca_config_path = Path('config_alpaca.json')
+    if alpaca_config_path.exists():
+        try:
+            with open(alpaca_config_path, 'r', encoding='utf-8') as af:
+                cfg_alpaca = json.load(af)
+                alpaca_key = cfg_alpaca.get('alpaca_key_id') or cfg_alpaca.get('trading', {}).get('alpaca_key_id')
+                alpaca_secret = cfg_alpaca.get('alpaca_secret_key') or cfg_alpaca.get('trading', {}).get('alpaca_secret_key')
+                if alpaca_key and alpaca_secret:
+                    bot_alpaca = TradingBot(
+                        ssid=None,
+                        telegram_token=cfg_alpaca.get('telegram_token', tg_token),
+                        telegram_chat_id=cfg_alpaca.get('telegram_chat_id', tg_chat),
+                        telegram_owner_id=cfg_alpaca.get('telegram_owner_id', tg_owner),
+                        config=cfg_alpaca.get('trading', cfg_alpaca),
+                        root_config=cfg_alpaca,
+                        config_path='config_alpaca.json'
+                    )
+                    tasks.append(asyncio.create_task(bot_alpaca.run()))
+                    print("🔸 Instancia Alpaca preparada.")
+        except Exception as e:
+            print(f"⚠️ Error cargando config_alpaca.json: {e}")
+
+    if not tasks:
+        print("❌ CRÍTICO: No hay ninguna instancia de bot configurada para ejecutar.")
+        return
+
+    print(f"🚀 Iniciando {len(tasks)} instancias de trading en paralelo...")
+    await asyncio.gather(*tasks)
 
 if __name__ == '__main__':
     try:
