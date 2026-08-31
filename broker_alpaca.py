@@ -255,7 +255,7 @@ class AlpacaAdapter:
             # Fixed Sizing: usar el monto nominal fijo definido
             qty = amount / price
             
-        allow_fractional = self.config.get('allow_fractional', True)
+        allow_fractional = self.config.get('allow_fractional', False)
         if allow_fractional:
             qty = round(qty, 4)
         else:
@@ -263,21 +263,34 @@ class AlpacaAdapter:
             if qty == 0:
                 qty = 1
 
-        # 4. Construir payload de Orden Bracket
-        payload = {
-            "symbol": ticker,
-            "qty": str(qty),
-            "side": side,
-            "type": "market",
-            "time_in_force": "gtc",
-            "order_class": "bracket",
-            "take_profit": {
-                "limit_price": str(take_profit)
-            },
-            "stop_loss": {
-                "stop_price": str(stop_loss)
+        # 4. Construir payload de Orden adaptado a Alpaca
+        is_fractional = (qty != int(qty))
+        
+        if is_fractional:
+            # Alpaca requiere time_in_force='day' para órdenes fraccionadas y no permite bracket en fracciones
+            payload = {
+                "symbol": ticker,
+                "qty": str(qty),
+                "side": side,
+                "type": "market",
+                "time_in_force": "day"
             }
-        }
+        else:
+            # Para acciones enteras, soporta bracket order completo con Take Profit y Stop Loss
+            payload = {
+                "symbol": ticker,
+                "qty": str(int(qty)),
+                "side": side,
+                "type": "market",
+                "time_in_force": "day",
+                "order_class": "bracket",
+                "take_profit": {
+                    "limit_price": str(take_profit)
+                },
+                "stop_loss": {
+                    "stop_price": str(stop_loss)
+                }
+            }
         
         url = f"{self.base_url}/v2/orders"
         try:
@@ -333,6 +346,28 @@ class AlpacaAdapter:
             return float(candles[-1]['close'])
         return 0.0
 
+    async def opened_deals(self) -> list[dict]:
+        """Devuelve una lista de las posiciones y órdenes actualmente abiertas en Alpaca."""
+        url_pos = f"{self.base_url}/v2/positions"
+        deals = []
+        try:
+            async with aiohttp.ClientSession(headers=self.headers) as session:
+                async with session.get(url_pos, timeout=10) as r:
+                    if r.status == 200:
+                        positions = await r.json()
+                        for p in positions:
+                            deals.append({
+                                "symbol": p.get("symbol"),
+                                "qty": float(p.get("qty", 0.0)),
+                                "side": p.get("side", "long"),
+                                "entry_price": float(p.get("avg_entry_price", 0.0)),
+                                "current_price": float(p.get("current_price", 0.0)),
+                                "unrealized_pl": float(p.get("unrealized_pl", 0.0))
+                            })
+        except Exception as e:
+            logger.error(f"Error consultando opened_deals en Alpaca: {e}")
+        return deals
+
     async def closed_deals(self) -> list[dict]:
         """Escanea trades activos, cierra por tiempo si expiran, y devuelve los cerrados."""
         current_time = time.time()
@@ -348,11 +383,34 @@ class AlpacaAdapter:
                         positions_list = await r.json()
                         open_positions = {pos['symbol']: pos for pos in positions_list}
                     else:
-                        logger.error(f"Error obteniendo posiciones de Alpaca: HTTP {r.status}")
-        except Exception as e:
-            logger.error(f"Excepción obteniendo posiciones: {e}")
-            # Si falla la llamada de posiciones, no procesamos cierres para evitar falsos positivos
-            return []
+                        logger.warning(f"Error consultando posiciones en Alpaca: HTTP {r.status}")
+        except Exception as pos_err:
+            logger.error(f"Excepción obteniendo posiciones de Alpaca: {pos_err}")
+
+        # 1.5. Sincronizar posiciones existentes en Alpaca que no estén en memoria (ej: tras reinicio)
+        for sym, pos in open_positions.items():
+            already_tracked = any(t.get('symbol') == sym for t in self.active_trades.values())
+            if not already_tracked:
+                fake_id = f"alpaca_sync_{sym}_{int(current_time)}"
+                entry_p = float(pos.get('avg_entry_price', 0.0))
+                qty_val = float(pos.get('qty', 0.0))
+                side_val = "buy" if pos.get('side', 'long') == 'long' else "sell"
+                
+                tp_p = round(entry_p * (1.02 if side_val == "buy" else 0.98), 2)
+                sl_p = round(entry_p * (0.985 if side_val == "buy" else 1.015), 2)
+                
+                self.active_trades[fake_id] = {
+                    "symbol": sym,
+                    "pair": sym,
+                    "qty": qty_val,
+                    "side": side_val,
+                    "entry_price": entry_p,
+                    "stop_loss": sl_p,
+                    "take_profit": tp_p,
+                    "start_time": current_time,
+                    "duration": int(self.config.get('holding_period_seconds', 14400))
+                }
+                logger.info(f"[Alpaca] Posición abierta previa de {sym} ({qty_val} acciones) sincronizada y bajo seguimiento del bot.")
 
         # 2. Iterar sobre nuestros trades en memoria
         active_ids = list(self.active_trades.keys())
@@ -363,7 +421,7 @@ class AlpacaAdapter:
             
             is_position_open = symbol in open_positions
             time_elapsed = current_time - trade['start_time']
-            should_force_close = time_elapsed >= trade['duration']
+            should_force_close = (trade.get('duration', 0) > 0) and (time_elapsed >= trade['duration'])
             
             # Caso A: El TP o el SL se activaron solos en la nube (la posición ya se cerró en Alpaca)
             if not is_position_open:
@@ -382,40 +440,76 @@ class AlpacaAdapter:
                 del self.active_trades[order_id]
                 logger.info(f"[Alpaca] Trade {order_id} de {symbol} CERRADO por SL/TP. PnL: ${pnl:.2f} | Precio Cierre: {close_price}")
                 
-            # Caso B: Pasó el tiempo de expiración y la posición sigue abierta -> Cerrar manualmente (Market Close)
-            elif should_force_close:
-                logger.info(f"[Alpaca] Expiración de tiempo alcanzada ({int(time_elapsed)}s). Cerrando manualmente posición de {symbol}...")
+            # Caso B: La posición sigue abierta en Alpaca -> Monitorear TP, SL y Trailing Stop Dinámico
+            elif is_position_open:
+                pos_info = open_positions[symbol]
+                curr_price = float(pos_info.get('current_price', 0.0))
+                entry_price = trade['entry_price']
+                side = trade['side']
+                tp_price = trade.get('take_profit', 0.0)
+                sl_price = trade.get('stop_loss', 0.0)
                 
-                # Cerrar la posición en Alpaca
-                close_url = f"{self.base_url}/v2/positions/{symbol}"
-                try:
-                    async with aiohttp.ClientSession(headers=self.headers) as session:
-                        async with session.delete(close_url, timeout=15) as r:
-                            res_body = await r.read()
-                            if r.status == 200 or r.status == 201:
-                                logger.info(f"[Alpaca] Posición de {symbol} liquidada exitosamente.")
-                            else:
-                                logger.error(f"Error liquidando posición en Alpaca: HTTP {r.status} - {res_body.decode('utf-8')}")
-                except Exception as e:
-                    logger.error(f"Excepción al liquidar posición de {symbol}: {e}")
+                # --- ACTUALIZACIÓN DINÁMICA DE TRAILING STOP (CHANDELIER TRAIL) ---
+                if curr_price > 0:
+                    atr_est = trade.get('atr', entry_price * 0.005)
+                    
+                    if side == "buy":
+                        peak_p = max(trade.get('peak_price', entry_price), curr_price)
+                        trade['peak_price'] = peak_p
+                        
+                        # Si el precio sube a favor, el trailing sube protegiendo la ganancia
+                        if curr_price > entry_price:
+                            trail_floor = peak_p - (1.2 * atr_est)
+                            if trail_floor > sl_price:
+                                trade['stop_loss'] = round(trail_floor, 2)
+                                logger.info(f"[Alpaca] 🛡️ TRAILING STOP ELEVADO para {symbol}: Nuevo SL garantizado @ ${trade['stop_loss']} (Precio actual: ${curr_price:.2f})")
+
+                    elif side == "sell":
+                        trough_p = min(trade.get('trough_price', entry_price), curr_price)
+                        trade['trough_price'] = trough_p
+                        
+                        # Si el precio baja a favor, el trailing baja protegiendo la ganancia
+                        if curr_price < entry_price:
+                            trail_ceil = trough_p + (1.2 * atr_est)
+                            if trail_ceil < sl_price:
+                                trade['stop_loss'] = round(trail_ceil, 2)
+                                logger.info(f"[Alpaca] 🛡️ TRAILING STOP REDUCIDO para {symbol}: Nuevo SL garantizado @ ${trade['stop_loss']} (Precio actual: ${curr_price:.2f})")
+
+                # --- VERIFICAR SI TOCÓ TAKE PROFIT, STOP LOSS O TRAILING ---
+                hit_tp = (side == "buy" and tp_price > 0 and curr_price >= tp_price) or (side == "sell" and tp_price > 0 and curr_price <= tp_price)
+                hit_sl = (side == "buy" and sl_price > 0 and curr_price <= trade['stop_loss']) or (side == "sell" and sl_price > 0 and curr_price >= trade['stop_loss'])
                 
-                # Esperar 1 segundo para que la liquidación se procese
-                await asyncio.sleep(1)
-                
-                # Calcular PnL final
-                pnl, close_price = await self._get_closed_trade_details(symbol, trade['side'], trade['entry_price'], trade['qty'])
-                
-                closed_item = {
-                    "id": order_id,
-                    "asset": pair,
-                    "profit": pnl,
-                    "result": "win" if pnl > 0 else "loss",
-                    "close_time": int(current_time)
-                }
-                newly_closed.append(closed_item)
-                self.closed_trades_cache.append(closed_item)
-                del self.active_trades[order_id]
-                logger.info(f"[Alpaca] Trade {order_id} de {symbol} CERRADO por Expiración de Tiempo. PnL: ${pnl:.2f} | Precio Cierre: {close_price}")
+                if hit_tp or hit_sl or should_force_close:
+                    exit_reason = "TAKE PROFIT (WIN)" if hit_tp else ("TRAILING STOP / SL" if hit_sl else "EXPIRACIÓN DE TIEMPO")
+                    logger.info(f"[Alpaca] 🎯 Cerrando posición de {symbol} por {exit_reason} (Precio: ${curr_price:.2f} | Entrada: ${entry_price:.2f})...")
+                    
+                    # Liquidar en Alpaca
+                    close_url = f"{self.base_url}/v2/positions/{symbol}"
+                    try:
+                        async with aiohttp.ClientSession(headers=self.headers) as session:
+                            async with session.delete(close_url, timeout=15) as r:
+                                if r.status in [200, 201]:
+                                    logger.info(f"[Alpaca] Posición de {symbol} liquidada exitosamente en el broker.")
+                    except Exception as e:
+                        logger.error(f"Error liquidando {symbol}: {e}")
+                        
+                    await asyncio.sleep(1)
+                    pnl, close_p = await self._get_closed_trade_details(symbol, side, entry_price, trade['qty'])
+                    if pnl == 0.0 and curr_price > 0:
+                        pnl = (curr_price - entry_price) * trade['qty'] if side == "buy" else (entry_price - curr_price) * trade['qty']
+                        close_p = curr_price
+                        
+                    closed_item = {
+                        "id": order_id,
+                        "asset": pair,
+                        "profit": pnl,
+                        "result": "win" if pnl > 0 else "loss",
+                        "close_time": int(current_time)
+                    }
+                    newly_closed.append(closed_item)
+                    self.closed_trades_cache.append(closed_item)
+                    del self.active_trades[order_id]
+                    logger.info(f"[Alpaca] Trade {order_id} de {symbol} FINALIZADO por {exit_reason}. PnL: ${pnl:+.2f} USD")
 
         # Retornar los cerrados en este escaneo
         return newly_closed
