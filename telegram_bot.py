@@ -1654,7 +1654,11 @@ class TelegramNotifier:
             for _, row in df_sorted.iterrows():
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
-                local_ts = row['timestamp']
+                ts_val = row['timestamp']
+                if ts_val.tzinfo is None:
+                    local_ts = ts_val.tz_localize('UTC').tz_convert(timezone(timedelta(hours=-3)))
+                else:
+                    local_ts = ts_val.tz_convert(timezone(timedelta(hours=-3)))
                 
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
                     time_str = local_ts.strftime('%d/%m %H:%M')
