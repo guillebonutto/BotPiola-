@@ -1647,6 +1647,11 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 local_ts = row['timestamp']
+                if hasattr(local_ts, 'tzinfo') and local_ts.tzinfo is not None:
+                    local_ts = local_ts.astimezone(timezone(timedelta(hours=-3)))
+                else:
+                    # Asumir que venía en UTC si es naive
+                    local_ts = local_ts.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=-3)))
                 
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
                     time_str = local_ts.strftime('%d/%m %H:%M')
@@ -1709,6 +1714,10 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 local_ts = row['timestamp']
+                if hasattr(local_ts, 'tzinfo') and local_ts.tzinfo is not None:
+                    local_ts = local_ts.astimezone(timezone(timedelta(hours=-3)))
+                else:
+                    local_ts = local_ts.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=-3)))
                 
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
                     time_str = local_ts.strftime('%d/%m %H:%M')
