@@ -1,129 +1,157 @@
 [
     {
-        "pair": "USDCAD_otc",
-        "strategy": "Fibonacci Retracement 61.8%",
-        "interval": 60,
-        "win_rate": 69.23,
-        "count": 13
-    },
-    {
-        "pair": "AUDCAD_otc",
+        "pair": "BTCUSD_otc",
         "strategy": "WaveTrend + Keltner Channel Reversion",
         "interval": 300,
-        "win_rate": 63.86,
-        "count": 83
+        "win_rate": 100.0,
+        "count": 6
     },
     {
-        "pair": "GBPJPY_otc",
-        "strategy": "Expert Vision Donchian Reversion",
-        "interval": 900,
-        "win_rate": 63.64,
-        "count": 11
-    },
-    {
-        "pair": "#MSFT_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 900,
-        "win_rate": 63.41,
-        "count": 41
-    },
-    {
-        "pair": "#BA_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 900,
-        "win_rate": 61.9,
-        "count": 21
-    },
-    {
-        "pair": "GBPJPY_otc",
+        "pair": "#TSLA_otc",
         "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 900,
-        "win_rate": 60.71,
-        "count": 28
+        "interval": 60,
+        "win_rate": 100.0,
+        "count": 4
     },
     {
         "pair": "#INTC_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 300,
-        "win_rate": 59.09,
-        "count": 44
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
+        "interval": 900,
+        "win_rate": 100.0,
+        "count": 5
     },
     {
-        "pair": "#MSFT_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+        "pair": "NZDUSD_otc",
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
+        "interval": 60,
+        "win_rate": 90.0,
+        "count": 10
+    },
+    {
+        "pair": "#MCD_otc",
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
         "interval": 900,
-        "win_rate": 58.82,
-        "count": 17
+        "win_rate": 85.71,
+        "count": 7
+    },
+    {
+        "pair": "USDCHF_otc",
+        "strategy": "Bollinger Extreme (2.5 Dev) + RSI Reversion",
+        "interval": 60,
+        "win_rate": 83.33,
+        "count": 6
+    },
+    {
+        "pair": "USDCHF_otc",
+        "strategy": "TTM Volatility Squeeze Breakout",
+        "interval": 900,
+        "win_rate": 83.33,
+        "count": 6
     },
     {
         "pair": "#PFE_otc",
-        "strategy": "Expert Vision Donchian Reversion",
+        "strategy": "TTM Volatility Squeeze Breakout",
+        "interval": 60,
+        "win_rate": 83.33,
+        "count": 6
+    },
+    {
+        "pair": "USDINR_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 60,
+        "win_rate": 80.0,
+        "count": 10
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
         "interval": 900,
-        "win_rate": 58.82,
-        "count": 17
-    },
-    {
-        "pair": "EURUSD_otc",
-        "strategy": "Expert Vision Donchian Reversion",
-        "interval": 300,
-        "win_rate": 57.89,
-        "count": 38
-    },
-    {
-        "pair": "#PFE_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 900,
-        "win_rate": 57.69,
-        "count": 26
-    },
-    {
-        "pair": "AUDCAD_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 300,
-        "win_rate": 57.5,
-        "count": 40
+        "win_rate": 80.0,
+        "count": 5
     },
     {
         "pair": "AUDJPY_otc",
-        "strategy": "Fibonacci Retracement 61.8%",
-        "interval": 60,
-        "win_rate": 57.14,
-        "count": 14
-    },
-    {
-        "pair": "USDCOP_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 300,
-        "win_rate": 56.0,
-        "count": 75
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
+        "interval": 900,
+        "win_rate": 80.0,
+        "count": 5
     },
     {
         "pair": "EURUSD_otc",
         "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 300,
-        "win_rate": 54.67,
-        "count": 75
-    },
-    {
-        "pair": "#MSFT_otc",
-        "strategy": "Expert Vision Donchian Reversion",
         "interval": 900,
-        "win_rate": 54.55,
-        "count": 22
+        "win_rate": 80.0,
+        "count": 5
+    },
+    {
+        "pair": "USDCAD_otc",
+        "strategy": "Bollinger Extreme (2.5 Dev) + RSI Reversion",
+        "interval": 60,
+        "win_rate": 78.95,
+        "count": 38
+    },
+    {
+        "pair": "USDCOP_otc",
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
+        "interval": 300,
+        "win_rate": 76.92,
+        "count": 13
+    },
+    {
+        "pair": "EURJPY_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 75.0,
+        "count": 12
+    },
+    {
+        "pair": "EURGBP_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 60,
+        "win_rate": 75.0,
+        "count": 4
+    },
+    {
+        "pair": "BTCUSD_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 900,
+        "win_rate": 75.0,
+        "count": 4
+    },
+    {
+        "pair": "AUDJPY_otc",
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
+        "interval": 300,
+        "win_rate": 75.0,
+        "count": 8
+    },
+    {
+        "pair": "USDCHF_otc",
+        "strategy": "Price Action Envolvente en Extremo Bollinger 2.5",
+        "interval": 60,
+        "win_rate": 75.0,
+        "count": 12
     },
     {
         "pair": "#AAPL_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 300,
-        "win_rate": 63.33,
-        "count": 30
+        "strategy": "TTM Volatility Squeeze Breakout",
+        "interval": 900,
+        "win_rate": 75.0,
+        "count": 8
     },
     {
-        "pair": "#AAPL_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 300,
-        "win_rate": 66.67,
-        "count": 15
+        "pair": "#BA_otc",
+        "strategy": "TTM Volatility Squeeze Breakout",
+        "interval": 900,
+        "win_rate": 75.0,
+        "count": 8
+    },
+    {
+        "pair": "#FB_otc",
+        "strategy": "TTM Volatility Squeeze Breakout",
+        "interval": 60,
+        "win_rate": 75.0,
+        "count": 8
     },
     {
         "pair": "#FB_otc",
@@ -133,6 +161,13 @@
         "count": 12
     },
     {
+        "pair": "NZDUSD_otc",
+        "strategy": "Bollinger Extreme (2.5 Dev) + RSI Reversion",
+        "interval": 60,
+        "win_rate": 75.0,
+        "count": 8
+    },
+    {
         "pair": "#AAPL_otc",
         "strategy": "WaveTrend + Keltner Channel Reversion",
         "interval": 60,
@@ -140,122 +175,73 @@
         "count": 11
     },
     {
-        "pair": "#FB_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 300,
-        "win_rate": 66.67,
-        "count": 18
-    },
-    {
-        "pair": "#AAPL_otc",
-        "strategy": "Expert Vision Donchian Reversion",
+        "pair": "GBPUSD_otc",
+        "strategy": "Price Action Envolvente en Extremo Bollinger 2.5",
         "interval": 900,
-        "win_rate": 65.0,
-        "count": 20
-    },
-    {
-        "pair": "#AAPL_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 900,
-        "win_rate": 60.98,
-        "count": 41
-    },
-    {
-        "pair": "#INTC_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 300,
-        "win_rate": 60.0,
-        "count": 30
-    },
-    {
-        "pair": "#MCD_otc",
-        "strategy": "Expert Vision Donchian Reversion",
-        "interval": 300,
-        "win_rate": 60.0,
-        "count": 15
-    },
-    {
-        "pair": "#MCD_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 300,
-        "win_rate": 60.0,
-        "count": 15
-    },
-    {
-        "pair": "#INTC_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 300,
-        "win_rate": 59.26,
-        "count": 27
-    },
-    {
-        "pair": "#INTC_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 900,
-        "win_rate": 58.33,
-        "count": 36
-    },
-    {
-        "pair": "#PFE_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 300,
-        "win_rate": 58.33,
-        "count": 36
-    },
-    {
-        "pair": "#PFE_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 300,
-        "win_rate": 57.89,
-        "count": 19
-    },
-    {
-        "pair": "#INTC_otc",
-        "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "interval": 900,
-        "win_rate": 57.14,
-        "count": 14
-    },
-    {
-        "pair": "#PFE_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 60,
-        "win_rate": 56.25,
-        "count": 16
-    },
-    {
-        "pair": "#FB_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
-        "interval": 300,
-        "win_rate": 56.0,
-        "count": 25
-    },
-    {
-        "pair": "#MSFT_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 300,
-        "win_rate": 55.26,
-        "count": 38
-    },
-    {
-        "pair": "#MCD_otc",
-        "strategy": "Estoc\u00e1stico + SMA200",
-        "interval": 900,
-        "win_rate": 55.17,
+        "win_rate": 72.41,
         "count": 29
     },
     {
-        "pair": "#MCD_otc",
-        "strategy": "Expert Vision Donchian Reversion",
-        "interval": 900,
-        "win_rate": 55.0,
-        "count": 20
+        "pair": "USDINR_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 71.43,
+        "count": 14
     },
     {
-        "pair": "#INTC_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "pair": "AUDUSD_otc",
+        "strategy": "TTM Volatility Squeeze Breakout",
         "interval": 60,
-        "win_rate": 55.0,
-        "count": 20
+        "win_rate": 71.43,
+        "count": 7
+    },
+    {
+        "pair": "GBPJPY_otc",
+        "strategy": "TTM Volatility Squeeze Breakout",
+        "interval": 900,
+        "win_rate": 71.43,
+        "count": 7
+    },
+    {
+        "pair": "NZDUSD_otc",
+        "strategy": "Bollinger Extreme (2.5 Dev) + RSI Reversion",
+        "interval": 300,
+        "win_rate": 71.43,
+        "count": 7
+    },
+    {
+        "pair": "#PFE_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 300,
+        "win_rate": 71.43,
+        "count": 7
+    },
+    {
+        "pair": "NZDUSD_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 900,
+        "win_rate": 70.83,
+        "count": 24
+    },
+    {
+        "pair": "AUDCAD_otc",
+        "strategy": "WaveTrend + Keltner Channel Reversion",
+        "interval": 900,
+        "win_rate": 70.59,
+        "count": 17
+    },
+    {
+        "pair": "#BA_otc",
+        "strategy": "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)",
+        "interval": 900,
+        "win_rate": 70.0,
+        "count": 10
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "RSI Divergence + Pivot Reversion",
+        "interval": 300,
+        "win_rate": 72.73,
+        "count": 33
     }
 ]

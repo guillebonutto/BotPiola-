@@ -19,6 +19,7 @@ from strategy_hybrid_sniper import StrategyHybridSniper
 from strategy_bollinger_rsi import StrategyBollingerRSI
 from strategy_price_action_engulfing import StrategyPriceActionEngulfing
 from strategy_trend_pullback import StrategyTrendPullback
+from strategy_divergence_pivot import StrategyDivergencePivot
 
 from trade_logger import trade_logger
 from feedback_db import FeedbackDB
@@ -115,7 +116,8 @@ class TradingBot:
             StrategyFibonacci(bypass_filter=is_alpaca),
             StrategyStructure(),
             StrategyExpertVision(bypass_filter=is_alpaca),
-            StrategyContinuation()
+            StrategyContinuation(),
+            StrategyDivergencePivot(bypass_filter=is_alpaca)
         ]
         
         enabled_list = self.config.get('enabled_strategies')
