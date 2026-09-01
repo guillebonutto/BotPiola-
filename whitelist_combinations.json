@@ -49,13 +49,6 @@
         "count": 6
     },
     {
-        "pair": "#PFE_otc",
-        "strategy": "TTM Volatility Squeeze Breakout",
-        "interval": 60,
-        "win_rate": 83.33,
-        "count": 6
-    },
-    {
         "pair": "USDINR_otc",
         "strategy": "WaveTrend + Keltner Channel Reversion",
         "interval": 60,
@@ -205,13 +198,6 @@
     {
         "pair": "NZDUSD_otc",
         "strategy": "Bollinger Extreme (2.5 Dev) + RSI Reversion",
-        "interval": 300,
-        "win_rate": 71.43,
-        "count": 7
-    },
-    {
-        "pair": "#PFE_otc",
-        "strategy": "WaveTrend + Keltner Channel Reversion",
         "interval": 300,
         "win_rate": 71.43,
         "count": 7
