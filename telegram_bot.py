@@ -1414,10 +1414,18 @@ class TelegramNotifier:
                 if 'profit_loss' in completed.columns:
                     stats['pnl'] = completed['profit_loss'].sum()
                     
-            # Hoy (GMT-3)
+            # Hoy (UTC-3)
             tz = timezone(timedelta(hours=-3))
             today = datetime.now(tz).date()
-            df_today = completed[completed['timestamp'].dt.date == today]
+            
+            # Convertir la columna timestamp a tz UTC-3 para comparar correctamente la fecha local
+            ts_col = completed['timestamp']
+            if ts_col.dt.tz is None:
+                ts_local = ts_col.dt.tz_localize('UTC').dt.tz_convert(tz)
+            else:
+                ts_local = ts_col.dt.tz_convert(tz)
+                
+            df_today = completed[ts_local.dt.date == today]
             if len(df_today) > 0:
                 stats['today_trades'] = len(df_today)
                 wins_today = len(df_today[df_today['result'] == 'WIN'])
@@ -1647,11 +1655,6 @@ class TelegramNotifier:
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
                 local_ts = row['timestamp']
-                if hasattr(local_ts, 'tzinfo') and local_ts.tzinfo is not None:
-                    local_ts = local_ts.astimezone(timezone(timedelta(hours=-3)))
-                else:
-                    # Asumir que venía en UTC si es naive
-                    local_ts = local_ts.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=-3)))
                 
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
                     time_str = local_ts.strftime('%d/%m %H:%M')
@@ -1713,11 +1716,11 @@ class TelegramNotifier:
             for _, row in trades_to_show.iterrows():
                 res_icon = "✅" if row['result'] == 'WIN' else "❌" if row['result'] == 'LOSS' else "⏳"
                 pnl_str = f"{row['profit_loss']:+.2f}$" if row['result'] in ['WIN', 'LOSS'] else "---"
-                local_ts = row['timestamp']
-                if hasattr(local_ts, 'tzinfo') and local_ts.tzinfo is not None:
-                    local_ts = local_ts.astimezone(timezone(timedelta(hours=-3)))
+                ts_val = row['timestamp']
+                if ts_val.tzinfo is None:
+                    local_ts = ts_val.tz_localize('UTC').tz_convert(timezone(timedelta(hours=-3)))
                 else:
-                    local_ts = local_ts.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=-3)))
+                    local_ts = ts_val.tz_convert(timezone(timedelta(hours=-3)))
                 
                 if start_dt and end_dt and (end_dt - start_dt).days >= 1:
                     time_str = local_ts.strftime('%d/%m %H:%M')
