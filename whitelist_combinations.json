@@ -229,5 +229,26 @@
         "interval": 300,
         "win_rate": 72.73,
         "count": 33
+    },
+    {
+        "pair": "AUDUSD_otc",
+        "strategy": "Smart Money Concepts (FVG + Order Block)",
+        "interval": 3600,
+        "win_rate": 78.57,
+        "count": 14
+    },
+    {
+        "pair": "USDINR_otc",
+        "strategy": "Smart Money Concepts (FVG + Order Block)",
+        "interval": 1800,
+        "win_rate": 75.0,
+        "count": 28
+    },
+    {
+        "pair": "#BA_otc",
+        "strategy": "Smart Money Concepts (FVG + Order Block)",
+        "interval": 3600,
+        "win_rate": 71.43,
+        "count": 14
     }
 ]
