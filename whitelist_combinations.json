@@ -250,5 +250,103 @@
         "interval": 3600,
         "win_rate": 71.43,
         "count": 14
+    },
+    {
+        "pair": "#FB_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 900,
+        "win_rate": 90.91,
+        "count": 11
+    },
+    {
+        "pair": "GBPUSD_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 1800,
+        "win_rate": 90.0,
+        "count": 10
+    },
+    {
+        "pair": "AUDCAD_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 3600,
+        "win_rate": 88.89,
+        "count": 9
+    },
+    {
+        "pair": "AUDUSD_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 900,
+        "win_rate": 83.33,
+        "count": 12
+    },
+    {
+        "pair": "EURUSD_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 900,
+        "win_rate": 82.35,
+        "count": 17
+    },
+    {
+        "pair": "USDCHF_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 1800,
+        "win_rate": 81.82,
+        "count": 11
+    },
+    {
+        "pair": "EURJPY_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 300,
+        "win_rate": 81.82,
+        "count": 11
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 60,
+        "win_rate": 80.0,
+        "count": 10
+    },
+    {
+        "pair": "#TSLA_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 900,
+        "win_rate": 78.95,
+        "count": 19
+    },
+    {
+        "pair": "#MSFT_otc",
+        "strategy": "Fibonacci Master Sniper (Golden Zone + Matrix)",
+        "interval": 300,
+        "win_rate": 77.78,
+        "count": 9
+    },
+    {
+        "pair": "USDCHF_otc",
+        "strategy": "Chartist Master (Wedges & Triangles)",
+        "interval": 300,
+        "win_rate": 72.73,
+        "count": 11
+    },
+    {
+        "pair": "AUDCAD_otc",
+        "strategy": "Chartist Master (Wedges & Triangles)",
+        "interval": 3600,
+        "win_rate": 70.0,
+        "count": 10
+    },
+    {
+        "pair": "EURGBP_otc",
+        "strategy": "Chartist Master (Wedges & Triangles)",
+        "interval": 3600,
+        "win_rate": 70.0,
+        "count": 10
+    },
+    {
+        "pair": "#AAPL_otc",
+        "strategy": "Chartist Master (Wedges & Triangles)",
+        "interval": 900,
+        "win_rate": 70.0,
+        "count": 10
     }
 ]

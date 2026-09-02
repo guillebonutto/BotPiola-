@@ -21,6 +21,8 @@ from strategy_price_action_engulfing import StrategyPriceActionEngulfing
 from strategy_trend_pullback import StrategyTrendPullback
 from strategy_divergence_pivot import StrategyDivergencePivot
 from strategy_smart_money_smc import StrategySmartMoneySMC
+from strategy_fibonacci_master import StrategyFibonacciMasterSniper
+from strategy_chartist_patterns import StrategyChartistPatterns
 
 from trade_logger import trade_logger
 from feedback_db import FeedbackDB
@@ -119,7 +121,9 @@ class TradingBot:
             StrategyExpertVision(bypass_filter=is_alpaca),
             StrategyContinuation(),
             StrategyDivergencePivot(bypass_filter=is_alpaca),
-            StrategySmartMoneySMC(bypass_filter=is_alpaca)
+            StrategySmartMoneySMC(bypass_filter=is_alpaca),
+            StrategyFibonacciMasterSniper(bypass_filter=is_alpaca),
+            StrategyChartistPatterns(bypass_filter=is_alpaca)
         ]
         
         enabled_list = self.config.get('enabled_strategies')
