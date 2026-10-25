@@ -1,0 +1,702 @@
+{
+    "EURUSD_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 29,
+            "wins": 10,
+            "losses": 19,
+            "win_rate": 34.48,
+            "total_profit": -56.67
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 4,
+            "wins": 0,
+            "losses": 4,
+            "win_rate": 0.0,
+            "total_profit": -40.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 5,
+            "wins": 0,
+            "losses": 5,
+            "win_rate": 0.0,
+            "total_profit": -50.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 3,
+            "wins": 0,
+            "losses": 3,
+            "win_rate": 0.0,
+            "total_profit": -29.25
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 56,
+            "wins": 28,
+            "losses": 28,
+            "win_rate": 50.0,
+            "total_profit": 93.33
+        }
+    ],
+    "GBPUSD_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 49,
+            "wins": 18,
+            "losses": 31,
+            "win_rate": 36.73,
+            "total_profit": -70.0
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 5,
+            "wins": 2,
+            "losses": 3,
+            "win_rate": 40.0,
+            "total_profit": -3.33
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 3,
+            "wins": 1,
+            "losses": 2,
+            "win_rate": 33.33,
+            "total_profit": -6.67
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 8,
+            "wins": 5,
+            "losses": 3,
+            "win_rate": 62.5,
+            "total_profit": 36.67
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 71,
+            "wins": 28,
+            "losses": 43,
+            "win_rate": 39.44,
+            "total_profit": -56.67
+        }
+    ],
+    "AUDUSD_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 32,
+            "wins": 7,
+            "losses": 25,
+            "win_rate": 21.88,
+            "total_profit": -156.67
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 5,
+            "wins": 1,
+            "losses": 4,
+            "win_rate": 20.0,
+            "total_profit": -26.67
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 4,
+            "wins": 3,
+            "losses": 1,
+            "win_rate": 75.0,
+            "total_profit": 30.0
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 51,
+            "wins": 26,
+            "losses": 25,
+            "win_rate": 50.98,
+            "total_profit": 88.07
+        }
+    ],
+    "USDCAD_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 33,
+            "wins": 7,
+            "losses": 26,
+            "win_rate": 21.21,
+            "total_profit": -139.41
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 6,
+            "wins": 1,
+            "losses": 5,
+            "win_rate": 16.67,
+            "total_profit": -36.67
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 8,
+            "wins": 3,
+            "losses": 5,
+            "win_rate": 37.5,
+            "total_profit": -0.37
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 18,
+            "wins": 10,
+            "losses": 8,
+            "win_rate": 55.56,
+            "total_profit": 25.77
+        }
+    ],
+    "USDJPY_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 36,
+            "wins": 16,
+            "losses": 20,
+            "win_rate": 44.44,
+            "total_profit": 9.85
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0,
+            "total_profit": -20.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0,
+            "total_profit": -20.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 23,
+            "wins": 7,
+            "losses": 16,
+            "win_rate": 30.43,
+            "total_profit": -75.93
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 59,
+            "wins": 25,
+            "losses": 34,
+            "win_rate": 42.37,
+            "total_profit": -13.13
+        }
+    ],
+    "SPY_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 22,
+            "wins": 12,
+            "losses": 10,
+            "win_rate": 54.55,
+            "total_profit": 60.0
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 2,
+            "wins": 1,
+            "losses": 1,
+            "win_rate": 50.0,
+            "total_profit": 3.33
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0,
+            "total_profit": -20.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 3,
+            "wins": 1,
+            "losses": 2,
+            "win_rate": 33.33,
+            "total_profit": -6.67
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 41,
+            "wins": 16,
+            "losses": 25,
+            "win_rate": 39.02,
+            "total_profit": -33.88
+        }
+    ],
+    "AAPL_5m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 24,
+            "wins": 9,
+            "losses": 15,
+            "win_rate": 37.5,
+            "total_profit": -30.0
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0,
+            "total_profit": -10.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 6,
+            "wins": 1,
+            "losses": 5,
+            "win_rate": 16.67,
+            "total_profit": -36.67
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 43,
+            "wins": 21,
+            "losses": 22,
+            "win_rate": 48.84,
+            "total_profit": 63.17
+        }
+    ],
+    "EURUSD_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 36,
+            "wins": 21,
+            "losses": 15,
+            "win_rate": 58.33,
+            "total_profit": 88.69
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 3,
+            "wins": 2,
+            "losses": 1,
+            "win_rate": 66.67,
+            "total_profit": 26.67
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 4,
+            "wins": 3,
+            "losses": 1,
+            "win_rate": 75.0,
+            "total_profit": 25.04
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 3,
+            "wins": 1,
+            "losses": 2,
+            "win_rate": 33.33,
+            "total_profit": -6.67
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 41,
+            "wins": 18,
+            "losses": 23,
+            "win_rate": 43.9,
+            "total_profit": -10.1
+        }
+    ],
+    "GBPUSD_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 37,
+            "wins": 22,
+            "losses": 15,
+            "win_rate": 59.46,
+            "total_profit": 129.48
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 3,
+            "wins": 1,
+            "losses": 2,
+            "win_rate": 33.33,
+            "total_profit": -6.67
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 3,
+            "wins": 1,
+            "losses": 2,
+            "win_rate": 33.33,
+            "total_profit": -8.73
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 7,
+            "wins": 4,
+            "losses": 3,
+            "win_rate": 57.14,
+            "total_profit": 18.22
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 55,
+            "wins": 25,
+            "losses": 30,
+            "win_rate": 45.45,
+            "total_profit": 10.16
+        }
+    ],
+    "AUDUSD_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 31,
+            "wins": 21,
+            "losses": 10,
+            "win_rate": 67.74,
+            "total_profit": 165.34
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 2,
+            "wins": 1,
+            "losses": 1,
+            "win_rate": 50.0,
+            "total_profit": -7.83
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0,
+            "total_profit": -10.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 5,
+            "wins": 2,
+            "losses": 3,
+            "win_rate": 40.0,
+            "total_profit": -14.49
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 52,
+            "wins": 22,
+            "losses": 30,
+            "win_rate": 42.31,
+            "total_profit": -60.19
+        }
+    ],
+    "USDCAD_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 14,
+            "wins": 4,
+            "losses": 10,
+            "win_rate": 28.57,
+            "total_profit": -68.69
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 100.0,
+            "total_profit": 0.37
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 13,
+            "wins": 8,
+            "losses": 5,
+            "win_rate": 61.54,
+            "total_profit": 10.51
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 17,
+            "wins": 8,
+            "losses": 9,
+            "win_rate": 47.06,
+            "total_profit": 28.62
+        }
+    ],
+    "USDJPY_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 15,
+            "wins": 8,
+            "losses": 7,
+            "win_rate": 53.33,
+            "total_profit": 5.07
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0,
+            "total_profit": -20.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 11,
+            "wins": 4,
+            "losses": 7,
+            "win_rate": 36.36,
+            "total_profit": -33.65
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 37,
+            "wins": 17,
+            "losses": 20,
+            "win_rate": 45.95,
+            "total_profit": 19.24
+        }
+    ],
+    "SPY_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 14,
+            "wins": 7,
+            "losses": 7,
+            "win_rate": 50.0,
+            "total_profit": 22.08
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 4,
+            "wins": 1,
+            "losses": 3,
+            "win_rate": 25.0,
+            "total_profit": -16.67
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 100.0,
+            "total_profit": 8.4
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 28,
+            "wins": 12,
+            "losses": 16,
+            "win_rate": 42.86,
+            "total_profit": 9.2
+        }
+    ],
+    "AAPL_15m": [
+        {
+            "strategy": "Estoc\u00e1stico + SMA200",
+            "total_trades": 15,
+            "wins": 2,
+            "losses": 13,
+            "win_rate": 13.33,
+            "total_profit": -103.33
+        },
+        {
+            "strategy": "Fibonacci Retracement 61.8%",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Cambio de Estructura (MSS)",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Expert Vision Donchian Reversion",
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_profit": 0.0
+        },
+        {
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "total_trades": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0,
+            "total_profit": -10.0
+        },
+        {
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "total_trades": 24,
+            "wins": 13,
+            "losses": 11,
+            "win_rate": 54.17,
+            "total_profit": 34.06
+        }
+    ]
+}

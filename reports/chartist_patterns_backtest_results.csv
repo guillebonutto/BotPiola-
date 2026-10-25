@@ -1,0 +1,210 @@
+symbol,name,type,timeframe,pattern,trades,wins,losses,winrate,tot_pnl,profit_factor,avg_duration_hours
+AAPL,Apple Inc.,Stock,15m,Triángulo Ascendente (Ascending Triangle),12,3,9,25.0,-1.54,0.6,0.7
+AAPL,Apple Inc.,Stock,15m,Triángulo Descendente (Descending Triangle),4,3,1,75.0,1.34,3.66,2.0
+AAPL,Apple Inc.,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),21,8,13,38.1,-0.57,0.9,1.1
+AAPL,Apple Inc.,Stock,15m,Doble Suelo (Double Bottom 'W'),22,7,15,31.8,-2.06,0.72,0.6
+AAPL,Apple Inc.,Stock,15m,Doble Techo (Double Top 'M'),10,3,7,30.0,-0.79,0.77,1.1
+AAPL,Apple Inc.,Stock,1h,Triángulo Ascendente (Ascending Triangle),27,8,19,29.6,-8.06,0.58,6.1
+AAPL,Apple Inc.,Stock,1h,Triángulo Descendente (Descending Triangle),12,3,9,25.0,-5.61,0.46,4.4
+AAPL,Apple Inc.,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),35,11,24,31.4,-6.26,0.72,6.2
+AAPL,Apple Inc.,Stock,1h,Doble Suelo (Double Bottom 'W'),54,12,42,22.2,-20.25,0.46,4.6
+AAPL,Apple Inc.,Stock,1h,Doble Techo (Double Top 'M'),46,15,31,32.6,-4.58,0.84,4.2
+AAPL,Apple Inc.,Stock,5m,Triángulo Ascendente (Ascending Triangle),20,9,11,45.0,0.34,1.11,0.6
+AAPL,Apple Inc.,Stock,5m,Triángulo Descendente (Descending Triangle),17,6,11,35.3,0.12,1.05,0.6
+AAPL,Apple Inc.,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),46,11,35,23.9,-4.7,0.5,0.5
+AAPL,Apple Inc.,Stock,5m,Doble Suelo (Double Bottom 'W'),51,15,36,29.4,-2.94,0.7,0.4
+AAPL,Apple Inc.,Stock,5m,Doble Techo (Double Top 'M'),37,8,29,21.6,-4.04,0.46,0.4
+MSFT,Microsoft Corp.,Stock,15m,Triángulo Ascendente (Ascending Triangle),6,1,5,16.7,-1.12,0.51,0.6
+MSFT,Microsoft Corp.,Stock,15m,Triángulo Descendente (Descending Triangle),6,3,3,50.0,1.09,1.8,0.8
+MSFT,Microsoft Corp.,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),26,11,15,42.3,1.63,1.24,0.9
+MSFT,Microsoft Corp.,Stock,15m,Doble Suelo (Double Bottom 'W'),17,5,12,29.4,-1.44,0.77,1.5
+MSFT,Microsoft Corp.,Stock,15m,Doble Techo (Double Top 'M'),12,5,7,41.7,-0.46,0.89,1.2
+MSFT,Microsoft Corp.,Stock,1h,Triángulo Ascendente (Ascending Triangle),21,12,9,57.1,7.88,2.14,4.7
+MSFT,Microsoft Corp.,Stock,1h,Triángulo Descendente (Descending Triangle),14,10,4,71.4,10.4,4.26,5.5
+MSFT,Microsoft Corp.,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),42,13,29,31.0,-3.12,0.87,3.8
+MSFT,Microsoft Corp.,Stock,1h,Doble Suelo (Double Bottom 'W'),42,11,31,26.2,-7.54,0.69,4.7
+MSFT,Microsoft Corp.,Stock,1h,Doble Techo (Double Top 'M'),36,15,21,41.7,3.23,1.18,4.4
+MSFT,Microsoft Corp.,Stock,5m,Triángulo Ascendente (Ascending Triangle),20,5,15,25.0,-2.48,0.42,0.6
+MSFT,Microsoft Corp.,Stock,5m,Triángulo Descendente (Descending Triangle),16,7,9,43.8,1.26,1.59,0.9
+MSFT,Microsoft Corp.,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),39,9,30,23.1,-4.44,0.53,0.7
+MSFT,Microsoft Corp.,Stock,5m,Doble Suelo (Double Bottom 'W'),42,8,34,19.0,-5.62,0.44,0.5
+MSFT,Microsoft Corp.,Stock,5m,Doble Techo (Double Top 'M'),43,16,27,37.2,-0.66,0.91,0.5
+NVDA,NVIDIA Corp.,Stock,15m,Triángulo Ascendente (Ascending Triangle),5,3,2,60.0,2.22,2.93,1.9
+NVDA,NVIDIA Corp.,Stock,15m,Triángulo Descendente (Descending Triangle),11,3,8,27.3,-2.8,0.49,1.2
+NVDA,NVIDIA Corp.,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),18,6,12,33.3,-1.78,0.77,1.2
+NVDA,NVIDIA Corp.,Stock,15m,Doble Suelo (Double Bottom 'W'),18,3,15,16.7,-7.27,0.32,1.6
+NVDA,NVIDIA Corp.,Stock,15m,Doble Techo (Double Top 'M'),13,1,12,7.7,-6.75,0.12,1.2
+NVDA,NVIDIA Corp.,Stock,1h,Triángulo Ascendente (Ascending Triangle),26,8,18,30.8,-3.94,0.83,4.9
+NVDA,NVIDIA Corp.,Stock,1h,Triángulo Descendente (Descending Triangle),12,4,8,33.3,-1.31,0.89,4.8
+NVDA,NVIDIA Corp.,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),42,16,26,38.1,-4.04,0.9,5.8
+NVDA,NVIDIA Corp.,Stock,1h,Doble Suelo (Double Bottom 'W'),37,12,25,32.4,-1.65,0.95,5.1
+NVDA,NVIDIA Corp.,Stock,1h,Doble Techo (Double Top 'M'),42,17,25,40.5,6.36,1.16,3.9
+NVDA,NVIDIA Corp.,Stock,5m,Triángulo Ascendente (Ascending Triangle),23,7,16,30.4,-0.1,0.98,0.9
+NVDA,NVIDIA Corp.,Stock,5m,Triángulo Descendente (Descending Triangle),19,7,12,36.8,-0.99,0.79,0.7
+NVDA,NVIDIA Corp.,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),39,9,30,23.1,-4.63,0.61,0.8
+NVDA,NVIDIA Corp.,Stock,5m,Doble Suelo (Double Bottom 'W'),41,8,33,19.5,-7.72,0.38,0.5
+NVDA,NVIDIA Corp.,Stock,5m,Doble Techo (Double Top 'M'),49,13,36,26.5,-5.8,0.58,0.3
+SPY,SPDR S&P 500 ETF,ETF,15m,Triángulo Ascendente (Ascending Triangle),4,0,4,0.0,-0.68,0.0,0.6
+SPY,SPDR S&P 500 ETF,ETF,15m,Triángulo Descendente (Descending Triangle),5,1,4,20.0,-0.67,0.29,1.4
+SPY,SPDR S&P 500 ETF,ETF,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),17,5,12,29.4,-0.49,0.8,1.9
+SPY,SPDR S&P 500 ETF,ETF,15m,Doble Suelo (Double Bottom 'W'),15,2,13,13.3,-2.42,0.26,2.1
+SPY,SPDR S&P 500 ETF,ETF,15m,Doble Techo (Double Top 'M'),19,7,12,36.8,-1.31,0.59,1.0
+SPY,SPDR S&P 500 ETF,ETF,1h,Triángulo Ascendente (Ascending Triangle),26,14,12,53.8,6.22,2.36,7.3
+SPY,SPDR S&P 500 ETF,ETF,1h,Triángulo Descendente (Descending Triangle),13,4,9,30.8,-2.99,0.42,4.5
+SPY,SPDR S&P 500 ETF,ETF,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),35,11,24,31.4,-4.34,0.64,4.7
+SPY,SPDR S&P 500 ETF,ETF,1h,Doble Suelo (Double Bottom 'W'),60,18,42,30.0,-5.63,0.71,6.1
+SPY,SPDR S&P 500 ETF,ETF,1h,Doble Techo (Double Top 'M'),53,14,39,26.4,-5.43,0.72,3.1
+SPY,SPDR S&P 500 ETF,ETF,5m,Triángulo Ascendente (Ascending Triangle),19,8,11,42.1,0.72,1.5,0.6
+SPY,SPDR S&P 500 ETF,ETF,5m,Triángulo Descendente (Descending Triangle),19,8,11,42.1,0.45,1.32,0.8
+SPY,SPDR S&P 500 ETF,ETF,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),39,15,24,38.5,-0.07,0.98,0.8
+SPY,SPDR S&P 500 ETF,ETF,5m,Doble Suelo (Double Bottom 'W'),45,12,33,26.7,-1.6,0.64,0.6
+SPY,SPDR S&P 500 ETF,ETF,5m,Doble Techo (Double Top 'M'),63,18,45,28.6,-2.58,0.57,0.3
+QQQ,Invesco QQQ Trust,ETF,15m,Triángulo Ascendente (Ascending Triangle),3,0,3,0.0,-1.2,0.0,3.7
+QQQ,Invesco QQQ Trust,ETF,15m,Triángulo Descendente (Descending Triangle),7,1,6,14.3,-1.51,0.33,0.5
+QQQ,Invesco QQQ Trust,ETF,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),13,2,11,15.4,-2.02,0.48,0.7
+QQQ,Invesco QQQ Trust,ETF,15m,Doble Suelo (Double Bottom 'W'),11,2,9,18.2,-2.08,0.37,1.8
+QQQ,Invesco QQQ Trust,ETF,15m,Doble Techo (Double Top 'M'),18,6,12,33.3,-1.42,0.73,1.2
+QQQ,Invesco QQQ Trust,ETF,1h,Triángulo Ascendente (Ascending Triangle),28,13,15,46.4,9.59,2.26,4.6
+QQQ,Invesco QQQ Trust,ETF,1h,Triángulo Descendente (Descending Triangle),14,3,11,21.4,-4.43,0.38,3.9
+QQQ,Invesco QQQ Trust,ETF,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),38,16,22,42.1,1.75,1.11,4.7
+QQQ,Invesco QQQ Trust,ETF,1h,Doble Suelo (Double Bottom 'W'),46,12,34,26.1,-7.95,0.61,5.4
+QQQ,Invesco QQQ Trust,ETF,1h,Doble Techo (Double Top 'M'),44,14,30,31.8,-6.09,0.73,3.5
+QQQ,Invesco QQQ Trust,ETF,5m,Triángulo Ascendente (Ascending Triangle),19,6,13,31.6,-0.88,0.69,1.1
+QQQ,Invesco QQQ Trust,ETF,5m,Triángulo Descendente (Descending Triangle),15,7,8,46.7,1.22,1.69,0.7
+QQQ,Invesco QQQ Trust,ETF,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),36,12,24,33.3,0.21,1.04,1.0
+QQQ,Invesco QQQ Trust,ETF,5m,Doble Suelo (Double Bottom 'W'),45,9,36,20.0,-4.32,0.47,0.8
+QQQ,Invesco QQQ Trust,ETF,5m,Doble Techo (Double Top 'M'),68,19,49,27.9,-4.1,0.61,0.4
+TSLA,Tesla Inc.,Stock,15m,Triángulo Descendente (Descending Triangle),6,1,5,16.7,-2.7,0.29,1.0
+TSLA,Tesla Inc.,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),22,11,11,50.0,5.26,1.73,1.0
+TSLA,Tesla Inc.,Stock,15m,Doble Suelo (Double Bottom 'W'),15,6,9,40.0,2.0,1.31,0.6
+TSLA,Tesla Inc.,Stock,15m,Doble Techo (Double Top 'M'),9,3,6,33.3,-0.24,0.95,1.3
+TSLA,Tesla Inc.,Stock,1h,Triángulo Ascendente (Ascending Triangle),20,10,10,50.0,14.9,1.88,5.4
+TSLA,Tesla Inc.,Stock,1h,Triángulo Descendente (Descending Triangle),21,11,10,52.4,19.08,2.04,7.0
+TSLA,Tesla Inc.,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),55,17,38,30.9,-23.22,0.67,3.4
+TSLA,Tesla Inc.,Stock,1h,Doble Suelo (Double Bottom 'W'),36,12,24,33.3,-9.68,0.79,4.5
+TSLA,Tesla Inc.,Stock,1h,Doble Techo (Double Top 'M'),38,15,23,39.5,0.53,1.01,4.3
+TSLA,Tesla Inc.,Stock,5m,Triángulo Ascendente (Ascending Triangle),20,7,13,35.0,1.1,1.26,0.5
+TSLA,Tesla Inc.,Stock,5m,Triángulo Descendente (Descending Triangle),15,3,12,20.0,-2.27,0.52,0.7
+TSLA,Tesla Inc.,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),40,11,29,27.5,-5.71,0.56,0.5
+TSLA,Tesla Inc.,Stock,5m,Doble Suelo (Double Bottom 'W'),51,17,34,33.3,-1.79,0.88,0.6
+TSLA,Tesla Inc.,Stock,5m,Doble Techo (Double Top 'M'),36,11,25,30.6,-2.22,0.8,0.5
+AMZN,Amazon.com Inc.,Stock,15m,Triángulo Ascendente (Ascending Triangle),3,2,1,66.7,1.54,5.22,1.2
+AMZN,Amazon.com Inc.,Stock,15m,Triángulo Descendente (Descending Triangle),7,4,3,57.1,2.5,2.95,1.8
+AMZN,Amazon.com Inc.,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),18,6,12,33.3,-1.14,0.82,0.8
+AMZN,Amazon.com Inc.,Stock,15m,Doble Suelo (Double Bottom 'W'),14,1,13,7.1,-6.25,0.12,0.9
+AMZN,Amazon.com Inc.,Stock,15m,Doble Techo (Double Top 'M'),21,9,12,42.9,2.02,1.31,1.5
+AMZN,Amazon.com Inc.,Stock,1h,Triángulo Ascendente (Ascending Triangle),20,11,9,55.0,5.08,1.44,5.7
+AMZN,Amazon.com Inc.,Stock,1h,Triángulo Descendente (Descending Triangle),11,7,4,63.6,7.88,2.58,7.5
+AMZN,Amazon.com Inc.,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),47,23,24,48.9,11.21,1.43,6.2
+AMZN,Amazon.com Inc.,Stock,1h,Doble Suelo (Double Bottom 'W'),43,16,27,37.2,-1.4,0.95,5.2
+AMZN,Amazon.com Inc.,Stock,1h,Doble Techo (Double Top 'M'),44,17,27,38.6,2.11,1.07,3.0
+AMZN,Amazon.com Inc.,Stock,5m,Triángulo Ascendente (Ascending Triangle),20,5,15,25.0,-2.24,0.5,0.5
+AMZN,Amazon.com Inc.,Stock,5m,Triángulo Descendente (Descending Triangle),27,9,18,33.3,-1.1,0.79,0.7
+AMZN,Amazon.com Inc.,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),45,15,30,33.3,-2.46,0.74,0.6
+AMZN,Amazon.com Inc.,Stock,5m,Doble Suelo (Double Bottom 'W'),44,10,34,22.7,-4.18,0.55,0.4
+AMZN,Amazon.com Inc.,Stock,5m,Doble Techo (Double Top 'M'),47,14,33,29.8,-2.62,0.71,0.5
+META,Meta Platforms,Stock,15m,Triángulo Ascendente (Ascending Triangle),5,4,1,80.0,3.67,8.59,0.7
+META,Meta Platforms,Stock,15m,Triángulo Descendente (Descending Triangle),5,2,3,40.0,-0.41,0.8,1.4
+META,Meta Platforms,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),23,9,14,39.1,0.01,1.0,0.8
+META,Meta Platforms,Stock,15m,Doble Suelo (Double Bottom 'W'),11,6,5,54.5,2.82,1.77,0.3
+META,Meta Platforms,Stock,15m,Doble Techo (Double Top 'M'),9,4,5,44.4,1.42,1.47,1.5
+META,Meta Platforms,Stock,1h,Triángulo Ascendente (Ascending Triangle),23,10,13,43.5,4.36,1.34,6.0
+META,Meta Platforms,Stock,1h,Triángulo Descendente (Descending Triangle),19,9,10,47.4,11.82,2.12,4.2
+META,Meta Platforms,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),49,25,24,51.0,13.54,1.41,5.0
+META,Meta Platforms,Stock,1h,Doble Suelo (Double Bottom 'W'),37,14,23,37.8,-0.54,0.98,6.1
+META,Meta Platforms,Stock,1h,Doble Techo (Double Top 'M'),42,19,23,45.2,10.56,1.38,4.0
+META,Meta Platforms,Stock,5m,Triángulo Ascendente (Ascending Triangle),19,6,13,31.6,-1.98,0.57,0.5
+META,Meta Platforms,Stock,5m,Triángulo Descendente (Descending Triangle),19,12,7,63.2,3.77,2.71,0.7
+META,Meta Platforms,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),47,14,33,29.8,-5.19,0.62,0.7
+META,Meta Platforms,Stock,5m,Doble Suelo (Double Bottom 'W'),41,9,32,22.0,-5.32,0.54,0.3
+META,Meta Platforms,Stock,5m,Doble Techo (Double Top 'M'),37,6,31,16.2,-7.3,0.3,0.5
+AMD,Advanced Micro Devices,Stock,15m,Triángulo Ascendente (Ascending Triangle),11,3,8,27.3,-4.76,0.55,1.2
+AMD,Advanced Micro Devices,Stock,15m,Triángulo Descendente (Descending Triangle),10,5,5,50.0,2.36,1.46,0.5
+AMD,Advanced Micro Devices,Stock,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),20,7,13,35.0,-2.18,0.84,0.8
+AMD,Advanced Micro Devices,Stock,15m,Doble Suelo (Double Bottom 'W'),13,3,10,23.1,-8.46,0.35,1.2
+AMD,Advanced Micro Devices,Stock,15m,Doble Techo (Double Top 'M'),17,3,14,17.6,-14.59,0.28,1.4
+AMD,Advanced Micro Devices,Stock,1h,Triángulo Ascendente (Ascending Triangle),22,6,16,27.3,-4.45,0.83,4.6
+AMD,Advanced Micro Devices,Stock,1h,Triángulo Descendente (Descending Triangle),15,3,12,20.0,-12.22,0.49,3.1
+AMD,Advanced Micro Devices,Stock,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),52,22,30,42.3,16.63,1.3,5.0
+AMD,Advanced Micro Devices,Stock,1h,Doble Suelo (Double Bottom 'W'),36,9,27,25.0,-18.58,0.61,6.7
+AMD,Advanced Micro Devices,Stock,1h,Doble Techo (Double Top 'M'),35,10,25,28.6,-20.88,0.6,4.0
+AMD,Advanced Micro Devices,Stock,5m,Triángulo Ascendente (Ascending Triangle),20,8,12,40.0,1.07,1.14,1.6
+AMD,Advanced Micro Devices,Stock,5m,Triángulo Descendente (Descending Triangle),13,4,9,30.8,-3.89,0.46,0.8
+AMD,Advanced Micro Devices,Stock,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),30,9,21,30.0,-4.95,0.69,0.7
+AMD,Advanced Micro Devices,Stock,5m,Doble Suelo (Double Bottom 'W'),43,13,30,30.2,-3.55,0.82,0.4
+AMD,Advanced Micro Devices,Stock,5m,Doble Techo (Double Top 'M'),53,13,40,24.5,-13.82,0.52,0.5
+EURUSD=X,EUR/USD,Forex,15m,Triángulo Ascendente (Ascending Triangle),17,7,10,41.2,0.03,1.06,0.6
+EURUSD=X,EUR/USD,Forex,15m,Triángulo Descendente (Descending Triangle),21,9,12,42.9,0.0,1.01,0.8
+EURUSD=X,EUR/USD,Forex,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),52,12,40,23.1,-0.78,0.51,1.3
+EURUSD=X,EUR/USD,Forex,15m,Doble Suelo (Double Bottom 'W'),45,12,33,26.7,-0.58,0.63,0.9
+EURUSD=X,EUR/USD,Forex,15m,Doble Techo (Double Top 'M'),43,13,30,30.2,-0.51,0.64,1.1
+EURUSD=X,EUR/USD,Forex,1h,Triángulo Ascendente (Ascending Triangle),74,33,41,44.6,1.3,1.27,4.0
+EURUSD=X,EUR/USD,Forex,1h,Triángulo Descendente (Descending Triangle),76,27,49,35.5,-0.24,0.96,3.1
+EURUSD=X,EUR/USD,Forex,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),237,81,156,34.2,-2.12,0.89,3.8
+EURUSD=X,EUR/USD,Forex,1h,Doble Suelo (Double Bottom 'W'),155,53,102,34.2,-1.67,0.87,4.9
+EURUSD=X,EUR/USD,Forex,1h,Doble Techo (Double Top 'M'),168,42,126,25.0,-7.68,0.54,4.0
+EURUSD=X,EUR/USD,Forex,5m,Triángulo Ascendente (Ascending Triangle),66,24,42,36.4,0.03,1.04,0.4
+EURUSD=X,EUR/USD,Forex,5m,Triángulo Descendente (Descending Triangle),75,33,42,44.0,0.28,1.32,0.3
+EURUSD=X,EUR/USD,Forex,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),155,43,112,27.7,-1.01,0.64,0.4
+EURUSD=X,EUR/USD,Forex,5m,Doble Suelo (Double Bottom 'W'),112,42,70,37.5,-0.1,0.93,0.3
+EURUSD=X,EUR/USD,Forex,5m,Doble Techo (Double Top 'M'),128,44,84,34.4,-0.28,0.84,0.3
+GBPUSD=X,GBP/USD,Forex,15m,Triángulo Ascendente (Ascending Triangle),19,7,12,36.8,-0.08,0.84,0.8
+GBPUSD=X,GBP/USD,Forex,15m,Triángulo Descendente (Descending Triangle),31,9,22,29.0,-0.32,0.68,0.9
+GBPUSD=X,GBP/USD,Forex,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),62,14,48,22.6,-1.06,0.53,1.7
+GBPUSD=X,GBP/USD,Forex,15m,Doble Suelo (Double Bottom 'W'),52,16,36,30.8,-0.62,0.66,1.0
+GBPUSD=X,GBP/USD,Forex,15m,Doble Techo (Double Top 'M'),62,10,52,16.1,-1.66,0.33,1.0
+GBPUSD=X,GBP/USD,Forex,1h,Triángulo Ascendente (Ascending Triangle),96,34,62,35.4,-1.58,0.8,3.3
+GBPUSD=X,GBP/USD,Forex,1h,Triángulo Descendente (Descending Triangle),69,26,43,37.7,0.67,1.13,3.3
+GBPUSD=X,GBP/USD,Forex,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),265,83,182,31.3,-4.91,0.77,3.1
+GBPUSD=X,GBP/USD,Forex,1h,Doble Suelo (Double Bottom 'W'),177,46,131,26.0,-6.9,0.61,5.3
+GBPUSD=X,GBP/USD,Forex,1h,Doble Techo (Double Top 'M'),153,35,118,22.9,-8.37,0.49,3.4
+GBPUSD=X,GBP/USD,Forex,5m,Triángulo Ascendente (Ascending Triangle),78,24,54,30.8,-0.63,0.56,0.4
+GBPUSD=X,GBP/USD,Forex,5m,Triángulo Descendente (Descending Triangle),86,32,54,37.2,0.06,1.05,0.4
+GBPUSD=X,GBP/USD,Forex,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),194,53,141,27.3,-1.4,0.61,0.4
+GBPUSD=X,GBP/USD,Forex,5m,Doble Suelo (Double Bottom 'W'),155,40,115,25.8,-1.27,0.57,0.3
+GBPUSD=X,GBP/USD,Forex,5m,Doble Techo (Double Top 'M'),181,47,134,26.0,-1.19,0.6,0.3
+USDCAD=X,USD/CAD,Forex,15m,Triángulo Ascendente (Ascending Triangle),24,3,21,12.5,-1.28,0.22,2.9
+USDCAD=X,USD/CAD,Forex,15m,Triángulo Descendente (Descending Triangle),5,2,3,40.0,-0.01,0.97,0.8
+USDCAD=X,USD/CAD,Forex,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),12,4,8,33.3,-0.08,0.86,3.4
+USDCAD=X,USD/CAD,Forex,15m,Doble Suelo (Double Bottom 'W'),72,6,66,8.3,-4.18,0.16,2.0
+USDCAD=X,USD/CAD,Forex,15m,Doble Techo (Double Top 'M'),36,7,29,19.4,-1.63,0.34,2.6
+USDCAD=X,USD/CAD,Forex,1h,Triángulo Ascendente (Ascending Triangle),79,28,51,35.4,-0.38,0.94,6.5
+USDCAD=X,USD/CAD,Forex,1h,Triángulo Descendente (Descending Triangle),43,16,27,37.2,0.22,1.06,6.4
+USDCAD=X,USD/CAD,Forex,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),153,50,103,32.7,-2.67,0.82,5.7
+USDCAD=X,USD/CAD,Forex,1h,Doble Suelo (Double Bottom 'W'),195,41,154,21.0,-12.88,0.41,5.8
+USDCAD=X,USD/CAD,Forex,1h,Doble Techo (Double Top 'M'),120,41,79,34.2,-1.87,0.84,10.0
+USDCAD=X,USD/CAD,Forex,5m,Triángulo Ascendente (Ascending Triangle),54,13,41,24.1,-1.08,0.52,1.5
+USDCAD=X,USD/CAD,Forex,5m,Triángulo Descendente (Descending Triangle),9,3,6,33.3,-0.14,0.6,1.8
+USDCAD=X,USD/CAD,Forex,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),14,5,9,35.7,0.0,1.01,2.6
+USDCAD=X,USD/CAD,Forex,5m,Doble Suelo (Double Bottom 'W'),233,18,215,7.7,-10.35,0.15,0.7
+USDCAD=X,USD/CAD,Forex,5m,Doble Techo (Double Top 'M'),67,24,43,35.8,-0.21,0.92,1.4
+USDJPY=X,USD/JPY,Forex,15m,Triángulo Ascendente (Ascending Triangle),32,10,22,31.2,-0.36,0.74,2.7
+USDJPY=X,USD/JPY,Forex,15m,Triángulo Descendente (Descending Triangle),13,6,7,46.2,0.22,1.37,0.9
+USDJPY=X,USD/JPY,Forex,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),66,20,46,30.3,-0.72,0.77,1.3
+USDJPY=X,USD/JPY,Forex,15m,Doble Suelo (Double Bottom 'W'),51,11,40,21.6,-1.23,0.45,1.4
+USDJPY=X,USD/JPY,Forex,15m,Doble Techo (Double Top 'M'),54,13,41,24.1,-0.43,0.81,0.8
+USDJPY=X,USD/JPY,Forex,1h,Triángulo Ascendente (Ascending Triangle),100,43,57,43.0,2.39,1.26,7.0
+USDJPY=X,USD/JPY,Forex,1h,Triángulo Descendente (Descending Triangle),47,17,30,36.2,-1.35,0.79,3.4
+USDJPY=X,USD/JPY,Forex,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),171,49,122,28.7,-8.64,0.65,5.7
+USDJPY=X,USD/JPY,Forex,1h,Doble Suelo (Double Bottom 'W'),140,43,97,30.7,-6.12,0.67,5.2
+USDJPY=X,USD/JPY,Forex,1h,Doble Techo (Double Top 'M'),138,36,102,26.1,-8.02,0.59,4.2
+USDJPY=X,USD/JPY,Forex,5m,Triángulo Ascendente (Ascending Triangle),101,36,65,35.6,-0.27,0.88,0.7
+USDJPY=X,USD/JPY,Forex,5m,Triángulo Descendente (Descending Triangle),47,12,35,25.5,-0.53,0.49,0.4
+USDJPY=X,USD/JPY,Forex,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),123,43,80,35.0,-0.42,0.88,0.7
+USDJPY=X,USD/JPY,Forex,5m,Doble Suelo (Double Bottom 'W'),121,38,83,31.4,-0.5,0.81,0.5
+USDJPY=X,USD/JPY,Forex,5m,Doble Techo (Double Top 'M'),161,38,123,23.6,-2.02,0.57,0.3
+AUDUSD=X,AUD/USD,Forex,15m,Triángulo Ascendente (Ascending Triangle),25,8,17,32.0,-0.11,0.86,0.7
+AUDUSD=X,AUD/USD,Forex,15m,Triángulo Descendente (Descending Triangle),18,5,13,27.8,-0.27,0.6,1.7
+AUDUSD=X,AUD/USD,Forex,15m,Triángulo Simétrico / Cuña (Symmetrical Triangle),69,17,52,24.6,-1.46,0.51,1.1
+AUDUSD=X,AUD/USD,Forex,15m,Doble Suelo (Double Bottom 'W'),65,14,51,21.5,-2.0,0.36,0.9
+AUDUSD=X,AUD/USD,Forex,15m,Doble Techo (Double Top 'M'),49,10,39,20.4,-1.16,0.49,0.7
+AUDUSD=X,AUD/USD,Forex,1h,Triángulo Ascendente (Ascending Triangle),82,28,54,34.1,-0.76,0.92,5.0
+AUDUSD=X,AUD/USD,Forex,1h,Triángulo Descendente (Descending Triangle),63,14,49,22.2,-5.21,0.44,4.7
+AUDUSD=X,AUD/USD,Forex,1h,Triángulo Simétrico / Cuña (Symmetrical Triangle),171,52,119,30.4,-7.01,0.68,5.2
+AUDUSD=X,AUD/USD,Forex,1h,Doble Suelo (Double Bottom 'W'),153,45,108,29.4,-6.13,0.68,5.5
+AUDUSD=X,AUD/USD,Forex,1h,Doble Techo (Double Top 'M'),169,52,117,30.8,-5.71,0.74,4.7
+AUDUSD=X,AUD/USD,Forex,5m,Triángulo Ascendente (Ascending Triangle),67,23,44,34.3,-0.33,0.75,0.4
+AUDUSD=X,AUD/USD,Forex,5m,Triángulo Descendente (Descending Triangle),65,29,36,44.6,0.27,1.27,0.3
+AUDUSD=X,AUD/USD,Forex,5m,Triángulo Simétrico / Cuña (Symmetrical Triangle),213,68,145,31.9,-0.79,0.79,0.4
+AUDUSD=X,AUD/USD,Forex,5m,Doble Suelo (Double Bottom 'W'),132,38,94,28.8,-0.84,0.67,0.3
+AUDUSD=X,AUD/USD,Forex,5m,Doble Techo (Double Top 'M'),137,35,102,25.5,-1.33,0.53,0.3

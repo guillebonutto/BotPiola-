@@ -1,0 +1,8 @@
+pair,timeframe,strategy,trades,wins,losses,winrate,pnl
+BTCUSD_otc,300,WT_Keltner,6,6,0,100.0,5.1
+#TSLA_otc,60,WT_Keltner,4,4,0,100.0,3.4
+USDINR_otc,60,WT_Keltner,10,8,2,80.0,4.8
+EURJPY_otc,300,WT_Keltner,12,9,3,75.0,4.65
+EURGBP_otc,60,WT_Keltner,4,3,1,75.0,1.55
+BTCUSD_otc,900,WT_Keltner,4,3,1,75.0,1.55
+USDINR_otc,300,WT_Keltner,14,10,4,71.43,4.5

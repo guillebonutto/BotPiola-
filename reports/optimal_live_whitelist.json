@@ -1,0 +1,254 @@
+[
+  {
+    "pair": "#AAPL_otc",
+    "timeframe": 900,
+    "strategy": "Estoc\u00e1stico + SMA200",
+    "real_wr": 58.33,
+    "net_profit": 12.3,
+    "profit_factor": 1.33,
+    "max_dd": 7.0,
+    "best_hours_utc": [
+      3,
+      7,
+      10,
+      12,
+      13,
+      14,
+      21,
+      22,
+      23
+    ]
+  },
+  {
+    "pair": "AUDUSD_otc",
+    "timeframe": 300,
+    "strategy": "Estoc\u00e1stico + SMA200",
+    "real_wr": 60.66,
+    "net_profit": 11.65,
+    "profit_factor": 1.39,
+    "max_dd": 6.3,
+    "best_hours_utc": [
+      1,
+      7,
+      8,
+      14,
+      16,
+      17,
+      20
+    ]
+  },
+  {
+    "pair": "USDCHF_otc",
+    "timeframe": 900,
+    "strategy": "Estoc\u00e1stico + SMA200",
+    "real_wr": 60.32,
+    "net_profit": 11.5,
+    "profit_factor": 1.37,
+    "max_dd": 8.55,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "NZDUSD_otc",
+    "timeframe": 900,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 70.83,
+    "net_profit": 9.85,
+    "profit_factor": 2.23,
+    "max_dd": 4.0,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "EURUSD_otc",
+    "timeframe": 60,
+    "strategy": "Estoc\u00e1stico + SMA200",
+    "real_wr": 63.89,
+    "net_profit": 9.5,
+    "profit_factor": 1.59,
+    "max_dd": 6.0,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "USDCHF_otc",
+    "timeframe": 900,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 61.11,
+    "net_profit": 7.45,
+    "profit_factor": 2.06,
+    "max_dd": 1.0,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "AUDCAD_otc",
+    "timeframe": 300,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 72.73,
+    "net_profit": 6.35,
+    "profit_factor": 3.12,
+    "max_dd": 1.0,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "AUDCAD_otc",
+    "timeframe": 900,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 70.59,
+    "net_profit": 5.9,
+    "profit_factor": 1.98,
+    "max_dd": 3.15,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "AUDJPY_otc",
+    "timeframe": 900,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 63.16,
+    "net_profit": 5.6,
+    "profit_factor": 1.7,
+    "max_dd": 3.0,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "#FB_otc",
+    "timeframe": 300,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 57.14,
+    "net_profit": 5.3,
+    "profit_factor": 1.53,
+    "max_dd": 3.0,
+    "best_hours_utc": [
+      12
+    ]
+  },
+  {
+    "pair": "USDCAD_otc",
+    "timeframe": 900,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 75.0,
+    "net_profit": 4.5,
+    "profit_factor": 2.12,
+    "max_dd": 3.0,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "NZDUSD_otc",
+    "timeframe": 300,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 56.67,
+    "net_profit": 4.4,
+    "profit_factor": 1.27,
+    "max_dd": 6.15,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "#AAPL_otc",
+    "timeframe": 60,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 72.73,
+    "net_profit": 3.65,
+    "profit_factor": 1.91,
+    "max_dd": 4.0,
+    "best_hours_utc": [
+      5
+    ]
+  },
+  {
+    "pair": "#MCD_otc",
+    "timeframe": 300,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 66.67,
+    "net_profit": 3.5,
+    "profit_factor": 1.7,
+    "max_dd": 3.0,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "GBPJPY_otc",
+    "timeframe": 900,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 57.14,
+    "net_profit": 3.45,
+    "profit_factor": 1.31,
+    "max_dd": 3.15,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "USDCAD_otc",
+    "timeframe": 900,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 55.56,
+    "net_profit": 2.85,
+    "profit_factor": 1.19,
+    "max_dd": 5.15,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "#MSFT_otc",
+    "timeframe": 900,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 62.5,
+    "net_profit": 2.2,
+    "profit_factor": 1.27,
+    "max_dd": 4.0,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "EURUSD_otc",
+    "timeframe": 300,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 55.56,
+    "net_profit": 1.9,
+    "profit_factor": 1.19,
+    "max_dd": 3.0,
+    "best_hours_utc": []
+  },
+  {
+    "pair": "#INTC_otc",
+    "timeframe": 900,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 60.0,
+    "net_profit": 1.8,
+    "profit_factor": 1.36,
+    "max_dd": 4.0,
+    "best_hours_utc": [
+      5
+    ]
+  },
+  {
+    "pair": "GBPUSD_otc",
+    "timeframe": 900,
+    "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+    "real_wr": 60.0,
+    "net_profit": 1.35,
+    "profit_factor": 1.17,
+    "max_dd": 5.3,
+    "best_hours_utc": [
+      0
+    ]
+  },
+  {
+    "pair": "#INTC_otc",
+    "timeframe": 900,
+    "strategy": "WaveTrend + Keltner Channel Reversion",
+    "real_wr": 55.17,
+    "net_profit": 0.85,
+    "profit_factor": 1.05,
+    "max_dd": 8.15,
+    "best_hours_utc": [
+      13
+    ]
+  }
+]
