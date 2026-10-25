@@ -1,0 +1,319 @@
+{
+  "[RAPID] Micro Breakout 4v (Gen44)": {
+    "graduated_at": "2026-10-14T12:07:16.865331",
+    "last_updated": "2026-10-16T22:00:00.000000",
+    "win_rate": 77.8,
+    "trades": 27,
+    "wins": 21,
+    "losses": 6,
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED",
+    "pairs": [
+      "#AAPL_otc",
+      "AUDCAD_otc"
+    ],
+    "toxic_pairs": [
+      "#CSCO_otc",
+      "#PFE_otc",
+      "AUDJPY_otc",
+      "AUDUSD_otc",
+      "EURGBP_otc",
+      "USDBRL_otc",
+      "USDCHF_otc"
+    ],
+    "allowed_hours_utc": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      18
+    ],
+    "toxic_hours_utc": [
+      15,
+      20,
+      21,
+      22
+    ]
+  },
+  "[RAPID] RSI Velocity 6p (Gen34)": {
+    "graduated_at": "2026-10-14T12:07:16.865331",
+    "win_rate": 62.9,
+    "trades": 35,
+    "wins": 22,
+    "losses": 13,
+    "status": "INCUBATING_IN_PAPER"
+  },
+  "[ÉLITE] Micro Breakout 7v (Gen35)": {
+    "graduated_at": "2026-10-14T13:19:00.000000",
+    "last_updated": "2026-10-17T20:45:00.000000",
+    "win_rate": 53.6,
+    "trades": 57,
+    "wins": 30,
+    "losses": 27,
+    "filtered_win_rate": 74.3,
+    "status": "INCUBATING_IN_PAPER",
+    "graduation_type": "CLUSTER_SPECIALIZED",
+    "pairs": [
+      "#TSLA_otc",
+      "#MCD_otc",
+      "AUDJPY_otc",
+      "AUDUSD_otc",
+      "EURGBP_otc",
+      "#AAPL_otc"
+    ],
+    "toxic_pairs": [
+      "USDINR_otc",
+      "#BA_otc",
+      "#PFE_otc",
+      "CADJPY_otc",
+      "#CSCO_otc",
+      "#INTC_otc",
+      "EURJPY_otc",
+      "EURUSD_otc",
+      "NZDJPY_otc"
+    ],
+    "allowed_hours_utc": [
+      5,
+      7,
+      19
+    ],
+    "toxic_hours_utc": [
+      4,
+      6,
+      8,
+      18
+    ],
+    "notes": "Especializada: 74.3% WR en pares asignados y evitando horas toxicas (18:00 hs)."
+  },
+  "Estocástico + SMA200": {
+    "graduated_at": "2026-10-16T11:50:07.484534",
+    "last_updated": "2026-10-16T11:50:07.484534",
+    "win_rate": 74.4,
+    "trades": 117,
+    "wins": 87,
+    "losses": 30,
+    "pairs": [
+      "#INTC_otc",
+      "#MCD_otc",
+      "AUDNZD_otc",
+      "AUDUSD_otc",
+      "CADCHF_otc",
+      "CADJPY_otc",
+      "CHFJPY_otc",
+      "ETHUSD_otc",
+      "NZDJPY_otc",
+      "USDCAD_otc",
+      "USDCHF_otc",
+      "XAGUSD_otc"
+    ],
+    "toxic_pairs": [
+      "#FB_otc",
+      "AUDJPY_otc",
+      "BTCUSD_otc",
+      "EURGBP_otc",
+      "EURUSD_otc",
+      "GBPAUD_otc",
+      "LTCUSD_otc",
+      "USDARS_otc",
+      "USDMXN_otc"
+    ],
+    "allowed_hours_utc": [
+      4,
+      5,
+      7,
+      8,
+      10,
+      12,
+      14,
+      15,
+      20,
+      21,
+      23
+    ],
+    "toxic_hours_utc": [
+      0,
+      1,
+      2,
+      3,
+      11,
+      16,
+      22
+    ],
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED"
+  },
+  "Price Action Envolvente en Extremo Bollinger 2.5": {
+    "graduated_at": "2026-10-16T11:50:07.484534",
+    "last_updated": "2026-10-16T11:50:07.484534",
+    "win_rate": 77.4,
+    "trades": 31,
+    "wins": 24,
+    "losses": 7,
+    "pairs": [
+      "#INTC_otc",
+      "#TSLA_otc",
+      "AUDNZD_otc",
+      "CHFJPY_otc",
+      "GBPAUD_otc",
+      "NZDJPY_otc",
+      "USDMXN_otc"
+    ],
+    "toxic_pairs": [
+      "AUDUSD_otc"
+    ],
+    "allowed_hours_utc": [
+      1,
+      4,
+      11,
+      22
+    ],
+    "toxic_hours_utc": [
+      5,
+      12,
+      13,
+      14,
+      16,
+      18,
+      19,
+      21,
+      23
+    ],
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED"
+  },
+  "RSI Divergence + Pivot Reversion": {
+    "graduated_at": "2026-10-16T11:50:07.484534",
+    "last_updated": "2026-10-16T11:50:07.484534",
+    "win_rate": 66.4,
+    "trades": 110,
+    "wins": 73,
+    "losses": 37,
+    "pairs": [
+      "EURJPY_otc",
+      "GBPAUD_otc",
+      "NZDUSD_otc",
+      "USDARS_otc"
+    ],
+    "toxic_pairs": [
+      "#BA_otc",
+      "#CSCO_otc",
+      "#TSLA_otc",
+      "AUDCHF_otc",
+      "BTCUSD_otc",
+      "CADCHF_otc",
+      "CADJPY_otc",
+      "CHFJPY_otc",
+      "EURGBP_otc",
+      "GBPJPY_otc",
+      "GBPUSD_otc",
+      "USDCAD_otc",
+      "USDCOP_otc",
+      "USDJPY_otc",
+      "USDPHP_otc"
+    ],
+    "allowed_hours_utc": [
+      13,
+      20,
+      23
+    ],
+    "toxic_hours_utc": [
+      2,
+      4,
+      5,
+      10,
+      12,
+      18,
+      19,
+      21
+    ],
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED"
+  },
+  "SMC Élite (ChoCH + MTF + MACD)": {
+    "graduated_at": "2026-10-16T11:50:07.484534",
+    "last_updated": "2026-10-16T11:50:07.484534",
+    "win_rate": 63.2,
+    "trades": 359,
+    "wins": 227,
+    "losses": 132,
+    "pairs": [
+      "#CSCO_otc",
+      "#MSFT_otc",
+      "AUDCHF_otc",
+      "AUDNZD_otc",
+      "USDCAD_otc"
+    ],
+    "toxic_pairs": [
+      "#AAPL_otc",
+      "#TSLA_otc",
+      "CADCHF_otc",
+      "CHFJPY_otc",
+      "ETHUSD_otc",
+      "EURJPY_otc",
+      "NZDJPY_otc",
+      "USDEGP_otc",
+      "USDJPY_otc",
+      "XAUUSD_otc"
+    ],
+    "allowed_hours_utc": null,
+    "toxic_hours_utc": null,
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED"
+  },
+  "Squeeze Expansion + Volume Spike": {
+    "graduated_at": "2026-10-16T11:50:07.484534",
+    "last_updated": "2026-10-16T11:50:07.484534",
+    "win_rate": 67.0,
+    "trades": 109,
+    "wins": 73,
+    "losses": 36,
+    "pairs": [
+      "#PFE_otc",
+      "AUDCAD_otc",
+      "AUDJPY_otc",
+      "AUDNZD_otc",
+      "USDARS_otc",
+      "USDCOP_otc",
+      "USDPHP_otc"
+    ],
+    "toxic_pairs": [
+      "#AAPL_otc",
+      "#INTC_otc",
+      "#MCD_otc",
+      "#TSLA_otc",
+      "AUDCHF_otc",
+      "BTCUSD_otc",
+      "EURGBP_otc",
+      "EURUSD_otc",
+      "GBPAUD_otc",
+      "LTCUSD_otc",
+      "NZDJPY_otc",
+      "USDCAD_otc",
+      "USDCHF_otc",
+      "USDEGP_otc",
+      "USDINR_otc",
+      "USDJPY_otc",
+      "USDMXN_otc",
+      "XAUUSD_otc"
+    ],
+    "allowed_hours_utc": [
+      2,
+      4,
+      8,
+      13
+    ],
+    "toxic_hours_utc": [
+      1,
+      6,
+      9,
+      11,
+      15,
+      21
+    ],
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED"
+  }
+}

@@ -13,7 +13,10 @@ class StrategyFibonacci(Strategy):
             
         # Filtro de activación por par y temporalidad según backtest maestro (Restricción estricta >=60% WR)
         allowed_combinations = {
-            ("USDCAD_otc", 60),    # WR: 69.23% (13 trades)
+            ("#MSFT_otc", 300),    # WR: 66.67% (6 trades)
+            ("#MSFT_otc", 900),    # WR: 60.00% (5 trades)
+            ("AUDCAD_otc", 300),   # WR: 66.67% (9 trades)
+            ("NZDUSD_otc", 900),   # WR: 60.00% (5 trades)
         }
         
         pair = df['symbol'].iloc[-1] if 'symbol' in df.columns else df.attrs.get('pair', 'UNKNOWN')
@@ -68,6 +71,9 @@ class StrategyFibonacci(Strategy):
         
         fib_618_bull = high_price - (price_range * 0.618)
         
+        # Duración dinámica según el timeframe de la vela analizada
+        target_duration = int(time_diff) if time_diff in [60, 300, 900] else 300
+
         # Si estamos en tendencia alcista
         if current_price > trend_sma:
             # Si el precio toca la zona del 61.8% (con margen de error más estricto: 2.5%)
@@ -81,7 +87,7 @@ class StrategyFibonacci(Strategy):
                     # Verificar señal de giro: Martillo o Envolvente Alcista o vela de reversión
                     has_pattern = last.get('CDL_HAMMER', 0) == 100 or last.get('CDL_ENGULFING', 0) == 100
                     if has_pattern or (last['Close'] > last['Open'] and last['Close'] > df.iloc[-2]['High']):
-                         return 'BUY', f"Rebote en Fibonacci 61.8% + Stoch {stoch_k:.1f} (Sobreventa) + Giro", 300
+                         return 'BUY', f"Rebote en Fibonacci 61.8% + Stoch {stoch_k:.1f} (Sobreventa) + Giro", target_duration
 
         # Contexto Bajista
         # Impulso fue de High a Low. Retroceso sube hasta 61.8%
@@ -98,6 +104,6 @@ class StrategyFibonacci(Strategy):
                  if stoch_k > 75:
                      # Vela roja confirmatoria y Estocástico alto
                      if df.iloc[-1]['Close'] < df.iloc[-1]['Open']:
-                         return 'SELL', f"Rechazo en Fibonacci 61.8% + Stoch {stoch_k:.1f} (Sobrecompra)", 300
+                         return 'SELL', f"Rechazo en Fibonacci 61.8% + Stoch {stoch_k:.1f} (Sobrecompra)", target_duration
                       
         return 'HOLD', f"Price {current_price:.4f} vs SMA {trend_sma:.4f} (No Fib signal)", 0

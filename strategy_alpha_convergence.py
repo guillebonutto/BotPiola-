@@ -18,17 +18,23 @@ class StrategyAlphaConvergence(Strategy):
         pair = df['symbol'].iloc[-1] if 'symbol' in df.columns else df.attrs.get('pair', 'UNKNOWN')
         
         try:
-            time_diff = int((df.iloc[-1]['Timestamp'] - df.iloc[-2]['Timestamp']).total_seconds())
+            t1 = pd.to_datetime(df.iloc[-1]['Timestamp'])
+            t2 = pd.to_datetime(df.iloc[-2]['Timestamp'])
+            time_diff = int((t1 - t2).total_seconds())
         except Exception:
-            time_diff = 60 # Default a 1m
+            time_diff = int(df.attrs.get('interval', 300))
             
         allowed_combinations = {
-            ("AUDCAD_otc", 60),    # WR: 63.64% (22 trades)
-            ("AUDCAD_otc", 300),   # WR: 62.50% (16 trades)
-            ("GBPUSD_otc", 300),   # WR: 62.07% (29 trades)
+            ("USDCAD_otc", 900),   # WR: 75.00% (12 trades)
+            ("AUDCAD_otc", 300),   # WR: 72.73% (11 trades)
+            ("#MCD_otc", 300),     # WR: 66.67% (12 trades)
+            ("#MSFT_otc", 900),    # WR: 62.50% (16 trades)
+            ("USDCHF_otc", 900),   # WR: 61.11% (18 trades)
+            ("GBPUSD_otc", 900),   # WR: 60.00% (15 trades)
+            ("#INTC_otc", 900),    # WR: 60.00% (10 trades)
             ("#BA_otc", 900),      # WR: 61.90% (21 trades)
-            ("#INTC_otc", 300),    # WR: 59.09% (44 trades)
-            ("#MSFT_otc", 900),    # WR: 58.82% (17 trades)
+            ("GBPUSD_otc", 300),   # WR: 62.07% (29 trades)
+            ("AUDCAD_otc", 900),   # WR: 62.50% (16 trades)
         }
         
         pair_tf = (pair, time_diff)
@@ -72,6 +78,15 @@ class StrategyAlphaConvergence(Strategy):
         bb_lower = last['BB_Lower']
         stoch_k = last['Stoch_K']
         
+        # EMAs de tendencia para Trend Shield
+        ema20 = last.get('EMA_20', close)
+        ema50 = last.get('EMA_50', close)
+        trend_shield_buy = not (close < ema20 < ema50)
+        trend_shield_sell = not (close > ema20 > ema50)
+
+        # Duración dinámica según el timeframe de la vela analizada
+        target_duration = int(time_diff) if time_diff in [60, 300, 900] else 300
+        
         # --- CONDICIONES DE COMPRA (BUY) ---
         bb_buy = low <= bb_lower
         
@@ -87,8 +102,8 @@ class StrategyAlphaConvergence(Strategy):
         stoch_buy = stoch_k < stoch_limit
         confirm_buy = close > open_p
         
-        if bb_buy and fibo_buy and stoch_buy and confirm_buy:
-            return 'BUY', f"Alpha Reversion: BB Lower Tocado + Fibo {hit_lvl*100:.1f}% Respetado + Stoch K={stoch_k:.1f} (Sobreventa)", 300
+        if bb_buy and fibo_buy and stoch_buy and confirm_buy and trend_shield_buy:
+            return 'BUY', f"Alpha Reversion: BB Lower Tocado + Fibo {hit_lvl*100:.1f}% Respetado + Stoch K={stoch_k:.1f} (Sobreventa) + Trend Shield", target_duration
             
         # --- CONDICIONES DE VENTA (SELL) ---
         bb_sell = high >= bb_upper
@@ -104,7 +119,7 @@ class StrategyAlphaConvergence(Strategy):
         stoch_sell = stoch_k > (100 - stoch_limit)
         confirm_sell = close < open_p
         
-        if bb_sell and fibo_sell and stoch_sell and confirm_sell:
-            return 'SELL', f"Alpha Reversion: BB Upper Tocado + Fibo {hit_lvl*100:.1f}% Respetado + Stoch K={stoch_k:.1f} (Sobrecompra)", 300
+        if bb_sell and fibo_sell and stoch_sell and confirm_sell and trend_shield_sell:
+            return 'SELL', f"Alpha Reversion: BB Upper Tocado + Fibo {hit_lvl*100:.1f}% Respetado + Stoch K={stoch_k:.1f} (Sobrecompra) + Trend Shield", target_duration
             
         return 'HOLD', f"No Alpha convergence on {pair}", 0

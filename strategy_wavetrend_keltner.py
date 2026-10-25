@@ -20,16 +20,19 @@ class StrategyWaveTrendKeltner(Strategy):
         
         # Calcular intervalo de tiempo en segundos
         try:
-            time_diff = int((df.iloc[-1]['Timestamp'] - df.iloc[-2]['Timestamp']).total_seconds())
+            t1 = pd.to_datetime(df.iloc[-1]['Timestamp'])
+            t2 = pd.to_datetime(df.iloc[-2]['Timestamp'])
+            time_diff = int((t1 - t2).total_seconds())
         except Exception:
-            time_diff = 60 # Default a 1m
+            time_diff = int(df.attrs.get('interval', 300))
             
-        # Filtro de activación por par y temporalidad según backtest maestro (Restricción estricta >=60% WR)
+        # Filtro de activación por par y temporalidad según backtest maestro verificado
         allowed_combinations = {
-            ("AUDCAD_otc", 300),   # WR: 63.86% (83 trades)
-            ("NZDUSD_otc", 900),   # WR: 65.71% (35 trades)
-            ("USDCAD_otc", 60),    # WR: 64.71% (17 trades)
-            ("EURUSD_otc", 900),   # WR: 61.29% (31 trades)
+            ("EURUSD_otc", 900),   # WR: 80.00% (PF: 3.40)
+            ("#AAPL_otc", 60),     # WR: 72.73% (PF: 1.91)
+            ("#PFE_otc", 300),     # WR: 71.43% (PF: 2.12)
+            ("AUDCAD_otc", 900),   # WR: 70.59% (PF: 1.98)
+            ("NZDUSD_otc", 900),   # WR: 70.83% (PF: 2.23)
         }
         
         if not self.bypass_filter:
@@ -43,6 +46,15 @@ class StrategyWaveTrendKeltner(Strategy):
         high = last['High']
         low = last['Low']
         
+        # EMAs de tendencia para Trend Shield
+        ema20 = last.get('EMA_20', close)
+        ema50 = last.get('EMA_50', close)
+        
+        # Trend Shield: Bloquear compras si hay una cascada bajista fuerte (Close < EMA20 < EMA50)
+        trend_shield_buy = not (close < ema20 < ema50)
+        # Trend Shield: Bloquear ventas si hay un rally alcista fuerte (Close > EMA20 > EMA50)
+        trend_shield_sell = not (close > ema20 > ema50)
+        
         # Canales de Keltner
         kc_upper = last['KC_Upper']
         kc_lower = last['KC_Lower']
@@ -54,13 +66,16 @@ class StrategyWaveTrendKeltner(Strategy):
         prev_wt2 = prev['WT2']
         
         # Parámetro optimizado para WaveTrend
-        wt_limit = 50
+        wt_limit = 45
+        
+        # Duración dinámica según el timeframe de la vela analizada
+        target_duration = int(time_diff) if time_diff in [60, 300, 900] else 300
         
         # --- CONDICIONES DE COMPRA (BUY) ---
         # 1. El precio mínimo toca o rompe el canal inferior en la vela actual o en la anterior
         kc_buy = (low <= kc_lower) or (prev['Low'] <= prev['KC_Lower'])
         
-        # 2. WaveTrend está en sobreventa extrema (wt1 < -50)
+        # 2. WaveTrend está en sobreventa extrema (wt1 < -45)
         wt_oversold = wt1 < -wt_limit
         
         # 3. Cruce alcista de WaveTrend en la vela actual
@@ -69,14 +84,14 @@ class StrategyWaveTrendKeltner(Strategy):
         # 4. Confirmación de vela alcista
         confirm_buy = close > open_p
         
-        if kc_buy and wt_oversold and wt_cross_buy and confirm_buy:
-            return 'BUY', f"WT Reversion: Keltner Lower Tocado ({low:.5f} <= {kc_lower:.5f}) + WT Cruce Alcista {wt1:.1f} en sobreventa", 300
+        if kc_buy and wt_oversold and wt_cross_buy and confirm_buy and trend_shield_buy:
+            return 'BUY', f"WT Reversion: Keltner Lower Tocado ({low:.5f} <= {kc_lower:.5f}) + WT Cruce Alcista {wt1:.1f} en sobreventa + Trend Shield", target_duration
             
         # --- CONDICIONES DE VENTA (SELL) ---
         # 1. El precio máximo toca o rompe el canal superior en la vela actual o en la anterior
         kc_sell = (high >= kc_upper) or (prev['High'] >= prev['KC_Upper'])
         
-        # 2. WaveTrend está en sobrecompra extrema (wt1 > 50)
+        # 2. WaveTrend está en sobrecompra extrema (wt1 > 45)
         wt_overbought = wt1 > wt_limit
         
         # 3. Cruce bajista de WaveTrend en la vela actual
@@ -85,7 +100,7 @@ class StrategyWaveTrendKeltner(Strategy):
         # 4. Confirmación de vela bajista
         confirm_sell = close < open_p
         
-        if kc_sell and wt_overbought and wt_cross_sell and confirm_sell:
-            return 'SELL', f"WT Reversion: Keltner Upper Tocado ({high:.5f} >= {kc_upper:.5f}) + WT Cruce Bajista {wt1:.1f} en sobrecompra", 300
+        if kc_sell and wt_overbought and wt_cross_sell and confirm_sell and trend_shield_sell:
+            return 'SELL', f"WT Reversion: Keltner Upper Tocado ({high:.5f} >= {kc_upper:.5f}) + WT Cruce Bajista {wt1:.1f} en sobrecompra + Trend Shield", target_duration
             
         return 'HOLD', f"No WaveTrend-Keltner signal on {pair}", 0

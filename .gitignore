@@ -1,11 +1,61 @@
+# Configuraciones con credenciales y sesiones
 config.json
+config_alpaca.json
+config_paper.json
+email_config.json
+.env
+*.env
+*.env.*
+
+# Llaves y autenticación biométrica / facial
+.bio_key
+biometric_url.txt
+master_face_features.enc
+
+# Bases de datos y snapshots
+*.db
+*.db.bak*
+*.sqlite
+*.sqlite3
 feedback.db
-feedback_images/
+feedback.db.*
+
+# Logs y terminales
+*.log
 logs/
 !logs/trades/
 !logs/trades/*.csv
+terminal_debug.log
+alpaca_stderr.log
+alpaca_stdout.log
+pibot_service.log
+optimizer_daemon.log
+web_server.log
+
+# Caché y archivos temporales de Python
 __pycache__/
-*.db
-*.log
-.env
+*.py[cod]
+*$py.class
+.pytest_cache/
+pytest.ini
+
+# Estados de sesión y sincronización en runtime
+.telegram_offset
+alpaca_status.json
+pocketoption_status.json
+session_state.json
+paper_pending.json
+restart.signal
+*.bak*
+
+# Backups y binarios
+backups/
+bin/
+
+# Carpetas de desarrollo y scratch con pruebas internas
+scratch/
+
+# Archivos pesados / PDFs
 *.pdf
+*.docx
+*.xlsx

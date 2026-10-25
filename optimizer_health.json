@@ -1,0 +1,15 @@
+{
+  "last_cycle": "2026-10-16T11:50:07.484534",
+  "total_graduated": 8,
+  "graduated_strategies": [
+    "[RAPID] Micro Breakout 4v (Gen44)",
+    "[RAPID] RSI Velocity 6p (Gen34)",
+    "[\u00c9LITE] Micro Breakout 7v (Gen35)",
+    "Estoc\u00e1stico + SMA200",
+    "Price Action Envolvente en Extremo Bollinger 2.5",
+    "RSI Divergence + Pivot Reversion",
+    "SMC \u00c9lite (ChoCH + MTF + MACD)",
+    "Squeeze Expansion + Volume Spike"
+  ],
+  "status": "RUNNING_HYBRID_GUARDIAN"
+}

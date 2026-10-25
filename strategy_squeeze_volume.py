@@ -18,6 +18,9 @@ class StrategySqueezeVolume(Strategy):
         if df.empty or len(df) < 50:
             return 'HOLD', "Insufficient Data (<50 candles)", 0
 
+        # Asegurar copia independiente para evitar SettingWithCopyWarning
+        df = df.copy()
+
         # Verificar que existan columnas requeridas o calcularlas sobre la marcha
         if 'BB_Width' not in df.columns:
             bb_upper = df['Close'].rolling(20).mean() + (df['Close'].rolling(20).std() * 2.0)

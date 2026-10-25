@@ -1,0 +1,516 @@
+{
+  "total_evaluated": 178,
+  "elite_count": 35,
+  "combined_wr": 66.39,
+  "combined_trades": 949,
+  "combined_pnl": 278.6,
+  "top_strategies": [
+    {
+      "name": "[BB] Burst (Dev2.4/W14/RSI20-80)",
+      "family": "Stoch_BB_Burst",
+      "params": {
+        "dev": 2.4,
+        "bb_w": 14,
+        "rsi_buy": 20,
+        "rsi_sell": 80
+      },
+      "trades": 2275,
+      "wins": 1136,
+      "losses": 1139,
+      "draws": 28,
+      "win_rate": 49.9,
+      "pnl": -93.88,
+      "roi": -4.1,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#BA_otc_60s": {
+          "trades": 14,
+          "wins": 9,
+          "losses": 5,
+          "draws": 0,
+          "wr": 64.3,
+          "pnl": 3.28
+        },
+        "GBPUSD_otc_60s": {
+          "trades": 8,
+          "wins": 6,
+          "losses": 2,
+          "draws": 0,
+          "wr": 75.0,
+          "pnl": 3.52
+        }
+      },
+      "filtered_trades": 22,
+      "filtered_wr": 68.2,
+      "filtered_pnl": 6.8
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M10/C2)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 10,
+        "rsi_filter": false,
+        "sqz_c": 2
+      },
+      "trades": 13501,
+      "wins": 6451,
+      "losses": 7050,
+      "draws": 101,
+      "win_rate": 47.8,
+      "pnl": -1115.08,
+      "roi": -8.3,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 64,
+          "wins": 43,
+          "losses": 19,
+          "draws": 2,
+          "wr": 67.2,
+          "pnl": 20.56
+        }
+      },
+      "filtered_trades": 64,
+      "filtered_wr": 67.2,
+      "filtered_pnl": 20.56
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M10/C3)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 10,
+        "rsi_filter": false,
+        "sqz_c": 3
+      },
+      "trades": 13501,
+      "wins": 6451,
+      "losses": 7050,
+      "draws": 101,
+      "win_rate": 47.8,
+      "pnl": -1115.08,
+      "roi": -8.3,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 64,
+          "wins": 43,
+          "losses": 19,
+          "draws": 2,
+          "wr": 67.2,
+          "pnl": 20.56
+        }
+      },
+      "filtered_trades": 64,
+      "filtered_wr": 67.2,
+      "filtered_pnl": 20.56
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M10/C4)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 10,
+        "rsi_filter": false,
+        "sqz_c": 4
+      },
+      "trades": 13501,
+      "wins": 6451,
+      "losses": 7050,
+      "draws": 101,
+      "win_rate": 47.8,
+      "pnl": -1115.08,
+      "roi": -8.3,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 64,
+          "wins": 43,
+          "losses": 19,
+          "draws": 2,
+          "wr": 67.2,
+          "pnl": 20.56
+        }
+      },
+      "filtered_trades": 64,
+      "filtered_wr": 67.2,
+      "filtered_pnl": 20.56
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M10/C2/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 10,
+        "rsi_filter": true,
+        "sqz_c": 2
+      },
+      "trades": 13250,
+      "wins": 6336,
+      "losses": 6914,
+      "draws": 97,
+      "win_rate": 47.8,
+      "pnl": -1084.88,
+      "roi": -8.2,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 63,
+          "wins": 42,
+          "losses": 19,
+          "draws": 2,
+          "wr": 66.7,
+          "pnl": 19.64
+        }
+      },
+      "filtered_trades": 63,
+      "filtered_wr": 66.7,
+      "filtered_pnl": 19.64
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M10/C3/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 10,
+        "rsi_filter": true,
+        "sqz_c": 3
+      },
+      "trades": 13250,
+      "wins": 6336,
+      "losses": 6914,
+      "draws": 97,
+      "win_rate": 47.8,
+      "pnl": -1084.88,
+      "roi": -8.2,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 63,
+          "wins": 42,
+          "losses": 19,
+          "draws": 2,
+          "wr": 66.7,
+          "pnl": 19.64
+        }
+      },
+      "filtered_trades": 63,
+      "filtered_wr": 66.7,
+      "filtered_pnl": 19.64
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M10/C4/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 10,
+        "rsi_filter": true,
+        "sqz_c": 4
+      },
+      "trades": 13250,
+      "wins": 6336,
+      "losses": 6914,
+      "draws": 97,
+      "win_rate": 47.8,
+      "pnl": -1084.88,
+      "roi": -8.2,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 63,
+          "wins": 42,
+          "losses": 19,
+          "draws": 2,
+          "wr": 66.7,
+          "pnl": 19.64
+        }
+      },
+      "filtered_trades": 63,
+      "filtered_wr": 66.7,
+      "filtered_pnl": 19.64
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M12/C2)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 12,
+        "rsi_filter": false,
+        "sqz_c": 2
+      },
+      "trades": 13566,
+      "wins": 6551,
+      "losses": 7015,
+      "draws": 95,
+      "win_rate": 48.3,
+      "pnl": -988.08,
+      "roi": -7.3,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 66,
+          "wins": 48,
+          "losses": 16,
+          "draws": 2,
+          "wr": 72.7,
+          "pnl": 28.16
+        },
+        "USDCHF_otc_300s": {
+          "trades": 116,
+          "wins": 72,
+          "losses": 44,
+          "draws": 0,
+          "wr": 62.1,
+          "pnl": 22.24
+        }
+      },
+      "filtered_trades": 182,
+      "filtered_wr": 65.9,
+      "filtered_pnl": 50.4
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M12/C3)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 12,
+        "rsi_filter": false,
+        "sqz_c": 3
+      },
+      "trades": 13566,
+      "wins": 6551,
+      "losses": 7015,
+      "draws": 95,
+      "win_rate": 48.3,
+      "pnl": -988.08,
+      "roi": -7.3,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 66,
+          "wins": 48,
+          "losses": 16,
+          "draws": 2,
+          "wr": 72.7,
+          "pnl": 28.16
+        },
+        "USDCHF_otc_300s": {
+          "trades": 116,
+          "wins": 72,
+          "losses": 44,
+          "draws": 0,
+          "wr": 62.1,
+          "pnl": 22.24
+        }
+      },
+      "filtered_trades": 182,
+      "filtered_wr": 65.9,
+      "filtered_pnl": 50.4
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M12/C4)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 12,
+        "rsi_filter": false,
+        "sqz_c": 4
+      },
+      "trades": 13566,
+      "wins": 6551,
+      "losses": 7015,
+      "draws": 95,
+      "win_rate": 48.3,
+      "pnl": -988.08,
+      "roi": -7.3,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 66,
+          "wins": 48,
+          "losses": 16,
+          "draws": 2,
+          "wr": 72.7,
+          "pnl": 28.16
+        },
+        "USDCHF_otc_300s": {
+          "trades": 116,
+          "wins": 72,
+          "losses": 44,
+          "draws": 0,
+          "wr": 62.1,
+          "pnl": 22.24
+        }
+      },
+      "filtered_trades": 182,
+      "filtered_wr": 65.9,
+      "filtered_pnl": 50.4
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M12/C2/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 12,
+        "rsi_filter": true,
+        "sqz_c": 2
+      },
+      "trades": 13360,
+      "wins": 6449,
+      "losses": 6911,
+      "draws": 92,
+      "win_rate": 48.3,
+      "pnl": -977.92,
+      "roi": -7.3,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 65,
+          "wins": 47,
+          "losses": 16,
+          "draws": 2,
+          "wr": 72.3,
+          "pnl": 27.24
+        },
+        "USDCHF_otc_300s": {
+          "trades": 114,
+          "wins": 71,
+          "losses": 43,
+          "draws": 0,
+          "wr": 62.3,
+          "pnl": 22.32
+        }
+      },
+      "filtered_trades": 179,
+      "filtered_wr": 65.9,
+      "filtered_pnl": 49.56
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M12/C3/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 12,
+        "rsi_filter": true,
+        "sqz_c": 3
+      },
+      "trades": 13360,
+      "wins": 6449,
+      "losses": 6911,
+      "draws": 92,
+      "win_rate": 48.3,
+      "pnl": -977.92,
+      "roi": -7.3,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 65,
+          "wins": 47,
+          "losses": 16,
+          "draws": 2,
+          "wr": 72.3,
+          "pnl": 27.24
+        },
+        "USDCHF_otc_300s": {
+          "trades": 114,
+          "wins": 71,
+          "losses": 43,
+          "draws": 0,
+          "wr": 62.3,
+          "pnl": 22.32
+        }
+      },
+      "filtered_trades": 179,
+      "filtered_wr": 65.9,
+      "filtered_pnl": 49.56
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M12/C4/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 12,
+        "rsi_filter": true,
+        "sqz_c": 4
+      },
+      "trades": 13360,
+      "wins": 6449,
+      "losses": 6911,
+      "draws": 92,
+      "win_rate": 48.3,
+      "pnl": -977.92,
+      "roi": -7.3,
+      "elite_pairs_count": 2,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 65,
+          "wins": 47,
+          "losses": 16,
+          "draws": 2,
+          "wr": 72.3,
+          "pnl": 27.24
+        },
+        "USDCHF_otc_300s": {
+          "trades": 114,
+          "wins": 71,
+          "losses": 43,
+          "draws": 0,
+          "wr": 62.3,
+          "pnl": 22.32
+        }
+      },
+      "filtered_trades": 179,
+      "filtered_wr": 65.9,
+      "filtered_pnl": 49.56
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M16/C2/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 16,
+        "rsi_filter": true,
+        "sqz_c": 2
+      },
+      "trades": 13346,
+      "wins": 6440,
+      "losses": 6906,
+      "draws": 90,
+      "win_rate": 48.3,
+      "pnl": -981.2,
+      "roi": -7.4,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 70,
+          "wins": 46,
+          "losses": 22,
+          "draws": 2,
+          "wr": 65.7,
+          "pnl": 20.32
+        }
+      },
+      "filtered_trades": 70,
+      "filtered_wr": 65.7,
+      "filtered_pnl": 20.32
+    },
+    {
+      "name": "[SQZ] Volatility Fired (M16/C3/RSI)",
+      "family": "TTM_Squeeze",
+      "params": {
+        "mom_len": 16,
+        "rsi_filter": true,
+        "sqz_c": 3
+      },
+      "trades": 13346,
+      "wins": 6440,
+      "losses": 6906,
+      "draws": 90,
+      "win_rate": 48.3,
+      "pnl": -981.2,
+      "roi": -7.4,
+      "elite_pairs_count": 1,
+      "elite_pairs": {
+        "#FB_otc_60s": {
+          "trades": 70,
+          "wins": 46,
+          "losses": 22,
+          "draws": 2,
+          "wr": 65.7,
+          "pnl": 20.32
+        }
+      },
+      "filtered_trades": 70,
+      "filtered_wr": 65.7,
+      "filtered_pnl": 20.32
+    }
+  ]
+}

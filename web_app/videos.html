@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos del Primo</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --panel-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #10b981;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: radial-gradient(circle at top right, #1e1b4b, var(--bg-color));
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.5s ease;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        .email-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            transition: transform 0.2s, border-color 0.2s;
+            animation: fadeInUp 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        .email-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .email-subject {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .email-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .attachment-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .attachment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .filename {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .icon-video {
+            color: #ef4444;
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-download:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-download:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .status-msg {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .success-text { color: var(--success); }
+        .error-text { color: #ef4444; }
+
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: #60a5fa; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background-color: var(--border);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+            display: none;
+            position: relative;
+        }
+        .progress-bar {
+            width: 50%;
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 2px;
+            animation: indeterminate 1.5s infinite linear;
+            position: absolute;
+            left: 0;
+        }
+        @keyframes indeterminate {
+            0% { left: -50%; width: 50%; }
+            50% { left: 25%; width: 50%; }
+            100% { left: 100%; width: 50%; }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Volver al Dashboard</a>
+        
+        <header>
+            <h1>Videos Recibidos</h1>
+            <p style="color: var(--text-muted)">Revisando la bandeja de entrada para videos nuevos...</p>
+        </header>
+
+        <div class="glass-panel" id="main-panel">
+            <div id="loader" class="loader">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p>Conectando con Gmail...</p>
+            </div>
+            
+            <div id="error-box" style="display: none; color: #ef4444; text-align: center; padding: 20px;"></div>
+            
+            <div id="emails-container"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchEmails();
+        });
+
+        async function fetchEmails() {
+            try {
+                const res = await fetch('/api/emails');
+                const data = await res.json();
+                
+                document.getElementById('loader').style.display = 'none';
+                
+                if (data.error) {
+                    showError(data.error);
+                    return;
+                }
+                
+                renderEmails(data.emails);
+            } catch (err) {
+                document.getElementById('loader').style.display = 'none';
+                showError("No se pudo conectar con el servidor local.");
+            }
+        }
+
+        function showError(msg) {
+            const errBox = document.getElementById('error-box');
+            errBox.style.display = 'block';
+            errBox.innerHTML = `<i class="fas fa-exclamation-triangle fa-2x"></i><p>${msg}</p><p style="color:var(--text-muted); font-size: 0.9em;">Asegúrate de haber configurado el archivo <b>email_config.json</b>.</p>`;
+        }
+
+        function renderEmails(emails) {
+            const container = document.getElementById('emails-container');
+            if (!emails || emails.length === 0) {
+                container.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding: 30px;"><i class="fas fa-inbox fa-3x" style="margin-bottom:15px; opacity: 0.5;"></i><p>No se encontraron correos con videos.</p></div>';
+                return;
+            }
+
+            emails.forEach((email, index) => {
+                const card = document.createElement('div');
+                card.className = 'email-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                let attachmentsHtml = email.attachments.map(att => {
+                    const isObj = (typeof att === 'object' && att !== null);
+                    const fn = isObj ? (att.filename || '') : att;
+                    const isDrive = isObj ? Boolean(att.is_drive) : false;
+                    const driveUrl = isObj ? (att.drive_url || '#') : '#';
+
+                    const ext = fn.split('.').pop().toLowerCase();
+                    let iconClass = "fa-file";
+                    let iconColor = "#94a3b8";
+                    if (['mp3', 'wav', 'm4a', 'aac', 'ogg', 'flac'].includes(ext)) {
+                        iconClass = "fa-file-audio";
+                        iconColor = "#a78bfa";
+                    } else if (['mp4', 'mkv', 'avi', 'mov', 'webm'].includes(ext)) {
+                        iconClass = "fa-file-video";
+                        iconColor = "#f43f5e";
+                    } else if (['wfp', 'prproj'].includes(ext)) {
+                        iconClass = "fa-film";
+                        iconColor = "#38bdf8";
+                    }
+
+                    let actionHtml = `
+                        <button class="btn-download" style="width: 100%; justify-content: center;" onclick="downloadVideo('${email.id}', '${fn.replace(/'/g, "\\'")}', '${(driveUrl || '').replace(/'/g, "\\'")}', this)">
+                            <i class="fas fa-download"></i> Descargar
+                        </button>
+                        <div class="progress-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="status-msg"></span>
+                    `;
+
+                    return `
+                    <li class="attachment-item">
+                        <div class="filename">
+                            <i class="fas ${iconClass}" style="color: ${iconColor};"></i>
+                            <span title="${fn}">${fn}</span>
+                        </div>
+                        <div style="text-align: right; width: 100%; max-width: 150px; flex-shrink: 0;">
+                            ${actionHtml}
+                        </div>
+                    </li>
+                `;
+                }).join('');
+
+                card.innerHTML = `
+                    <div class="email-header">
+                        <h3 class="email-subject">${email.subject || '(Sin Asunto)'}</h3>
+                        <span class="email-date">${email.date || ''}</span>
+                    </div>
+                    <ul class="attachment-list">
+                        ${attachmentsHtml}
+                    </ul>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function downloadVideo(emailId, filename, driveUrl, btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Descargando...';
+            const progressContainer = btn.nextElementSibling;
+            const statusSpan = progressContainer.nextElementSibling;
+            
+            progressContainer.style.display = 'block';
+            statusSpan.textContent = "Descargando archivo...";
+            statusSpan.className = "status-msg";
+
+            try {
+                const res = await fetch('/api/download_video', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email_id: emailId, filename: filename, drive_url: driveUrl })
+                });
+                const data = await res.json();
+                
+                if (data.status === 'success') {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Listo';
+                    progressContainer.style.display = 'none';
+                    statusSpan.textContent = `Guardado en: ${data.filepath}`;
+                    statusSpan.classList.add('success-text');
+                } else {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-download"></i> Descargar';
+                    progressContainer.style.display = 'none';
+                    statusSpan.textContent = data.error || "Error al descargar";
+                    statusSpan.classList.add('error-text');
+                }
+            } catch (err) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-download"></i> Descargar';
+                progressContainer.style.display = 'none';
+                statusSpan.textContent = "Error de red";
+                statusSpan.classList.add('error-text');
+            }
+        }
+    </script>
+</body>
+</html>

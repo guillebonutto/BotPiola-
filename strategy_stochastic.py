@@ -27,14 +27,17 @@ class StrategyStochastic(Strategy):
         # 0. Identificar par y temporalidad para aplicar filtro de efectividad
         pair = df['symbol'].iloc[-1] if 'symbol' in df.columns else df.attrs.get('pair', 'UNKNOWN')
         try:
-            time_diff = int((df.iloc[-1]['Timestamp'] - df.iloc[-2]['Timestamp']).total_seconds())
+            t1 = pd.to_datetime(df.iloc[-1]['Timestamp'])
+            t2 = pd.to_datetime(df.iloc[-2]['Timestamp'])
+            time_diff = int((t1 - t2).total_seconds())
         except Exception:
-            time_diff = 60 # Default a 1m
+            time_diff = int(df.attrs.get('interval', 300))
             
         allowed_combinations = {
+            ("#AAPL_otc", 900),    # WR: 58.33% (72 trades, +$12.30)
+            ("AUDUSD_otc", 300),   # WR: 60.66% (61 trades, +$11.65)
+            ("USDCHF_otc", 900),   # WR: 60.32% (63 trades, +$11.50)
             ("AUDCAD_otc", 900),   # WR: 71.43% (28 trades)
-            ("USDCHF_otc", 900),   # WR: 65.71% (35 trades)
-            ("AUDUSD_otc", 300),   # WR: 69.23% (13 trades)
             ("#MSFT_otc", 900),    # WR: 63.41% (41 trades)
         }
         
@@ -55,6 +58,9 @@ class StrategyStochastic(Strategy):
         is_bull_trend = close > sma_200 and ema_20 > ema_50
         is_bear_trend = close < sma_200 and ema_20 < ema_50
         
+        # Duración dinámica según el timeframe de la vela analizada
+        target_duration = int(time_diff) if time_diff in [60, 300, 900] else 300
+
         # 2. Señal de Compra (Tendencia Alcista)
         if is_bull_trend:
             if prev['Stoch_K'] < 20 and prev['Stoch_K'] < prev['Stoch_D'] and last['Stoch_K'] > last['Stoch_D']:
@@ -67,7 +73,7 @@ class StrategyStochastic(Strategy):
                         # Evitar entrar si el RSI es extremadamente bajo (fuerte impulso de caída) o ya sobrecomprado
                         if rsi > 40 and rsi < 70:
                             if close > last['Open'] or last.get('CDL_HAMMER', 0) == 100:
-                                return 'BUY', "Cruce Estocástico en Sobreventa + Tendencia Alcista Confirmada", 300
+                                return 'BUY', "Cruce Estocástico en Sobreventa + Tendencia Alcista Confirmada", target_duration
                   
         # 3. Señal de Venta (Tendencia Bajista)
         if is_bear_trend:
@@ -81,6 +87,6 @@ class StrategyStochastic(Strategy):
                         # Evitar entrar si el RSI es extremadamente alto (fuerte impulso de subida) o ya sobrevendido
                         if rsi < 60 and rsi > 30:
                             if close < last['Open'] or last.get('CDL_SHOOTINGSTAR', 0) == -100:
-                                return 'SELL', "Cruce Estocástico en Sobrecompra + Tendencia Bajista Confirmada", 300
+                                return 'SELL', "Cruce Estocástico en Sobrecompra + Tendencia Bajista Confirmada", target_duration
                 
         return 'HOLD', f"Trend {'BULL' if is_bull_trend else 'BEAR' if is_bear_trend else 'NEUTRAL'} | Stoch K={last['Stoch_K']:.1f}", 0

@@ -1,0 +1,40 @@
+{
+    "overall": {
+        "ADX_RANGING_REVERSION": {
+            "trades": 38,
+            "wins": 14,
+            "losses": 24,
+            "pnl": -12.1
+        },
+        "TREND_PULLBACK_MOMENTUM": {
+            "trades": 4510,
+            "wins": 2227,
+            "losses": 2283,
+            "pnl": -390.0499999999995
+        },
+        "DIVERGENCE_EXHAUSTION": {
+            "trades": 10551,
+            "wins": 5121,
+            "losses": 5430,
+            "pnl": -1077.1500000000053
+        },
+        "ALPHA_CONVERGENCE_CONFLUENCE": {
+            "trades": 141,
+            "wins": 64,
+            "losses": 77,
+            "pnl": -22.60000000000001
+        }
+    },
+    "top_specializations": [
+        {
+            "pair_tf": "#MSFT_otc_60s",
+            "model": "DIVERGENCE_EXHAUSTION",
+            "trades": 55,
+            "wins": 33,
+            "losses": 22,
+            "winrate": 60.0,
+            "pnl": 6.049999999999997,
+            "profit_factor": 1.2750000000000001
+        }
+    ]
+}

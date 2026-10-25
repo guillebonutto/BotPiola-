@@ -1,0 +1,530 @@
+[
+  {
+    "params": "Swing6/Disp1.2/Wait4",
+    "swing": 6,
+    "disp": 1.2,
+    "max_wait": 4,
+    "use_trend": false,
+    "global_trades": 1022,
+    "global_wr": 75.4,
+    "elite_pairs_count": 7,
+    "elite_trades": 948,
+    "elite_wr": 77.7,
+    "elite_pnl": 467.04,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 24,
+        "wins": 20,
+        "losses": 4,
+        "wr": 83.3
+      },
+      "AUDJPY_otc_60s": {
+        "trades": 5,
+        "wins": 5,
+        "losses": 0,
+        "wr": 100.0
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 23,
+        "wins": 20,
+        "losses": 3,
+        "wr": 87.0
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 745,
+        "wins": 586,
+        "losses": 159,
+        "wr": 78.7
+      },
+      "EURJPY_otc_60s": {
+        "trades": 58,
+        "wins": 43,
+        "losses": 15,
+        "wr": 74.1
+      },
+      "USDCOP_otc_60s": {
+        "trades": 32,
+        "wins": 23,
+        "losses": 9,
+        "wr": 71.9
+      },
+      "USDINR_otc_60s": {
+        "trades": 61,
+        "wins": 40,
+        "losses": 21,
+        "wr": 65.6
+      }
+    }
+  },
+  {
+    "params": "Swing6/Disp1.2/Wait6",
+    "swing": 6,
+    "disp": 1.2,
+    "max_wait": 6,
+    "use_trend": false,
+    "global_trades": 1022,
+    "global_wr": 75.4,
+    "elite_pairs_count": 7,
+    "elite_trades": 948,
+    "elite_wr": 77.7,
+    "elite_pnl": 467.04,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 24,
+        "wins": 20,
+        "losses": 4,
+        "wr": 83.3
+      },
+      "AUDJPY_otc_60s": {
+        "trades": 5,
+        "wins": 5,
+        "losses": 0,
+        "wr": 100.0
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 23,
+        "wins": 20,
+        "losses": 3,
+        "wr": 87.0
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 745,
+        "wins": 586,
+        "losses": 159,
+        "wr": 78.7
+      },
+      "EURJPY_otc_60s": {
+        "trades": 58,
+        "wins": 43,
+        "losses": 15,
+        "wr": 74.1
+      },
+      "USDCOP_otc_60s": {
+        "trades": 32,
+        "wins": 23,
+        "losses": 9,
+        "wr": 71.9
+      },
+      "USDINR_otc_60s": {
+        "trades": 61,
+        "wins": 40,
+        "losses": 21,
+        "wr": 65.6
+      }
+    }
+  },
+  {
+    "params": "Swing6/Disp1.2/Wait8",
+    "swing": 6,
+    "disp": 1.2,
+    "max_wait": 8,
+    "use_trend": false,
+    "global_trades": 1022,
+    "global_wr": 75.4,
+    "elite_pairs_count": 7,
+    "elite_trades": 948,
+    "elite_wr": 77.7,
+    "elite_pnl": 467.04,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 24,
+        "wins": 20,
+        "losses": 4,
+        "wr": 83.3
+      },
+      "AUDJPY_otc_60s": {
+        "trades": 5,
+        "wins": 5,
+        "losses": 0,
+        "wr": 100.0
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 23,
+        "wins": 20,
+        "losses": 3,
+        "wr": 87.0
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 745,
+        "wins": 586,
+        "losses": 159,
+        "wr": 78.7
+      },
+      "EURJPY_otc_60s": {
+        "trades": 58,
+        "wins": 43,
+        "losses": 15,
+        "wr": 74.1
+      },
+      "USDCOP_otc_60s": {
+        "trades": 32,
+        "wins": 23,
+        "losses": 9,
+        "wr": 71.9
+      },
+      "USDINR_otc_60s": {
+        "trades": 61,
+        "wins": 40,
+        "losses": 21,
+        "wr": 65.6
+      }
+    }
+  },
+  {
+    "params": "Swing6/Disp1.2/Wait4/EMA",
+    "swing": 6,
+    "disp": 1.2,
+    "max_wait": 4,
+    "use_trend": true,
+    "global_trades": 881,
+    "global_wr": 75.8,
+    "elite_pairs_count": 6,
+    "elite_trades": 821,
+    "elite_wr": 77.6,
+    "elite_pnl": 402.04,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 20,
+        "wins": 17,
+        "losses": 3,
+        "wr": 85.0
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 19,
+        "wins": 16,
+        "losses": 3,
+        "wr": 84.2
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 652,
+        "wins": 510,
+        "losses": 142,
+        "wr": 78.2
+      },
+      "EURJPY_otc_60s": {
+        "trades": 47,
+        "wins": 36,
+        "losses": 11,
+        "wr": 76.6
+      },
+      "USDCOP_otc_60s": {
+        "trades": 26,
+        "wins": 19,
+        "losses": 7,
+        "wr": 73.1
+      },
+      "USDINR_otc_60s": {
+        "trades": 57,
+        "wins": 39,
+        "losses": 18,
+        "wr": 68.4
+      }
+    }
+  },
+  {
+    "params": "Swing6/Disp1.2/Wait6/EMA",
+    "swing": 6,
+    "disp": 1.2,
+    "max_wait": 6,
+    "use_trend": true,
+    "global_trades": 881,
+    "global_wr": 75.8,
+    "elite_pairs_count": 6,
+    "elite_trades": 821,
+    "elite_wr": 77.6,
+    "elite_pnl": 402.04,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 20,
+        "wins": 17,
+        "losses": 3,
+        "wr": 85.0
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 19,
+        "wins": 16,
+        "losses": 3,
+        "wr": 84.2
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 652,
+        "wins": 510,
+        "losses": 142,
+        "wr": 78.2
+      },
+      "EURJPY_otc_60s": {
+        "trades": 47,
+        "wins": 36,
+        "losses": 11,
+        "wr": 76.6
+      },
+      "USDCOP_otc_60s": {
+        "trades": 26,
+        "wins": 19,
+        "losses": 7,
+        "wr": 73.1
+      },
+      "USDINR_otc_60s": {
+        "trades": 57,
+        "wins": 39,
+        "losses": 18,
+        "wr": 68.4
+      }
+    }
+  },
+  {
+    "params": "Swing6/Disp1.2/Wait8/EMA",
+    "swing": 6,
+    "disp": 1.2,
+    "max_wait": 8,
+    "use_trend": true,
+    "global_trades": 881,
+    "global_wr": 75.8,
+    "elite_pairs_count": 6,
+    "elite_trades": 821,
+    "elite_wr": 77.6,
+    "elite_pnl": 402.04,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 20,
+        "wins": 17,
+        "losses": 3,
+        "wr": 85.0
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 19,
+        "wins": 16,
+        "losses": 3,
+        "wr": 84.2
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 652,
+        "wins": 510,
+        "losses": 142,
+        "wr": 78.2
+      },
+      "EURJPY_otc_60s": {
+        "trades": 47,
+        "wins": 36,
+        "losses": 11,
+        "wr": 76.6
+      },
+      "USDCOP_otc_60s": {
+        "trades": 26,
+        "wins": 19,
+        "losses": 7,
+        "wr": 73.1
+      },
+      "USDINR_otc_60s": {
+        "trades": 57,
+        "wins": 39,
+        "losses": 18,
+        "wr": 68.4
+      }
+    }
+  },
+  {
+    "params": "Swing8/Disp1.2/Wait4/EMA",
+    "swing": 8,
+    "disp": 1.2,
+    "max_wait": 4,
+    "use_trend": true,
+    "global_trades": 700,
+    "global_wr": 76.4,
+    "elite_pairs_count": 6,
+    "elite_trades": 657,
+    "elite_wr": 77.6,
+    "elite_pnl": 322.2,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 16,
+        "wins": 13,
+        "losses": 3,
+        "wr": 81.2
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 15,
+        "wins": 13,
+        "losses": 2,
+        "wr": 86.7
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 520,
+        "wins": 405,
+        "losses": 115,
+        "wr": 77.9
+      },
+      "EURJPY_otc_60s": {
+        "trades": 40,
+        "wins": 32,
+        "losses": 8,
+        "wr": 80.0
+      },
+      "USDCOP_otc_60s": {
+        "trades": 17,
+        "wins": 14,
+        "losses": 3,
+        "wr": 82.4
+      },
+      "USDINR_otc_60s": {
+        "trades": 49,
+        "wins": 33,
+        "losses": 16,
+        "wr": 67.3
+      }
+    }
+  },
+  {
+    "params": "Swing8/Disp1.2/Wait6/EMA",
+    "swing": 8,
+    "disp": 1.2,
+    "max_wait": 6,
+    "use_trend": true,
+    "global_trades": 700,
+    "global_wr": 76.4,
+    "elite_pairs_count": 6,
+    "elite_trades": 657,
+    "elite_wr": 77.6,
+    "elite_pnl": 322.2,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 16,
+        "wins": 13,
+        "losses": 3,
+        "wr": 81.2
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 15,
+        "wins": 13,
+        "losses": 2,
+        "wr": 86.7
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 520,
+        "wins": 405,
+        "losses": 115,
+        "wr": 77.9
+      },
+      "EURJPY_otc_60s": {
+        "trades": 40,
+        "wins": 32,
+        "losses": 8,
+        "wr": 80.0
+      },
+      "USDCOP_otc_60s": {
+        "trades": 17,
+        "wins": 14,
+        "losses": 3,
+        "wr": 82.4
+      },
+      "USDINR_otc_60s": {
+        "trades": 49,
+        "wins": 33,
+        "losses": 16,
+        "wr": 67.3
+      }
+    }
+  },
+  {
+    "params": "Swing8/Disp1.2/Wait8/EMA",
+    "swing": 8,
+    "disp": 1.2,
+    "max_wait": 8,
+    "use_trend": true,
+    "global_trades": 700,
+    "global_wr": 76.4,
+    "elite_pairs_count": 6,
+    "elite_trades": 657,
+    "elite_wr": 77.6,
+    "elite_pnl": 322.2,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 16,
+        "wins": 13,
+        "losses": 3,
+        "wr": 81.2
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 15,
+        "wins": 13,
+        "losses": 2,
+        "wr": 86.7
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 520,
+        "wins": 405,
+        "losses": 115,
+        "wr": 77.9
+      },
+      "EURJPY_otc_60s": {
+        "trades": 40,
+        "wins": 32,
+        "losses": 8,
+        "wr": 80.0
+      },
+      "USDCOP_otc_60s": {
+        "trades": 17,
+        "wins": 14,
+        "losses": 3,
+        "wr": 82.4
+      },
+      "USDINR_otc_60s": {
+        "trades": 49,
+        "wins": 33,
+        "losses": 16,
+        "wr": 67.3
+      }
+    }
+  },
+  {
+    "params": "Swing8/Disp1.6/Wait4/EMA",
+    "swing": 8,
+    "disp": 1.6,
+    "max_wait": 4,
+    "use_trend": true,
+    "global_trades": 679,
+    "global_wr": 76.3,
+    "elite_pairs_count": 6,
+    "elite_trades": 639,
+    "elite_wr": 77.5,
+    "elite_pnl": 311.4,
+    "elite_pairs": {
+      "#TSLA_otc_60s": {
+        "trades": 16,
+        "wins": 13,
+        "losses": 3,
+        "wr": 81.2
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 15,
+        "wins": 13,
+        "losses": 2,
+        "wr": 86.7
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 504,
+        "wins": 392,
+        "losses": 112,
+        "wr": 77.8
+      },
+      "EURJPY_otc_60s": {
+        "trades": 38,
+        "wins": 30,
+        "losses": 8,
+        "wr": 78.9
+      },
+      "USDCOP_otc_60s": {
+        "trades": 17,
+        "wins": 14,
+        "losses": 3,
+        "wr": 82.4
+      },
+      "USDINR_otc_60s": {
+        "trades": 49,
+        "wins": 33,
+        "losses": 16,
+        "wr": 67.3
+      }
+    }
+  }
+]

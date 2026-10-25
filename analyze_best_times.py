@@ -30,6 +30,15 @@ def analyze_logs(logs_dir="logs/trades", config_path="config.json"):
         return None
 
     dfs = []
+    paper_csv = Path("paper_backtest.csv")
+    if csv_suffix == "pocketoption" and paper_csv.exists():
+        try:
+            df_paper = pd.read_csv(paper_csv)
+            if not df_paper.empty:
+                dfs.append(df_paper)
+        except Exception as e:
+            print(f"[WARN] Error leyendo paper_backtest.csv: {e}")
+
     for f in all_files:
         try:
             df_temp = pd.read_csv(f)
@@ -84,21 +93,46 @@ def analyze_logs(logs_dir="logs/trades", config_path="config.json"):
     conf_wr = 0.55 if broker == 'alpaca' else 0.70
     confidence_zones = hour_pair_stats[(hour_pair_stats['win_rate'] > conf_wr) & (hour_pair_stats['count'] >= 15)]
 
+    # Preservar y fusionar estrategias previas para que nunca se pierdan del catálogo acumulado
+    existing_strat_perf = {}
+    existing_pair_perf = {}
+    intel_file = f"trading_intelligence{out_suffix}.json"
+    old_total_trades = len(df)
+    if Path(intel_file).exists():
+        try:
+            with open(intel_file, 'r', encoding='utf-8') as f:
+                old_intel = json.load(f)
+                old_total_trades = old_intel.get('total_trades_analyzed', len(df))
+                for item in old_intel.get('strategy_performance', []):
+                    if isinstance(item, dict) and 'strategy' in item:
+                        existing_strat_perf[item['strategy']] = item
+                for item in old_intel.get('pair_strategy_performance', []):
+                    if isinstance(item, dict) and 'strategy' in item and 'pair' in item:
+                        existing_pair_perf[(item['strategy'], item['pair'])] = item
+        except Exception:
+            pass
+
+    for item in strat_stats.to_dict(orient='records'):
+        existing_strat_perf[item['strategy']] = item
+
+    for item in pair_strat_stats.to_dict(orient='records'):
+        existing_pair_perf[(item['strategy'], item['pair'])] = item
+
     report = {
         'last_update': datetime.now().isoformat(),
-        'total_trades_analyzed': len(df),
+        'total_trades_analyzed': max(len(df), old_total_trades),
         'risk_zones': risk_zones.to_dict(orient='records'),
         'confidence_zones': confidence_zones.to_dict(orient='records'),
-        'strategy_performance': strat_stats.to_dict(orient='records'),
-        'pair_strategy_performance': pair_strat_stats.to_dict(orient='records')
+        'strategy_performance': list(existing_strat_perf.values()),
+        'pair_strategy_performance': list(existing_pair_perf.values())
     }
     
-    intel_file = f"trading_intelligence{out_suffix}.json"
     with open(intel_file, 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=4)
         
     print(f"[OK] Inteligencia generada: {intel_file}")
-    print(f"   - Trades analizados: {len(df)}")
+    print(f"   - Trades analizados: {report['total_trades_analyzed']}")
+    print(f"   - Estrategias consolidadas: {len(report['strategy_performance'])}")
     print(f"   - Zonas de riesgo detectadas: {len(risk_zones)}")
     print(f"   - Zonas de confianza detectadas: {len(confidence_zones)}")
     
@@ -126,22 +160,35 @@ def generate_dynamic_threshold_matrix(logs_dir="logs/trades", config_path="confi
     thresholds_file = f"strategy_thresholds{out_suffix}.json"
     
     matrix = {}
-    known_strategies = [
-        "Estocástico + SMA200",
-        "WaveTrend + Keltner Channel Reversion",
-        "Alpha Convergence (Bollinger + Fibo + Stoch)",
-        "Cambio de Estructura (MSS)",
-        "Expert Vision Donchian Reversion",
-        "Fibonacci Retracement 61.8%",
-        "Patrones de Continuación (Chartismo)"
-    ]
+    if Path(thresholds_file).exists():
+        try:
+            with open(thresholds_file, 'r', encoding='utf-8') as f:
+                matrix = json.load(f)
+        except Exception:
+            matrix = {}
+
+    try:
+        from gui_bridge import MASTER_STRATEGIES_CATALOG
+        known_strategies = list(MASTER_STRATEGIES_CATALOG)
+    except Exception:
+        known_strategies = [
+            "Estocástico + SMA200",
+            "WaveTrend + Keltner Channel Reversion",
+            "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "Cambio de Estructura (MSS)",
+            "Expert Vision Donchian Reversion",
+            "Fibonacci Retracement 61.8%",
+            "Patrones de Continuación (Chartismo)"
+        ]
     
     default_pairs = ["EURUSD", "GBPUSD", "AUDUSD", "USDCAD", "USDJPY", "SPY", "AAPL"] if broker == 'alpaca' else ["EURUSD_otc", "GBPUSD_otc", "AUDUSD_otc", "USDCAD_otc", "AUDCAD_otc", "USDMXN_otc", "USDCOP_otc", "GBPJPY_otc", "AUDJPY_otc", "NZDUSD_otc", "USDCHF_otc"]
     default_thresh = 0.45 if broker == 'alpaca' else 0.55
     for strat in known_strategies:
-        matrix[strat] = {}
+        if strat not in matrix:
+            matrix[strat] = {}
         for pair in default_pairs:
-            matrix[strat][pair] = default_thresh
+            if pair not in matrix[strat]:
+                matrix[strat][pair] = default_thresh
             
     if not all_files:
         try:
@@ -152,6 +199,15 @@ def generate_dynamic_threshold_matrix(logs_dir="logs/trades", config_path="confi
         return matrix
 
     dfs = []
+    paper_csv = Path("paper_backtest.csv")
+    if csv_suffix == "pocketoption" and paper_csv.exists():
+        try:
+            df_paper = pd.read_csv(paper_csv)
+            if not df_paper.empty:
+                dfs.append(df_paper)
+        except Exception as e:
+            print(f"[WARN] Error leyendo paper_backtest.csv: {e}")
+
     for f in all_files:
         try:
             df_temp = pd.read_csv(f)

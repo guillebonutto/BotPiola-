@@ -1,0 +1,12 @@
+{
+  "generation": 502,
+  "strategies": [
+    "[SMC] Liquidity & FVG W18/M42 (Gen474)",
+    "[RAPID] EMA Pullback 12/28 (Gen498)",
+    "[RAPID] EMA Pullback 9/25 (Gen499)",
+    "[RAPID] Stoch BB Dev2.5/W14 (Gen502)",
+    "[RAPID] Stoch BB Dev2.5/W14 (Gen501)",
+    "[RAPID] RSI Velocity 7p (Gen496)"
+  ],
+  "last_update": "2026-10-25T18:31:47.360653"
+}

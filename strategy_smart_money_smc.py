@@ -33,35 +33,71 @@ class StrategySmartMoneySMC(Strategy):
         prev2 = df.iloc[-3]
         recent = df.iloc[-30:]
 
-        # --- 1. Detección de Fair Value Gap (FVG / Imbalance) ---
-        # Bullish FVG: Low de la vela actual (i) > High de la vela de hace 2 periodos (i-2)
-        bullish_fvg = prev['Low'] > df.iloc[-4]['High'] if len(df) >= 4 else False
+        # --- 1. Mitigación Visual: Escaneo Histórico de FVGs ---
+        lookback = min(100, len(df))
+        df_recent = df.iloc[-lookback:]
         
-        # Bearish FVG: High de la vela actual (i) < Low de la vela de hace 2 periodos (i-2)
-        bearish_fvg = prev['High'] < df.iloc[-4]['Low'] if len(df) >= 4 else False
+        bullish_fvg_unmitigated = None # Tuple: (index, gap_top, gap_bottom)
+        bearish_fvg_unmitigated = None # Tuple: (index, gap_top, gap_bottom)
+
+        # Buscar de más antiguo a más nuevo
+        for i in range(2, lookback - 1):
+            # Bullish FVG: Low(i) > High(i-2)
+            if df_recent['Low'].iloc[i] > df_recent['High'].iloc[i-2]:
+                gap_top = df_recent['Low'].iloc[i]
+                gap_bottom = df_recent['High'].iloc[i-2]
+                
+                # Chequear mitigación en velas posteriores
+                mitigated = False
+                for j in range(i + 1, lookback):
+                    if df_recent['Low'].iloc[j] <= gap_top:
+                        mitigated = True
+                        break
+                
+                if not mitigated:
+                    bullish_fvg_unmitigated = (i, gap_top, gap_bottom)
+                    
+            # Bearish FVG: High(i) < Low(i-2)
+            if df_recent['High'].iloc[i] < df_recent['Low'].iloc[i-2]:
+                gap_top = df_recent['Low'].iloc[i-2]
+                gap_bottom = df_recent['High'].iloc[i]
+                
+                # Chequear mitigación en velas posteriores
+                mitigated = False
+                for j in range(i + 1, lookback):
+                    if df_recent['High'].iloc[j] >= gap_bottom:
+                        mitigated = True
+                        break
+                
+                if not mitigated:
+                    bearish_fvg_unmitigated = (i, gap_top, gap_bottom)
 
         # --- 2. Detección de Estructura (Swing High / Low) ---
+        recent = df.iloc[-30:]
         high_max = recent['High'].max()
         low_min = recent['Low'].min()
         eq_price = (high_max + low_min) / 2.0  # Nivel 50% Equilibrium
 
         # --- 3. SEÑAL DE COMPRA (BULLISH SMC ENTRY) ---
-        # Condición: El precio retrocede a la zona de DISCOUNT (< 50% del rango)
-        # y toca la zona de Imbalance / Order Block previa
-        if last['Close'] < eq_price:
-            # Detectar si la vela anterior o actual rebalanceó un FVG alcista previo
-            if bullish_fvg or (last['Low'] <= df.iloc[-4]['High'] and last['Close'] > last['Open']):
-                # Confirmación de rechazo alcista en el Order Block
+        if last['Close'] < eq_price and bullish_fvg_unmitigated:
+            gap_top = bullish_fvg_unmitigated[1]
+            
+            # Condición: El precio retrocede y entra en el FVG no mitigado (Low actual o previo <= gap_top)
+            if last['Low'] <= gap_top or prev['Low'] <= gap_top:
+                # Confirmación de rechazo alcista (Order Block válido)
                 if last['Close'] > last['Open'] and (last['Close'] - last['Open']) > (last['High'] - last['Low']) * 0.4:
-                    return 'BUY', f"SMC Bullish: Rebalanceo FVG + Retorno a OB en Zona Discount (Bajo {eq_price:.4f})", target_duration
+                    velas_atras = lookback - bullish_fvg_unmitigated[0]
+                    return 'BUY', f"SMC Bullish: Rebote en FVG No Mitigado de hace {velas_atras} velas (Zona Discount)", target_duration
 
         # --- 4. SEÑAL DE VENTA (BEARISH SMC ENTRY) ---
-        # Condición: El precio retrocede a la zona PREMIUM (> 50% del rango)
-        # y toca el Imbalance bajista
-        if last['Close'] > eq_price:
-            if bearish_fvg or (last['High'] >= df.iloc[-4]['Low'] and last['Close'] < last['Open']):
-                # Confirmación de rechazo bajista en el Order Block
+        if last['Close'] > eq_price and bearish_fvg_unmitigated:
+            gap_bottom = bearish_fvg_unmitigated[2]
+            
+            # Condición: El precio retrocede y entra en el FVG bajista no mitigado (High actual o previo >= gap_bottom)
+            if last['High'] >= gap_bottom or prev['High'] >= gap_bottom:
+                # Confirmación de rechazo bajista (Order Block válido)
                 if last['Close'] < last['Open'] and (last['Open'] - last['Close']) > (last['High'] - last['Low']) * 0.4:
-                    return 'SELL', f"SMC Bearish: Rebalanceo FVG + Rechazo en OB en Zona Premium (Sobre {eq_price:.4f})", target_duration
+                    velas_atras = lookback - bearish_fvg_unmitigated[0]
+                    return 'SELL', f"SMC Bearish: Rechazo en FVG No Mitigado de hace {velas_atras} velas (Zona Premium)", target_duration
 
-        return 'HOLD', "Sin confluencia SMC (No FVG/OB active)", 0
+        return 'HOLD', "Sin confluencia SMC (No FVG/OB activo o mitigado)", 0

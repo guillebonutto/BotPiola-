@@ -1,0 +1,430 @@
+[
+  {
+    "params": "Wick36/RMult1.5/RSI30-70",
+    "wick": 0.36,
+    "r_mult": 1.5,
+    "rsi_lim": [
+      30,
+      70
+    ],
+    "global_trades": 285,
+    "global_wr": 44.2,
+    "elite_pairs_count": 3,
+    "elite_trades": 22,
+    "elite_wr": 81.8,
+    "elite_pnl": 12.56,
+    "elite_pairs": {
+      "#FB_otc_300s": {
+        "trades": 9,
+        "wins": 6,
+        "losses": 3,
+        "wr": 66.7
+      },
+      "#INTC_otc_300s": {
+        "trades": 6,
+        "wins": 6,
+        "losses": 0,
+        "wr": 100.0
+      },
+      "EURJPY_otc_60s": {
+        "trades": 7,
+        "wins": 6,
+        "losses": 1,
+        "wr": 85.7
+      }
+    }
+  },
+  {
+    "params": "Wick36/RMult1.8/RSI35-65",
+    "wick": 0.36,
+    "r_mult": 1.8,
+    "rsi_lim": [
+      35,
+      65
+    ],
+    "global_trades": 77,
+    "global_wr": 35.1,
+    "elite_pairs_count": 3,
+    "elite_trades": 24,
+    "elite_wr": 75.0,
+    "elite_pnl": 10.56,
+    "elite_pairs": {
+      "AUDJPY_otc_60s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "NZDUSD_otc_60s": {
+        "trades": 9,
+        "wins": 7,
+        "losses": 2,
+        "wr": 77.8
+      },
+      "USDCAD_otc_60s": {
+        "trades": 7,
+        "wins": 5,
+        "losses": 2,
+        "wr": 71.4
+      }
+    }
+  },
+  {
+    "params": "Wick36/RMult1.3/RSI40-60",
+    "wick": 0.36,
+    "r_mult": 1.3,
+    "rsi_lim": [
+      40,
+      60
+    ],
+    "global_trades": 3483,
+    "global_wr": 47.0,
+    "elite_pairs_count": 3,
+    "elite_trades": 49,
+    "elite_wr": 73.5,
+    "elite_pnl": 20.12,
+    "elite_pairs": {
+      "#AAPL_otc_60s": {
+        "trades": 17,
+        "wins": 13,
+        "losses": 4,
+        "wr": 76.5
+      },
+      "#MCD_otc_60s": {
+        "trades": 16,
+        "wins": 13,
+        "losses": 3,
+        "wr": 81.2
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 16,
+        "wins": 10,
+        "losses": 6,
+        "wr": 62.5
+      }
+    }
+  },
+  {
+    "params": "Wick40/RMult1.5/RSI35-65",
+    "wick": 0.4,
+    "r_mult": 1.5,
+    "rsi_lim": [
+      35,
+      65
+    ],
+    "global_trades": 418,
+    "global_wr": 43.8,
+    "elite_pairs_count": 5,
+    "elite_trades": 46,
+    "elite_wr": 71.7,
+    "elite_pnl": 17.36,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 11,
+        "wins": 7,
+        "losses": 4,
+        "wr": 63.6
+      },
+      "#FB_otc_300s": {
+        "trades": 7,
+        "wins": 5,
+        "losses": 2,
+        "wr": 71.4
+      },
+      "#INTC_otc_300s": {
+        "trades": 9,
+        "wins": 7,
+        "losses": 2,
+        "wr": 77.8
+      },
+      "EURJPY_otc_60s": {
+        "trades": 14,
+        "wins": 11,
+        "losses": 3,
+        "wr": 78.6
+      },
+      "GBPUSD_otc_300s": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "wr": 60.0
+      }
+    }
+  },
+  {
+    "params": "Wick32/RMult1.8/RSI35-65",
+    "wick": 0.32,
+    "r_mult": 1.8,
+    "rsi_lim": [
+      35,
+      65
+    ],
+    "global_trades": 100,
+    "global_wr": 35.0,
+    "elite_pairs_count": 3,
+    "elite_trades": 31,
+    "elite_wr": 71.0,
+    "elite_pnl": 11.24,
+    "elite_pairs": {
+      "AUDJPY_otc_60s": {
+        "trades": 11,
+        "wins": 9,
+        "losses": 2,
+        "wr": 81.8
+      },
+      "NZDUSD_otc_60s": {
+        "trades": 11,
+        "wins": 7,
+        "losses": 4,
+        "wr": 63.6
+      },
+      "USDCAD_otc_60s": {
+        "trades": 9,
+        "wins": 6,
+        "losses": 3,
+        "wr": 66.7
+      }
+    }
+  },
+  {
+    "params": "Wick36/RMult1.5/RSI35-65",
+    "wick": 0.36,
+    "r_mult": 1.5,
+    "rsi_lim": [
+      35,
+      65
+    ],
+    "global_trades": 544,
+    "global_wr": 44.1,
+    "elite_pairs_count": 8,
+    "elite_trades": 75,
+    "elite_wr": 70.7,
+    "elite_pnl": 26.76,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      },
+      "#FB_otc_300s": {
+        "trades": 11,
+        "wins": 7,
+        "losses": 4,
+        "wr": 63.6
+      },
+      "#INTC_otc_300s": {
+        "trades": 11,
+        "wins": 9,
+        "losses": 2,
+        "wr": 81.8
+      },
+      "#TSLA_otc_300s": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "wr": 60.0
+      },
+      "EURJPY_otc_60s": {
+        "trades": 17,
+        "wins": 13,
+        "losses": 4,
+        "wr": 76.5
+      },
+      "GBPUSD_otc_300s": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "wr": 60.0
+      },
+      "NZDUSD_otc_300s": {
+        "trades": 7,
+        "wins": 6,
+        "losses": 1,
+        "wr": 85.7
+      },
+      "USDCAD_otc_300s": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "wr": 60.0
+      }
+    }
+  },
+  {
+    "params": "Wick32/RMult1.3/RSI30-70",
+    "wick": 0.32,
+    "r_mult": 1.3,
+    "rsi_lim": [
+      30,
+      70
+    ],
+    "global_trades": 1390,
+    "global_wr": 48.8,
+    "elite_pairs_count": 6,
+    "elite_trades": 59,
+    "elite_wr": 69.5,
+    "elite_pnl": 19.72,
+    "elite_pairs": {
+      "#BA_otc_60s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "#INTC_otc_60s": {
+        "trades": 5,
+        "wins": 4,
+        "losses": 1,
+        "wr": 80.0
+      },
+      "#MCD_otc_60s": {
+        "trades": 7,
+        "wins": 6,
+        "losses": 1,
+        "wr": 85.7
+      },
+      "#TSLA_otc_300s": {
+        "trades": 15,
+        "wins": 9,
+        "losses": 6,
+        "wr": 60.0
+      },
+      "NZDUSD_otc_300s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      },
+      "USDCHF_otc_60s": {
+        "trades": 10,
+        "wins": 7,
+        "losses": 3,
+        "wr": 70.0
+      }
+    }
+  },
+  {
+    "params": "Wick40/RMult1.3/RSI40-60",
+    "wick": 0.4,
+    "r_mult": 1.3,
+    "rsi_lim": [
+      40,
+      60
+    ],
+    "global_trades": 2784,
+    "global_wr": 46.5,
+    "elite_pairs_count": 5,
+    "elite_trades": 75,
+    "elite_wr": 69.3,
+    "elite_pnl": 24.84,
+    "elite_pairs": {
+      "#AAPL_otc_60s": {
+        "trades": 14,
+        "wins": 11,
+        "losses": 3,
+        "wr": 78.6
+      },
+      "#MCD_otc_60s": {
+        "trades": 16,
+        "wins": 13,
+        "losses": 3,
+        "wr": 81.2
+      },
+      "AUDCAD_otc_60s": {
+        "trades": 10,
+        "wins": 6,
+        "losses": 4,
+        "wr": 60.0
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      },
+      "NZDUSD_otc_300s": {
+        "trades": 21,
+        "wins": 13,
+        "losses": 8,
+        "wr": 61.9
+      }
+    }
+  },
+  {
+    "params": "Wick32/RMult1.8/RSI40-60",
+    "wick": 0.32,
+    "r_mult": 1.8,
+    "rsi_lim": [
+      40,
+      60
+    ],
+    "global_trades": 202,
+    "global_wr": 30.2,
+    "elite_pairs_count": 2,
+    "elite_trades": 32,
+    "elite_wr": 68.8,
+    "elite_pnl": 10.24,
+    "elite_pairs": {
+      "AUDJPY_otc_60s": {
+        "trades": 17,
+        "wins": 12,
+        "losses": 5,
+        "wr": 70.6
+      },
+      "USDCAD_otc_60s": {
+        "trades": 15,
+        "wins": 10,
+        "losses": 5,
+        "wr": 66.7
+      }
+    }
+  },
+  {
+    "params": "Wick44/RMult1.5/RSI35-65",
+    "wick": 0.44,
+    "r_mult": 1.5,
+    "rsi_lim": [
+      35,
+      65
+    ],
+    "global_trades": 326,
+    "global_wr": 43.3,
+    "elite_pairs_count": 5,
+    "elite_trades": 35,
+    "elite_wr": 68.6,
+    "elite_pnl": 11.08,
+    "elite_pairs": {
+      "#FB_otc_300s": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "wr": 66.7
+      },
+      "#INTC_otc_300s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "EURJPY_otc_60s": {
+        "trades": 11,
+        "wins": 8,
+        "losses": 3,
+        "wr": 72.7
+      },
+      "GBPUSD_otc_300s": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "wr": 60.0
+      },
+      "USDCOP_otc_60s": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "wr": 60.0
+      }
+    }
+  }
+]

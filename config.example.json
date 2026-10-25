@@ -1,0 +1,54 @@
+{
+    "ssid": "PONER_SSID_AQUI",
+    "telegram_token": "PONER_TELEGRAM_BOT_TOKEN_AQUI",
+    "telegram_chat_id": "-100XXXXXXXXXX",
+    "telegram_owner_id": "123456789",
+    "security_pin": "0000",
+    "credentials": {
+        "email": "tu_correo@ejemplo.com",
+        "password": "tu_password"
+    },
+    "supabase_url": "https://tu-proyecto.supabase.co",
+    "supabase_key": "tu_supabase_anon_o_service_key",
+    "supabase_table": "trades_real",
+    "gemini_api_key": "tu_gemini_api_key",
+    "use_gemini_live": false,
+    "trading": {
+        "pairs_with_timeframe": {
+            "AUDNZD_otc": 300,
+            "AUDCAD_otc": 300,
+            "USDARS_otc": 300,
+            "#CSCO_otc": 300,
+            "#MSFT_otc": 300,
+            "USDCAD_otc": 300,
+            "AUDCHF_otc": 300,
+            "EURGBP_otc": 300
+        },
+        "pairs": [
+            "AUDNZD_otc",
+            "AUDCAD_otc",
+            "USDARS_otc",
+            "#CSCO_otc",
+            "#MSFT_otc",
+            "USDCAD_otc",
+            "AUDCHF_otc",
+            "EURGBP_otc"
+        ],
+        "interval": 300,
+        "intervals": [300],
+        "lookback": 220,
+        "verbose": true,
+        "verbose_telegram": true,
+        "amount": 2.0,
+        "daily_stop_loss": -60.0,
+        "daily_take_profit": 25.0,
+        "news_window": 15,
+        "money_management": {
+            "mode": "martingale",
+            "fixed_amount": 2.0,
+            "compound_percentage": 0.01,
+            "martingale_multiplier": 2.0,
+            "martingale_max_steps": 3
+        }
+    }
+}

@@ -17,14 +17,15 @@ from supabase import create_client, Client
 class TradeLogger:
     """Logger para guardar trades en CSV con estructura detallada."""
     
-    def __init__(self, logs_dir="logs/trades", filename_pattern="trades_{date}.csv"):
+    def __init__(self, logs_dir="logs/trades", filename_pattern="trades_{date}.csv", config_path=None):
         self.logs_dir = Path(logs_dir)
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         self.filename_pattern = filename_pattern
         self.current_file = None
         self.headers = None
+        self.supabase_table = "trades"
         self._ensure_file()
-        self._init_supabase()
+        self._init_supabase(config_path)
     
     def configure(self, filename_pattern=None, logs_dir=None, config_path=None):
         """Configura dinámicamente el directorio, patrón de nombres de archivo e inicializa Supabase."""
@@ -43,15 +44,16 @@ class TradeLogger:
         try:
             path = Path(config_path or 'config.json')
             if path.exists():
-                with open(path, 'r') as f:
+                with open(path, 'r', encoding='utf-8') as f:
                     config = json.load(f)
                 
                 url = config.get("supabase_url")
                 key = config.get("supabase_key")
+                self.supabase_table = config.get("supabase_table", "trades")
                 
                 if url and key:
                     self.supabase: Client = create_client(url, key)
-                    print("[OK] Supabase conectado en TradeLogger")
+                    print(f"[OK] Supabase conectado en TradeLogger (Tabla: '{self.supabase_table}')")
                 else:
                     self.supabase = None
             else:
@@ -205,7 +207,8 @@ class TradeLogger:
         def _do_sync():
             try:
                 clean_row = {k: (v if v != '' else None) for k, v in row.items()}
-                self.supabase.table("trades").upsert(clean_row).execute()
+                tbl = getattr(self, 'supabase_table', 'trades')
+                self.supabase.table(tbl).upsert(clean_row).execute()
             except Exception as e:
                 print(f"[WARN] Error sincronizando con Supabase: {e}")
 
@@ -252,7 +255,8 @@ class TradeLogger:
                     
                     def _do_update(_upd=update_data, _tid=trade_id):
                         try:
-                            self.supabase.table("trades").update(_upd).eq("trade_id", str(_tid)).execute()
+                            tbl = getattr(self, 'supabase_table', 'trades')
+                            self.supabase.table(tbl).update(_upd).eq("trade_id", str(_tid)).execute()
                         except Exception as _e:
                             print(f"[WARN] Error actualizando Supabase: {_e}")
                     

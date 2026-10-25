@@ -23,9 +23,18 @@ from strategy_divergence_pivot import StrategyDivergencePivot
 from strategy_smart_money_smc import StrategySmartMoneySMC
 from strategy_fibonacci_master import StrategyFibonacciMasterSniper
 from strategy_chartist_patterns import StrategyChartistPatterns
+from strategy_micro_breakout_7v import StrategyMicroBreakout7v
+from strategy_bb_burst_pro import StrategyBBBurstPro
+from strategy_ttm_squeeze_pro import StrategyTTMSqueezePro
+from strategy_vsa_climax import StrategyVSAClimax
+from strategy_orderblock_mtf import StrategyOrderBlockMTF
+from strategy_vwap_reversion import StrategyVWAPReversion
+from strategy_momentum_conf import StrategyMomentumConfluence
+from graduated_strategy_loader import load_graduated_strategies
 
-from trade_logger import trade_logger
+from trade_logger import TradeLogger, trade_logger
 from feedback_db import FeedbackDB
+from money_management import MoneyManagement
 import uuid
 import json
 from pathlib import Path
@@ -57,12 +66,12 @@ class TradingBot:
         self.root_config = root_config or {}
         self.broker = self.root_config.get('broker', 'pocketoption')
         
-        # Configurar logger dinámicamente según configuración
+        # Configurar logger independiente por instancia según configuración
         logger_suffix = Path(self.config_path).stem
         if logger_suffix == "config":
             tbl_cfg = self.root_config.get('supabase_table', '')
             logger_suffix = "pocketoption_real" if "real" in tbl_cfg else "pocketoption"
-        trade_logger.configure(
+        self.trade_logger = TradeLogger(
             filename_pattern=f"trades_{logger_suffix}_{{date}}.csv",
             config_path=self.config_path
         )
@@ -81,13 +90,15 @@ class TradingBot:
         self.pattern_recognizer = PatternRecognizer()
         
         gemini_key = self.root_config.get('gemini_api_key') or (config or {}).get('gemini_api_key') or os.getenv('GEMINI_API_KEY')
+        security_pin = str(self.root_config.get('security_pin') or (config or {}).get('security_pin', '2026'))
         self.notifier = TelegramNotifier(
             telegram_token, 
             telegram_chat_id, 
             telegram_owner_id,
             get_balance_callback=self.get_balance,
             gemini_api_key=gemini_key,
-            bot_ref=self
+            bot_ref=self,
+            security_pin=security_pin
         )
         
         # Configuración dinámica
@@ -108,22 +119,29 @@ class TradingBot:
         # Inicializar lista de estrategias activas
         is_alpaca = self.broker == 'alpaca'
         all_strategies = [
-            StrategyHybridSniper(bypass_filter=is_alpaca),
-            StrategyBollingerRSI(bypass_filter=is_alpaca),
-            StrategyPriceActionEngulfing(bypass_filter=is_alpaca),
-            StrategyTrendPullback(bypass_filter=is_alpaca),
-            StrategyWaveTrendKeltner(bypass_filter=is_alpaca),
-            StrategyTTMSqueeze(bypass_filter=is_alpaca),
-            StrategyStochastic(bypass_filter=is_alpaca),
-            StrategyAlphaConvergence(bypass_filter=is_alpaca),
-            StrategyFibonacci(bypass_filter=is_alpaca),
+            StrategyHybridSniper(bypass_filter=True),
+            StrategyBollingerRSI(bypass_filter=True),
+            StrategyPriceActionEngulfing(bypass_filter=True),
+            StrategyTrendPullback(bypass_filter=True),
+            StrategyWaveTrendKeltner(bypass_filter=True),
+            StrategyTTMSqueeze(bypass_filter=True),
+            StrategyStochastic(bypass_filter=True),
+            StrategyAlphaConvergence(bypass_filter=True),
+            StrategyFibonacci(bypass_filter=True),
             StrategyStructure(),
-            StrategyExpertVision(bypass_filter=is_alpaca),
+            StrategyExpertVision(bypass_filter=True),
             StrategyContinuation(),
-            StrategyDivergencePivot(bypass_filter=is_alpaca),
-            StrategySmartMoneySMC(bypass_filter=is_alpaca),
-            StrategyFibonacciMasterSniper(bypass_filter=is_alpaca),
-            StrategyChartistPatterns(bypass_filter=is_alpaca)
+            StrategyDivergencePivot(bypass_filter=True),
+            StrategySmartMoneySMC(bypass_filter=True),
+            StrategyFibonacciMasterSniper(bypass_filter=True),
+            StrategyChartistPatterns(bypass_filter=True),
+            StrategyMicroBreakout7v(bypass_filter=True),
+            StrategyBBBurstPro(bypass_filter=True),
+            StrategyTTMSqueezePro(bypass_filter=True),
+            StrategyVSAClimax(bypass_filter=True),
+            StrategyOrderBlockMTF(bypass_filter=True),
+            StrategyVWAPReversion(bypass_filter=True),
+            StrategyMomentumConfluence(bypass_filter=True)
         ]
         
         enabled_list = self.config.get('enabled_strategies')
@@ -132,6 +150,10 @@ class TradingBot:
             print(f"[Bot] Estrategias activas filtradas: {[s.name for s in self.strategies]}")
         else:
             self.strategies = all_strategies
+
+        # Cargar e inyectar automáticamente estrategias graduadas (WR >= 60% en Paper)
+        self.graduated_strategies = {}
+        self._load_and_inject_graduated_strategies(verbose=True)
 
         
         # Base de datos de feedback y mantenimiento
@@ -145,13 +167,40 @@ class TradingBot:
         self.thresholds = self._load_thresholds()
         self.whitelist = self._load_whitelist()
 
-        # --- GESTIÓN DE RIESGO ---
+        # --- GESTIÓN DE RIESGO Y CAPITAL ---
+        if self.broker != 'alpaca':
+            # PocketOption: Gestión estricta Miriam Molina (Proyecto Nuevo)
+            mm_cfg = self.config.get('money_management') or self.root_config.get('money_management') or {}
+            self.mm = MoneyManagement(
+                base_amount=mm_cfg.get('base_amount', self.config.get('amount', 1.0)),
+                max_compound_levels=mm_cfg.get('max_compound_levels', 2),
+                max_session_trades=mm_cfg.get('max_session_trades', 5),
+                max_wins=mm_cfg.get('max_wins_take_profit', 3),
+                max_losses=mm_cfg.get('max_losses_stop_loss', 3),
+                auto_reset_on_target=mm_cfg.get('auto_reset_on_target', False),
+                state_file="session_state.json",
+                db_file=db_name
+            )
+            self.session_profit = self.mm.session_pnl
+        else:
+            # Alpaca: Gestión para acciones/ETFs según config_alpaca.json
+            self.mm = None
+            self.session_profit = 0.0
+            try:
+                today = datetime.now().strftime('%Y-%m-%d')
+                import sqlite3
+                conn = sqlite3.connect(db_name)
+                cur = conn.cursor()
+                rows = cur.execute("SELECT profit FROM trades WHERE timestamp LIKE ? AND result IN ('win', 'loss')", (f"{today}%",)).fetchall()
+                conn.close()
+                self.session_profit = sum(float(r[0]) for r in rows)
+            except Exception:
+                pass
+
         self.daily_stop_loss = self.config.get('daily_stop_loss', DEFAULT_CONFIG['daily_stop_loss'])
         self.daily_take_profit = self.config.get('daily_take_profit', DEFAULT_CONFIG['daily_take_profit'])
-        self.session_profit = 0.0
-        self.session_profit = 0.0
         self.strategy_fails = {}      # Seguimiento de rachas negativas por sesión
-        self.consecutive_losses = {}  # Seguimiento de Martingala por par {pair: count}
+        self.consecutive_losses = {}  # Seguimiento por par
         
         # --- MTF CACHE ---
         self.mtf_cache = {} # { (pair, interval): (timestamp, dataframe) }
@@ -186,7 +235,7 @@ class TradingBot:
             try:
                 genai.configure(api_key=gemini_key)
                 self.ai_validator = genai.GenerativeModel(
-                    model_name='gemini-2.5-flash',
+                    model_name='gemini-1.5-flash',
                     system_instruction=(
                         "Eres un validador experto de señales de trading en opciones binarias (PocketOption). "
                         "Tu única función es analizar snapshots de indicadores técnicos y decidir si una "
@@ -239,23 +288,30 @@ class TradingBot:
                             strat_name = row[1]
                             amount = row[2]
                             
-                            # Actualizar el registro
+                            real_close = float(matched.get('close_price') or matched.get('close') or 0.0)
+                            close_ts = datetime.now().isoformat()
+                            # Actualizar el registro con precio real y timestamp de salida
                             cursor.execute("""
                                 UPDATE trades 
-                                SET result = ?, profit = ?, close_price = open_price + ?
+                                SET result = ?, profit = ?, close_price = ?, close_timestamp = ?
                                 WHERE trade_id = ?
-                            """, ('win' if is_win else 'loss', profit, profit / amount if amount > 0 else 0, db_trade_id))
+                            """, ('win' if is_win else 'loss', profit, real_close if real_close > 0 else (open_price + (profit / amount if amount > 0 else 0)), close_ts, db_trade_id))
                             conn.commit()
                             
                             # Actualizar CSV
-                            trade_logger.update_trade_result(
+                            self.trade_logger.update_trade_result(
                                 trade_id=db_trade_id,
                                 result='WIN' if is_win else 'LOSS',
                                 profit_loss=profit
                             )
                             
-                            # Actualizar métricas de sesión
-                            self.session_profit += profit
+                            # Actualizar métricas de sesión y Money Management
+                            outcome = 'WIN' if is_win else ('DRAW' if profit == 0 else 'LOSS')
+                            if hasattr(self, 'mm') and self.mm is not None:
+                                self.mm.register_result(outcome, profit)
+                                self.session_profit = self.mm.session_pnl
+                            else:
+                                self.session_profit += profit
                             if is_win:
                                 self.strategy_fails[strat_name] = 0
                                 self.consecutive_losses[pair] = 0
@@ -282,7 +338,12 @@ class TradingBot:
                                 print(f"[Alpaca Monitor] Error actualizando inteligencia: {intel_e}")
                         else:
                             print(f"[Alpaca Monitor] Trade sincronizado {placed_id} finalizado. Profit: ${profit:.2f}. Notificando en Telegram...")
-                            self.session_profit += profit
+                            outcome = 'WIN' if is_win else ('DRAW' if profit == 0 else 'LOSS')
+                            if hasattr(self, 'mm') and self.mm is not None:
+                                self.mm.register_result(outcome, profit)
+                                self.session_profit = self.mm.session_pnl
+                            else:
+                                self.session_profit += profit
                             if pair in self.active_trade_expiry_dict:
                                 self.active_trade_expiry_dict[pair] = datetime.min.replace(tzinfo=timezone.utc)
                             await self.notifier.notify_close(pair, profit, is_win, trade_id=str(placed_id))
@@ -322,28 +383,99 @@ class TradingBot:
                     if enabled_list is not None:
                         is_alpaca = self.broker == 'alpaca'
                         all_strats = [
-                            StrategyHybridSniper(bypass_filter=is_alpaca),
-                            StrategyBollingerRSI(bypass_filter=is_alpaca),
-                            StrategyPriceActionEngulfing(bypass_filter=is_alpaca),
-                            StrategyTrendPullback(bypass_filter=is_alpaca),
-                            StrategyWaveTrendKeltner(bypass_filter=is_alpaca),
-                            StrategyTTMSqueeze(bypass_filter=is_alpaca),
-                            StrategyStochastic(bypass_filter=is_alpaca),
-                            StrategyAlphaConvergence(bypass_filter=is_alpaca),
-                            StrategyFibonacci(bypass_filter=is_alpaca),
+                            StrategyHybridSniper(bypass_filter=True),
+                            StrategyBollingerRSI(bypass_filter=True),
+                            StrategyPriceActionEngulfing(bypass_filter=True),
+                            StrategyTrendPullback(bypass_filter=True),
+                            StrategyWaveTrendKeltner(bypass_filter=True),
+                            StrategyTTMSqueeze(bypass_filter=True),
+                            StrategyStochastic(bypass_filter=True),
+                            StrategyAlphaConvergence(bypass_filter=True),
+                            StrategyFibonacci(bypass_filter=True),
                             StrategyStructure(),
-                            StrategyExpertVision(bypass_filter=is_alpaca),
-                            StrategyContinuation()
+                            StrategyExpertVision(bypass_filter=True),
+                            StrategyContinuation(),
+                            StrategyDivergencePivot(bypass_filter=True),
+                            StrategySmartMoneySMC(bypass_filter=True),
+                            StrategyFibonacciMasterSniper(bypass_filter=True),
+                            StrategyChartistPatterns(bypass_filter=True),
+                            StrategyMicroBreakout7v(bypass_filter=True),
+                            StrategyBBBurstPro(bypass_filter=True),
+                            StrategyTTMSqueezePro(bypass_filter=True),
+                            StrategyVSAClimax(bypass_filter=True),
+                            StrategyOrderBlockMTF(bypass_filter=True),
+                            StrategyVWAPReversion(bypass_filter=True),
+                            StrategyMomentumConfluence(bypass_filter=True)
                         ]
                         self.strategies = [s for s in all_strats if s.name in enabled_list]
+                        self._load_and_inject_graduated_strategies(verbose=True)
                         print(f"[Bot] Estrategias activas recargadas: {[s.name for s in self.strategies]}")
+                    
+                # Recargar parámetros de MoneyManagement
+                mm_cfg = trading_config.get('money_management') or new_config.get('money_management')
+                if mm_cfg and getattr(self, 'mm', None) is not None:
+                    self.mm.base_amount = float(mm_cfg.get('base_amount', getattr(self.mm, 'base_amount', 1.0)))
+                    self.mm.max_compound_levels = int(mm_cfg.get('max_compound_levels', getattr(self.mm, 'max_compound_levels', 2)))
+                    self.mm.max_session_trades = int(mm_cfg.get('max_session_trades', getattr(self.mm, 'max_session_trades', 5)))
+                    self.mm.max_wins = int(mm_cfg.get('max_wins_take_profit', getattr(self.mm, 'max_wins', 3)))
+                    self.mm.max_losses = int(mm_cfg.get('max_losses_stop_loss', getattr(self.mm, 'max_losses', 2)))
                     
                 # Recargar inteligencia estática en memoria
                 self.intelligence = self._load_intelligence()
                 self.thresholds = self._load_thresholds()
                 
+                # Recargar dinámicamente estrategias graduadas en cada ciclo
+                self._load_and_inject_graduated_strategies(verbose=False)
+                
         except Exception as e:
             print(f"[WARN] [Config] Error al recargar configuracion dinamica: {e}")
+
+    def _load_and_inject_graduated_strategies(self, verbose=True):
+        """
+        Inyecta dinámicamente las estrategias promovidas por el optimizador genético
+        desde 'strategies_ready_for_live.json' (WR >= 60.0% en Paper Trading).
+        """
+        try:
+            graduated_list = load_graduated_strategies()
+            if not graduated_list:
+                return
+
+            if not hasattr(self, 'graduated_strategies'):
+                self.graduated_strategies = {}
+
+            existing_names = {s.name: s for s in self.strategies}
+            newly_injected = []
+
+            for strat in graduated_list:
+                self.graduated_strategies[strat.name] = strat
+                if strat.name not in existing_names:
+                    self.strategies.append(strat)
+                    existing_names[strat.name] = strat
+                    newly_injected.append(strat.name)
+                else:
+                    existing = existing_names[strat.name]
+                    if hasattr(strat, 'target_pairs') and strat.target_pairs:
+                        existing.target_pairs = strat.target_pairs
+                    if hasattr(strat, 'toxic_pairs') and strat.toxic_pairs:
+                        existing.toxic_pairs = strat.toxic_pairs
+                    if hasattr(strat, 'allowed_hours') and strat.allowed_hours:
+                        existing.allowed_hours = strat.allowed_hours
+                    if hasattr(strat, 'toxic_hours') and strat.toxic_hours:
+                        existing.toxic_hours = strat.toxic_hours
+                    if hasattr(strat, 'paper_win_rate'):
+                        existing.paper_win_rate = strat.paper_win_rate
+                    existing.is_graduated = True
+
+            if newly_injected and verbose:
+                msg = f"🎓 [GRADUATED] Inyectadas {len(newly_injected)} variantes graduadas para operar en real: {newly_injected}"
+                print(f"[Bot] {msg}")
+                try:
+                    from gui_bridge import gui_bridge
+                    gui_bridge.log(msg, "WIN")
+                except Exception:
+                    pass
+        except Exception as e:
+            print(f"[WARN] Error inyectando estrategias graduadas: {e}")
 
     def _load_intelligence(self):
         """Carga el mapa de confianza generado por analyze_best_times.py."""
@@ -647,6 +779,45 @@ Devuelve SOLO este JSON:
             self.gemini_cache[cache_key] = fallback_res
             return fallback_res
 
+    async def trigger_killapp(self, stop_reason):
+        """Ejecuta Killapp: Notifica por Telegram y cierra todos los procesos del bot para blindar la cuenta."""
+        st = self.mm.get_status() if hasattr(self, 'mm') and self.mm is not None else {
+            'session_trades': 0, 'session_wins': 0, 'session_losses': 0, 'session_pnl': self.session_profit
+        }
+        max_trades = getattr(self.mm, 'max_session_trades', 5) if hasattr(self, 'mm') and self.mm is not None else 5
+        
+        msg = (
+            f"🛑 <b>[PocketOption] KILLAPP EJECUTADO - RETIRO DEL MERCADO</b>\n\n"
+            f"📌 <b>Motivo:</b> {stop_reason}\n"
+            f"📊 <b>Operaciones hoy:</b> {st['session_trades']}/{max_trades}\n"
+            f"🏆 <b>Score final:</b> {st['session_wins']}W - {st['session_losses']}L\n"
+            f"💰 <b>PnL Sesión:</b> ${st['session_pnl']:+.2f} USD\n\n"
+            f"🔒 <b>Seguridad:</b> <i>Killapp ha cerrado por completo el bot y sus procesos. Tu capital queda 100% resguardado hasta el próximo encendido de tu PC o mañana.</i>"
+        )
+        print(f"\n" + "="*65)
+        print(f"🛑 [KILLAPP] {stop_reason}")
+        print(f"   Score: {st['session_wins']}W - {st['session_losses']}L | PnL: ${st['session_pnl']:+.2f} USD")
+        print(f"   Apagando el bot por killapp...")
+        print("="*65 + "\n")
+        
+        try:
+            if self.notifier and self.notifier.token:
+                await self.notifier.send_message(msg)
+                await asyncio.sleep(2) # Esperar a que Telegram complete el envío
+        except Exception as e:
+            print(f"⚠️ Error enviando notificación de Killapp: {e}")
+
+        # Marcar archivo de bandera killapp para avisar al supervisor run_bot.py
+        try:
+            with open("killapp.flag", "w", encoding="utf-8") as kf:
+                kf.write(f"{datetime.now().isoformat()} - {stop_reason}")
+        except Exception:
+            pass
+
+        # Salir con código 0: esto le indica al supervisor run_bot.py que se apague de inmediato
+        import os
+        os._exit(0)
+
     async def get_balance(self):
         """Obtiene el balance actual de la cuenta con reintentos para permitir el handshake del WebSocket."""
         for attempt in range(4):
@@ -665,70 +836,30 @@ Devuelve SOLO este JSON:
         return "SSID Expirado"
 
     async def calculate_trade_amount(self, pair):
-        """Calcula el monto de la operación según la gestión de capital configurada.
-        Soporta:
-          - progressive_smart_compound / martingale_smart:
-              * Fase 1 (Saldo < $60.00): Martingala Inteligente ($1 base + 1 paso recuperación a $2).
-              * Fase 2 (Saldo >= $60.00): Interés compuesto al 5% entero (floor), sin martingala.
-          - compound: Interés compuesto basado en porcentaje del saldo real.
-          - fixed: Monto fijo por operación.
-        """
-        import math
-        mm_config = self.config.get('money_management', {})
-        mode = mm_config.get('mode', 'progressive_smart_compound')
+        """Calcula el monto de la operación según el broker y la gestión de capital."""
         balance = await self.get_balance()
+        bal_float = balance if isinstance(balance, (int, float)) and balance > 0 else None
         
-        phase2_threshold = float(mm_config.get('phase2_balance_threshold', 60.0))
-        raw_pct = float(mm_config.get('compound_percentage', 0.05))
-        pct = min(raw_pct, 0.05) # Límite estricto 5%
-        base_amount = float(mm_config.get('fixed_amount', self.amount))
+        # PocketOption usa MoneyManagement (Miriam Molina / Proyecto Nuevo - Soros 2 niveles)
+        if self.broker != 'alpaca' and hasattr(self, 'mm') and self.mm is not None:
+            amount = self.mm.get_trade_amount(bal_float)
+            bal_str = f"${balance:.2f}" if bal_float else str(balance)
+            print(f"  [PocketOption - Soros Nivel {self.mm.compound_level + 1}] {pair}: Inversión ${amount:.2f} USD (Saldo: {bal_str})")
+            return max(1.0, float(amount))
+            
+        # Alpaca usa gestión para acciones según config_alpaca.json
+        if self.broker == 'alpaca':
+            import math
+            mm_config = self.config.get('money_management', {})
+            mode = mm_config.get('mode', 'compound')
+            fixed_amt = float(mm_config.get('fixed_amount', self.amount))
+            if mode == 'compound' and bal_float:
+                pct = min(float(mm_config.get('compound_percentage', 0.05)), 0.05)
+                amt = max(fixed_amt, math.floor(bal_float * pct))
+                return float(amt)
+            return float(fixed_amt)
 
-        # 1. Modo Progresivo Inteligente (Fase 1 Martingale Smart < $60 -> Fase 2 Compuesto 5% >= $60)
-        if mode in ['progressive_smart_compound', 'martingale_smart', 'progressive']:
-            if isinstance(balance, (int, float)) and balance >= phase2_threshold:
-                # --- FASE 2: INTERÉS COMPUESTO 5% ENTERO (FLOOR) ---
-                compound_amount = float(max(1, math.floor(balance * pct)))
-                print(f"  [Gestión de Capital - FASE 2] {pair}: Saldo actual ${balance:.2f} >= ${phase2_threshold:.2f} -> Interés Compuesto 5% Entero (Floor): ${compound_amount:.2f} USD")
-                return compound_amount
-            else:
-                # --- FASE 1: MARTINGALE SMART ($1 BASE + 1 PASO A $2) ---
-                losses = self.consecutive_losses.get(pair, 0)
-                max_steps = mm_config.get('martingale_max_steps', 1)
-                multiplier = mm_config.get('martingale_multiplier', 2.0)
-                bal_display = f"${balance:.2f}" if isinstance(balance, (int, float)) else str(balance)
-                
-                if 0 < losses <= max_steps:
-                    trade_amount = float(math.floor(base_amount * (multiplier ** losses)))
-                    trade_amount = max(1.0, trade_amount)
-                    print(f"  [Gestión de Capital - FASE 1] {pair}: Recuperación Martingale Smart (Paso {losses}/{max_steps} | Saldo: {bal_display}) -> ${trade_amount:.2f} USD")
-                    return trade_amount
-                elif losses > max_steps:
-                    print(f"  [Gestión de Capital - FASE 1] {pair}: Límite de {max_steps} pasos alcanzado. Reiniciando a base (${base_amount:.2f} | Saldo: {bal_display})")
-                    self.consecutive_losses[pair] = 0
-                    return max(1.0, base_amount)
-
-                print(f"  [Gestión de Capital - FASE 1] {pair}: Operación base (${base_amount:.2f} USD | Saldo: {bal_display})")
-                return max(1.0, base_amount)
-
-        # 2. Modo Compuesto Puro
-        if mode == 'compound' and isinstance(balance, (int, float)) and balance > 0:
-            compound_amount = float(max(1, math.floor(balance * pct)))
-            print(f"  [Gestión de Capital] {pair}: Interés compuesto {pct*100:.1f}% (${balance:.2f}) -> ${compound_amount:.2f} USD")
-            return compound_amount
-
-        # 3. Martingala Estándar
-        if mode in ['martingale', 'martingale_limited']:
-            losses = self.consecutive_losses.get(pair, 0)
-            max_steps = mm_config.get('martingale_max_steps', 1)
-            multiplier = mm_config.get('martingale_multiplier', 2.0)
-            if 0 < losses <= max_steps:
-                trade_amount = float(math.floor(base_amount * (multiplier ** losses)))
-                return max(1.0, trade_amount)
-            else:
-                self.consecutive_losses[pair] = 0
-                return max(1.0, base_amount)
-
-        return max(1.0, base_amount)
+        return max(1.0, float(self.amount))
 
     async def fetch_data(self, pair, interval=None):
         """Obtiene velas y prepara el DataFrame con reintentos."""
@@ -805,6 +936,11 @@ Devuelve SOLO este JSON:
                         continue
                     return pd.DataFrame()
                 except Exception as e:
+                    err_str = str(e)
+                    if "Invalid asset" in err_str:
+                        if self.verbose:
+                            print(f"⚠️ Activo no disponible en PocketOption ({pair}): omitiendo.")
+                        return pd.DataFrame()
                     print(f"Error fetching {pair} (Attempt {attempt+1}): {e}")
                     if attempt == 0: continue
                     return pd.DataFrame()
@@ -892,12 +1028,12 @@ Devuelve SOLO este JSON:
         allowed_types = []
         if self.broker == 'alpaca':
             if market_state in ['TRENDING_UP', 'TRENDING_DOWN', 'NEUTRAL']:
-                allowed_types = ['TREND', 'REVERSION']
+                allowed_types = ['TREND', 'REVERSION', 'REVERSAL', 'BREAKOUT', 'MOMENTUM', 'TREND_PULLBACK', 'TREND_FOLLOWING']
             else:
                 allowed_types = []
         else:
             if market_state in ['TRENDING_UP', 'TRENDING_DOWN']:
-                allowed_types = ['TREND']
+                allowed_types = ['TREND', 'BREAKOUT', 'MOMENTUM', 'TREND_PULLBACK', 'TREND_FOLLOWING']
             elif market_state == 'SIDEWAYS':
                 # Evitamos operar por completo en consolidaciones de bajo rango (chop market)
                 allowed_types = []
@@ -906,13 +1042,44 @@ Devuelve SOLO este JSON:
                 allowed_types = []
             elif market_state == 'NEUTRAL':
                 # En transiciones o mercados sin tendencia, permitimos reversión y rupturas de compresión
-                allowed_types = ['REVERSION', 'TREND']
+                allowed_types = ['REVERSION', 'REVERSAL', 'TREND', 'BREAKOUT', 'MOMENTUM', 'TREND_PULLBACK']
             else:
                 allowed_types = []
 
+        curr_hour_utc = datetime.now(timezone.utc).hour
         for strategy in self.strategies:
+            # 1. Filtro de par restringido (target_pairs y toxic_pairs de la optimización)
+            clean_pair = pair.replace('#', '').replace('_otc', '').upper()
+            target_pairs = getattr(strategy, 'target_pairs', None)
+            if target_pairs:
+                allowed_pairs = [p.replace('#', '').replace('_otc', '').upper() for p in target_pairs]
+                if clean_pair not in allowed_pairs:
+                    continue
+
+            toxic_pairs = getattr(strategy, 'toxic_pairs', None)
+            if toxic_pairs:
+                blocked_pairs = [p.replace('#', '').replace('_otc', '').upper() for p in toxic_pairs]
+                if clean_pair in blocked_pairs:
+                    if self.verbose:
+                        print(f"  [PAIR SHIELD] Saltando {strategy.name}: Par {pair} identificado como tóxico (<45% WR)")
+                    continue
+
+            # 2. Filtro Horario Dinámico por Estrategia (Horas de Oro y Horas Tóxicas)
+            allowed_hours = getattr(strategy, 'allowed_hours', None)
+            if allowed_hours and curr_hour_utc not in allowed_hours:
+                continue
+
+            toxic_hours = getattr(strategy, 'toxic_hours', None)
+            if toxic_hours and curr_hour_utc in toxic_hours:
+                if self.verbose:
+                    print(f"  [HOURLY SHIELD] Saltando {strategy.name}: Hora {curr_hour_utc:02d}:00 UTC es tóxica para esta estrategia")
+                strategy_logs.append(f"   🛡️ <b>{strategy.name}</b>: Hora tóxica ({curr_hour_utc:02d}:00 UTC)")
+                continue
+
+            # 3. Filtro de régimen de mercado
             strat_type = getattr(strategy, 'type', 'TREND')
-            if strat_type not in allowed_types:
+            is_graduated = getattr(strategy, 'is_graduated', False) or getattr(strategy, 'bypass_regime', False)
+            if not is_graduated and strat_type not in allowed_types:
                 if self.verbose: 
                     print(f"  [REGIME] Saltando {strategy.name} ({strat_type}) por incompatibilidad con regimen {market_state}")
                 strategy_logs.append(f"   🛡️ <b>{strategy.name}</b>: Incompatible con {market_state}")
@@ -1029,9 +1196,16 @@ Devuelve SOLO este JSON:
                     active_trades_data = {}
                     if hasattr(self.api, 'active_trades'):
                         active_trades_data = {k: v for k, v in self.api.active_trades.items()}
+                    inv_cap = 0.0
+                    if hasattr(self.api, 'get_invested_capital'):
+                        inv_cap = await self.api.get_invested_capital()
+                    open_cnt = len([t for t in active_trades_data.values() if t.get('status', 'active') == 'active'])
                     with open('alpaca_status.json', 'w', encoding='utf-8') as sf:
                         json.dump({
                             'balance': balance,
+                            'invested_capital': inv_cap,
+                            'max_invested_capital': float(self.config.get('max_invested_capital_usd', 40000.0)),
+                            'open_trades_count': open_cnt,
                             'active_trades': active_trades_data,
                             'last_updated': datetime.now(timezone.utc).isoformat()
                         }, sf)
@@ -1043,6 +1217,34 @@ Devuelve SOLO este JSON:
                 await asyncio.sleep(10)
                 continue
             elif balance == "SSID Expirado" or (self.broker == 'alpaca' and balance == -1.0):
+                if self.broker != 'alpaca':
+                    creds = self.root_config.get('credentials') or self.config.get('credentials')
+                    if creds and creds.get('email') and creds.get('password'):
+                        print("\n[PocketOption] 🔄 SSID expirado detectado. Intentando auto-renovación de sesión vía Playwright...")
+                        if self.notifier and self.notifier.token:
+                            try:
+                                await self.notifier.send_message("🔄 <b>PocketOption:</b> SSID expirado. Iniciando auto-login para renovar sesión...")
+                            except Exception:
+                                pass
+                        try:
+                            from auto_session_refresher import refresh_pocketoption_session
+                            refreshed = await refresh_pocketoption_session(creds['email'], creds['password'], headless=True)
+                            if refreshed:
+                                print("✅ [PocketOption] ¡Sesión renovada con éxito! Reconectando WebSocket...")
+                                self.reload_config()
+                                new_ssid = self.root_config.get('ssid') or self.config.get('ssid')
+                                if new_ssid:
+                                    self.api = PocketOptionAsync(new_ssid)
+                                    if self.notifier and self.notifier.token:
+                                        try:
+                                            await self.notifier.send_message("✅ <b>PocketOption:</b> Nueva sesión generada y conectada con éxito. Continuando operativa normal.")
+                                        except Exception:
+                                            pass
+                                    await asyncio.sleep(3)
+                                    continue
+                        except Exception as ref_err:
+                            print(f"[PocketOption] ⚠️ Error en auto-renovación de sesión: {ref_err}")
+
                 msg = "[ERR] The bot cannot continue without valid Alpaca credentials." if self.broker == 'alpaca' else "[ERR] The bot cannot continue without a valid SSID. Please update config.json."
                 print(msg)
                 if self.notifier.token:
@@ -1069,18 +1271,103 @@ Devuelve SOLO este JSON:
                 await asyncio.sleep(10)
                 continue
 
-            # --- CONTROL DE RIESGO DIARIO ---
-            if self.session_profit <= self.daily_stop_loss:
-                msg = f"🛑 <b>STOP LOSS REACHED:</b> ${self.session_profit:.2f}. Stopping trading session for today."
-                print(msg)
-                await self.notifier.send_message(msg)
-                break # Sale del bot
-            
-            if self.session_profit >= self.daily_take_profit:
-                msg = f"🎯 <b>TAKE PROFIT REACHED:</b> ${self.session_profit:.2f}. Securing profits and stopping trading session."
-                print(msg)
-                await self.notifier.send_message(msg)
-                break
+            # --- VERIFICACIÓN DE GESTIÓN DE CAPITAL (Miriam Molina - PocketOption) ---
+            if self.broker != 'alpaca' and hasattr(self, 'mm') and self.mm is not None:
+                can_trade, stop_reason = self.mm.can_trade()
+                if not can_trade:
+                    if not getattr(self, 'is_retired', False):
+                        self.is_retired = True
+                        self.retirement_reason = stop_reason
+                        st = self.mm.get_status()
+                        msg = (
+                            f"🛡️ <b>[PocketOption] OBJETIVO DE SESIÓN CUMPLIDO - EN REPOSO</b>\n\n"
+                            f"📌 <b>Motivo:</b> {stop_reason}\n"
+                            f"📊 <b>Operaciones hoy:</b> {st['session_trades']}/{self.mm.max_session_trades}\n"
+                            f"🏆 <b>Score final:</b> {st['session_wins']}W - {st['session_losses']}L\n"
+                            f"💰 <b>PnL Sesión:</b> ${st['session_pnl']:+.2f} USD\n\n"
+                            f"🔒 <i>PocketOption en reposo para proteger capital. Las otras instancias (Alpaca / Paper) continúan activas.</i>"
+                        )
+                        print(f"\n[{now_utc.strftime('%H:%M:%S')}] [PocketOption MM] {stop_reason}")
+                        print(f"   Score: {st['session_wins']}W - {st['session_losses']}L | PnL: ${st['session_pnl']:+.2f} USD")
+                        print(f"   PocketOption en reposo. Alpaca y Paper continúan operando...\n")
+                        try:
+                            await self.notifier.send_message(msg)
+                        except Exception:
+                            pass
+                    await asyncio.sleep(60)
+                    continue
+                else:
+                    self.is_retired = False
+
+            # --- CONTROL DE RIESGO Y EXPOSICION DE CAPITAL PARA ALPACA ---
+            if self.broker == 'alpaca':
+                max_invested_cap = float(self.config.get('max_invested_capital_usd', 40000.0))
+                max_concurrent = int(self.config.get('max_concurrent_trades', 3))
+                
+                # Obtener capital invertido y operaciones abiertas en tiempo real
+                try:
+                    invested_capital = await self.api.get_invested_capital()
+                    open_trades_count = await self.api.get_open_positions_count()
+                except Exception:
+                    invested_capital = sum(
+                        abs(float(t.get('qty', 0.0)) * float(t.get('entry_price', 0.0)))
+                        for t in getattr(self.api, 'active_trades', {}).values()
+                        if t.get('status', 'active') == 'active'
+                    )
+                    open_trades_count = len([
+                        t for t in getattr(self.api, 'active_trades', {}).values()
+                        if t.get('status', 'active') == 'active'
+                    ])
+
+                # 1. CONTROL DE EXPOSICION: Si supera el monto invertido o limite de operaciones abiertas, detener nuevas compras
+                if invested_capital >= max_invested_cap or open_trades_count >= max_concurrent:
+                    if not getattr(self, '_alpaca_exposure_notified', False):
+                        reason = (
+                            f"Capital invertido: ${invested_capital:,.2f} / Limite: ${max_invested_cap:,.2f}"
+                            if invested_capital >= max_invested_cap
+                            else f"Operaciones activas: {open_trades_count} / Maximo: {max_concurrent}"
+                        )
+                        msg = f"⚠️ <b>[Alpaca] LIMITE DE EXPOSICION ALCANZADO:</b> {reason}. Pausando nuevas aperturas para proteger la cuenta mientras se gestionan las posiciones abiertas."
+                        print(f"[{now_utc.strftime('%H:%M:%S')}] {msg}")
+                        try:
+                            await self.notifier.send_message(msg)
+                        except Exception:
+                            pass
+                        self._alpaca_exposure_notified = True
+                    # Breve pausa para dar tiempo al monitor de posiciones y reintentar
+                    await asyncio.sleep(20)
+                    continue
+                else:
+                    self._alpaca_exposure_notified = False
+
+                # 2. CONTROL DE STOP LOSS / TAKE PROFIT DIARIO:
+                # REGLA: Si hay operaciones abiertas, NO pausar por limite diario para no congelar la gestion ni el monitoreo.
+                if open_trades_count == 0:
+                    if self.session_profit <= self.daily_stop_loss:
+                        if not getattr(self, '_alpaca_stop_notified', False):
+                            msg = f"🛑 <b>[Alpaca] STOP LOSS DIARIO ALCANZADO:</b> ${self.session_profit:.2f} (Limite: ${self.daily_stop_loss:.2f}). Sin posiciones abiertas. Pausando nuevas aperturas por hoy."
+                            print(f"[{now_utc.strftime('%H:%M:%S')}] {msg}")
+                            try:
+                                await self.notifier.send_message(msg)
+                            except Exception:
+                                pass
+                            self._alpaca_stop_notified = True
+                        await asyncio.sleep(60)
+                        continue
+                    elif self.session_profit >= self.daily_take_profit:
+                        if not getattr(self, '_alpaca_tp_notified', False):
+                            msg = f"🎯 <b>[Alpaca] TAKE PROFIT DIARIO ALCANZADO:</b> ${self.session_profit:.2f} (Meta: ${self.daily_take_profit:.2f}). Sin posiciones abiertas. Pausando nuevas aperturas por hoy."
+                            print(f"[{now_utc.strftime('%H:%M:%S')}] {msg}")
+                            try:
+                                await self.notifier.send_message(msg)
+                            except Exception:
+                                pass
+                            self._alpaca_tp_notified = True
+                        await asyncio.sleep(60)
+                        continue
+                    else:
+                        self._alpaca_stop_notified = False
+                        self._alpaca_tp_notified = False
 
             if self.broker != 'alpaca' and now_utc < self.active_trade_expiry:
                 remaining = (self.active_trade_expiry - now_utc).total_seconds()
@@ -1118,21 +1405,126 @@ Devuelve SOLO este JSON:
  
                     action, duration, strat_name = signal
                     
-                    # --- FILTRO DE WHITELIST DE BACKTESTING (>= 70% Win Rate) ---
-                    if self.whitelist is not None:
-                        pair_mapped = pair
-                        if not pair.endswith('_otc'):
-                            if len(pair) == 6 and not pair.startswith('#'):
-                                pair_mapped = f"{pair}_otc"
-                            else:
-                                pair_mapped = f"#{pair}_otc"
-                        
-                        sig_key = (pair_mapped, strat_name, int(interval))
-                        if sig_key not in self.whitelist:
-                            print(f"  [WHITELIST FILTER] Señal bloqueada: {pair} (mapeado a {pair_mapped}) | {strat_name} | {interval}s no cumple el umbral estricto de Win Rate (>=70%).")
-                            cycle_report[-1] += f"\n   🚫 <b>WHITELIST BLOCK:</b> {strat_name} no permitida en {pair} ({interval}s) por WR &lt; 70%"
-                            continue
+                    # --- FILTRO DE WHITELIST DE BACKTESTING (>= 70% Win Rate para PocketOption) ---
+                    if self.whitelist is not None and self.broker != 'alpaca':
+                        is_graduated = (
+                            getattr(self, 'graduated_strategies', {}) and strat_name in self.graduated_strategies
+                        )
+                        if is_graduated:
+                            grad_strat = self.graduated_strategies[strat_name]
+                            target_pairs = getattr(grad_strat, 'target_pairs', None)
+                            toxic_pairs = getattr(grad_strat, 'toxic_pairs', [])
+                            allowed_hours = getattr(grad_strat, 'allowed_hours', None)
+                            toxic_hours = getattr(grad_strat, 'toxic_hours', [])
+
+                            # 1. Si tiene toxic_pairs y el par actual es tóxico, BLOQUEAR
+                            if toxic_pairs and pair in toxic_pairs:
+                                print(f"  [GRADUATED BLOCK] {strat_name} bloqueada: par {pair} clasificado como tóxico.")
+                                cycle_report[-1] += f"\n   🚫 <b>GRADUATED BLOCK:</b> {strat_name} en par tóxico {pair}"
+                                continue
+
+                            # 2. Si tiene allowed_hours y la hora actual no está, BLOQUEAR
+                            now_h = datetime.now(timezone.utc).hour
+                            if allowed_hours and now_h not in allowed_hours:
+                                print(f"  [GRADUATED BLOCK] {strat_name} bloqueada en hora UTC {now_h} (fuera de allowed_hours).")
+                                cycle_report[-1] += f"\n   ⏱️ <b>GRADUATED BLOCK:</b> {strat_name} fuera de horario óptimo ({now_h}:00 UTC)"
+                                continue
+
+                            # 3. Si tiene toxic_hours y la hora actual es tóxica, BLOQUEAR
+                            if toxic_hours and now_h in toxic_hours:
+                                print(f"  [GRADUATED BLOCK] {strat_name} bloqueada en hora tóxica UTC {now_h}.")
+                                cycle_report[-1] += f"\n   ⏱️ <b>GRADUATED BLOCK:</b> {strat_name} en hora tóxica ({now_h}:00 UTC)"
+                                continue
+
+                            # 4. Si NO tiene target_pairs explícitos, NO puede bypassear la whitelist general
+                            if not target_pairs:
+                                pair_mapped = pair if pair.endswith('_otc') else (f"{pair}_otc" if len(pair) == 6 and not pair.startswith('#') else f"#{pair}_otc")
+                                sig_key = (pair_mapped, strat_name, int(interval))
+                                if sig_key not in self.whitelist:
+                                    print(f"  [GRADUATED BLOCK] {strat_name} sin target_pairs no cumple whitelist estricta en {pair} ({interval}s).")
+                                    cycle_report[-1] += f"\n   🚫 <b>GRADUATED BLOCK:</b> {strat_name} sin target_pairs no cumple whitelist en {pair}"
+                                    continue
+                            elif pair not in target_pairs:
+                                print(f"  [GRADUATED BLOCK] {strat_name} bloqueada: {pair} no está en su lista de target_pairs {target_pairs}.")
+                                cycle_report[-1] += f"\n   🚫 <b>GRADUATED BLOCK:</b> {strat_name} no autorizada en {pair} (solo {target_pairs})"
+                                continue
+
+                            print(f"  [GRADUATED EXECUTION] Estrategia graduada '{strat_name}' autorizada en par especializado ({pair}).")
+
+                        else:
+                            pair_mapped = pair
+                            if not pair.endswith('_otc'):
+                                if len(pair) == 6 and not pair.startswith('#'):
+                                    pair_mapped = f"{pair}_otc"
+                                else:
+                                    pair_mapped = f"#{pair}_otc"
                             
+                            sig_key = (pair_mapped, strat_name, int(interval))
+                            if sig_key not in self.whitelist:
+                                print(f"  [WHITELIST FILTER] Señal bloqueada: {pair} (mapeado a {pair_mapped}) | {strat_name} | {interval}s no cumple el umbral estricto de Win Rate (>=70%).")
+                                cycle_report[-1] += f"\n   🚫 <b>WHITELIST BLOCK:</b> {strat_name} no permitida en {pair} ({interval}s) por WR &lt; 70%"
+                                continue
+
+                    # --- FILTRO HORARIO DINÁMICO (HOURLY SHIELD - Matriz de Backtesting Ciclo 2 & 5) ---
+                    if self.broker != 'alpaca':
+                        now_utc_hour = datetime.now(timezone.utc).hour
+                        h_arg = (now_utc_hour - 3) % 24
+                        
+                        is_toxic = False
+                        toxic_reason = ""
+                        
+                        # 1. Rollover y ensanchamiento de spreads (00:00 UTC / 21:00 Arg)
+                        if now_utc_hour == 0 and "Bollinger" in strat_name:
+                            is_toxic = True
+                            toxic_reason = "Cambio de día del broker / ensanchamiento de spreads (WR 20%)"
+                        elif now_utc_hour in [3, 18, 23] and "WaveTrend" in strat_name:
+                            is_toxic = True
+                            toxic_reason = f"Hora tóxica para WaveTrend {now_utc_hour:02d}:00 UTC (WR histórico 16.7% - 30%)"
+                        elif now_utc_hour in [0, 1, 6] and "TTM" in strat_name:
+                            is_toxic = True
+                            toxic_reason = f"Consolidación errática pre-Londres para TTM {now_utc_hour:02d}:00 UTC (WR histórico 28%)"
+                        elif now_utc_hour in [11, 13] and "HYBRID" in strat_name:
+                            is_toxic = True
+                            toxic_reason = f"Turbulencia macro pre-NY para HYBRID {now_utc_hour:02d}:00 UTC (WR histórico 28.6%)"
+                        
+                        if is_toxic:
+                            msg_toxic = f"[HOURLY SHIELD] Señal bloqueada: {pair} | {strat_name} a las {now_utc_hour:02d}:00 UTC (Arg {h_arg:02d}:00). Razón: {toxic_reason}"
+                            print(f"  {msg_toxic}")
+                            cycle_report[-1] += f"\n   ⏱️ <b>HOURLY SHIELD BLOCK:</b> {strat_name} bloqueada a las {h_arg:02d}:00 Arg ({toxic_reason})"
+                            continue
+
+                    # --- ESCUDO DE MACRO TENDENCIA (TREND SHIELD - Ciclo 3 & 4) ---
+                    if self.broker != 'alpaca':
+                        close_p = latest_data.get('Close', 0)
+                        ema20_p = latest_data.get('EMA_20', 0)
+                        ema50_p = latest_data.get('EMA_50', 0)
+                        sma200_p = latest_data.get('SMA_200', 0)
+                        
+                        # Bloquear compras si el precio está en cascada bajista severa
+                        if action == 'BUY' and ema20_p > 0 and ema50_p > 0:
+                            if close_p < ema20_p < ema50_p:
+                                print(f"  [TREND SHIELD] BUY bloqueado en {pair}: Cascada bajista activa (Close < EMA20 < EMA50).")
+                                cycle_report[-1] += f"\n   🛡️ <b>TREND SHIELD:</b> BUY bloqueado por cascada bajista"
+                                continue
+                                
+                        # Bloquear ventas si el precio está en rally alcista vertical
+                        if action == 'SELL' and ema20_p > 0 and ema50_p > 0:
+                            if close_p > ema20_p > ema50_p:
+                                print(f"  [TREND SHIELD] SELL bloqueado en {pair}: Rally alcista vertical activo (Close > EMA20 > EMA50).")
+                                cycle_report[-1] += f"\n   🛡️ <b>TREND SHIELD:</b> SELL bloqueado por rally alcista"
+                                continue
+                                
+                        # Macro filtro SMA200 para evitar operar reversiones contra dislocaciones extremas (>1.5%)
+                        if sma200_p > 0:
+                            if action == 'BUY' and close_p < sma200_p * 0.985:
+                                print(f"  [TREND SHIELD] BUY bloqueado en {pair}: Desviación extrema bajista bajo SMA200 (>1.5%).")
+                                cycle_report[-1] += f"\n   🛡️ <b>TREND SHIELD:</b> BUY bloqueado por colapso bajo SMA200"
+                                continue
+                            if action == 'SELL' and close_p > sma200_p * 1.015:
+                                print(f"  [TREND SHIELD] SELL bloqueado en {pair}: Dislocación extrema alcista sobre SMA200 (>1.5%).")
+                                cycle_report[-1] += f"\n   🛡️ <b>TREND SHIELD:</b> SELL bloqueado por sobre-extensión sobre SMA200"
+                                continue
+
                     # --- FILTRO IA HISTÓRICO (trading_intelligence.json) ---
                     allowed, reason = self.is_allowed_by_ai(pair, strat_name, interval)
                     if not allowed:
@@ -1200,10 +1592,15 @@ Devuelve SOLO este JSON:
                                 'expiry_time': duration,
                                 'notes': notes_json
                             }
-                            trade_logger.log_trade(trade_data)
+                            self.trade_logger.log_trade(trade_data)
 
                             # --- GUARDAR TAMBIÉN EN BASE DE DATOS SQL (SQLite local) ---
-                            timeframe_str = f"{duration // 60}min" if duration >= 60 else f"{duration}seg"
+                            macd_v = latest_data.get('MACD', 0)
+                            macd_s = latest_data.get('MACD_Signal', 0)
+                            macd_h = latest_data.get('MACD_Hist')
+                            if macd_h is None:
+                                macd_h = macd_v - macd_s
+
                             db_trade_blocked = {
                                 'trade_id': trade_id,
                                 'pair': pair,
@@ -1219,7 +1616,13 @@ Devuelve SOLO este JSON:
                                 'ai_decision': 'BLOCKED',
                                 'ai_confidence': ai_confidence,
                                 'ai_reason': ai_reason,
-                                'ai_snapshot': json.dumps(ai_snapshot)
+                                'ai_snapshot': json.dumps(ai_snapshot),
+                                'close_timestamp': datetime.now().isoformat(),
+                                'rsi': latest_data.get('RSI', 0),
+                                'stoch_k': latest_data.get('Stoch_K', 0),
+                                'macd_hist': macd_h,
+                                'ema_distance': distance_ema20,
+                                'atr': latest_data.get('ATR', 0)
                             }
                             self.db.save_trade(db_trade_blocked)
                             print(f"  [DB] Bloqueo de IA guardado en feedback.db")
@@ -1231,11 +1634,30 @@ Devuelve SOLO este JSON:
                     print(f"EJECUTANDO ORDEN: {action} en {pair} por {duration}s. Estrategia: {strat_name}")
                     
                     try:
+                        if hasattr(self, 'mm') and self.mm is not None:
+                            can_op, stop_reason = self.mm.can_trade()
+                            if not can_op:
+                                print(f"  [BLOQUEO MM] Operación cancelada por reglas de sesión: {stop_reason}")
+                                continue
+
                         amount = await self.calculate_trade_amount(pair)
                         
                         # --- COLOCAR ORDEN (Alpaca se coloca primero para obtener el ID real de la orden) ---
                         placed_id = None
                         if self.broker == 'alpaca':
+                            # Pre-check de capital y operaciones concurrentes antes de mandar la orden
+                            inv_cap = await self.api.get_invested_capital() if hasattr(self.api, 'get_invested_capital') else 0.0
+                            max_inv = float(self.config.get('max_invested_capital_usd', 40000.0))
+                            max_ops = int(self.config.get('max_concurrent_trades', 3))
+                            open_ops = await self.api.get_open_positions_count() if hasattr(self.api, 'get_open_positions_count') else len(self.api.active_trades)
+                            
+                            if open_ops >= max_ops:
+                                print(f"  [Alpaca Pre-Check] Limite de operaciones simultaneas alcanzado ({open_ops}/{max_ops}). Omitiendo orden en {pair}.")
+                                continue
+                            if inv_cap >= max_inv:
+                                print(f"  [Alpaca Pre-Check] Limite de capital invertido alcanzado (${inv_cap:,.2f} >= ${max_inv:,.2f}). Omitiendo orden en {pair}.")
+                                continue
+
                             duration_alpaca = self.config.get('holding_period_seconds', 14400)
                             buy_kwargs = {
                                 "asset": pair, 
@@ -1254,6 +1676,9 @@ Devuelve SOLO este JSON:
                                         self.api.sell(**buy_kwargs),
                                         timeout=15.0
                                     )
+                                if not placed_id:
+                                    print(f"  [Alpaca] Orden omitida o no colocada para {pair}.")
+                                    continue
                                 trade_id = str(placed_id)
                             except Exception as e:
                                 print(f"  [ERROR] Excepcion colocando orden en Alpaca: {e}")
@@ -1267,8 +1692,9 @@ Devuelve SOLO este JSON:
                             self.active_trade_expiry_dict[pair] = datetime.now(timezone.utc) + timedelta(seconds=duration_alpaca + 60)
                             print(f"  [LOCK] Par {pair} bloqueado por {duration_alpaca}s en Alpaca.")
                         else:
-                            self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=duration + 10)
-                            print(f"  [LOCK] Bot bloqueado hasta {self.active_trade_expiry.strftime('%H:%M:%S')} UTC")
+                            cooldown_post = int(self.config.get('cooldown_between_trades_seconds', 180))
+                            self.active_trade_expiry = datetime.now(timezone.utc) + timedelta(seconds=duration + 10 + cooldown_post)
+                            print(f"  [LOCK] Bot bloqueado hasta {self.active_trade_expiry.strftime('%H:%M:%S')} UTC (incluye {cooldown_post}s cooldown anti-sobreoperación)")
 
                         # --- LOGGING PREVIO CON DETALLES COMPLETOS ---
                         # Calcular score MTF y detalles
@@ -1323,7 +1749,7 @@ Devuelve SOLO este JSON:
                             'expiry_time': duration,
                             'notes': notes_json
                         }
-                        trade_logger.log_trade(trade_data)
+                        self.trade_logger.log_trade(trade_data)
                         
                         # Notificar Apertura
                         await self.notifier.notify_open(pair, action, strat_name, duration, amount)
@@ -1332,6 +1758,13 @@ Devuelve SOLO este JSON:
                         if self.broker == 'alpaca':
                             try:
                                 timeframe_str = f"{duration // 60}min" if duration >= 60 else f"{duration}seg"
+                                macd_v = latest_data.get('MACD', 0)
+                                macd_s = latest_data.get('MACD_Signal', 0)
+                                macd_h = latest_data.get('MACD_Hist')
+                                if macd_h is None:
+                                    macd_h = macd_v - macd_s
+                                dist_ema20 = close_val - ema20_val
+
                                 trade_db_data = {
                                     'trade_id': trade_id,
                                     'pair': pair,
@@ -1346,7 +1779,12 @@ Devuelve SOLO este JSON:
                                     'ai_decision': 'APPROVED',
                                     'ai_confidence': ai_confidence,
                                     'ai_reason': ai_reason,
-                                    'ai_snapshot': json.dumps(ai_snapshot)
+                                    'ai_snapshot': json.dumps(ai_snapshot),
+                                    'rsi': latest_data.get('RSI', 0),
+                                    'stoch_k': latest_data.get('Stoch_K', 0),
+                                    'macd_hist': macd_h,
+                                    'ema_distance': dist_ema20,
+                                    'atr': latest_data.get('ATR', 0)
                                 }
                                 self.db.save_trade(trade_db_data)
                                 print(f"  [DB] Operación {trade_id} (PENDING) guardada en base de datos.")
@@ -1390,6 +1828,7 @@ Devuelve SOLO este JSON:
                         is_win = False
                         profit = 0.0
                         result_confirmed = False
+                        real_close_price = None
                         
                         # CAPA 1: Consultar closed_deals()
                         for attempt in range(3):
@@ -1426,6 +1865,10 @@ Devuelve SOLO este JSON:
                                         matched = recent[-1]
                                 
                                 if matched:
+                                    try:
+                                        real_close_price = float(matched.get('close_price') or matched.get('closeQuote') or matched.get('close') or 0.0)
+                                    except Exception:
+                                        real_close_price = None
                                     deal_amount = float(matched.get('amount', amount))
                                     raw_profit = float(matched.get('profit', 0.0))
                                     
@@ -1457,6 +1900,11 @@ Devuelve SOLO este JSON:
                         if not result_confirmed and placed_id:
                             try:
                                 details = await asyncio.wait_for(self.api.check_win(placed_id), timeout=6.0)
+                                if not real_close_price:
+                                    try:
+                                        real_close_price = float(details.get('close_price') or details.get('closeQuote') or details.get('close') or 0.0)
+                                    except Exception:
+                                        pass
                                 deal_amount = float(details.get('amount', amount))
                                 raw_profit = float(details.get('profit', 0.0))
                                 
@@ -1504,8 +1952,20 @@ Devuelve SOLO este JSON:
                         print(f"  >>> Resultado Operacion: {'GANADA' if is_win else 'PERDIDA'} (${profit:+.2f})")
                         await self.notifier.notify_close(pair, profit, is_win, trade_id=trade_id)
 
-                        # --- ACTUALIZAR MÉTRICAS DE SESIÓN ---
-                        self.session_profit += profit
+                        # --- ACTUALIZAR MÉTRICAS DE SESIÓN Y MONEY MANAGEMENT ---
+                        outcome = 'WIN' if is_win else ('DRAW' if profit == 0 else 'LOSS')
+                        if hasattr(self, 'mm') and self.mm is not None:
+                            self.mm.register_result(outcome, profit)
+                            self.session_profit = self.mm.session_pnl
+                            mm_st = self.mm.get_status()
+                            print(f"  [PocketOption MM] Ops: {mm_st['session_trades']}/{self.mm.max_session_trades} | Score: {mm_st['session_wins']}W - {mm_st['session_losses']}L | PnL: ${mm_st['session_pnl']:+.2f} USD")
+                            if not mm_st['session_active']:
+                                print(f"  [PocketOption MM RETIRO] {mm_st['stop_reason']}")
+                                self.is_retired = True
+                                self.retirement_reason = mm_st['stop_reason']
+                        else:
+                            self.session_profit += profit
+
                         if is_win:
                             self.strategy_fails[strat_name] = 0 # Reset racha
                             self.consecutive_losses[pair] = 0   # Reset Martingala
@@ -1514,7 +1974,7 @@ Devuelve SOLO este JSON:
                             self.consecutive_losses[pair] = self.consecutive_losses.get(pair, 0) + 1
 
                         # --- ACTUALIZAR LOG CSV ---
-                        trade_logger.update_trade_result(
+                        self.trade_logger.update_trade_result(
                             trade_id=trade_id,
                             result='WIN' if is_win else 'LOSS',
                             profit_loss=profit
@@ -1523,6 +1983,14 @@ Devuelve SOLO este JSON:
                         # --- GUARDAR EN BASE DE DATOS SQL (Restaurado) ---
                         try:
                             timeframe_str = f"{duration // 60}min" if duration >= 60 else f"{duration}seg"
+                            macd_v = latest_data.get('MACD', 0)
+                            macd_s = latest_data.get('MACD_Signal', 0)
+                            macd_h = latest_data.get('MACD_Hist')
+                            if macd_h is None:
+                                macd_h = macd_v - macd_s
+                            dist_ema20 = close_val - ema20_val
+                            c_price = real_close_price if (real_close_price and real_close_price > 0) else close_val
+
                             trade_db_data = {
                                 'trade_id': trade_id,
                                 'pair': pair,
@@ -1530,18 +1998,24 @@ Devuelve SOLO este JSON:
                                 'strategy': strat_name,
                                 'timeframe': timeframe_str,
                                 'amount': amount,
-                                'open_price': latest_data.get('Close', 0), # Estimado de la vela
-                                'close_price': latest_data.get('Close', 0) + (profit if is_win else -amount), # Estimado
+                                'open_price': close_val,
+                                'close_price': c_price,
                                 'result': 'win' if is_win else 'loss',
                                 'profit': profit,
                                 'telegram_message_id': None, # Se actualizará si hay feedback manual
                                 'ai_decision': 'APPROVED',
                                 'ai_confidence': ai_confidence,
                                 'ai_reason': ai_reason,
-                                'ai_snapshot': json.dumps(ai_snapshot)
+                                'ai_snapshot': json.dumps(ai_snapshot),
+                                'close_timestamp': datetime.now().isoformat(),
+                                'rsi': latest_data.get('RSI', 0),
+                                'stoch_k': latest_data.get('Stoch_K', 0),
+                                'macd_hist': macd_h,
+                                'ema_distance': dist_ema20,
+                                'atr': latest_data.get('ATR', 0)
                             }
                             self.db.save_trade(trade_db_data)
-                            print(f"  [DB] Operación {trade_id} guardada en feedback.db")
+                            print(f"  [DB] Operación {trade_id} guardada en feedback.db (RSI: {latest_data.get('RSI', 0):.1f}, Close: {c_price})")
                         except Exception as db_e:
                             print(f"  [WARN] Error guardando en DB: {db_e}")
 
@@ -1711,26 +2185,77 @@ async def main():
             print("❌ CRÍTICO: No se encontraron las credenciales de Alpaca (alpaca_key_id / alpaca_secret_key) en la configuración.")
             return
 
-    # 4. Servidor Web Minimalista (Keep-alive para Koyeb/Render)
+    # 4. Servidor Web y Mini App Biométrica para Telegram
     if web:
         async def handle(request):
             return web.Response(text="Bot is running in Dual Mode!")
 
+        async def handle_biometric(request):
+            bio_path = Path("web_app/biometric.html")
+            if bio_path.exists():
+                return web.Response(text=bio_path.read_text(encoding="utf-8"), content_type="text/html")
+            return web.Response(text="<h1>Biometric Auth page not found</h1>", content_type="text/html", status=404)
+
+        async def handle_face_status(request):
+            try:
+                from face_verifier import face_verifier
+                return web.json_response({"enrolled": face_verifier.is_enrolled()})
+            except Exception as e:
+                return web.json_response({"enrolled": False, "error": str(e)})
+
+        async def handle_enroll_face(request):
+            try:
+                data = await request.json()
+                img_data = data.get("image")
+                if not img_data:
+                    return web.json_response({"success": False, "error": "Falta la imagen."}, status=400)
+                from face_verifier import face_verifier
+                res = face_verifier.enroll_face(img_data)
+                return web.json_response(res)
+            except Exception as e:
+                return web.json_response({"success": False, "error": str(e)}, status=500)
+
+        async def handle_verify_face(request):
+            try:
+                data = await request.json()
+                img_data = data.get("image")
+                if not img_data:
+                    return web.json_response({"verified": False, "error": "Falta la imagen."}, status=400)
+                from face_verifier import face_verifier
+                res = face_verifier.verify_face(img_data)
+                return web.json_response(res)
+            except Exception as e:
+                return web.json_response({"verified": False, "error": str(e)}, status=500)
+
         app = web.Application()
         app.router.add_get('/', handle)
+        app.router.add_get('/biometric', handle_biometric)
+        app.router.add_get('/api/face_status', handle_face_status)
+        app.router.add_post('/api/enroll_face', handle_enroll_face)
+        app.router.add_post('/api/verify_face', handle_verify_face)
         port = int(os.getenv("PORT", 8080))
         runner = web.AppRunner(app)
         await runner.setup()
-        site = web.TCPSite(runner, '0.0.0.0', port)
+        is_cloud = bool(os.getenv("KOYEB_APP_NAME") or os.getenv("RENDER") or os.getenv("DYNO") or os.getenv("RAILWAY_ENVIRONMENT"))
+        bind_host = '0.0.0.0' if is_cloud else '127.0.0.1'
+        site = web.TCPSite(runner, bind_host, port)
         
         async def start_server():
             try:
                 await site.start()
-                print(f"📡 Servidor keep-alive iniciado en puerto {port}")
+                print(f"📡 Servidor local iniciado en puerto {port}")
+                # Iniciar túnel Cloudflare seguro para la Mini App de Telegram
+                try:
+                    from tunnel_manager import tunnel_manager
+                    bio_url = await asyncio.to_thread(tunnel_manager.get_biometric_url)
+                    if bio_url:
+                        print(f"[OK] Mini App Biometrica lista: {bio_url}")
+                except Exception as te:
+                    print(f"⚠️ Error iniciando túnel biométrico: {te}")
             except OSError as bind_err:
-                print(f"⚠️ Servidor keep-alive no pudo iniciarse en puerto {port} (puerto en uso): {bind_err}")
+                print(f"⚠️ Servidor web no pudo iniciarse en puerto {port} (puerto en uso): {bind_err}")
             except Exception as e:
-                print(f"⚠️ Error al iniciar servidor keep-alive: {e}")
+                print(f"⚠️ Error al iniciar servidor web: {e}")
                 
         asyncio.create_task(start_server())
 
@@ -1743,6 +2268,15 @@ async def main():
         bot_po = TradingBot(po_ssid, tg_token, tg_chat, tg_owner, config=config.get('trading', config), root_config=config, config_path='config.json')
         tasks.append(asyncio.create_task(bot_po.run()))
         print("🟢 Instancia PocketOption preparada.")
+        
+        # 🧪 PAPER TRIAL (backtesting en vivo sin filtros — sin dinero real)
+        try:
+            from paper_bot import PaperTrialBot
+            paper = PaperTrialBot(bot_po)
+            tasks.append(asyncio.create_task(paper.run()))
+            print("🧪 Instancia Paper Trial preparada (explorador en paralelo).")
+        except Exception as pe:
+            print(f"⚠️ Paper Trial no pudo iniciarse: {pe}")
     else:
         print("⚠️ Instancia PocketOption omitida (sin SSID válido).")
         

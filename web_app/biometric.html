@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Reconocimiento Facial de Dueño</title>
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Google TensorFlow.js + BlazeFace Deep Learning Model -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #0a0e14;
+      --card-bg: #121820;
+      --primary: #00ff88;
+      --primary-glow: rgba(0, 255, 136, 0.4);
+      --text: #ffffff;
+      --text-dim: #8b949e;
+      --danger: #ff4d4f;
+      --danger-glow: rgba(255, 77, 79, 0.4);
+      --warning: #ffb703;
+      --cyan: #00d2ff;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--tg-theme-bg-color, var(--bg-color));
+      color: var(--tg-theme-text-color, var(--text));
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .card {
+      background: var(--tg-theme-secondary-bg-color, var(--card-bg));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 26px 20px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Visor circular del escáner */
+    .scanner-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 255, 136, 0.05);
+      border: 2px solid rgba(0, 255, 136, 0.3);
+      box-shadow: 0 0 25px var(--primary-glow);
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .scanner-wrapper.tracking {
+      border-color: #00ff88;
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.6);
+    }
+    .scanner-wrapper.challenge {
+      border-color: var(--cyan);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.7);
+    }
+    .scanner-wrapper.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 25px var(--danger-glow);
+      background: rgba(255, 77, 79, 0.08);
+    }
+    .scanner-wrapper.success {
+      border-color: #00ff88;
+      box-shadow: 0 0 45px #00ff88;
+      background: rgba(0, 255, 136, 0.25);
+    }
+
+    /* Video de la cámara frontal en modo espejo */
+    #cameraVideo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+      border-radius: 50%;
+      display: none;
+    }
+
+    #centerIcon {
+      font-size: 56px;
+      z-index: 2;
+    }
+
+    /* Retícula futurista */
+    .reticle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px dashed rgba(0, 255, 136, 0.5);
+      animation: rotateReticle 10s linear infinite;
+      pointer-events: none;
+      z-index: 3;
+      display: none;
+    }
+    @keyframes rotateReticle {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Láser de escaneo facial dinámico */
+    .laser-beam {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00ff88, transparent);
+      box-shadow: 0 0 12px #00ff88;
+      top: 0;
+      left: 0;
+      z-index: 4;
+      display: none;
+      animation: scanMovement 1.8s ease-in-out infinite alternate;
+    }
+    @keyframes scanMovement {
+      0% { top: 8%; opacity: 0.7; }
+      100% { top: 90%; opacity: 1; }
+    }
+
+    .turn-hint {
+      position: absolute;
+      font-size: 44px;
+      z-index: 5;
+      display: none;
+      filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.9));
+      animation: hintBounce 1s infinite alternate;
+    }
+    @keyframes hintBounce {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(12px); }
+    }
+
+    /* Indicador de estado de detección (IA Badge) */
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+    .ai-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--warning);
+    }
+    .ai-badge.active .dot {
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--primary);
+    }
+    .ai-badge.challenge .dot {
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+    .ai-badge.error .dot {
+      background: var(--danger);
+      box-shadow: 0 0 8px var(--danger);
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    p {
+      font-size: 13px;
+      color: var(--tg-theme-hint-color, var(--text-dim));
+      line-height: 1.4;
+      margin-bottom: 16px;
+      min-height: 38px;
+    }
+
+    /* Barra de progreso */
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #00ff88, #00cc6a);
+      transition: width 0.15s ease-out;
+    }
+    .progress-bar-fill.challenge {
+      background: linear-gradient(90deg, #00d2ff, #0088cc);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: var(--tg-theme-button-color, var(--primary));
+      color: var(--tg-theme-button-text-color, #000000);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 136, 0.25);
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      box-shadow: none;
+      margin-top: 8px;
+      font-size: 12px;
+      padding: 9px;
+      font-weight: 500;
+    }
+
+    .pulse {
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.5); }
+      70% { box-shadow: 0 0 0 16px rgba(0, 255, 136, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="ai-badge" id="aiBadge">
+      <span class="dot"></span>
+      <span id="aiBadgeText">Reconocimiento Facial de Dueño</span>
+    </div>
+
+    <div class="scanner-wrapper pulse" id="scannerWrapper">
+      <video id="cameraVideo" autoplay playsinline muted></video>
+      <div class="reticle" id="reticle"></div>
+      <div class="laser-beam" id="laser"></div>
+      <div class="turn-hint" id="turnHint">➡️</div>
+      <div id="centerIcon">👤</div>
+    </div>
+
+    <h1 id="statusTitle">Autenticación Facial</h1>
+    <p id="statusDesc">Iniciando reconocimiento en tu celular...</p>
+
+    <div class="progress-bar-bg" id="progressBg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Botón para registro inicial de rostro maestro -->
+    <button class="btn" id="enrollBtn" style="display:none;" onclick="takeEnrollSnapshot()">
+      <span>📸 Guardar mi Rostro Maestro</span>
+    </button>
+
+    <button class="btn" id="actionBtn" style="display:none;" onclick="startCameraScan()">
+      <span>🔄 Reintentar Verificación</span>
+    </button>
+  </div>
+
+  <script>
+    const tg = window.Telegram ? window.Telegram.WebApp : null;
+    let cameraStream = null;
+    let faceModel = null;
+    let detectionLoopActive = false;
+    let isEnrolled = false;
+    let isEnrolling = false;
+
+    // Parámetros de captura Face ID Instantáneo
+    let frontFacingFrames = 0;
+    const REQUIRED_FRONT_FRAMES = 3; // 3 frames estables (~250ms) para disparo nítido
+
+    if (tg) {
+      tg.ready();
+      tg.expand();
+    }
+
+    const scannerWrapper = document.getElementById('scannerWrapper');
+    const cameraVideo = document.getElementById('cameraVideo');
+    const reticle = document.getElementById('reticle');
+    const laser = document.getElementById('laser');
+    const turnHint = document.getElementById('turnHint');
+    const centerIcon = document.getElementById('centerIcon');
+    const statusTitle = document.getElementById('statusTitle');
+    const statusDesc = document.getElementById('statusDesc');
+    const progressBg = document.getElementById('progressBg');
+    const progressFill = document.getElementById('progressFill');
+    const aiBadge = document.getElementById('aiBadge');
+    const aiBadgeText = document.getElementById('aiBadgeText');
+    const enrollBtn = document.getElementById('enrollBtn');
+    const actionBtn = document.getElementById('actionBtn');
+
+    function updateUI(icon, title, desc, isError = false, isSuccess = false) {
+      if (icon) centerIcon.innerText = icon;
+      statusTitle.innerText = title;
+      statusDesc.innerText = desc;
+      scannerWrapper.classList.remove('error', 'success', 'tracking', 'challenge', 'pulse');
+      if (isError) scannerWrapper.classList.add('error');
+      if (isSuccess) scannerWrapper.classList.add('success');
+    }
+
+    function stopCamera() {
+      detectionLoopActive = false;
+      if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null;
+      }
+    }
+
+    function notifySuccess(type = 'guille_face_recognition') {
+      stopCamera();
+      updateUI('✅', '¡Bienvenido Guille!', 'Identidad de dueño confirmada con éxito. Desbloqueando bot...', false, true);
+      reticle.style.display = 'none';
+      laser.style.display = 'none';
+      turnHint.style.display = 'none';
+      progressBg.style.display = 'none';
+      actionBtn.style.display = 'none';
+      enrollBtn.style.display = 'none';
+      aiBadge.className = 'ai-badge active';
+      aiBadgeText.innerText = 'Rostro de Dueño Autorizado';
+
+      if (tg) {
+        tg.sendData(JSON.stringify({
+          verified: true,
+          type: type,
+          timestamp: Date.now()
+        }));
+
+        setTimeout(() => {
+          tg.close();
+        }, 600);
+      }
+    }
+
+    // Capturar frame de la cámara en formato Base64 JPEG
+    function captureSnapshotBase64() {
+      const canvas = document.createElement('canvas');
+      canvas.width = cameraVideo.videoWidth || 480;
+      canvas.height = cameraVideo.videoHeight || 480;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(cameraVideo, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL('image/jpeg', 0.88);
+    }
+
+    // Comprobar si el dueño ya tiene rostro maestro registrado
+    async function checkMasterFaceStatus() {
+      try {
+        const res = await fetch('/api/face_status');
+        const data = await res.json();
+        isEnrolled = Boolean(data.enrolled);
+      } catch (e) {
+        console.warn('Error comprobando estado de rostro maestro:', e);
+        isEnrolled = false;
+      }
+
+      startCameraScan();
+    }
+
+    // 1. INICIAR CÁMARA FRONTAL Y MODELO BLAZEFACE
+    async function startCameraScan() {
+      actionBtn.style.display = 'none';
+      enrollBtn.style.display = 'none';
+
+      try {
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: 'user',
+            width: { ideal: 480 },
+            height: { ideal: 480 }
+          },
+          audio: false
+        });
+
+        cameraVideo.srcObject = cameraStream;
+        await cameraVideo.play();
+
+        cameraVideo.style.display = 'block';
+        centerIcon.style.display = 'none';
+        reticle.style.display = 'block';
+        laser.style.display = 'block';
+
+        if (!faceModel) {
+          aiBadgeText.innerText = 'Cargando Red Neuronal...';
+          updateUI('', 'Cargando IA', 'Inicializando detector anatómico...');
+          try {
+            if (window.blazeface) {
+              faceModel = await window.blazeface.load();
+              aiBadge.className = 'ai-badge active';
+              aiBadgeText.innerText = isEnrolled ? 'IA Verificación de Dueño' : 'IA Registro de Dueño';
+            }
+          } catch (mErr) {
+            console.warn('Error cargando BlazeFace:', mErr);
+          }
+        }
+
+        if (!isEnrolled) {
+          // MODO REGISTRO: Guille debe registrar su rostro maestro
+          updateUI('', '📸 Registro de Dueño', 'Centra tu rostro completo y toca "Guardar mi Rostro Maestro".');
+          enrollBtn.style.display = 'flex';
+          progressBg.style.display = 'none';
+        } else {
+          // MODO VERIFICACIÓN INSTANTÁNEA: Face ID con vector cifrado AES-256
+          frontFacingFrames = 0;
+          detectionLoopActive = true;
+          progressBg.style.display = 'block';
+          updateUI('', 'Face ID Instantáneo', 'Mira de frente a la pantalla...');
+          runDetectionLoop();
+        }
+
+      } catch (err) {
+        console.warn('Error accediendo a la cámara:', err);
+        cameraVideo.style.display = 'none';
+        centerIcon.style.display = 'block';
+        reticle.style.display = 'none';
+        laser.style.display = 'none';
+        turnHint.style.display = 'none';
+        progressBg.style.display = 'none';
+
+        updateUI('🚫', 'Cámara Requerida', 'Se requiere acceso a la cámara frontal para verificar que eres tú (Guille).', true, false);
+        actionBtn.style.display = 'flex';
+        actionBtn.querySelector('span').innerText = '📷 Permitir Cámara Frontal';
+      }
+    }
+
+    // REGISTRAR ROSTRO MAESTRO (1era vez)
+    async function takeEnrollSnapshot() {
+      enrollBtn.disabled = true;
+      enrollBtn.querySelector('span').innerText = '⏳ Guardando vector biométrico...';
+
+      const base64Img = captureSnapshotBase64();
+
+      try {
+        const res = await fetch('/api/enroll_face', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: base64Img })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          isEnrolled = true;
+          enrollBtn.style.display = 'none';
+          updateUI('✅', '¡Rostro Guardado!', 'Rostro maestro registrado con éxito. Iniciando sesión...', false, true);
+          setTimeout(() => {
+            notifySuccess('guille_face_enrolled');
+          }, 1000);
+        } else {
+          enrollBtn.disabled = false;
+          enrollBtn.querySelector('span').innerText = '📸 Reintentar Registro';
+          updateUI('❌', 'Error de Registro', data.error || 'No se pudo registrar.', true);
+        }
+      } catch (e) {
+        enrollBtn.disabled = false;
+        enrollBtn.querySelector('span').innerText = '📸 Reintentar';
+        updateUI('❌', 'Error de Conexión', 'No se pudo comunicar con el servidor.', true);
+      }
+    }
+
+    // BUCLE DE DETECCIÓN Y VERIFICACIÓN 1:1 CONTRA EL ROSTRO DE GUILLE
+    async function runDetectionLoop() {
+      if (!detectionLoopActive || !cameraVideo || cameraVideo.paused || cameraVideo.ended) return;
+
+      try {
+        if (faceModel) {
+          const predictions = await faceModel.estimateFaces(cameraVideo, false);
+
+          if (predictions && predictions.length > 0) {
+            const face = predictions[0];
+            const start = face.topLeft;
+            const end = face.bottomRight;
+            const width = end[0] - start[0];
+            const videoW = cameraVideo.videoWidth || 480;
+            const videoH = cameraVideo.videoHeight || 480;
+
+            const landmarks = face.landmarks;
+            const rightEye = landmarks ? landmarks[0] : null;
+            const leftEye = landmarks ? landmarks[1] : null;
+            const nose = landmarks ? landmarks[2] : null;
+            const mouth = landmarks ? landmarks[3] : null;
+
+            const hasAllFeatures = (rightEye && leftEye && nose && mouth);
+            const avgEyeY = hasAllFeatures ? (rightEye[1] + leftEye[1]) / 2 : 0;
+            const eyeDistance = hasAllFeatures ? Math.hypot(rightEye[0] - leftEye[0], rightEye[1] - leftEye[1]) : 0;
+
+            // Validación estricta de cara completa (no solo ojos)
+            const isFullFaceGeometry = hasAllFeatures &&
+                                       (eyeDistance >= videoW * 0.10) &&
+                                       (nose[1] > avgEyeY + 8) &&
+                                       (mouth[1] > nose[1] + 8) &&
+                                       (mouth[1] < videoH - 8);
+
+            const isProminent = (width / videoW >= 0.18) && isFullFaceGeometry;
+
+            if (isProminent) {
+              const eyeMidX = (rightEye[0] + leftEye[0]) / 2;
+              const currentYaw = (nose[0] - eyeMidX) / eyeDistance;
+
+              // Comprobar que mira de frente al sensor
+              if (Math.abs(currentYaw) < 0.22) {
+                frontFacingFrames++;
+
+                scannerWrapper.classList.remove('error');
+                scannerWrapper.classList.add('tracking');
+                laser.style.background = 'linear-gradient(90deg, transparent, #00ff88, transparent)';
+                laser.style.boxShadow = '0 0 16px #00ff88';
+                turnHint.style.display = 'none';
+
+                const pct = Math.min(100, Math.round((frontFacingFrames / REQUIRED_FRONT_FRAMES) * 100));
+                progressFill.style.width = pct + '%';
+                statusTitle.innerText = '👤 Verificando Identidad...';
+                statusDesc.innerText = 'Comparando con vector cifrado AES-256...';
+
+                if (frontFacingFrames >= REQUIRED_FRONT_FRAMES) {
+                  // ¡Captura nítida inmediata! Se envía al servidor
+                  detectionLoopActive = false;
+                  await executeServerFaceMatch();
+                  return;
+                }
+              } else {
+                handleNoFace('Mira de frente al centro de la cámara');
+              }
+
+            } else if (!hasAllFeatures || !isFullFaceGeometry) {
+              handleNoFace('Muestra la cara completa (ojos, nariz y boca)');
+            } else {
+              handleNoFace('Acércate un poco más a la cámara');
+            }
+          } else {
+            handleNoFace('⚠️ Ningún rostro detectado. Enfoca tu cara.');
+          }
+        }
+      } catch (loopErr) {
+        console.error('Error en loop de detección:', loopErr);
+      }
+
+      if (detectionLoopActive) {
+        setTimeout(runDetectionLoop, 100);
+      }
+    }
+
+    // COMPARACIÓN 1:1 EN SERVIDOR CONTRA EL ROSTRO DE GUILLE
+    async function executeServerFaceMatch() {
+      updateUI('', 'Verificando con AES-256', 'Comparando rasgos con vector cifrado...');
+      progressBg.style.display = 'none';
+
+      const base64Img = captureSnapshotBase64();
+
+      try {
+        const res = await fetch('/api/verify_face', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: base64Img })
+        });
+        const data = await res.json();
+
+        if (data.verified) {
+          if (tg && tg.HapticFeedback) {
+            try { tg.HapticFeedback.notificationOccurred('success'); } catch(e){}
+          }
+          notifySuccess('guille_face_recognition');
+        } else {
+          if (tg && tg.HapticFeedback) {
+            try { tg.HapticFeedback.notificationOccurred('error'); } catch(e){}
+          }
+          updateUI('❌', 'Acceso Denegado', 'Tu rostro no coincide con el dueño registrado (Guille).', true);
+          actionBtn.style.display = 'flex';
+          actionBtn.querySelector('span').innerText = '🔄 Reintentar Verificación';
+        }
+      } catch (err) {
+        console.error('Error verificando en servidor:', err);
+        updateUI('❌', 'Error del Servidor', 'No se pudo comparar la imagen.', true);
+        actionBtn.style.display = 'flex';
+        actionBtn.querySelector('span').innerText = '🔄 Reintentar';
+      }
+    }
+
+    function handleNoFace(msg) {
+      frontFacingFrames = Math.max(0, frontFacingFrames - 1);
+      progressFill.style.width = (frontFacingFrames * 33) + '%';
+
+      scannerWrapper.classList.remove('tracking');
+      scannerWrapper.classList.add('error');
+      laser.style.background = 'linear-gradient(90deg, transparent, #ff4d4f, transparent)';
+      laser.style.boxShadow = '0 0 16px #ff4d4f';
+      aiBadge.className = 'ai-badge error';
+      aiBadgeText.innerText = 'Enfoca tu Cara';
+      turnHint.style.display = 'none';
+
+      statusTitle.innerText = 'Alineación Facial';
+      statusDesc.innerText = msg;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(checkMasterFaceStatus, 300);
+    });
+
+    window.addEventListener('beforeunload', stopCamera);
+  </script>
+</body>
+</html>

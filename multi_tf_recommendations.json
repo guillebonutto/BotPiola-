@@ -1,47 +1,107 @@
 {
-    "EURUSD_otc": {
-        "timeframe": "M5 (5 Minutos)",
-        "win_rate": 59.09090909090909,
-        "trades": 44
-    },
-    "GBPUSD_otc": {
-        "timeframe": "M15 (15 Minutos)",
-        "win_rate": 51.61290322580645,
-        "trades": 62
-    },
-    "AUDUSD_otc": {
-        "timeframe": "M5 (5 Minutos)",
-        "win_rate": 48.214285714285715,
-        "trades": 56
+    "NZDUSD_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 75.0,
+        "trades": 4
     },
     "USDCAD_otc": {
-        "timeframe": "M1 (1 Minuto)",
-        "win_rate": 68.42105263157895,
-        "trades": 19
-    },
-    "AUDCAD_otc": {
-        "timeframe": "M5 (5 Minutos)",
-        "win_rate": 66.66666666666666,
-        "trades": 54
-    },
-    "GBPJPY_otc": {
-        "timeframe": "M15 (15 Minutos)",
-        "win_rate": 62.5,
-        "trades": 48
+        "timeframe": "H1 (1 Hora)",
+        "win_rate": 75.0,
+        "trades": 4
     },
     "USDCHF_otc": {
         "timeframe": "M15 (15 Minutos)",
-        "win_rate": 55.23809523809524,
-        "trades": 105
+        "win_rate": 52.17391304347826,
+        "trades": 23
     },
-    "NZDUSD_otc": {
+    "GBPUSD_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 66.66666666666666,
+        "trades": 3
+    },
+    "EURUSD_otc": {
+        "timeframe": "M15 (15 Minutos)",
+        "win_rate": 77.77777777777779,
+        "trades": 9
+    },
+    "GBPJPY_otc": {
         "timeframe": "M1 (1 Minuto)",
-        "win_rate": 60.0,
-        "trades": 15
+        "win_rate": 83.33333333333334,
+        "trades": 6
     },
     "AUDJPY_otc": {
+        "timeframe": "H1 (1 Hora)",
+        "win_rate": 66.66666666666666,
+        "trades": 3
+    },
+    "AUDUSD_otc": {
+        "timeframe": "H1 (1 Hora)",
+        "win_rate": 66.66666666666666,
+        "trades": 9
+    },
+    "AUDCAD_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 75.0,
+        "trades": 4
+    },
+    "USDCOP_otc": {
+        "timeframe": "M5 (5 Minutos)",
+        "win_rate": 55.55555555555556,
+        "trades": 36
+    },
+    "EURJPY_otc": {
+        "timeframe": "M5 (5 Minutos)",
+        "win_rate": 76.47058823529412,
+        "trades": 17
+    },
+    "USDINR_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 57.14285714285714,
+        "trades": 7
+    },
+    "BTCUSD_otc": {
+        "timeframe": "H1 (1 Hora)",
+        "win_rate": 71.42857142857143,
+        "trades": 7
+    },
+    "EURGBP_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 80.0,
+        "trades": 5
+    },
+    "#TSLA_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 80.0,
+        "trades": 5
+    },
+    "#INTC_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 100.0,
+        "trades": 5
+    },
+    "#MCD_otc": {
+        "timeframe": "M5 (5 Minutos)",
+        "win_rate": 53.57142857142857,
+        "trades": 28
+    },
+    "#AAPL_otc": {
+        "timeframe": "M5 (5 Minutos)",
+        "win_rate": 55.55555555555556,
+        "trades": 27
+    },
+    "#BA_otc": {
         "timeframe": "M1 (1 Minuto)",
-        "win_rate": 52.63157894736842,
-        "trades": 19
+        "win_rate": 66.66666666666666,
+        "trades": 3
+    },
+    "#FB_otc": {
+        "timeframe": "M30 (30 Minutos)",
+        "win_rate": 66.66666666666666,
+        "trades": 3
+    },
+    "#PFE_otc": {
+        "timeframe": "H1 (1 Hora)",
+        "win_rate": 75.0,
+        "trades": 4
     }
 }

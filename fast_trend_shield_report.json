@@ -1,0 +1,3877 @@
+{
+    "best_mode": "FULL_SHIELD",
+    "summary": {
+        "NONE": {
+            "total_trades": 126440,
+            "total_wins": 60847,
+            "total_losses": 65593,
+            "net_pnl": -13873.05000000028,
+            "by_strategy": {
+                "WaveTrend + Keltner Channel Reversion": {
+                    "trades": 16816,
+                    "wins": 8083,
+                    "losses": 8733,
+                    "pnl": -1862.4499999999794
+                },
+                "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                    "trades": 40349,
+                    "wins": 19534,
+                    "losses": 20815,
+                    "pnl": -4211.099999999849
+                },
+                "Fibonacci Retracement 61.8%": {
+                    "trades": 51879,
+                    "wins": 24896,
+                    "losses": 26983,
+                    "pnl": -5821.400000000456
+                },
+                "Estoc\u00e1stico + SMA200": {
+                    "trades": 17396,
+                    "wins": 8334,
+                    "losses": 9062,
+                    "pnl": -1978.0999999999926
+                }
+            },
+            "by_pair_tf": {
+                "#AAPL_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 578,
+                        "wins": 284,
+                        "losses": 294,
+                        "pnl": -52.59999999999966
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1143,
+                        "wins": 542,
+                        "losses": 601,
+                        "pnl": -140.30000000000172
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 753,
+                        "wins": 353,
+                        "losses": 400,
+                        "pnl": -99.95000000000051
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 612,
+                        "wins": 289,
+                        "losses": 323,
+                        "pnl": -77.35000000000032
+                    }
+                },
+                "#AAPL_otc_60s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 119,
+                        "wins": 59,
+                        "losses": 60,
+                        "pnl": -9.850000000000009
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 451,
+                        "wins": 205,
+                        "losses": 246,
+                        "pnl": -71.74999999999987
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 347,
+                        "wins": 163,
+                        "losses": 184,
+                        "pnl": -45.44999999999981
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 125,
+                        "wins": 58,
+                        "losses": 67,
+                        "pnl": -17.699999999999996
+                    }
+                },
+                "#AAPL_otc_900s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 204,
+                        "wins": 99,
+                        "losses": 105,
+                        "pnl": -20.84999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 349,
+                        "wins": 179,
+                        "losses": 170,
+                        "pnl": -17.849999999999923
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 250,
+                        "wins": 128,
+                        "losses": 122,
+                        "pnl": -13.200000000000024
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 142,
+                        "wins": 76,
+                        "losses": 66,
+                        "pnl": -1.400000000000016
+                    }
+                },
+                "#BA_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 337,
+                        "wins": 167,
+                        "losses": 170,
+                        "pnl": -28.049999999999876
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 209,
+                        "wins": 95,
+                        "losses": 114,
+                        "pnl": -33.24999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 133,
+                        "wins": 66,
+                        "losses": 67,
+                        "pnl": -10.900000000000007
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 201,
+                        "wins": 92,
+                        "losses": 109,
+                        "pnl": -30.799999999999955
+                    }
+                },
+                "#BA_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 228,
+                        "wins": 102,
+                        "losses": 126,
+                        "pnl": -39.29999999999995
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 43,
+                        "losses": 56,
+                        "pnl": -19.44999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 114,
+                        "wins": 57,
+                        "losses": 57,
+                        "pnl": -8.550000000000006
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 170,
+                        "wins": 81,
+                        "losses": 89,
+                        "pnl": -20.149999999999977
+                    }
+                },
+                "#BA_otc_900s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 203,
+                        "wins": 94,
+                        "losses": 109,
+                        "pnl": -29.09999999999996
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 359,
+                        "wins": 186,
+                        "losses": 173,
+                        "pnl": -14.900000000000018
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 256,
+                        "wins": 118,
+                        "losses": 138,
+                        "pnl": -37.69999999999992
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 89,
+                        "wins": 46,
+                        "losses": 43,
+                        "pnl": -3.899999999999998
+                    }
+                },
+                "#FB_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 1031,
+                        "wins": 478,
+                        "losses": 553,
+                        "pnl": -146.70000000000175
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1242,
+                        "wins": 601,
+                        "losses": 641,
+                        "pnl": -130.15000000000194
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 550,
+                        "wins": 261,
+                        "losses": 289,
+                        "pnl": -67.14999999999996
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 621,
+                        "wins": 303,
+                        "losses": 318,
+                        "pnl": -60.449999999999726
+                    }
+                },
+                "#FB_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 306,
+                        "wins": 148,
+                        "losses": 158,
+                        "pnl": -32.199999999999896
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 97,
+                        "wins": 46,
+                        "losses": 51,
+                        "pnl": -11.900000000000013
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 623,
+                        "wins": 291,
+                        "losses": 332,
+                        "pnl": -84.65000000000015
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 111,
+                        "wins": 55,
+                        "losses": 56,
+                        "pnl": -9.250000000000014
+                    }
+                },
+                "#FB_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 180,
+                        "wins": 97,
+                        "losses": 83,
+                        "pnl": -0.55
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 373,
+                        "wins": 184,
+                        "losses": 189,
+                        "pnl": -32.59999999999989
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 237,
+                        "wins": 117,
+                        "losses": 120,
+                        "pnl": -20.549999999999958
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 220,
+                        "wins": 99,
+                        "losses": 121,
+                        "pnl": -36.84999999999998
+                    }
+                },
+                "#INTC_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 554,
+                        "wins": 274,
+                        "losses": 280,
+                        "pnl": -47.09999999999976
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1031,
+                        "wins": 504,
+                        "losses": 527,
+                        "pnl": -98.60000000000059
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 641,
+                        "wins": 298,
+                        "losses": 343,
+                        "pnl": -89.70000000000033
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 504,
+                        "wins": 252,
+                        "losses": 252,
+                        "pnl": -37.79999999999971
+                    }
+                },
+                "#INTC_otc_60s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 105,
+                        "wins": 53,
+                        "losses": 52,
+                        "pnl": -6.950000000000006
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 360,
+                        "wins": 184,
+                        "losses": 176,
+                        "pnl": -19.59999999999991
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 288,
+                        "wins": 133,
+                        "losses": 155,
+                        "pnl": -41.94999999999986
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 44,
+                        "losses": 55,
+                        "pnl": -17.59999999999996
+                    }
+                },
+                "#INTC_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 339,
+                        "wins": 156,
+                        "losses": 183,
+                        "pnl": -50.399999999999835
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 215,
+                        "wins": 106,
+                        "losses": 109,
+                        "pnl": -18.900000000000034
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 208,
+                        "wins": 113,
+                        "losses": 95,
+                        "pnl": 1.0499999999999847
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 98,
+                        "wins": 49,
+                        "losses": 49,
+                        "pnl": -7.35000000000001
+                    }
+                },
+                "#MCD_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 583,
+                        "wins": 284,
+                        "losses": 299,
+                        "pnl": -57.59999999999971
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1461,
+                        "wins": 702,
+                        "losses": 759,
+                        "pnl": -162.30000000000197
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 648,
+                        "wins": 301,
+                        "losses": 347,
+                        "pnl": -91.1500000000004
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 1589,
+                        "wins": 771,
+                        "losses": 818,
+                        "pnl": -162.65000000000265
+                    }
+                },
+                "#MCD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 775,
+                        "wins": 364,
+                        "losses": 411,
+                        "pnl": -101.60000000000015
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 111,
+                        "wins": 46,
+                        "losses": 65,
+                        "pnl": -25.899999999999988
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 348,
+                        "wins": 164,
+                        "losses": 184,
+                        "pnl": -44.599999999999795
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 126,
+                        "wins": 55,
+                        "losses": 71,
+                        "pnl": -24.249999999999964
+                    }
+                },
+                "#MCD_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 440,
+                        "wins": 227,
+                        "losses": 213,
+                        "pnl": -20.049999999999933
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 211,
+                        "wins": 100,
+                        "losses": 111,
+                        "pnl": -25.999999999999968
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 254,
+                        "wins": 126,
+                        "losses": 128,
+                        "pnl": -20.899999999999956
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 243,
+                        "wins": 114,
+                        "losses": 129,
+                        "pnl": -32.09999999999999
+                    }
+                },
+                "#MSFT_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 1565,
+                        "wins": 756,
+                        "losses": 809,
+                        "pnl": -166.40000000000296
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 734,
+                        "wins": 342,
+                        "losses": 392,
+                        "pnl": -101.30000000000067
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 221,
+                        "wins": 117,
+                        "losses": 104,
+                        "pnl": -4.550000000000017
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 240,
+                        "wins": 117,
+                        "losses": 123,
+                        "pnl": -23.550000000000004
+                    }
+                },
+                "#MSFT_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 917,
+                        "wins": 443,
+                        "losses": 474,
+                        "pnl": -97.45000000000135
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 356,
+                        "wins": 170,
+                        "losses": 186,
+                        "pnl": -41.49999999999986
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 120,
+                        "wins": 52,
+                        "losses": 68,
+                        "pnl": -23.799999999999976
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 97,
+                        "wins": 41,
+                        "losses": 56,
+                        "pnl": -21.149999999999977
+                    }
+                },
+                "#MSFT_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 697,
+                        "wins": 336,
+                        "losses": 361,
+                        "pnl": -75.39999999999975
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 552,
+                        "wins": 260,
+                        "losses": 292,
+                        "pnl": -71.0000000000006
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 245,
+                        "wins": 120,
+                        "losses": 125,
+                        "pnl": -22.9999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 204,
+                        "wins": 101,
+                        "losses": 103,
+                        "pnl": -17.150000000000013
+                    }
+                },
+                "#PFE_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 254,
+                        "wins": 129,
+                        "losses": 125,
+                        "pnl": -15.350000000000025
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 218,
+                        "wins": 105,
+                        "losses": 113,
+                        "pnl": -23.749999999999957
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 433,
+                        "wins": 222,
+                        "losses": 211,
+                        "pnl": -22.299999999999834
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 261,
+                        "wins": 116,
+                        "losses": 145,
+                        "pnl": -46.39999999999989
+                    }
+                },
+                "#PFE_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 306,
+                        "wins": 152,
+                        "losses": 154,
+                        "pnl": -24.799999999999912
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 368,
+                        "wins": 168,
+                        "losses": 200,
+                        "pnl": -57.1999999999998
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 113,
+                        "wins": 53,
+                        "losses": 60,
+                        "pnl": -14.950000000000006
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 121,
+                        "wins": 61,
+                        "losses": 60,
+                        "pnl": -8.150000000000011
+                    }
+                },
+                "#PFE_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 387,
+                        "wins": 197,
+                        "losses": 190,
+                        "pnl": -22.54999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 203,
+                        "wins": 104,
+                        "losses": 99,
+                        "pnl": -10.60000000000001
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 113,
+                        "wins": 60,
+                        "losses": 53,
+                        "pnl": -2.000000000000018
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 219,
+                        "wins": 106,
+                        "losses": 113,
+                        "pnl": -22.9
+                    }
+                },
+                "AUDCAD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1016,
+                        "wins": 491,
+                        "losses": 525,
+                        "pnl": -107.65000000000086
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 572,
+                        "wins": 292,
+                        "losses": 280,
+                        "pnl": -31.799999999999997
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 617,
+                        "wins": 283,
+                        "losses": 334,
+                        "pnl": -93.45000000000036
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 410,
+                        "wins": 187,
+                        "losses": 223,
+                        "pnl": -64.05000000000003
+                    }
+                },
+                "AUDJPY_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 8107,
+                        "wins": 3919,
+                        "losses": 4188,
+                        "pnl": -856.849999999946
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 7409,
+                        "wins": 3647,
+                        "losses": 3762,
+                        "pnl": -662.0499999999546
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3025,
+                        "wins": 1471,
+                        "losses": 1554,
+                        "pnl": -303.6500000000012
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3135,
+                        "wins": 1514,
+                        "losses": 1621,
+                        "pnl": -334.0999999999916
+                    }
+                },
+                "AUDUSD_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 651,
+                        "wins": 304,
+                        "losses": 347,
+                        "pnl": -88.60000000000082
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1091,
+                        "wins": 530,
+                        "losses": 561,
+                        "pnl": -110.50000000000139
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 581,
+                        "wins": 275,
+                        "losses": 306,
+                        "pnl": -72.25000000000014
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 598,
+                        "wins": 285,
+                        "losses": 313,
+                        "pnl": -70.74999999999983
+                    }
+                },
+                "EURUSD_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 602,
+                        "wins": 289,
+                        "losses": 313,
+                        "pnl": -67.34999999999974
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 1445,
+                        "wins": 674,
+                        "losses": 771,
+                        "pnl": -198.10000000000178
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1448,
+                        "wins": 669,
+                        "losses": 779,
+                        "pnl": -210.35000000000204
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 626,
+                        "wins": 272,
+                        "losses": 354,
+                        "pnl": -122.8000000000003
+                    }
+                },
+                "NZDUSD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 5807,
+                        "wins": 2770,
+                        "losses": 3037,
+                        "pnl": -682.499999999966
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3190,
+                        "wins": 1487,
+                        "losses": 1703,
+                        "pnl": -439.04999999998967
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 6458,
+                        "wins": 3079,
+                        "losses": 3379,
+                        "pnl": -761.8499999999586
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3086,
+                        "wins": 1479,
+                        "losses": 1607,
+                        "pnl": -349.8499999999938
+                    }
+                },
+                "USDCAD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 23323,
+                        "wins": 11236,
+                        "losses": 12087,
+                        "pnl": -2536.4000000005326
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 10320,
+                        "wins": 5023,
+                        "losses": 5297,
+                        "pnl": -1027.449999999924
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3043,
+                        "wins": 1507,
+                        "losses": 1536,
+                        "pnl": -255.05000000000615
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3114,
+                        "wins": 1497,
+                        "losses": 1617,
+                        "pnl": -344.54999999998984
+                    }
+                },
+                "USDCOP_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 604,
+                        "wins": 281,
+                        "losses": 323,
+                        "pnl": -84.15000000000018
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1248,
+                        "wins": 594,
+                        "losses": 654,
+                        "pnl": -149.10000000000207
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 614,
+                        "wins": 294,
+                        "losses": 320,
+                        "pnl": -70.10000000000025
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 1063,
+                        "wins": 488,
+                        "losses": 575,
+                        "pnl": -160.20000000000115
+                    }
+                }
+            }
+        },
+        "EMA_CONFLUENCE": {
+            "total_trades": 56898,
+            "total_wins": 27255,
+            "total_losses": 29643,
+            "net_pnl": -6476.249999999898,
+            "by_strategy": {
+                "Fibonacci Retracement 61.8%": {
+                    "trades": 24829,
+                    "wins": 11884,
+                    "losses": 12945,
+                    "pnl": -2843.5999999999053
+                },
+                "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                    "trades": 13959,
+                    "wins": 6692,
+                    "losses": 7267,
+                    "pnl": -1578.7999999999986
+                },
+                "Estoc\u00e1stico + SMA200": {
+                    "trades": 17396,
+                    "wins": 8334,
+                    "losses": 9062,
+                    "pnl": -1978.0999999999926
+                },
+                "WaveTrend + Keltner Channel Reversion": {
+                    "trades": 714,
+                    "wins": 345,
+                    "losses": 369,
+                    "pnl": -75.75000000000003
+                }
+            },
+            "by_pair_tf": {
+                "#AAPL_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 540,
+                        "wins": 260,
+                        "losses": 280,
+                        "pnl": -58.99999999999968
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 414,
+                        "wins": 202,
+                        "losses": 212,
+                        "pnl": -40.29999999999976
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 612,
+                        "wins": 289,
+                        "losses": 323,
+                        "pnl": -77.35000000000032
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 25,
+                        "wins": 10,
+                        "losses": 15,
+                        "pnl": -6.500000000000001
+                    }
+                },
+                "#AAPL_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 222,
+                        "wins": 103,
+                        "losses": 119,
+                        "pnl": -31.449999999999925
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 112,
+                        "wins": 54,
+                        "losses": 58,
+                        "pnl": -12.100000000000016
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 125,
+                        "wins": 58,
+                        "losses": 67,
+                        "pnl": -17.699999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 5,
+                        "wins": 2,
+                        "losses": 3,
+                        "pnl": -1.2999999999999998
+                    }
+                },
+                "#AAPL_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 250,
+                        "wins": 128,
+                        "losses": 122,
+                        "pnl": -13.200000000000024
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 10,
+                        "wins": 5,
+                        "losses": 5,
+                        "pnl": -0.7500000000000001
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 104,
+                        "wins": 53,
+                        "losses": 51,
+                        "pnl": -5.950000000000004
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 125,
+                        "wins": 63,
+                        "losses": 62,
+                        "pnl": -8.450000000000019
+                    }
+                },
+                "#BA_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 134,
+                        "wins": 53,
+                        "losses": 81,
+                        "pnl": -35.94999999999996
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 209,
+                        "wins": 95,
+                        "losses": 114,
+                        "pnl": -33.24999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 111,
+                        "wins": 49,
+                        "losses": 62,
+                        "pnl": -20.349999999999994
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 10,
+                        "wins": 2,
+                        "losses": 8,
+                        "pnl": -6.3
+                    }
+                },
+                "#BA_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 82,
+                        "wins": 33,
+                        "losses": 49,
+                        "pnl": -20.949999999999985
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 43,
+                        "losses": 56,
+                        "pnl": -19.44999999999999
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 106,
+                        "wins": 48,
+                        "losses": 58,
+                        "pnl": -17.200000000000003
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 5,
+                        "wins": 3,
+                        "losses": 2,
+                        "pnl": 0.5499999999999998
+                    }
+                },
+                "#BA_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 131,
+                        "wins": 75,
+                        "losses": 56,
+                        "pnl": 7.749999999999993
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 256,
+                        "wins": 118,
+                        "losses": 138,
+                        "pnl": -37.69999999999992
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 70,
+                        "wins": 35,
+                        "losses": 35,
+                        "pnl": -5.250000000000003
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 7,
+                        "wins": 3,
+                        "losses": 4,
+                        "pnl": -1.4500000000000002
+                    }
+                },
+                "#FB_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 697,
+                        "wins": 333,
+                        "losses": 364,
+                        "pnl": -80.95000000000006
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 474,
+                        "wins": 239,
+                        "losses": 235,
+                        "pnl": -31.849999999999866
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 621,
+                        "wins": 303,
+                        "losses": 318,
+                        "pnl": -60.449999999999726
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 23,
+                        "wins": 12,
+                        "losses": 11,
+                        "pnl": -0.7999999999999993
+                    }
+                },
+                "#FB_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 97,
+                        "wins": 46,
+                        "losses": 51,
+                        "pnl": -11.900000000000013
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 272,
+                        "wins": 130,
+                        "losses": 142,
+                        "pnl": -31.49999999999995
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 91,
+                        "wins": 43,
+                        "losses": 48,
+                        "pnl": -11.45000000000001
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3,
+                        "wins": 2,
+                        "losses": 1,
+                        "pnl": 0.7
+                    }
+                },
+                "#FB_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 137,
+                        "wins": 76,
+                        "losses": 61,
+                        "pnl": 3.599999999999996
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 138,
+                        "wins": 65,
+                        "losses": 73,
+                        "pnl": -17.75
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 237,
+                        "wins": 117,
+                        "losses": 120,
+                        "pnl": -20.549999999999958
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 15,
+                        "wins": 4,
+                        "losses": 11,
+                        "pnl": -7.600000000000001
+                    }
+                },
+                "#INTC_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 374,
+                        "wins": 166,
+                        "losses": 208,
+                        "pnl": -66.89999999999986
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 641,
+                        "wins": 298,
+                        "losses": 343,
+                        "pnl": -89.70000000000033
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 373,
+                        "wins": 183,
+                        "losses": 190,
+                        "pnl": -34.44999999999978
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 24,
+                        "wins": 15,
+                        "losses": 9,
+                        "pnl": 3.749999999999999
+                    }
+                },
+                "#INTC_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 191,
+                        "wins": 97,
+                        "losses": 94,
+                        "pnl": -11.550000000000011
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 100,
+                        "wins": 44,
+                        "losses": 56,
+                        "pnl": -18.599999999999966
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 44,
+                        "losses": 55,
+                        "pnl": -17.59999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 4,
+                        "wins": 2,
+                        "losses": 2,
+                        "pnl": -0.29999999999999993
+                    }
+                },
+                "#INTC_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 215,
+                        "wins": 106,
+                        "losses": 109,
+                        "pnl": -18.900000000000034
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 11,
+                        "wins": 5,
+                        "losses": 6,
+                        "pnl": -1.7499999999999998
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 101,
+                        "wins": 46,
+                        "losses": 55,
+                        "pnl": -15.900000000000007
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 69,
+                        "wins": 30,
+                        "losses": 39,
+                        "pnl": -13.500000000000005
+                    }
+                },
+                "#MCD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 539,
+                        "wins": 254,
+                        "losses": 285,
+                        "pnl": -69.10000000000011
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 648,
+                        "wins": 301,
+                        "losses": 347,
+                        "pnl": -91.1500000000004
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 960,
+                        "wins": 475,
+                        "losses": 485,
+                        "pnl": -81.25000000000021
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 23,
+                        "wins": 8,
+                        "losses": 15,
+                        "pnl": -8.200000000000003
+                    }
+                },
+                "#MCD_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 123,
+                        "wins": 56,
+                        "losses": 67,
+                        "pnl": -19.39999999999998
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 126,
+                        "wins": 55,
+                        "losses": 71,
+                        "pnl": -24.249999999999964
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 299,
+                        "wins": 120,
+                        "losses": 179,
+                        "pnl": -77.00000000000006
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 9,
+                        "wins": 5,
+                        "losses": 4,
+                        "pnl": 0.2500000000000002
+                    }
+                },
+                "#MCD_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 179,
+                        "wins": 88,
+                        "losses": 91,
+                        "pnl": -16.200000000000003
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 243,
+                        "wins": 114,
+                        "losses": 129,
+                        "pnl": -32.09999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 168,
+                        "wins": 86,
+                        "losses": 82,
+                        "pnl": -8.900000000000013
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 9,
+                        "wins": 5,
+                        "losses": 4,
+                        "pnl": 0.2499999999999999
+                    }
+                },
+                "#MSFT_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 526,
+                        "wins": 256,
+                        "losses": 270,
+                        "pnl": -52.399999999999785
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 207,
+                        "wins": 98,
+                        "losses": 109,
+                        "pnl": -25.699999999999946
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 240,
+                        "wins": 117,
+                        "losses": 123,
+                        "pnl": -23.550000000000004
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 10,
+                        "wins": 3,
+                        "losses": 7,
+                        "pnl": -4.450000000000001
+                    }
+                },
+                "#MSFT_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 288,
+                        "wins": 131,
+                        "losses": 157,
+                        "pnl": -45.64999999999993
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 105,
+                        "wins": 44,
+                        "losses": 61,
+                        "pnl": -23.599999999999987
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 120,
+                        "wins": 52,
+                        "losses": 68,
+                        "pnl": -23.799999999999976
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 2,
+                        "wins": 2,
+                        "losses": 0,
+                        "pnl": 1.7
+                    }
+                },
+                "#MSFT_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 245,
+                        "wins": 120,
+                        "losses": 125,
+                        "pnl": -22.9999999999999
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 365,
+                        "wins": 171,
+                        "losses": 194,
+                        "pnl": -48.649999999999835
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 8,
+                        "wins": 4,
+                        "losses": 4,
+                        "pnl": -0.6000000000000001
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 199,
+                        "wins": 95,
+                        "losses": 104,
+                        "pnl": -23.249999999999922
+                    }
+                },
+                "#PFE_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 254,
+                        "wins": 129,
+                        "losses": 125,
+                        "pnl": -15.350000000000025
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 177,
+                        "wins": 90,
+                        "losses": 87,
+                        "pnl": -10.50000000000003
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 200,
+                        "wins": 94,
+                        "losses": 106,
+                        "pnl": -26.09999999999995
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 7,
+                        "wins": 5,
+                        "losses": 2,
+                        "pnl": 2.25
+                    }
+                },
+                "#PFE_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 190,
+                        "wins": 91,
+                        "losses": 99,
+                        "pnl": -21.64999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 105,
+                        "wins": 54,
+                        "losses": 51,
+                        "pnl": -5.1000000000000085
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 121,
+                        "wins": 61,
+                        "losses": 60,
+                        "pnl": -8.150000000000011
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 6,
+                        "wins": 3,
+                        "losses": 3,
+                        "pnl": -0.44999999999999984
+                    }
+                },
+                "#PFE_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 90,
+                        "wins": 49,
+                        "losses": 41,
+                        "pnl": 0.649999999999993
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 140,
+                        "wins": 73,
+                        "losses": 67,
+                        "pnl": -4.950000000000012
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 219,
+                        "wins": 106,
+                        "losses": 113,
+                        "pnl": -22.9
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 12,
+                        "wins": 7,
+                        "losses": 5,
+                        "pnl": 0.9500000000000002
+                    }
+                },
+                "AUDCAD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 350,
+                        "wins": 159,
+                        "losses": 191,
+                        "pnl": -55.84999999999986
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 617,
+                        "wins": 283,
+                        "losses": 334,
+                        "pnl": -93.45000000000036
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 308,
+                        "wins": 140,
+                        "losses": 168,
+                        "pnl": -48.99999999999983
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 18,
+                        "wins": 10,
+                        "losses": 8,
+                        "pnl": 0.5000000000000002
+                    }
+                },
+                "AUDJPY_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 4842,
+                        "wins": 2316,
+                        "losses": 2526,
+                        "pnl": -557.3999999999776
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 2764,
+                        "wins": 1310,
+                        "losses": 1454,
+                        "pnl": -340.49999999999676
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3135,
+                        "wins": 1514,
+                        "losses": 1621,
+                        "pnl": -334.0999999999916
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 115,
+                        "wins": 68,
+                        "losses": 47,
+                        "pnl": 10.799999999999983
+                    }
+                },
+                "AUDUSD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 404,
+                        "wins": 204,
+                        "losses": 200,
+                        "pnl": -26.599999999999802
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 598,
+                        "wins": 285,
+                        "losses": 313,
+                        "pnl": -70.74999999999983
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 457,
+                        "wins": 217,
+                        "losses": 240,
+                        "pnl": -55.54999999999971
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 22,
+                        "wins": 9,
+                        "losses": 13,
+                        "pnl": -5.35
+                    }
+                },
+                "EURUSD_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 871,
+                        "wins": 400,
+                        "losses": 471,
+                        "pnl": -131.00000000000082
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 523,
+                        "wins": 238,
+                        "losses": 285,
+                        "pnl": -82.6999999999999
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 626,
+                        "wins": 272,
+                        "losses": 354,
+                        "pnl": -122.8000000000003
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 18,
+                        "wins": 10,
+                        "losses": 8,
+                        "pnl": 0.5000000000000002
+                    }
+                },
+                "NZDUSD_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 2497,
+                        "wins": 1155,
+                        "losses": 1342,
+                        "pnl": -360.2499999999968
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3086,
+                        "wins": 1479,
+                        "losses": 1607,
+                        "pnl": -349.8499999999938
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 3879,
+                        "wins": 1833,
+                        "losses": 2046,
+                        "pnl": -487.94999999998413
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 149,
+                        "wins": 54,
+                        "losses": 95,
+                        "pnl": -49.09999999999999
+                    }
+                },
+                "USDCAD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 7770,
+                        "wins": 3770,
+                        "losses": 4000,
+                        "pnl": -795.4999999999435
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3043,
+                        "wins": 1507,
+                        "losses": 1536,
+                        "pnl": -255.05000000000615
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 2891,
+                        "wins": 1449,
+                        "losses": 1442,
+                        "pnl": -210.35000000000633
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 126,
+                        "wins": 66,
+                        "losses": 60,
+                        "pnl": -3.9000000000000052
+                    }
+                },
+                "USDCOP_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 491,
+                        "wins": 244,
+                        "losses": 247,
+                        "pnl": -39.59999999999979
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 614,
+                        "wins": 294,
+                        "losses": 320,
+                        "pnl": -70.10000000000025
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 713,
+                        "wins": 336,
+                        "losses": 377,
+                        "pnl": -91.4000000000004
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 38,
+                        "wins": 21,
+                        "losses": 17,
+                        "pnl": 0.85
+                    }
+                }
+            }
+        },
+        "SMA200_CONFLUENCE": {
+            "total_trades": 57903,
+            "total_wins": 27777,
+            "total_losses": 30126,
+            "net_pnl": -6515.549999999912,
+            "by_strategy": {
+                "Fibonacci Retracement 61.8%": {
+                    "trades": 22728,
+                    "wins": 10929,
+                    "losses": 11799,
+                    "pnl": -2509.3499999999194
+                },
+                "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                    "trades": 14726,
+                    "wins": 7066,
+                    "losses": 7660,
+                    "pnl": -1653.8999999999974
+                },
+                "Estoc\u00e1stico + SMA200": {
+                    "trades": 17396,
+                    "wins": 8334,
+                    "losses": 9062,
+                    "pnl": -1978.0999999999926
+                },
+                "WaveTrend + Keltner Channel Reversion": {
+                    "trades": 3053,
+                    "wins": 1448,
+                    "losses": 1605,
+                    "pnl": -374.1999999999996
+                }
+            },
+            "by_pair_tf": {
+                "#AAPL_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 419,
+                        "wins": 203,
+                        "losses": 216,
+                        "pnl": -43.44999999999985
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 428,
+                        "wins": 219,
+                        "losses": 209,
+                        "pnl": -22.849999999999824
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 612,
+                        "wins": 289,
+                        "losses": 323,
+                        "pnl": -77.35000000000032
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 117,
+                        "wins": 70,
+                        "losses": 47,
+                        "pnl": 12.499999999999984
+                    }
+                },
+                "#AAPL_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 210,
+                        "wins": 103,
+                        "losses": 107,
+                        "pnl": -19.449999999999996
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 121,
+                        "wins": 58,
+                        "losses": 63,
+                        "pnl": -13.700000000000015
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 125,
+                        "wins": 58,
+                        "losses": 67,
+                        "pnl": -17.699999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 21,
+                        "wins": 8,
+                        "losses": 13,
+                        "pnl": -6.2
+                    }
+                },
+                "#AAPL_otc_900s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 45,
+                        "wins": 22,
+                        "losses": 23,
+                        "pnl": -4.300000000000001
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 140,
+                        "wins": 71,
+                        "losses": 69,
+                        "pnl": -8.650000000000022
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 250,
+                        "wins": 128,
+                        "losses": 122,
+                        "pnl": -13.200000000000024
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 74,
+                        "wins": 37,
+                        "losses": 37,
+                        "pnl": -5.5500000000000025
+                    }
+                },
+                "#BA_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 122,
+                        "wins": 53,
+                        "losses": 69,
+                        "pnl": -23.95000000000001
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 209,
+                        "wins": 95,
+                        "losses": 114,
+                        "pnl": -33.24999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 84,
+                        "wins": 36,
+                        "losses": 48,
+                        "pnl": -17.39999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 38,
+                        "wins": 14,
+                        "losses": 24,
+                        "pnl": -12.100000000000001
+                    }
+                },
+                "#BA_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 79,
+                        "wins": 33,
+                        "losses": 46,
+                        "pnl": -17.949999999999996
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 43,
+                        "losses": 56,
+                        "pnl": -19.44999999999999
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 91,
+                        "wins": 42,
+                        "losses": 49,
+                        "pnl": -13.300000000000006
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 18,
+                        "wins": 11,
+                        "losses": 7,
+                        "pnl": 2.3500000000000005
+                    }
+                },
+                "#BA_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 144,
+                        "wins": 72,
+                        "losses": 72,
+                        "pnl": -10.800000000000017
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 256,
+                        "wins": 118,
+                        "losses": 138,
+                        "pnl": -37.69999999999992
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 54,
+                        "wins": 26,
+                        "losses": 28,
+                        "pnl": -5.900000000000004
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 47,
+                        "wins": 21,
+                        "losses": 26,
+                        "pnl": -8.150000000000002
+                    }
+                },
+                "#FB_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 545,
+                        "wins": 248,
+                        "losses": 297,
+                        "pnl": -86.20000000000005
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 466,
+                        "wins": 229,
+                        "losses": 237,
+                        "pnl": -42.349999999999845
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 621,
+                        "wins": 303,
+                        "losses": 318,
+                        "pnl": -60.449999999999726
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 128,
+                        "wins": 58,
+                        "losses": 70,
+                        "pnl": -20.69999999999999
+                    }
+                },
+                "#FB_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 99,
+                        "wins": 46,
+                        "losses": 53,
+                        "pnl": -13.900000000000011
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 97,
+                        "wins": 46,
+                        "losses": 51,
+                        "pnl": -11.900000000000013
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 270,
+                        "wins": 128,
+                        "losses": 142,
+                        "pnl": -33.199999999999946
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 16,
+                        "wins": 6,
+                        "losses": 10,
+                        "pnl": -4.900000000000002
+                    }
+                },
+                "#FB_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 108,
+                        "wins": 59,
+                        "losses": 49,
+                        "pnl": 1.15
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 146,
+                        "wins": 69,
+                        "losses": 77,
+                        "pnl": -18.349999999999998
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 237,
+                        "wins": 117,
+                        "losses": 120,
+                        "pnl": -20.549999999999958
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 55,
+                        "wins": 23,
+                        "losses": 32,
+                        "pnl": -12.450000000000001
+                    }
+                },
+                "#INTC_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 416,
+                        "wins": 187,
+                        "losses": 229,
+                        "pnl": -70.04999999999993
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 641,
+                        "wins": 298,
+                        "losses": 343,
+                        "pnl": -89.70000000000033
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 285,
+                        "wins": 138,
+                        "losses": 147,
+                        "pnl": -29.69999999999984
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 106,
+                        "wins": 50,
+                        "losses": 56,
+                        "pnl": -13.50000000000001
+                    }
+                },
+                "#INTC_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 168,
+                        "wins": 87,
+                        "losses": 81,
+                        "pnl": -7.050000000000013
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 95,
+                        "wins": 43,
+                        "losses": 52,
+                        "pnl": -15.449999999999958
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 44,
+                        "losses": 55,
+                        "pnl": -17.59999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 15,
+                        "wins": 3,
+                        "losses": 12,
+                        "pnl": -9.450000000000001
+                    }
+                },
+                "#INTC_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 215,
+                        "wins": 106,
+                        "losses": 109,
+                        "pnl": -18.900000000000034
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 41,
+                        "wins": 18,
+                        "losses": 23,
+                        "pnl": -7.700000000000001
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 130,
+                        "wins": 68,
+                        "losses": 62,
+                        "pnl": -4.200000000000006
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 51,
+                        "wins": 25,
+                        "losses": 26,
+                        "pnl": -4.750000000000005
+                    }
+                },
+                "#MCD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 566,
+                        "wins": 270,
+                        "losses": 296,
+                        "pnl": -66.49999999999997
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 648,
+                        "wins": 301,
+                        "losses": 347,
+                        "pnl": -91.1500000000004
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 794,
+                        "wins": 401,
+                        "losses": 393,
+                        "pnl": -52.14999999999972
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 119,
+                        "wins": 50,
+                        "losses": 69,
+                        "pnl": -26.499999999999975
+                    }
+                },
+                "#MCD_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 140,
+                        "wins": 64,
+                        "losses": 76,
+                        "pnl": -21.599999999999945
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 126,
+                        "wins": 55,
+                        "losses": 71,
+                        "pnl": -24.249999999999964
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 313,
+                        "wins": 133,
+                        "losses": 180,
+                        "pnl": -66.9500000000001
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 25,
+                        "wins": 8,
+                        "losses": 17,
+                        "pnl": -10.200000000000001
+                    }
+                },
+                "#MCD_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 169,
+                        "wins": 86,
+                        "losses": 83,
+                        "pnl": -9.900000000000006
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 133,
+                        "wins": 62,
+                        "losses": 71,
+                        "pnl": -18.29999999999999
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 243,
+                        "wins": 114,
+                        "losses": 129,
+                        "pnl": -32.09999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 42,
+                        "wins": 22,
+                        "losses": 20,
+                        "pnl": -1.3000000000000007
+                    }
+                },
+                "#MSFT_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 619,
+                        "wins": 321,
+                        "losses": 298,
+                        "pnl": -25.150000000000013
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 260,
+                        "wins": 127,
+                        "losses": 133,
+                        "pnl": -25.050000000000004
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 240,
+                        "wins": 117,
+                        "losses": 123,
+                        "pnl": -23.550000000000004
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 44,
+                        "wins": 20,
+                        "losses": 24,
+                        "pnl": -7.0000000000000036
+                    }
+                },
+                "#MSFT_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 334,
+                        "wins": 157,
+                        "losses": 177,
+                        "pnl": -43.54999999999988
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 132,
+                        "wins": 60,
+                        "losses": 72,
+                        "pnl": -20.99999999999998
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 120,
+                        "wins": 52,
+                        "losses": 68,
+                        "pnl": -23.799999999999976
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 16,
+                        "wins": 6,
+                        "losses": 10,
+                        "pnl": -4.9
+                    }
+                },
+                "#MSFT_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 353,
+                        "wins": 166,
+                        "losses": 187,
+                        "pnl": -45.89999999999986
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 242,
+                        "wins": 116,
+                        "losses": 126,
+                        "pnl": -27.399999999999906
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 245,
+                        "wins": 120,
+                        "losses": 125,
+                        "pnl": -22.9999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 40,
+                        "wins": 17,
+                        "losses": 23,
+                        "pnl": -8.55
+                    }
+                },
+                "#PFE_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 254,
+                        "wins": 129,
+                        "losses": 125,
+                        "pnl": -15.350000000000025
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 173,
+                        "wins": 88,
+                        "losses": 85,
+                        "pnl": -10.200000000000024
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 157,
+                        "wins": 70,
+                        "losses": 87,
+                        "pnl": -27.499999999999943
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 34,
+                        "wins": 14,
+                        "losses": 20,
+                        "pnl": -8.100000000000001
+                    }
+                },
+                "#PFE_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 169,
+                        "wins": 82,
+                        "losses": 87,
+                        "pnl": -17.300000000000004
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 109,
+                        "wins": 56,
+                        "losses": 53,
+                        "pnl": -5.3999999999999995
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 121,
+                        "wins": 61,
+                        "losses": 60,
+                        "pnl": -8.150000000000011
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 27,
+                        "wins": 16,
+                        "losses": 11,
+                        "pnl": 2.600000000000001
+                    }
+                },
+                "#PFE_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 62,
+                        "wins": 30,
+                        "losses": 32,
+                        "pnl": -6.500000000000009
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 132,
+                        "wins": 64,
+                        "losses": 68,
+                        "pnl": -13.600000000000017
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 219,
+                        "wins": 106,
+                        "losses": 113,
+                        "pnl": -22.9
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 35,
+                        "wins": 20,
+                        "losses": 15,
+                        "pnl": 2.000000000000001
+                    }
+                },
+                "AUDCAD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 366,
+                        "wins": 170,
+                        "losses": 196,
+                        "pnl": -51.49999999999978
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 617,
+                        "wins": 283,
+                        "losses": 334,
+                        "pnl": -93.45000000000036
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 92,
+                        "wins": 42,
+                        "losses": 50,
+                        "pnl": -14.300000000000002
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 235,
+                        "wins": 104,
+                        "losses": 131,
+                        "pnl": -42.59999999999988
+                    }
+                },
+                "AUDJPY_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 4127,
+                        "wins": 1988,
+                        "losses": 2139,
+                        "pnl": -449.1999999999851
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 2780,
+                        "wins": 1332,
+                        "losses": 1448,
+                        "pnl": -315.79999999999734
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3135,
+                        "wins": 1514,
+                        "losses": 1621,
+                        "pnl": -334.0999999999916
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 505,
+                        "wins": 249,
+                        "losses": 256,
+                        "pnl": -44.34999999999978
+                    }
+                },
+                "AUDUSD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 402,
+                        "wins": 201,
+                        "losses": 201,
+                        "pnl": -30.14999999999987
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 598,
+                        "wins": 285,
+                        "losses": 313,
+                        "pnl": -70.74999999999983
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 114,
+                        "wins": 61,
+                        "losses": 53,
+                        "pnl": -1.1500000000000012
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 345,
+                        "wins": 163,
+                        "losses": 182,
+                        "pnl": -43.44999999999981
+                    }
+                },
+                "EURUSD_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 743,
+                        "wins": 334,
+                        "losses": 409,
+                        "pnl": -125.10000000000073
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 553,
+                        "wins": 239,
+                        "losses": 314,
+                        "pnl": -110.85000000000028
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 626,
+                        "wins": 272,
+                        "losses": 354,
+                        "pnl": -122.8000000000003
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 119,
+                        "wins": 54,
+                        "losses": 65,
+                        "pnl": -19.09999999999995
+                    }
+                },
+                "NZDUSD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 3120,
+                        "wins": 1497,
+                        "losses": 1623,
+                        "pnl": -350.5499999999962
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 2483,
+                        "wins": 1163,
+                        "losses": 1320,
+                        "pnl": -331.4499999999982
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3086,
+                        "wins": 1479,
+                        "losses": 1607,
+                        "pnl": -349.8499999999938
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 552,
+                        "wins": 254,
+                        "losses": 298,
+                        "pnl": -82.10000000000008
+                    }
+                },
+                "USDCAD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 8287,
+                        "wins": 4024,
+                        "losses": 4263,
+                        "pnl": -842.5999999999382
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 3343,
+                        "wins": 1651,
+                        "losses": 1692,
+                        "pnl": -288.65000000000293
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3043,
+                        "wins": 1507,
+                        "losses": 1536,
+                        "pnl": -255.05000000000615
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 529,
+                        "wins": 267,
+                        "losses": 262,
+                        "pnl": -35.04999999999978
+                    }
+                },
+                "USDCOP_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 490,
+                        "wins": 231,
+                        "losses": 259,
+                        "pnl": -62.64999999999973
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 614,
+                        "wins": 294,
+                        "losses": 320,
+                        "pnl": -70.10000000000025
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 578,
+                        "wins": 265,
+                        "losses": 313,
+                        "pnl": -87.75000000000026
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 113,
+                        "wins": 44,
+                        "losses": 69,
+                        "pnl": -31.599999999999962
+                    }
+                }
+            }
+        },
+        "MACD_MOMENTUM_EXHAUSTION": {
+            "total_trades": 83358,
+            "total_wins": 40128,
+            "total_losses": 43230,
+            "net_pnl": -9121.200000000052,
+            "by_strategy": {
+                "WaveTrend + Keltner Channel Reversion": {
+                    "trades": 16811,
+                    "wins": 8079,
+                    "losses": 8732,
+                    "pnl": -1864.8499999999794
+                },
+                "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                    "trades": 20836,
+                    "wins": 10110,
+                    "losses": 10726,
+                    "pnl": -2132.4999999999504
+                },
+                "Estoc\u00e1stico + SMA200": {
+                    "trades": 17396,
+                    "wins": 8334,
+                    "losses": 9062,
+                    "pnl": -1978.0999999999926
+                },
+                "Fibonacci Retracement 61.8%": {
+                    "trades": 28315,
+                    "wins": 13605,
+                    "losses": 14710,
+                    "pnl": -3145.7500000001296
+                }
+            },
+            "by_pair_tf": {
+                "#AAPL_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 578,
+                        "wins": 284,
+                        "losses": 294,
+                        "pnl": -52.59999999999966
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 489,
+                        "wins": 236,
+                        "losses": 253,
+                        "pnl": -52.39999999999978
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 612,
+                        "wins": 289,
+                        "losses": 323,
+                        "pnl": -77.35000000000032
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 296,
+                        "wins": 140,
+                        "losses": 156,
+                        "pnl": -36.9999999999999
+                    }
+                },
+                "#AAPL_otc_60s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 119,
+                        "wins": 59,
+                        "losses": 60,
+                        "pnl": -9.850000000000009
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 125,
+                        "wins": 58,
+                        "losses": 67,
+                        "pnl": -17.699999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 239,
+                        "wins": 102,
+                        "losses": 137,
+                        "pnl": -50.29999999999991
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 199,
+                        "wins": 97,
+                        "losses": 102,
+                        "pnl": -19.549999999999933
+                    }
+                },
+                "#AAPL_otc_900s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 204,
+                        "wins": 99,
+                        "losses": 105,
+                        "pnl": -20.84999999999999
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 250,
+                        "wins": 128,
+                        "losses": 122,
+                        "pnl": -13.200000000000024
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 154,
+                        "wins": 75,
+                        "losses": 79,
+                        "pnl": -15.24999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 61,
+                        "wins": 31,
+                        "losses": 30,
+                        "pnl": -3.6500000000000004
+                    }
+                },
+                "#BA_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 209,
+                        "wins": 95,
+                        "losses": 114,
+                        "pnl": -33.24999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 201,
+                        "wins": 92,
+                        "losses": 109,
+                        "pnl": -30.799999999999955
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 46,
+                        "wins": 22,
+                        "losses": 24,
+                        "pnl": -5.300000000000001
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 130,
+                        "wins": 61,
+                        "losses": 69,
+                        "pnl": -17.14999999999997
+                    }
+                },
+                "#BA_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 110,
+                        "wins": 47,
+                        "losses": 63,
+                        "pnl": -23.04999999999998
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 43,
+                        "losses": 56,
+                        "pnl": -19.44999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 114,
+                        "wins": 57,
+                        "losses": 57,
+                        "pnl": -8.550000000000006
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 81,
+                        "wins": 39,
+                        "losses": 42,
+                        "pnl": -8.850000000000005
+                    }
+                },
+                "#BA_otc_900s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 203,
+                        "wins": 94,
+                        "losses": 109,
+                        "pnl": -29.09999999999996
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 256,
+                        "wins": 118,
+                        "losses": 138,
+                        "pnl": -37.69999999999992
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 156,
+                        "wins": 82,
+                        "losses": 74,
+                        "pnl": -4.300000000000001
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 34,
+                        "wins": 20,
+                        "losses": 14,
+                        "pnl": 2.999999999999995
+                    }
+                },
+                "#FB_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 427,
+                        "wins": 196,
+                        "losses": 231,
+                        "pnl": -64.3999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 550,
+                        "wins": 261,
+                        "losses": 289,
+                        "pnl": -67.14999999999996
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 533,
+                        "wins": 255,
+                        "losses": 278,
+                        "pnl": -61.249999999999716
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 621,
+                        "wins": 303,
+                        "losses": 318,
+                        "pnl": -60.449999999999726
+                    }
+                },
+                "#FB_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 182,
+                        "wins": 85,
+                        "losses": 97,
+                        "pnl": -24.74999999999995
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 97,
+                        "wins": 46,
+                        "losses": 51,
+                        "pnl": -11.900000000000013
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 378,
+                        "wins": 171,
+                        "losses": 207,
+                        "pnl": -61.64999999999982
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 111,
+                        "wins": 55,
+                        "losses": 56,
+                        "pnl": -9.250000000000014
+                    }
+                },
+                "#FB_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 163,
+                        "wins": 84,
+                        "losses": 79,
+                        "pnl": -7.600000000000003
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 237,
+                        "wins": 117,
+                        "losses": 120,
+                        "pnl": -20.549999999999958
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 220,
+                        "wins": 99,
+                        "losses": 121,
+                        "pnl": -36.84999999999998
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 57,
+                        "wins": 26,
+                        "losses": 31,
+                        "pnl": -8.900000000000007
+                    }
+                },
+                "#INTC_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 554,
+                        "wins": 274,
+                        "losses": 280,
+                        "pnl": -47.09999999999976
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 641,
+                        "wins": 298,
+                        "losses": 343,
+                        "pnl": -89.70000000000033
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 393,
+                        "wins": 197,
+                        "losses": 196,
+                        "pnl": -28.54999999999999
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 177,
+                        "wins": 97,
+                        "losses": 80,
+                        "pnl": 2.449999999999983
+                    }
+                },
+                "#INTC_otc_60s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 105,
+                        "wins": 53,
+                        "losses": 52,
+                        "pnl": -6.950000000000006
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 181,
+                        "wins": 93,
+                        "losses": 88,
+                        "pnl": -8.950000000000005
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 157,
+                        "wins": 73,
+                        "losses": 84,
+                        "pnl": -21.949999999999946
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 44,
+                        "losses": 55,
+                        "pnl": -17.59999999999996
+                    }
+                },
+                "#INTC_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 215,
+                        "wins": 106,
+                        "losses": 109,
+                        "pnl": -18.900000000000034
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 207,
+                        "wins": 112,
+                        "losses": 95,
+                        "pnl": 0.19999999999998486
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 141,
+                        "wins": 63,
+                        "losses": 78,
+                        "pnl": -24.449999999999974
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 36,
+                        "wins": 18,
+                        "losses": 18,
+                        "pnl": -2.700000000000002
+                    }
+                },
+                "#MCD_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 583,
+                        "wins": 284,
+                        "losses": 299,
+                        "pnl": -57.59999999999971
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 648,
+                        "wins": 301,
+                        "losses": 347,
+                        "pnl": -91.1500000000004
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 761,
+                        "wins": 368,
+                        "losses": 393,
+                        "pnl": -80.19999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 748,
+                        "wins": 381,
+                        "losses": 367,
+                        "pnl": -43.149999999999544
+                    }
+                },
+                "#MCD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 467,
+                        "wins": 236,
+                        "losses": 231,
+                        "pnl": -30.39999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 111,
+                        "wins": 46,
+                        "losses": 65,
+                        "pnl": -25.899999999999988
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 219,
+                        "wins": 106,
+                        "losses": 113,
+                        "pnl": -22.89999999999994
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 126,
+                        "wins": 55,
+                        "losses": 71,
+                        "pnl": -24.249999999999964
+                    }
+                },
+                "#MCD_otc_900s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 210,
+                        "wins": 99,
+                        "losses": 111,
+                        "pnl": -26.84999999999997
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 243,
+                        "wins": 114,
+                        "losses": 129,
+                        "pnl": -32.09999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 183,
+                        "wins": 98,
+                        "losses": 85,
+                        "pnl": -1.6999999999999975
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 85,
+                        "wins": 47,
+                        "losses": 38,
+                        "pnl": 1.9499999999999984
+                    }
+                },
+                "#MSFT_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 992,
+                        "wins": 485,
+                        "losses": 507,
+                        "pnl": -94.75000000000173
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 456,
+                        "wins": 219,
+                        "losses": 237,
+                        "pnl": -50.84999999999977
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 220,
+                        "wins": 117,
+                        "losses": 103,
+                        "pnl": -3.550000000000013
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 240,
+                        "wins": 117,
+                        "losses": 123,
+                        "pnl": -23.550000000000004
+                    }
+                },
+                "#MSFT_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 120,
+                        "wins": 52,
+                        "losses": 68,
+                        "pnl": -23.799999999999976
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 598,
+                        "wins": 295,
+                        "losses": 303,
+                        "pnl": -52.249999999999666
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 215,
+                        "wins": 105,
+                        "losses": 110,
+                        "pnl": -20.749999999999922
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 97,
+                        "wins": 41,
+                        "losses": 56,
+                        "pnl": -21.149999999999977
+                    }
+                },
+                "#MSFT_otc_900s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 355,
+                        "wins": 173,
+                        "losses": 182,
+                        "pnl": -34.949999999999854
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 245,
+                        "wins": 120,
+                        "losses": 125,
+                        "pnl": -22.9999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 295,
+                        "wins": 146,
+                        "losses": 149,
+                        "pnl": -24.89999999999985
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 204,
+                        "wins": 101,
+                        "losses": 103,
+                        "pnl": -17.150000000000013
+                    }
+                },
+                "#PFE_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 254,
+                        "wins": 129,
+                        "losses": 125,
+                        "pnl": -15.350000000000025
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 218,
+                        "wins": 105,
+                        "losses": 113,
+                        "pnl": -23.749999999999957
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 183,
+                        "wins": 102,
+                        "losses": 81,
+                        "pnl": 5.6999999999999895
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 96,
+                        "wins": 42,
+                        "losses": 54,
+                        "pnl": -18.3
+                    }
+                },
+                "#PFE_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 194,
+                        "wins": 91,
+                        "losses": 103,
+                        "pnl": -25.649999999999885
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 186,
+                        "wins": 92,
+                        "losses": 94,
+                        "pnl": -15.799999999999997
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 113,
+                        "wins": 53,
+                        "losses": 60,
+                        "pnl": -14.950000000000006
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 121,
+                        "wins": 61,
+                        "losses": 60,
+                        "pnl": -8.150000000000011
+                    }
+                },
+                "#PFE_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 165,
+                        "wins": 81,
+                        "losses": 84,
+                        "pnl": -15.150000000000007
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 203,
+                        "wins": 104,
+                        "losses": 99,
+                        "pnl": -10.60000000000001
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 219,
+                        "wins": 106,
+                        "losses": 113,
+                        "pnl": -22.9
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 32,
+                        "wins": 16,
+                        "losses": 16,
+                        "pnl": -2.400000000000003
+                    }
+                },
+                "AUDCAD_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 418,
+                        "wins": 209,
+                        "losses": 209,
+                        "pnl": -31.34999999999973
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 572,
+                        "wins": 292,
+                        "losses": 280,
+                        "pnl": -31.799999999999997
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 617,
+                        "wins": 283,
+                        "losses": 334,
+                        "pnl": -93.45000000000036
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 151,
+                        "wins": 67,
+                        "losses": 84,
+                        "pnl": -27.049999999999933
+                    }
+                },
+                "AUDJPY_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 3819,
+                        "wins": 1898,
+                        "losses": 1921,
+                        "pnl": -307.70000000000203
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3024,
+                        "wins": 1470,
+                        "losses": 1554,
+                        "pnl": -304.50000000000136
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3135,
+                        "wins": 1514,
+                        "losses": 1621,
+                        "pnl": -334.0999999999916
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 3864,
+                        "wins": 1873,
+                        "losses": 1991,
+                        "pnl": -398.9499999999905
+                    }
+                },
+                "AUDUSD_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 581,
+                        "wins": 275,
+                        "losses": 306,
+                        "pnl": -72.25000000000014
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 598,
+                        "wins": 285,
+                        "losses": 313,
+                        "pnl": -70.74999999999983
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 449,
+                        "wins": 217,
+                        "losses": 232,
+                        "pnl": -47.549999999999734
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 240,
+                        "wins": 116,
+                        "losses": 124,
+                        "pnl": -25.39999999999989
+                    }
+                },
+                "EURUSD_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 602,
+                        "wins": 289,
+                        "losses": 313,
+                        "pnl": -67.34999999999974
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 680,
+                        "wins": 327,
+                        "losses": 353,
+                        "pnl": -75.0500000000001
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 626,
+                        "wins": 272,
+                        "losses": 354,
+                        "pnl": -122.8000000000003
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 744,
+                        "wins": 356,
+                        "losses": 388,
+                        "pnl": -85.40000000000003
+                    }
+                },
+                "NZDUSD_otc_60s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3190,
+                        "wins": 1487,
+                        "losses": 1703,
+                        "pnl": -439.04999999998967
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 2976,
+                        "wins": 1406,
+                        "losses": 1570,
+                        "pnl": -374.89999999999316
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3086,
+                        "wins": 1479,
+                        "losses": 1607,
+                        "pnl": -349.8499999999938
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 2463,
+                        "wins": 1142,
+                        "losses": 1321,
+                        "pnl": -350.2999999999919
+                    }
+                },
+                "USDCAD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 14902,
+                        "wins": 7152,
+                        "losses": 7750,
+                        "pnl": -1670.8000000001473
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 6414,
+                        "wins": 3085,
+                        "losses": 3329,
+                        "pnl": -706.7499999999571
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3043,
+                        "wins": 1507,
+                        "losses": 1536,
+                        "pnl": -255.05000000000615
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3113,
+                        "wins": 1496,
+                        "losses": 1617,
+                        "pnl": -345.39999999998963
+                    }
+                },
+                "USDCOP_otc_300s": {
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 604,
+                        "wins": 281,
+                        "losses": 323,
+                        "pnl": -84.15000000000018
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 614,
+                        "wins": 294,
+                        "losses": 320,
+                        "pnl": -70.10000000000025
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 546,
+                        "wins": 267,
+                        "losses": 279,
+                        "pnl": -52.04999999999967
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 435,
+                        "wins": 207,
+                        "losses": 228,
+                        "pnl": -52.04999999999985
+                    }
+                }
+            }
+        },
+        "FULL_SHIELD": {
+            "total_trades": 35810,
+            "total_wins": 17135,
+            "total_losses": 18675,
+            "net_pnl": -4110.249999999991,
+            "by_strategy": {
+                "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                    "trades": 6332,
+                    "wins": 3033,
+                    "losses": 3299,
+                    "pnl": -720.9500000000058
+                },
+                "Estoc\u00e1stico + SMA200": {
+                    "trades": 17396,
+                    "wins": 8334,
+                    "losses": 9062,
+                    "pnl": -1978.0999999999926
+                },
+                "Fibonacci Retracement 61.8%": {
+                    "trades": 11368,
+                    "wins": 5423,
+                    "losses": 5945,
+                    "pnl": -1335.449999999992
+                },
+                "WaveTrend + Keltner Channel Reversion": {
+                    "trades": 714,
+                    "wins": 345,
+                    "losses": 369,
+                    "pnl": -75.75000000000003
+                }
+            },
+            "by_pair_tf": {
+                "#AAPL_otc_300s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 167,
+                        "wins": 86,
+                        "losses": 81,
+                        "pnl": -7.900000000000016
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 612,
+                        "wins": 289,
+                        "losses": 323,
+                        "pnl": -77.35000000000032
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 218,
+                        "wins": 104,
+                        "losses": 114,
+                        "pnl": -25.59999999999995
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 25,
+                        "wins": 10,
+                        "losses": 15,
+                        "pnl": -6.500000000000001
+                    }
+                },
+                "#AAPL_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 125,
+                        "wins": 58,
+                        "losses": 67,
+                        "pnl": -17.699999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 102,
+                        "wins": 52,
+                        "losses": 50,
+                        "pnl": -5.8000000000000105
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 53,
+                        "wins": 34,
+                        "losses": 19,
+                        "pnl": 9.899999999999995
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 5,
+                        "wins": 2,
+                        "losses": 3,
+                        "pnl": -1.2999999999999998
+                    }
+                },
+                "#AAPL_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 250,
+                        "wins": 128,
+                        "losses": 122,
+                        "pnl": -13.200000000000024
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 10,
+                        "wins": 5,
+                        "losses": 5,
+                        "pnl": -0.7500000000000001
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 56,
+                        "wins": 31,
+                        "losses": 25,
+                        "pnl": 1.35
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 49,
+                        "wins": 23,
+                        "losses": 26,
+                        "pnl": -6.449999999999998
+                    }
+                },
+                "#BA_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 209,
+                        "wins": 95,
+                        "losses": 114,
+                        "pnl": -33.24999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 44,
+                        "wins": 21,
+                        "losses": 23,
+                        "pnl": -5.150000000000001
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 53,
+                        "wins": 19,
+                        "losses": 34,
+                        "pnl": -17.849999999999994
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 10,
+                        "wins": 2,
+                        "losses": 8,
+                        "pnl": -6.3
+                    }
+                },
+                "#BA_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 37,
+                        "wins": 14,
+                        "losses": 23,
+                        "pnl": -11.100000000000001
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 43,
+                        "losses": 56,
+                        "pnl": -19.44999999999999
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 46,
+                        "wins": 20,
+                        "losses": 26,
+                        "pnl": -9.0
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 5,
+                        "wins": 3,
+                        "losses": 2,
+                        "pnl": 0.5499999999999998
+                    }
+                },
+                "#BA_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 256,
+                        "wins": 118,
+                        "losses": 138,
+                        "pnl": -37.69999999999992
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 29,
+                        "wins": 16,
+                        "losses": 13,
+                        "pnl": 0.5999999999999974
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 59,
+                        "wins": 38,
+                        "losses": 21,
+                        "pnl": 11.299999999999992
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 7,
+                        "wins": 3,
+                        "losses": 4,
+                        "pnl": -1.4500000000000002
+                    }
+                },
+                "#FB_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 298,
+                        "wins": 135,
+                        "losses": 163,
+                        "pnl": -48.24999999999984
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 621,
+                        "wins": 303,
+                        "losses": 318,
+                        "pnl": -60.449999999999726
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 208,
+                        "wins": 98,
+                        "losses": 110,
+                        "pnl": -26.699999999999953
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 23,
+                        "wins": 12,
+                        "losses": 11,
+                        "pnl": -0.7999999999999993
+                    }
+                },
+                "#FB_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 97,
+                        "wins": 46,
+                        "losses": 51,
+                        "pnl": -11.900000000000013
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 48,
+                        "wins": 17,
+                        "losses": 31,
+                        "pnl": -16.550000000000004
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 148,
+                        "wins": 66,
+                        "losses": 82,
+                        "pnl": -25.899999999999977
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 3,
+                        "wins": 2,
+                        "losses": 1,
+                        "pnl": 0.7
+                    }
+                },
+                "#FB_otc_900s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 52,
+                        "wins": 19,
+                        "losses": 33,
+                        "pnl": -16.85
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 237,
+                        "wins": 117,
+                        "losses": 120,
+                        "pnl": -20.549999999999958
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 49,
+                        "wins": 23,
+                        "losses": 26,
+                        "pnl": -6.45
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 15,
+                        "wins": 4,
+                        "losses": 11,
+                        "pnl": -7.600000000000001
+                    }
+                },
+                "#INTC_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 641,
+                        "wins": 298,
+                        "losses": 343,
+                        "pnl": -89.70000000000033
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 137,
+                        "wins": 63,
+                        "losses": 74,
+                        "pnl": -20.450000000000017
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 146,
+                        "wins": 83,
+                        "losses": 63,
+                        "pnl": 7.549999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 24,
+                        "wins": 15,
+                        "losses": 9,
+                        "pnl": 3.749999999999999
+                    }
+                },
+                "#INTC_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 85,
+                        "wins": 39,
+                        "losses": 46,
+                        "pnl": -12.850000000000009
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 49,
+                        "wins": 23,
+                        "losses": 26,
+                        "pnl": -6.450000000000005
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 99,
+                        "wins": 44,
+                        "losses": 55,
+                        "pnl": -17.59999999999996
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 4,
+                        "wins": 2,
+                        "losses": 2,
+                        "pnl": -0.29999999999999993
+                    }
+                },
+                "#INTC_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 215,
+                        "wins": 106,
+                        "losses": 109,
+                        "pnl": -18.900000000000034
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 11,
+                        "wins": 5,
+                        "losses": 6,
+                        "pnl": -1.7499999999999998
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 42,
+                        "wins": 13,
+                        "losses": 29,
+                        "pnl": -17.949999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 26,
+                        "wins": 11,
+                        "losses": 15,
+                        "pnl": -5.650000000000001
+                    }
+                },
+                "#MCD_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 648,
+                        "wins": 301,
+                        "losses": 347,
+                        "pnl": -91.1500000000004
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 425,
+                        "wins": 212,
+                        "losses": 213,
+                        "pnl": -32.799999999999834
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 269,
+                        "wins": 128,
+                        "losses": 141,
+                        "pnl": -32.19999999999989
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 23,
+                        "wins": 8,
+                        "losses": 15,
+                        "pnl": -8.200000000000003
+                    }
+                },
+                "#MCD_otc_60s": {
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 72,
+                        "wins": 33,
+                        "losses": 39,
+                        "pnl": -10.950000000000006
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 126,
+                        "wins": 55,
+                        "losses": 71,
+                        "pnl": -24.249999999999964
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 152,
+                        "wins": 71,
+                        "losses": 81,
+                        "pnl": -20.64999999999997
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 9,
+                        "wins": 5,
+                        "losses": 4,
+                        "pnl": 0.2500000000000002
+                    }
+                },
+                "#MCD_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 243,
+                        "wins": 114,
+                        "losses": 129,
+                        "pnl": -32.09999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 64,
+                        "wins": 37,
+                        "losses": 27,
+                        "pnl": 4.449999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 70,
+                        "wins": 39,
+                        "losses": 31,
+                        "pnl": 2.1499999999999977
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 9,
+                        "wins": 5,
+                        "losses": 4,
+                        "pnl": 0.2499999999999999
+                    }
+                },
+                "#MSFT_otc_300s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 284,
+                        "wins": 139,
+                        "losses": 145,
+                        "pnl": -26.849999999999902
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 240,
+                        "wins": 117,
+                        "losses": 123,
+                        "pnl": -23.550000000000004
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 111,
+                        "wins": 55,
+                        "losses": 56,
+                        "pnl": -9.250000000000007
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 10,
+                        "wins": 3,
+                        "losses": 7,
+                        "pnl": -4.450000000000001
+                    }
+                },
+                "#MSFT_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 120,
+                        "wins": 52,
+                        "losses": 68,
+                        "pnl": -23.799999999999976
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 131,
+                        "wins": 63,
+                        "losses": 68,
+                        "pnl": -14.450000000000012
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 46,
+                        "wins": 20,
+                        "losses": 26,
+                        "pnl": -9.000000000000004
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 2,
+                        "wins": 2,
+                        "losses": 0,
+                        "pnl": 1.7
+                    }
+                },
+                "#MSFT_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 245,
+                        "wins": 120,
+                        "losses": 125,
+                        "pnl": -22.9999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 8,
+                        "wins": 4,
+                        "losses": 4,
+                        "pnl": -0.6000000000000001
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 172,
+                        "wins": 80,
+                        "losses": 92,
+                        "pnl": -23.999999999999943
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 108,
+                        "wins": 54,
+                        "losses": 54,
+                        "pnl": -8.100000000000016
+                    }
+                },
+                "#PFE_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 254,
+                        "wins": 129,
+                        "losses": 125,
+                        "pnl": -15.350000000000025
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 78,
+                        "wins": 41,
+                        "losses": 37,
+                        "pnl": -2.1500000000000004
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 76,
+                        "wins": 34,
+                        "losses": 42,
+                        "pnl": -13.100000000000009
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 7,
+                        "wins": 5,
+                        "losses": 2,
+                        "pnl": 2.25
+                    }
+                },
+                "#PFE_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 87,
+                        "wins": 43,
+                        "losses": 44,
+                        "pnl": -7.450000000000008
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 121,
+                        "wins": 61,
+                        "losses": 60,
+                        "pnl": -8.150000000000011
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 48,
+                        "wins": 25,
+                        "losses": 23,
+                        "pnl": -1.7500000000000018
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 6,
+                        "wins": 3,
+                        "losses": 3,
+                        "pnl": -0.44999999999999984
+                    }
+                },
+                "#PFE_otc_900s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 219,
+                        "wins": 106,
+                        "losses": 113,
+                        "pnl": -22.9
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 28,
+                        "wins": 15,
+                        "losses": 13,
+                        "pnl": -0.24999999999999922
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 49,
+                        "wins": 25,
+                        "losses": 24,
+                        "pnl": -2.749999999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 12,
+                        "wins": 7,
+                        "losses": 5,
+                        "pnl": 0.9500000000000002
+                    }
+                },
+                "AUDCAD_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 617,
+                        "wins": 283,
+                        "losses": 334,
+                        "pnl": -93.45000000000036
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 18,
+                        "wins": 10,
+                        "losses": 8,
+                        "pnl": 0.5000000000000002
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 128,
+                        "wins": 53,
+                        "losses": 75,
+                        "pnl": -29.949999999999946
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 123,
+                        "wins": 59,
+                        "losses": 64,
+                        "pnl": -13.849999999999977
+                    }
+                },
+                "AUDJPY_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3135,
+                        "wins": 1514,
+                        "losses": 1621,
+                        "pnl": -334.0999999999916
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1275,
+                        "wins": 619,
+                        "losses": 656,
+                        "pnl": -129.8500000000016
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 115,
+                        "wins": 68,
+                        "losses": 47,
+                        "pnl": 10.799999999999983
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 2144,
+                        "wins": 1032,
+                        "losses": 1112,
+                        "pnl": -234.80000000000288
+                    }
+                },
+                "AUDUSD_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 598,
+                        "wins": 285,
+                        "losses": 313,
+                        "pnl": -70.74999999999983
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 156,
+                        "wins": 83,
+                        "losses": 73,
+                        "pnl": -2.4500000000000135
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 175,
+                        "wins": 88,
+                        "losses": 87,
+                        "pnl": -12.199999999999992
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 22,
+                        "wins": 9,
+                        "losses": 13,
+                        "pnl": -5.35
+                    }
+                },
+                "EURUSD_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 626,
+                        "wins": 272,
+                        "losses": 354,
+                        "pnl": -122.8000000000003
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 241,
+                        "wins": 111,
+                        "losses": 130,
+                        "pnl": -35.64999999999996
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 367,
+                        "wins": 173,
+                        "losses": 194,
+                        "pnl": -46.9499999999999
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 18,
+                        "wins": 10,
+                        "losses": 8,
+                        "pnl": 0.5000000000000002
+                    }
+                },
+                "NZDUSD_otc_60s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3086,
+                        "wins": 1479,
+                        "losses": 1607,
+                        "pnl": -349.8499999999938
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 1641,
+                        "wins": 749,
+                        "losses": 892,
+                        "pnl": -255.35000000000267
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 149,
+                        "wins": 54,
+                        "losses": 95,
+                        "pnl": -49.09999999999999
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1108,
+                        "wins": 492,
+                        "losses": 616,
+                        "pnl": -197.80000000000183
+                    }
+                },
+                "USDCAD_otc_60s": {
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 3959,
+                        "wins": 1896,
+                        "losses": 2063,
+                        "pnl": -451.3999999999875
+                    },
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 3043,
+                        "wins": 1507,
+                        "losses": 1536,
+                        "pnl": -255.05000000000615
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 1413,
+                        "wins": 681,
+                        "losses": 732,
+                        "pnl": -153.15000000000256
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 126,
+                        "wins": 66,
+                        "losses": 60,
+                        "pnl": -3.9000000000000052
+                    }
+                },
+                "USDCOP_otc_300s": {
+                    "Estoc\u00e1stico + SMA200": {
+                        "trades": 614,
+                        "wins": 294,
+                        "losses": 320,
+                        "pnl": -70.10000000000025
+                    },
+                    "Fibonacci Retracement 61.8%": {
+                        "trades": 289,
+                        "wins": 143,
+                        "losses": 146,
+                        "pnl": -24.449999999999925
+                    },
+                    "Alpha Convergence (Bollinger + Fibo + Stoch)": {
+                        "trades": 210,
+                        "wins": 115,
+                        "losses": 95,
+                        "pnl": 2.7499999999999756
+                    },
+                    "WaveTrend + Keltner Channel Reversion": {
+                        "trades": 38,
+                        "wins": 21,
+                        "losses": 17,
+                        "pnl": 0.85
+                    }
+                }
+            }
+        }
+    },
+    "top_combinations": [
+        {
+            "pair_tf": "#BA_otc_900s",
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "trades": 59,
+            "wins": 38,
+            "losses": 21,
+            "winrate": 64.40677966101694,
+            "pnl": 11.299999999999992,
+            "profit_factor": 1.538095238095238
+        },
+        {
+            "pair_tf": "AUDJPY_otc_60s",
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "trades": 115,
+            "wins": 68,
+            "losses": 47,
+            "winrate": 59.130434782608695,
+            "pnl": 10.799999999999983,
+            "profit_factor": 1.229787234042553
+        },
+        {
+            "pair_tf": "#AAPL_otc_60s",
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "trades": 53,
+            "wins": 34,
+            "losses": 19,
+            "winrate": 64.15094339622641,
+            "pnl": 9.899999999999995,
+            "profit_factor": 1.5210526315789472
+        },
+        {
+            "pair_tf": "#MCD_otc_900s",
+            "strategy": "Alpha Convergence (Bollinger + Fibo + Stoch)",
+            "trades": 64,
+            "wins": 37,
+            "losses": 27,
+            "winrate": 57.8125,
+            "pnl": 4.449999999999996,
+            "profit_factor": 1.1648148148148147
+        },
+        {
+            "pair_tf": "#INTC_otc_300s",
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "trades": 24,
+            "wins": 15,
+            "losses": 9,
+            "winrate": 62.5,
+            "pnl": 3.749999999999999,
+            "profit_factor": 1.4166666666666667
+        },
+        {
+            "pair_tf": "#PFE_otc_900s",
+            "strategy": "WaveTrend + Keltner Channel Reversion",
+            "trades": 12,
+            "wins": 7,
+            "losses": 5,
+            "winrate": 58.333333333333336,
+            "pnl": 0.9500000000000002,
+            "profit_factor": 1.19
+        }
+    ]
+}

@@ -1,0 +1,4263 @@
+[
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M28/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.28,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 49232,
+    "wins": 24491,
+    "losses": 24741,
+    "draws": 364,
+    "win_rate": 49.7,
+    "pnl": -2209.28,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M28/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.28,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 39375,
+    "wins": 19629,
+    "losses": 19746,
+    "draws": 277,
+    "win_rate": 49.9,
+    "pnl": -1687.32,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M28/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.28,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 28977,
+    "wins": 14470,
+    "losses": 14507,
+    "draws": 214,
+    "win_rate": 49.9,
+    "pnl": -1194.6,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M32/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.32,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 44602,
+    "wins": 22195,
+    "losses": 22407,
+    "draws": 325,
+    "win_rate": 49.8,
+    "pnl": -1987.6,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M32/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.32,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 35784,
+    "wins": 17848,
+    "losses": 17936,
+    "draws": 249,
+    "win_rate": 49.9,
+    "pnl": -1515.84,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M32/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.32,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 26429,
+    "wins": 13197,
+    "losses": 13232,
+    "draws": 191,
+    "win_rate": 49.9,
+    "pnl": -1090.76,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M36/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.36,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 39961,
+    "wins": 19872,
+    "losses": 20089,
+    "draws": 297,
+    "win_rate": 49.7,
+    "pnl": -1806.76,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M36/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.36,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 32109,
+    "wins": 15999,
+    "losses": 16110,
+    "draws": 227,
+    "win_rate": 49.8,
+    "pnl": -1390.92,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M36/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.36,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 23754,
+    "wins": 11850,
+    "losses": 11904,
+    "draws": 176,
+    "win_rate": 49.9,
+    "pnl": -1002.0,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M40/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.4,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 35323,
+    "wins": 17586,
+    "losses": 17737,
+    "draws": 271,
+    "win_rate": 49.8,
+    "pnl": -1557.88,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M40/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.4,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 28438,
+    "wins": 14216,
+    "losses": 14222,
+    "draws": 206,
+    "win_rate": 50.0,
+    "pnl": -1143.28,
+    "roi": -4.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W10/M40/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 10,
+      "min_wick": 0.4,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 21097,
+    "wins": 10569,
+    "losses": 10528,
+    "draws": 159,
+    "win_rate": 50.1,
+    "pnl": -804.52,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M28/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.28,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 48833,
+    "wins": 24297,
+    "losses": 24536,
+    "draws": 361,
+    "win_rate": 49.8,
+    "pnl": -2182.76,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M28/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.28,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 39277,
+    "wins": 19581,
+    "losses": 19696,
+    "draws": 276,
+    "win_rate": 49.9,
+    "pnl": -1681.48,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M28/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.28,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 28949,
+    "wins": 14457,
+    "losses": 14492,
+    "draws": 213,
+    "win_rate": 49.9,
+    "pnl": -1191.56,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M32/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.32,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 44238,
+    "wins": 22020,
+    "losses": 22218,
+    "draws": 323,
+    "win_rate": 49.8,
+    "pnl": -1959.6,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M32/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.32,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 35695,
+    "wins": 17804,
+    "losses": 17891,
+    "draws": 249,
+    "win_rate": 49.9,
+    "pnl": -1511.32,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M32/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.32,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 26404,
+    "wins": 13185,
+    "losses": 13219,
+    "draws": 191,
+    "win_rate": 49.9,
+    "pnl": -1088.8,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M36/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.36,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 39638,
+    "wins": 19716,
+    "losses": 19922,
+    "draws": 295,
+    "win_rate": 49.7,
+    "pnl": -1783.28,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M36/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.36,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 32029,
+    "wins": 15958,
+    "losses": 16071,
+    "draws": 227,
+    "win_rate": 49.8,
+    "pnl": -1389.64,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M36/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.36,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 23731,
+    "wins": 11838,
+    "losses": 11893,
+    "draws": 176,
+    "win_rate": 49.9,
+    "pnl": -1002.04,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M40/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.4,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 35039,
+    "wins": 17449,
+    "losses": 17590,
+    "draws": 270,
+    "win_rate": 49.8,
+    "pnl": -1536.92,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M40/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.4,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 28366,
+    "wins": 14180,
+    "losses": 14186,
+    "draws": 206,
+    "win_rate": 50.0,
+    "pnl": -1140.4,
+    "roi": -4.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W12/M40/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 12,
+      "min_wick": 0.4,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 21075,
+    "wins": 10558,
+    "losses": 10517,
+    "draws": 159,
+    "win_rate": 50.1,
+    "pnl": -803.64,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M28/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.28,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 48065,
+    "wins": 23931,
+    "losses": 24134,
+    "draws": 354,
+    "win_rate": 49.8,
+    "pnl": -2117.48,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M28/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.28,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 39095,
+    "wins": 19487,
+    "losses": 19608,
+    "draws": 275,
+    "win_rate": 49.8,
+    "pnl": -1679.96,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M28/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.28,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 28917,
+    "wins": 14446,
+    "losses": 14471,
+    "draws": 213,
+    "win_rate": 50.0,
+    "pnl": -1180.68,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M32/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.32,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 43555,
+    "wins": 21694,
+    "losses": 21861,
+    "draws": 317,
+    "win_rate": 49.8,
+    "pnl": -1902.52,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M32/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.32,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 35531,
+    "wins": 17718,
+    "losses": 17813,
+    "draws": 248,
+    "win_rate": 49.9,
+    "pnl": -1512.44,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M32/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.32,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 26375,
+    "wins": 13174,
+    "losses": 13201,
+    "draws": 191,
+    "win_rate": 49.9,
+    "pnl": -1080.92,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M36/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.36,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 39037,
+    "wins": 19431,
+    "losses": 19606,
+    "draws": 289,
+    "win_rate": 49.8,
+    "pnl": -1729.48,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M36/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.36,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 31882,
+    "wins": 15880,
+    "losses": 16002,
+    "draws": 226,
+    "win_rate": 49.8,
+    "pnl": -1392.4,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M36/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.36,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 23710,
+    "wins": 11831,
+    "losses": 11879,
+    "draws": 176,
+    "win_rate": 49.9,
+    "pnl": -994.48,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M40/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.4,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 34514,
+    "wins": 17209,
+    "losses": 17305,
+    "draws": 265,
+    "win_rate": 49.9,
+    "pnl": -1472.72,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M40/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.4,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 28237,
+    "wins": 14113,
+    "losses": 14124,
+    "draws": 205,
+    "win_rate": 50.0,
+    "pnl": -1140.04,
+    "roi": -4.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W15/M40/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 15,
+      "min_wick": 0.4,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 21059,
+    "wins": 10552,
+    "losses": 10507,
+    "draws": 159,
+    "win_rate": 50.1,
+    "pnl": -799.16,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M28/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.28,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 45178,
+    "wins": 22486,
+    "losses": 22692,
+    "draws": 331,
+    "win_rate": 49.8,
+    "pnl": -2004.88,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M28/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.28,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 37619,
+    "wins": 18758,
+    "losses": 18861,
+    "draws": 263,
+    "win_rate": 49.9,
+    "pnl": -1603.64,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M28/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.28,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 28362,
+    "wins": 14170,
+    "losses": 14192,
+    "draws": 209,
+    "win_rate": 50.0,
+    "pnl": -1155.6,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M32/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.32,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 40950,
+    "wins": 20383,
+    "losses": 20567,
+    "draws": 299,
+    "win_rate": 49.8,
+    "pnl": -1814.64,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M32/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.32,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 34193,
+    "wins": 17051,
+    "losses": 17142,
+    "draws": 240,
+    "win_rate": 49.9,
+    "pnl": -1455.08,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M32/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.32,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 25866,
+    "wins": 12921,
+    "losses": 12945,
+    "draws": 190,
+    "win_rate": 50.0,
+    "pnl": -1057.68,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M36/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.36,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 36707,
+    "wins": 18262,
+    "losses": 18445,
+    "draws": 272,
+    "win_rate": 49.8,
+    "pnl": -1643.96,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M36/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.36,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 30677,
+    "wins": 15281,
+    "losses": 15396,
+    "draws": 218,
+    "win_rate": 49.8,
+    "pnl": -1337.48,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M36/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.36,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 23255,
+    "wins": 11606,
+    "losses": 11649,
+    "draws": 175,
+    "win_rate": 49.9,
+    "pnl": -971.48,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M40/RSI45-55)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.4,
+      "rsi_b": 45,
+      "rsi_s": 55
+    },
+    "trades": 32458,
+    "wins": 16183,
+    "losses": 16275,
+    "draws": 251,
+    "win_rate": 49.9,
+    "pnl": -1386.64,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M40/RSI40-60)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.4,
+      "rsi_b": 40,
+      "rsi_s": 60
+    },
+    "trades": 27173,
+    "wins": 13585,
+    "losses": 13588,
+    "draws": 200,
+    "win_rate": 50.0,
+    "pnl": -1089.8,
+    "roi": -4.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SMC] Liquidity & FVG (W18/M40/RSI35-65)",
+    "family": "SMC_Liquidity_FVG",
+    "params": {
+      "swing_window": 18,
+      "min_wick": 0.4,
+      "rsi_b": 35,
+      "rsi_s": 65
+    },
+    "trades": 20656,
+    "wins": 10353,
+    "losses": 10303,
+    "draws": 159,
+    "win_rate": 50.1,
+    "pnl": -778.24,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/14/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 14,
+      "trend_filter": true
+    },
+    "trades": 367644,
+    "wins": 182239,
+    "losses": 185405,
+    "draws": 2764,
+    "win_rate": 49.6,
+    "pnl": -17745.12,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/14)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 14,
+      "trend_filter": false
+    },
+    "trades": 518684,
+    "wins": 257043,
+    "losses": 261641,
+    "draws": 3831,
+    "win_rate": 49.6,
+    "pnl": -25161.44,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/16/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 16,
+      "trend_filter": true
+    },
+    "trades": 366936,
+    "wins": 181947,
+    "losses": 184989,
+    "draws": 2756,
+    "win_rate": 49.6,
+    "pnl": -17597.76,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/16)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 16,
+      "trend_filter": false
+    },
+    "trades": 510416,
+    "wins": 253036,
+    "losses": 257380,
+    "draws": 3760,
+    "win_rate": 49.6,
+    "pnl": -24586.88,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/21/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 21,
+      "trend_filter": true
+    },
+    "trades": 367200,
+    "wins": 182063,
+    "losses": 185137,
+    "draws": 2758,
+    "win_rate": 49.6,
+    "pnl": -17639.04,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/21)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 21,
+      "trend_filter": false
+    },
+    "trades": 495048,
+    "wins": 245481,
+    "losses": 249567,
+    "draws": 3681,
+    "win_rate": 49.6,
+    "pnl": -23724.48,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/26/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 26,
+      "trend_filter": true
+    },
+    "trades": 368623,
+    "wins": 182811,
+    "losses": 185812,
+    "draws": 2779,
+    "win_rate": 49.6,
+    "pnl": -17625.88,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (6/26)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 6,
+      "slow": 26,
+      "trend_filter": false
+    },
+    "trades": 484173,
+    "wins": 240138,
+    "losses": 244035,
+    "draws": 3599,
+    "win_rate": 49.6,
+    "pnl": -23108.04,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/14/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 14,
+      "trend_filter": true
+    },
+    "trades": 352831,
+    "wins": 174989,
+    "losses": 177842,
+    "draws": 2662,
+    "win_rate": 49.6,
+    "pnl": -16852.12,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/14)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 14,
+      "trend_filter": false
+    },
+    "trades": 494771,
+    "wins": 245304,
+    "losses": 249467,
+    "draws": 3648,
+    "win_rate": 49.6,
+    "pnl": -23787.32,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/16/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 16,
+      "trend_filter": true
+    },
+    "trades": 352093,
+    "wins": 174607,
+    "losses": 177486,
+    "draws": 2650,
+    "win_rate": 49.6,
+    "pnl": -16847.56,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/16)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 16,
+      "trend_filter": false
+    },
+    "trades": 486801,
+    "wins": 241339,
+    "losses": 245462,
+    "draws": 3587,
+    "win_rate": 49.6,
+    "pnl": -23430.12,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/21/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 21,
+      "trend_filter": true
+    },
+    "trades": 352183,
+    "wins": 174674,
+    "losses": 177509,
+    "draws": 2661,
+    "win_rate": 49.6,
+    "pnl": -16808.92,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/21)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 21,
+      "trend_filter": false
+    },
+    "trades": 472086,
+    "wins": 234138,
+    "losses": 237948,
+    "draws": 3511,
+    "win_rate": 49.6,
+    "pnl": -22541.04,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/26/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 26,
+      "trend_filter": true
+    },
+    "trades": 353329,
+    "wins": 175165,
+    "losses": 178164,
+    "draws": 2667,
+    "win_rate": 49.6,
+    "pnl": -17012.2,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (7/26)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 7,
+      "slow": 26,
+      "trend_filter": false
+    },
+    "trades": 461493,
+    "wins": 228850,
+    "losses": 232643,
+    "draws": 3422,
+    "win_rate": 49.6,
+    "pnl": -22101.0,
+    "roi": -4.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/14/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 14,
+      "trend_filter": true
+    },
+    "trades": 338714,
+    "wins": 168096,
+    "losses": 170618,
+    "draws": 2543,
+    "win_rate": 49.6,
+    "pnl": -15969.68,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/14)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 14,
+      "trend_filter": false
+    },
+    "trades": 472623,
+    "wins": 234501,
+    "losses": 238122,
+    "draws": 3481,
+    "win_rate": 49.6,
+    "pnl": -22381.08,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/16/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 16,
+      "trend_filter": true
+    },
+    "trades": 337889,
+    "wins": 167701,
+    "losses": 170188,
+    "draws": 2533,
+    "win_rate": 49.6,
+    "pnl": -15903.08,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/16)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 16,
+      "trend_filter": false
+    },
+    "trades": 464867,
+    "wins": 230666,
+    "losses": 234201,
+    "draws": 3424,
+    "win_rate": 49.6,
+    "pnl": -21988.28,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/21/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 21,
+      "trend_filter": true
+    },
+    "trades": 337959,
+    "wins": 167717,
+    "losses": 170242,
+    "draws": 2540,
+    "win_rate": 49.6,
+    "pnl": -15942.36,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/21)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 21,
+      "trend_filter": false
+    },
+    "trades": 450825,
+    "wins": 223781,
+    "losses": 227044,
+    "draws": 3341,
+    "win_rate": 49.6,
+    "pnl": -21165.48,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/26/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 26,
+      "trend_filter": true
+    },
+    "trades": 338975,
+    "wins": 168188,
+    "losses": 170787,
+    "draws": 2545,
+    "win_rate": 49.6,
+    "pnl": -16054.04,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (8/26)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 8,
+      "slow": 26,
+      "trend_filter": false
+    },
+    "trades": 440652,
+    "wins": 218717,
+    "losses": 221935,
+    "draws": 3262,
+    "win_rate": 49.6,
+    "pnl": -20715.36,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/14/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 14,
+      "trend_filter": true
+    },
+    "trades": 325619,
+    "wins": 161604,
+    "losses": 164015,
+    "draws": 2435,
+    "win_rate": 49.6,
+    "pnl": -15339.32,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/14)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 14,
+      "trend_filter": false
+    },
+    "trades": 452240,
+    "wins": 224413,
+    "losses": 227827,
+    "draws": 3327,
+    "win_rate": 49.6,
+    "pnl": -21367.04,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/16/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 16,
+      "trend_filter": true
+    },
+    "trades": 324884,
+    "wins": 161245,
+    "losses": 163639,
+    "draws": 2439,
+    "win_rate": 49.6,
+    "pnl": -15293.6,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/16)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 16,
+      "trend_filter": false
+    },
+    "trades": 444871,
+    "wins": 220756,
+    "losses": 224115,
+    "draws": 3291,
+    "win_rate": 49.6,
+    "pnl": -21019.48,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/21/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 21,
+      "trend_filter": true
+    },
+    "trades": 324670,
+    "wins": 161133,
+    "losses": 163537,
+    "draws": 2441,
+    "win_rate": 49.6,
+    "pnl": -15294.64,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/21)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 21,
+      "trend_filter": false
+    },
+    "trades": 431276,
+    "wins": 214110,
+    "losses": 217166,
+    "draws": 3200,
+    "win_rate": 49.6,
+    "pnl": -20184.8,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/26/TF)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 26,
+      "trend_filter": true
+    },
+    "trades": 325740,
+    "wins": 161614,
+    "losses": 164126,
+    "draws": 2453,
+    "win_rate": 49.6,
+    "pnl": -15441.12,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[EMA] Scalper (9/26)",
+    "family": "EMA_Scalper",
+    "params": {
+      "fast": 9,
+      "slow": 26,
+      "trend_filter": false
+    },
+    "trades": 421700,
+    "wins": 209294,
+    "losses": 212406,
+    "draws": 3133,
+    "win_rate": 49.6,
+    "pnl": -19855.52,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W14/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 14,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 35063,
+    "wins": 17483,
+    "losses": 17580,
+    "draws": 256,
+    "win_rate": 49.9,
+    "pnl": -1495.64,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W14/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 14,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 49964,
+    "wins": 24954,
+    "losses": 25010,
+    "draws": 371,
+    "win_rate": 49.9,
+    "pnl": -2052.32,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W14/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 14,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 66503,
+    "wins": 33139,
+    "losses": 33364,
+    "draws": 488,
+    "win_rate": 49.8,
+    "pnl": -2876.12,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W14/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 14,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 22821,
+    "wins": 11376,
+    "losses": 11445,
+    "draws": 174,
+    "win_rate": 49.8,
+    "pnl": -979.08,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W20/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 20,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 45200,
+    "wins": 22640,
+    "losses": 22560,
+    "draws": 326,
+    "win_rate": 50.1,
+    "pnl": -1731.2,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W20/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 20,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 61512,
+    "wins": 30877,
+    "losses": 30635,
+    "draws": 447,
+    "win_rate": 50.2,
+    "pnl": -2228.16,
+    "roi": -3.6,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W20/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 20,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 78324,
+    "wins": 39245,
+    "losses": 39079,
+    "draws": 558,
+    "win_rate": 50.1,
+    "pnl": -2973.6,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev1.8/W20/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 1.8,
+      "bb_w": 20,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 30678,
+    "wins": 15354,
+    "losses": 15324,
+    "draws": 222,
+    "win_rate": 50.0,
+    "pnl": -1198.32,
+    "roi": -3.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W14/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 14,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 19675,
+    "wins": 9884,
+    "losses": 9791,
+    "draws": 149,
+    "win_rate": 50.2,
+    "pnl": -697.72,
+    "roi": -3.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W14/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 14,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 28806,
+    "wins": 14471,
+    "losses": 14335,
+    "draws": 221,
+    "win_rate": 50.2,
+    "pnl": -1021.68,
+    "roi": -3.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W14/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 14,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 39396,
+    "wins": 19724,
+    "losses": 19672,
+    "draws": 301,
+    "win_rate": 50.1,
+    "pnl": -1525.92,
+    "roi": -3.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W14/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 14,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 12350,
+    "wins": 6220,
+    "losses": 6130,
+    "draws": 98,
+    "win_rate": 50.4,
+    "pnl": -407.6,
+    "roi": -3.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W20/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 20,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 29882,
+    "wins": 14981,
+    "losses": 14901,
+    "draws": 215,
+    "win_rate": 50.1,
+    "pnl": -1118.48,
+    "roi": -3.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W20/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 20,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 40452,
+    "wins": 20339,
+    "losses": 20113,
+    "draws": 289,
+    "win_rate": 50.3,
+    "pnl": -1401.12,
+    "roi": -3.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W20/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 20,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 51131,
+    "wins": 25618,
+    "losses": 25513,
+    "draws": 355,
+    "win_rate": 50.1,
+    "pnl": -1944.44,
+    "roi": -3.8,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.0/W20/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.0,
+      "bb_w": 20,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 20387,
+    "wins": 10205,
+    "losses": 10182,
+    "draws": 147,
+    "win_rate": 50.1,
+    "pnl": -793.4,
+    "roi": -3.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W14/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 14,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 9427,
+    "wins": 4748,
+    "losses": 4679,
+    "draws": 82,
+    "win_rate": 50.4,
+    "pnl": -310.84,
+    "roi": -3.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "GBPJPY_otc_60s": {
+        "trades": 38,
+        "wins": 23,
+        "losses": 15,
+        "draws": 0,
+        "wr": 60.5,
+        "pnl": 6.16
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 53,
+        "wins": 33,
+        "losses": 19,
+        "draws": 1,
+        "wr": 62.3,
+        "pnl": 11.36
+      }
+    },
+    "filtered_trades": 91,
+    "filtered_wr": 61.5,
+    "filtered_pnl": 17.52
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W14/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 14,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 14507,
+    "wins": 7345,
+    "losses": 7162,
+    "draws": 126,
+    "win_rate": 50.6,
+    "pnl": -404.6,
+    "roi": -2.8,
+    "elite_pairs_count": 3,
+    "elite_pairs": {
+      "AUDUSD_otc_60s": {
+        "trades": 61,
+        "wins": 38,
+        "losses": 21,
+        "draws": 2,
+        "wr": 62.3,
+        "pnl": 13.96
+      },
+      "GBPJPY_otc_60s": {
+        "trades": 60,
+        "wins": 36,
+        "losses": 24,
+        "draws": 0,
+        "wr": 60.0,
+        "pnl": 9.12
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 67,
+        "wins": 41,
+        "losses": 25,
+        "draws": 1,
+        "wr": 61.2,
+        "pnl": 12.72
+      }
+    },
+    "filtered_trades": 188,
+    "filtered_wr": 61.2,
+    "filtered_pnl": 35.8
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W14/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 14,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 20595,
+    "wins": 10348,
+    "losses": 10247,
+    "draws": 177,
+    "win_rate": 50.2,
+    "pnl": -726.84,
+    "roi": -3.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W14/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 14,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 5659,
+    "wins": 2841,
+    "losses": 2818,
+    "draws": 55,
+    "win_rate": 50.2,
+    "pnl": -204.28,
+    "roi": -3.6,
+    "elite_pairs_count": 3,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 23,
+        "wins": 14,
+        "losses": 8,
+        "draws": 1,
+        "wr": 60.9,
+        "pnl": 4.88
+      },
+      "BTCUSD_otc_60s": {
+        "trades": 78,
+        "wins": 48,
+        "losses": 30,
+        "draws": 0,
+        "wr": 61.5,
+        "pnl": 14.16
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 27,
+        "wins": 17,
+        "losses": 10,
+        "draws": 0,
+        "wr": 63.0,
+        "pnl": 5.64
+      }
+    },
+    "filtered_trades": 128,
+    "filtered_wr": 61.7,
+    "filtered_pnl": 24.68
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W20/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 20,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 17187,
+    "wins": 8563,
+    "losses": 8624,
+    "draws": 122,
+    "win_rate": 49.8,
+    "pnl": -746.04,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W20/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 20,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 23447,
+    "wins": 11734,
+    "losses": 11713,
+    "draws": 166,
+    "win_rate": 50.0,
+    "pnl": -917.72,
+    "roi": -3.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W20/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 20,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 29729,
+    "wins": 14842,
+    "losses": 14887,
+    "draws": 208,
+    "win_rate": 49.9,
+    "pnl": -1232.36,
+    "roi": -4.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.2/W20/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.2,
+      "bb_w": 20,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 11555,
+    "wins": 5752,
+    "losses": 5803,
+    "draws": 84,
+    "win_rate": 49.8,
+    "pnl": -511.16,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W14/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 14,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 4018,
+    "wins": 2029,
+    "losses": 1989,
+    "draws": 42,
+    "win_rate": 50.5,
+    "pnl": -122.32,
+    "roi": -3.0,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#AAPL_otc_60s": {
+        "trades": 15,
+        "wins": 9,
+        "losses": 6,
+        "draws": 0,
+        "wr": 60.0,
+        "pnl": 2.28
+      },
+      "#PFE_otc_60s": {
+        "trades": 19,
+        "wins": 12,
+        "losses": 7,
+        "draws": 0,
+        "wr": 63.2,
+        "pnl": 4.04
+      }
+    },
+    "filtered_trades": 34,
+    "filtered_wr": 61.8,
+    "filtered_pnl": 6.32
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W14/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 14,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 6555,
+    "wins": 3331,
+    "losses": 3224,
+    "draws": 63,
+    "win_rate": 50.8,
+    "pnl": -159.48,
+    "roi": -2.4,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#AAPL_otc_60s": {
+        "trades": 25,
+        "wins": 15,
+        "losses": 10,
+        "draws": 0,
+        "wr": 60.0,
+        "pnl": 3.8
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 25,
+        "wins": 15,
+        "losses": 10,
+        "draws": 0,
+        "wr": 60.0,
+        "pnl": 3.8
+      }
+    },
+    "filtered_trades": 50,
+    "filtered_wr": 60.0,
+    "filtered_pnl": 7.6
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W14/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 14,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 9676,
+    "wins": 4887,
+    "losses": 4789,
+    "draws": 87,
+    "win_rate": 50.5,
+    "pnl": -292.96,
+    "roi": -3.0,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#BA_otc_60s": {
+        "trades": 41,
+        "wins": 26,
+        "losses": 14,
+        "draws": 1,
+        "wr": 63.4,
+        "pnl": 9.92
+      },
+      "USDCHF_otc_60s": {
+        "trades": 46,
+        "wins": 28,
+        "losses": 18,
+        "draws": 0,
+        "wr": 60.9,
+        "pnl": 7.76
+      }
+    },
+    "filtered_trades": 87,
+    "filtered_wr": 62.1,
+    "filtered_pnl": 17.68
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W14/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 14,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 2275,
+    "wins": 1136,
+    "losses": 1139,
+    "draws": 28,
+    "win_rate": 49.9,
+    "pnl": -93.88,
+    "roi": -4.1,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#BA_otc_60s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "draws": 0,
+        "wr": 64.3,
+        "pnl": 3.28
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "draws": 0,
+        "wr": 75.0,
+        "pnl": 3.52
+      }
+    },
+    "filtered_trades": 22,
+    "filtered_wr": 68.2,
+    "filtered_pnl": 6.8
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W20/RSI25-75)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 20,
+      "rsi_buy": 25,
+      "rsi_sell": 75
+    },
+    "trades": 8387,
+    "wins": 4160,
+    "losses": 4227,
+    "draws": 61,
+    "win_rate": 49.6,
+    "pnl": -399.8,
+    "roi": -4.8,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "USDCHF_otc_60s": {
+        "trades": 50,
+        "wins": 30,
+        "losses": 20,
+        "draws": 0,
+        "wr": 60.0,
+        "pnl": 7.6
+      }
+    },
+    "filtered_trades": 50,
+    "filtered_wr": 60.0,
+    "filtered_pnl": 7.6
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W20/RSI30-70)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 20,
+      "rsi_buy": 30,
+      "rsi_sell": 70
+    },
+    "trades": 11720,
+    "wins": 5850,
+    "losses": 5870,
+    "draws": 91,
+    "win_rate": 49.9,
+    "pnl": -488.0,
+    "roi": -4.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "USDCHF_otc_60s": {
+        "trades": 63,
+        "wins": 39,
+        "losses": 24,
+        "draws": 0,
+        "wr": 61.9,
+        "pnl": 11.88
+      }
+    },
+    "filtered_trades": 63,
+    "filtered_wr": 61.9,
+    "filtered_pnl": 11.88
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W20/RSI35-65)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 20,
+      "rsi_buy": 35,
+      "rsi_sell": 65
+    },
+    "trades": 15129,
+    "wins": 7566,
+    "losses": 7563,
+    "draws": 119,
+    "win_rate": 50.0,
+    "pnl": -602.28,
+    "roi": -4.0,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 60,
+        "wins": 37,
+        "losses": 21,
+        "draws": 2,
+        "wr": 61.7,
+        "pnl": 13.04
+      },
+      "USDCHF_otc_60s": {
+        "trades": 82,
+        "wins": 50,
+        "losses": 32,
+        "draws": 0,
+        "wr": 61.0,
+        "pnl": 14.0
+      }
+    },
+    "filtered_trades": 142,
+    "filtered_wr": 61.3,
+    "filtered_pnl": 27.04
+  },
+  {
+    "name": "[BB] Burst (Dev2.4/W20/RSI20-80)",
+    "family": "Stoch_BB_Burst",
+    "params": {
+      "dev": 2.4,
+      "bb_w": 20,
+      "rsi_buy": 20,
+      "rsi_sell": 80
+    },
+    "trades": 5516,
+    "wins": 2742,
+    "losses": 2774,
+    "draws": 42,
+    "win_rate": 49.7,
+    "pnl": -251.36,
+    "roi": -4.6,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "AUDUSD_otc_60s": {
+        "trades": 21,
+        "wins": 13,
+        "losses": 8,
+        "draws": 0,
+        "wr": 61.9,
+        "pnl": 3.96
+      }
+    },
+    "filtered_trades": 21,
+    "filtered_wr": 61.9,
+    "filtered_pnl": 3.96
+  },
+  {
+    "name": "[RSI] Velocity (B20/S70/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 20,
+      "high_b": 70,
+      "use_ema": true
+    },
+    "trades": 26019,
+    "wins": 12805,
+    "losses": 13214,
+    "draws": 183,
+    "win_rate": 49.2,
+    "pnl": -1433.4,
+    "roi": -5.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B20/S70)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 20,
+      "high_b": 70,
+      "use_ema": false
+    },
+    "trades": 94675,
+    "wins": 47086,
+    "losses": 47589,
+    "draws": 697,
+    "win_rate": 49.7,
+    "pnl": -4269.88,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B20/S75/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 20,
+      "high_b": 75,
+      "use_ema": true
+    },
+    "trades": 20287,
+    "wins": 10072,
+    "losses": 10215,
+    "draws": 147,
+    "win_rate": 49.6,
+    "pnl": -948.76,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B20/S75)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 20,
+      "high_b": 75,
+      "use_ema": false
+    },
+    "trades": 83925,
+    "wins": 42016,
+    "losses": 41909,
+    "draws": 595,
+    "win_rate": 50.1,
+    "pnl": -3254.28,
+    "roi": -3.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B20/S80/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 20,
+      "high_b": 80,
+      "use_ema": true
+    },
+    "trades": 15742,
+    "wins": 7788,
+    "losses": 7954,
+    "draws": 118,
+    "win_rate": 49.5,
+    "pnl": -789.04,
+    "roi": -5.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B20/S80)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 20,
+      "high_b": 80,
+      "use_ema": false
+    },
+    "trades": 72914,
+    "wins": 36456,
+    "losses": 36458,
+    "draws": 547,
+    "win_rate": 50.0,
+    "pnl": -2918.48,
+    "roi": -4.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B25/S70/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 25,
+      "high_b": 70,
+      "use_ema": true
+    },
+    "trades": 30462,
+    "wins": 15041,
+    "losses": 15421,
+    "draws": 224,
+    "win_rate": 49.4,
+    "pnl": -1583.28,
+    "roi": -5.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B25/S70)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 25,
+      "high_b": 70,
+      "use_ema": false
+    },
+    "trades": 105430,
+    "wins": 52457,
+    "losses": 52973,
+    "draws": 786,
+    "win_rate": 49.8,
+    "pnl": -4712.56,
+    "roi": -4.5,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B25/S75/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 25,
+      "high_b": 75,
+      "use_ema": true
+    },
+    "trades": 24730,
+    "wins": 12308,
+    "losses": 12422,
+    "draws": 188,
+    "win_rate": 49.8,
+    "pnl": -1098.64,
+    "roi": -4.4,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B25/S75)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 25,
+      "high_b": 75,
+      "use_ema": false
+    },
+    "trades": 94680,
+    "wins": 47387,
+    "losses": 47293,
+    "draws": 684,
+    "win_rate": 50.0,
+    "pnl": -3696.96,
+    "roi": -3.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B25/S80/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 25,
+      "high_b": 80,
+      "use_ema": true
+    },
+    "trades": 20185,
+    "wins": 10024,
+    "losses": 10161,
+    "draws": 159,
+    "win_rate": 49.7,
+    "pnl": -938.92,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B25/S80)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 25,
+      "high_b": 80,
+      "use_ema": false
+    },
+    "trades": 83669,
+    "wins": 41827,
+    "losses": 41842,
+    "draws": 636,
+    "win_rate": 50.0,
+    "pnl": -3361.16,
+    "roi": -4.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B30/S70/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 30,
+      "high_b": 70,
+      "use_ema": true
+    },
+    "trades": 35992,
+    "wins": 17758,
+    "losses": 18234,
+    "draws": 269,
+    "win_rate": 49.3,
+    "pnl": -1896.64,
+    "roi": -5.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B30/S70)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 30,
+      "high_b": 70,
+      "use_ema": false
+    },
+    "trades": 115919,
+    "wins": 57545,
+    "losses": 58374,
+    "draws": 864,
+    "win_rate": 49.6,
+    "pnl": -5432.6,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B30/S75/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 30,
+      "high_b": 75,
+      "use_ema": true
+    },
+    "trades": 30260,
+    "wins": 15025,
+    "losses": 15235,
+    "draws": 233,
+    "win_rate": 49.7,
+    "pnl": -1412.0,
+    "roi": -4.7,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B30/S75)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 30,
+      "high_b": 75,
+      "use_ema": false
+    },
+    "trades": 105169,
+    "wins": 52475,
+    "losses": 52694,
+    "draws": 762,
+    "win_rate": 49.9,
+    "pnl": -4417.0,
+    "roi": -4.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B30/S80/EMA)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 30,
+      "high_b": 80,
+      "use_ema": true
+    },
+    "trades": 25715,
+    "wins": 12741,
+    "losses": 12974,
+    "draws": 204,
+    "win_rate": 49.5,
+    "pnl": -1252.28,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[RSI] Velocity (B30/S80)",
+    "family": "RSI_Velocity",
+    "params": {
+      "low_b": 30,
+      "high_b": 80,
+      "use_ema": false
+    },
+    "trades": 94158,
+    "wins": 46915,
+    "losses": 47243,
+    "draws": 714,
+    "win_rate": 49.8,
+    "pnl": -4081.2,
+    "roi": -4.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M10/C2/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 10,
+      "rsi_filter": true,
+      "sqz_c": 2
+    },
+    "trades": 13250,
+    "wins": 6336,
+    "losses": 6914,
+    "draws": 97,
+    "win_rate": 47.8,
+    "pnl": -1084.88,
+    "roi": -8.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 63,
+        "wins": 42,
+        "losses": 19,
+        "draws": 2,
+        "wr": 66.7,
+        "pnl": 19.64
+      }
+    },
+    "filtered_trades": 63,
+    "filtered_wr": 66.7,
+    "filtered_pnl": 19.64
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M10/C3/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 10,
+      "rsi_filter": true,
+      "sqz_c": 3
+    },
+    "trades": 13250,
+    "wins": 6336,
+    "losses": 6914,
+    "draws": 97,
+    "win_rate": 47.8,
+    "pnl": -1084.88,
+    "roi": -8.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 63,
+        "wins": 42,
+        "losses": 19,
+        "draws": 2,
+        "wr": 66.7,
+        "pnl": 19.64
+      }
+    },
+    "filtered_trades": 63,
+    "filtered_wr": 66.7,
+    "filtered_pnl": 19.64
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M10/C4/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 10,
+      "rsi_filter": true,
+      "sqz_c": 4
+    },
+    "trades": 13250,
+    "wins": 6336,
+    "losses": 6914,
+    "draws": 97,
+    "win_rate": 47.8,
+    "pnl": -1084.88,
+    "roi": -8.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 63,
+        "wins": 42,
+        "losses": 19,
+        "draws": 2,
+        "wr": 66.7,
+        "pnl": 19.64
+      }
+    },
+    "filtered_trades": 63,
+    "filtered_wr": 66.7,
+    "filtered_pnl": 19.64
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M10/C2)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 10,
+      "rsi_filter": false,
+      "sqz_c": 2
+    },
+    "trades": 13501,
+    "wins": 6451,
+    "losses": 7050,
+    "draws": 101,
+    "win_rate": 47.8,
+    "pnl": -1115.08,
+    "roi": -8.3,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 64,
+        "wins": 43,
+        "losses": 19,
+        "draws": 2,
+        "wr": 67.2,
+        "pnl": 20.56
+      }
+    },
+    "filtered_trades": 64,
+    "filtered_wr": 67.2,
+    "filtered_pnl": 20.56
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M10/C3)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 10,
+      "rsi_filter": false,
+      "sqz_c": 3
+    },
+    "trades": 13501,
+    "wins": 6451,
+    "losses": 7050,
+    "draws": 101,
+    "win_rate": 47.8,
+    "pnl": -1115.08,
+    "roi": -8.3,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 64,
+        "wins": 43,
+        "losses": 19,
+        "draws": 2,
+        "wr": 67.2,
+        "pnl": 20.56
+      }
+    },
+    "filtered_trades": 64,
+    "filtered_wr": 67.2,
+    "filtered_pnl": 20.56
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M10/C4)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 10,
+      "rsi_filter": false,
+      "sqz_c": 4
+    },
+    "trades": 13501,
+    "wins": 6451,
+    "losses": 7050,
+    "draws": 101,
+    "win_rate": 47.8,
+    "pnl": -1115.08,
+    "roi": -8.3,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 64,
+        "wins": 43,
+        "losses": 19,
+        "draws": 2,
+        "wr": 67.2,
+        "pnl": 20.56
+      }
+    },
+    "filtered_trades": 64,
+    "filtered_wr": 67.2,
+    "filtered_pnl": 20.56
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M12/C2/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 12,
+      "rsi_filter": true,
+      "sqz_c": 2
+    },
+    "trades": 13360,
+    "wins": 6449,
+    "losses": 6911,
+    "draws": 92,
+    "win_rate": 48.3,
+    "pnl": -977.92,
+    "roi": -7.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 65,
+        "wins": 47,
+        "losses": 16,
+        "draws": 2,
+        "wr": 72.3,
+        "pnl": 27.24
+      },
+      "USDCHF_otc_300s": {
+        "trades": 114,
+        "wins": 71,
+        "losses": 43,
+        "draws": 0,
+        "wr": 62.3,
+        "pnl": 22.32
+      }
+    },
+    "filtered_trades": 179,
+    "filtered_wr": 65.9,
+    "filtered_pnl": 49.56
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M12/C3/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 12,
+      "rsi_filter": true,
+      "sqz_c": 3
+    },
+    "trades": 13360,
+    "wins": 6449,
+    "losses": 6911,
+    "draws": 92,
+    "win_rate": 48.3,
+    "pnl": -977.92,
+    "roi": -7.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 65,
+        "wins": 47,
+        "losses": 16,
+        "draws": 2,
+        "wr": 72.3,
+        "pnl": 27.24
+      },
+      "USDCHF_otc_300s": {
+        "trades": 114,
+        "wins": 71,
+        "losses": 43,
+        "draws": 0,
+        "wr": 62.3,
+        "pnl": 22.32
+      }
+    },
+    "filtered_trades": 179,
+    "filtered_wr": 65.9,
+    "filtered_pnl": 49.56
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M12/C4/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 12,
+      "rsi_filter": true,
+      "sqz_c": 4
+    },
+    "trades": 13360,
+    "wins": 6449,
+    "losses": 6911,
+    "draws": 92,
+    "win_rate": 48.3,
+    "pnl": -977.92,
+    "roi": -7.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 65,
+        "wins": 47,
+        "losses": 16,
+        "draws": 2,
+        "wr": 72.3,
+        "pnl": 27.24
+      },
+      "USDCHF_otc_300s": {
+        "trades": 114,
+        "wins": 71,
+        "losses": 43,
+        "draws": 0,
+        "wr": 62.3,
+        "pnl": 22.32
+      }
+    },
+    "filtered_trades": 179,
+    "filtered_wr": 65.9,
+    "filtered_pnl": 49.56
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M12/C2)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 12,
+      "rsi_filter": false,
+      "sqz_c": 2
+    },
+    "trades": 13566,
+    "wins": 6551,
+    "losses": 7015,
+    "draws": 95,
+    "win_rate": 48.3,
+    "pnl": -988.08,
+    "roi": -7.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 66,
+        "wins": 48,
+        "losses": 16,
+        "draws": 2,
+        "wr": 72.7,
+        "pnl": 28.16
+      },
+      "USDCHF_otc_300s": {
+        "trades": 116,
+        "wins": 72,
+        "losses": 44,
+        "draws": 0,
+        "wr": 62.1,
+        "pnl": 22.24
+      }
+    },
+    "filtered_trades": 182,
+    "filtered_wr": 65.9,
+    "filtered_pnl": 50.4
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M12/C3)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 12,
+      "rsi_filter": false,
+      "sqz_c": 3
+    },
+    "trades": 13566,
+    "wins": 6551,
+    "losses": 7015,
+    "draws": 95,
+    "win_rate": 48.3,
+    "pnl": -988.08,
+    "roi": -7.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 66,
+        "wins": 48,
+        "losses": 16,
+        "draws": 2,
+        "wr": 72.7,
+        "pnl": 28.16
+      },
+      "USDCHF_otc_300s": {
+        "trades": 116,
+        "wins": 72,
+        "losses": 44,
+        "draws": 0,
+        "wr": 62.1,
+        "pnl": 22.24
+      }
+    },
+    "filtered_trades": 182,
+    "filtered_wr": 65.9,
+    "filtered_pnl": 50.4
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M12/C4)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 12,
+      "rsi_filter": false,
+      "sqz_c": 4
+    },
+    "trades": 13566,
+    "wins": 6551,
+    "losses": 7015,
+    "draws": 95,
+    "win_rate": 48.3,
+    "pnl": -988.08,
+    "roi": -7.3,
+    "elite_pairs_count": 2,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 66,
+        "wins": 48,
+        "losses": 16,
+        "draws": 2,
+        "wr": 72.7,
+        "pnl": 28.16
+      },
+      "USDCHF_otc_300s": {
+        "trades": 116,
+        "wins": 72,
+        "losses": 44,
+        "draws": 0,
+        "wr": 62.1,
+        "pnl": 22.24
+      }
+    },
+    "filtered_trades": 182,
+    "filtered_wr": 65.9,
+    "filtered_pnl": 50.4
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M14/C2/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 14,
+      "rsi_filter": true,
+      "sqz_c": 2
+    },
+    "trades": 13579,
+    "wins": 6560,
+    "losses": 7019,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -983.8,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 73,
+        "wins": 47,
+        "losses": 24,
+        "draws": 2,
+        "wr": 64.4,
+        "pnl": 19.24
+      }
+    },
+    "filtered_trades": 73,
+    "filtered_wr": 64.4,
+    "filtered_pnl": 19.24
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M14/C3/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 14,
+      "rsi_filter": true,
+      "sqz_c": 3
+    },
+    "trades": 13579,
+    "wins": 6560,
+    "losses": 7019,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -983.8,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 73,
+        "wins": 47,
+        "losses": 24,
+        "draws": 2,
+        "wr": 64.4,
+        "pnl": 19.24
+      }
+    },
+    "filtered_trades": 73,
+    "filtered_wr": 64.4,
+    "filtered_pnl": 19.24
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M14/C4/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 14,
+      "rsi_filter": true,
+      "sqz_c": 4
+    },
+    "trades": 13579,
+    "wins": 6560,
+    "losses": 7019,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -983.8,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 73,
+        "wins": 47,
+        "losses": 24,
+        "draws": 2,
+        "wr": 64.4,
+        "pnl": 19.24
+      }
+    },
+    "filtered_trades": 73,
+    "filtered_wr": 64.4,
+    "filtered_pnl": 19.24
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M14/C2)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 14,
+      "rsi_filter": false,
+      "sqz_c": 2
+    },
+    "trades": 13579,
+    "wins": 6560,
+    "losses": 7019,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -983.8,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 73,
+        "wins": 47,
+        "losses": 24,
+        "draws": 2,
+        "wr": 64.4,
+        "pnl": 19.24
+      }
+    },
+    "filtered_trades": 73,
+    "filtered_wr": 64.4,
+    "filtered_pnl": 19.24
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M14/C3)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 14,
+      "rsi_filter": false,
+      "sqz_c": 3
+    },
+    "trades": 13579,
+    "wins": 6560,
+    "losses": 7019,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -983.8,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 73,
+        "wins": 47,
+        "losses": 24,
+        "draws": 2,
+        "wr": 64.4,
+        "pnl": 19.24
+      }
+    },
+    "filtered_trades": 73,
+    "filtered_wr": 64.4,
+    "filtered_pnl": 19.24
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M14/C4)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 14,
+      "rsi_filter": false,
+      "sqz_c": 4
+    },
+    "trades": 13579,
+    "wins": 6560,
+    "losses": 7019,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -983.8,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 73,
+        "wins": 47,
+        "losses": 24,
+        "draws": 2,
+        "wr": 64.4,
+        "pnl": 19.24
+      }
+    },
+    "filtered_trades": 73,
+    "filtered_wr": 64.4,
+    "filtered_pnl": 19.24
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M16/C2/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 16,
+      "rsi_filter": true,
+      "sqz_c": 2
+    },
+    "trades": 13346,
+    "wins": 6440,
+    "losses": 6906,
+    "draws": 90,
+    "win_rate": 48.3,
+    "pnl": -981.2,
+    "roi": -7.4,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 70,
+        "wins": 46,
+        "losses": 22,
+        "draws": 2,
+        "wr": 65.7,
+        "pnl": 20.32
+      }
+    },
+    "filtered_trades": 70,
+    "filtered_wr": 65.7,
+    "filtered_pnl": 20.32
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M16/C3/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 16,
+      "rsi_filter": true,
+      "sqz_c": 3
+    },
+    "trades": 13346,
+    "wins": 6440,
+    "losses": 6906,
+    "draws": 90,
+    "win_rate": 48.3,
+    "pnl": -981.2,
+    "roi": -7.4,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 70,
+        "wins": 46,
+        "losses": 22,
+        "draws": 2,
+        "wr": 65.7,
+        "pnl": 20.32
+      }
+    },
+    "filtered_trades": 70,
+    "filtered_wr": 65.7,
+    "filtered_pnl": 20.32
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M16/C4/RSI)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 16,
+      "rsi_filter": true,
+      "sqz_c": 4
+    },
+    "trades": 13346,
+    "wins": 6440,
+    "losses": 6906,
+    "draws": 90,
+    "win_rate": 48.3,
+    "pnl": -981.2,
+    "roi": -7.4,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 70,
+        "wins": 46,
+        "losses": 22,
+        "draws": 2,
+        "wr": 65.7,
+        "pnl": 20.32
+      }
+    },
+    "filtered_trades": 70,
+    "filtered_wr": 65.7,
+    "filtered_pnl": 20.32
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M16/C2)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 16,
+      "rsi_filter": false,
+      "sqz_c": 2
+    },
+    "trades": 13534,
+    "wins": 6543,
+    "losses": 6991,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -971.44,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 70,
+        "wins": 46,
+        "losses": 22,
+        "draws": 2,
+        "wr": 65.7,
+        "pnl": 20.32
+      }
+    },
+    "filtered_trades": 70,
+    "filtered_wr": 65.7,
+    "filtered_pnl": 20.32
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M16/C3)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 16,
+      "rsi_filter": false,
+      "sqz_c": 3
+    },
+    "trades": 13534,
+    "wins": 6543,
+    "losses": 6991,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -971.44,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 70,
+        "wins": 46,
+        "losses": 22,
+        "draws": 2,
+        "wr": 65.7,
+        "pnl": 20.32
+      }
+    },
+    "filtered_trades": 70,
+    "filtered_wr": 65.7,
+    "filtered_pnl": 20.32
+  },
+  {
+    "name": "[SQZ] Volatility Fired (M16/C4)",
+    "family": "TTM_Squeeze",
+    "params": {
+      "mom_len": 16,
+      "rsi_filter": false,
+      "sqz_c": 4
+    },
+    "trades": 13534,
+    "wins": 6543,
+    "losses": 6991,
+    "draws": 93,
+    "win_rate": 48.3,
+    "pnl": -971.44,
+    "roi": -7.2,
+    "elite_pairs_count": 1,
+    "elite_pairs": {
+      "#FB_otc_60s": {
+        "trades": 70,
+        "wins": 46,
+        "losses": 22,
+        "draws": 2,
+        "wr": 65.7,
+        "pnl": 20.32
+      }
+    },
+    "filtered_trades": 70,
+    "filtered_wr": 65.7,
+    "filtered_pnl": 20.32
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P9/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 9,
+      "conf_rsi": true
+    },
+    "trades": 150371,
+    "wins": 74465,
+    "losses": 75906,
+    "draws": 1098,
+    "win_rate": 49.5,
+    "pnl": -7398.2,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P9)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 9,
+      "conf_rsi": false
+    },
+    "trades": 256438,
+    "wins": 126854,
+    "losses": 129584,
+    "draws": 1875,
+    "win_rate": 49.5,
+    "pnl": -12878.32,
+    "roi": -5.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P14/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 14,
+      "conf_rsi": true
+    },
+    "trades": 135992,
+    "wins": 67193,
+    "losses": 68799,
+    "draws": 1001,
+    "win_rate": 49.4,
+    "pnl": -6981.44,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P14)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 14,
+      "conf_rsi": false
+    },
+    "trades": 192358,
+    "wins": 94855,
+    "losses": 97503,
+    "draws": 1425,
+    "win_rate": 49.3,
+    "pnl": -10236.4,
+    "roi": -5.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P20/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 20,
+      "conf_rsi": true
+    },
+    "trades": 126524,
+    "wins": 62553,
+    "losses": 63971,
+    "draws": 943,
+    "win_rate": 49.4,
+    "pnl": -6422.24,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P20)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 20,
+      "conf_rsi": false
+    },
+    "trades": 160343,
+    "wins": 79129,
+    "losses": 81214,
+    "draws": 1184,
+    "win_rate": 49.3,
+    "pnl": -8415.32,
+    "roi": -5.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P21/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 21,
+      "conf_rsi": true
+    },
+    "trades": 125121,
+    "wins": 61831,
+    "losses": 63290,
+    "draws": 926,
+    "win_rate": 49.4,
+    "pnl": -6405.48,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E50/P21)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 50,
+      "entry_ema": 21,
+      "conf_rsi": false
+    },
+    "trades": 157061,
+    "wins": 77455,
+    "losses": 79606,
+    "draws": 1152,
+    "win_rate": 49.3,
+    "pnl": -8347.4,
+    "roi": -5.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P9/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 9,
+      "conf_rsi": true
+    },
+    "trades": 143072,
+    "wins": 70892,
+    "losses": 72180,
+    "draws": 1057,
+    "win_rate": 49.5,
+    "pnl": -6959.36,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P9)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 9,
+      "conf_rsi": false
+    },
+    "trades": 236039,
+    "wins": 116837,
+    "losses": 119202,
+    "draws": 1752,
+    "win_rate": 49.5,
+    "pnl": -11711.96,
+    "roi": -5.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P14/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 14,
+      "conf_rsi": true
+    },
+    "trades": 125256,
+    "wins": 61902,
+    "losses": 63354,
+    "draws": 928,
+    "win_rate": 49.4,
+    "pnl": -6404.16,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P14)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 14,
+      "conf_rsi": false
+    },
+    "trades": 173406,
+    "wins": 85540,
+    "losses": 87866,
+    "draws": 1298,
+    "win_rate": 49.3,
+    "pnl": -9169.2,
+    "roi": -5.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P20/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 20,
+      "conf_rsi": true
+    },
+    "trades": 112109,
+    "wins": 55428,
+    "losses": 56681,
+    "draws": 841,
+    "win_rate": 49.4,
+    "pnl": -5687.24,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P20)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 20,
+      "conf_rsi": false
+    },
+    "trades": 139346,
+    "wins": 68778,
+    "losses": 70568,
+    "draws": 1039,
+    "win_rate": 49.4,
+    "pnl": -7292.24,
+    "roi": -5.2,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P21/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 21,
+      "conf_rsi": true
+    },
+    "trades": 110173,
+    "wins": 54460,
+    "losses": 55713,
+    "draws": 818,
+    "win_rate": 49.4,
+    "pnl": -5609.8,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E100/P21)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 100,
+      "entry_ema": 21,
+      "conf_rsi": false
+    },
+    "trades": 135540,
+    "wins": 66857,
+    "losses": 68683,
+    "draws": 1003,
+    "win_rate": 49.3,
+    "pnl": -7174.56,
+    "roi": -5.3,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P9/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 9,
+      "conf_rsi": true
+    },
+    "trades": 141503,
+    "wins": 70121,
+    "losses": 71382,
+    "draws": 1067,
+    "win_rate": 49.6,
+    "pnl": -6870.68,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P9)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 9,
+      "conf_rsi": false
+    },
+    "trades": 224082,
+    "wins": 110918,
+    "losses": 113164,
+    "draws": 1681,
+    "win_rate": 49.5,
+    "pnl": -11119.44,
+    "roi": -5.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P14/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 14,
+      "conf_rsi": true
+    },
+    "trades": 121050,
+    "wins": 59889,
+    "losses": 61161,
+    "draws": 916,
+    "win_rate": 49.5,
+    "pnl": -6063.12,
+    "roi": -5.0,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P14)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 14,
+      "conf_rsi": false
+    },
+    "trades": 164115,
+    "wins": 81075,
+    "losses": 83040,
+    "draws": 1239,
+    "win_rate": 49.4,
+    "pnl": -8451.0,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P20/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 20,
+      "conf_rsi": true
+    },
+    "trades": 105987,
+    "wins": 52486,
+    "losses": 53501,
+    "draws": 804,
+    "win_rate": 49.5,
+    "pnl": -5213.88,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P20)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 20,
+      "conf_rsi": false
+    },
+    "trades": 130814,
+    "wins": 64676,
+    "losses": 66138,
+    "draws": 984,
+    "win_rate": 49.4,
+    "pnl": -6636.08,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P21/RSI)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 21,
+      "conf_rsi": true
+    },
+    "trades": 103796,
+    "wins": 51396,
+    "losses": 52400,
+    "draws": 776,
+    "win_rate": 49.5,
+    "pnl": -5115.68,
+    "roi": -4.9,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  },
+  {
+    "name": "[SHIELD] Trend Pullback (E200/P21)",
+    "family": "Trend_Shield",
+    "params": {
+      "trend_ema": 200,
+      "entry_ema": 21,
+      "conf_rsi": false
+    },
+    "trades": 127022,
+    "wins": 62778,
+    "losses": 64244,
+    "draws": 947,
+    "win_rate": 49.4,
+    "pnl": -6488.24,
+    "roi": -5.1,
+    "elite_pairs_count": 0,
+    "elite_pairs": {},
+    "filtered_trades": 0,
+    "filtered_wr": 0.0,
+    "filtered_pnl": 0
+  }
+]

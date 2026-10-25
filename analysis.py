@@ -54,10 +54,14 @@ class MarketAnalyzer:
         df['BB_Middle'] = bb.bollinger_mavg()
         df['BB_Lower'] = bb.bollinger_lband()
         
-        # --- Volatilidad ---
+        # --- Volatilidad y Fuerza ---
         # ATR 14
         atr = AverageTrueRange(high=df['High'], low=df['Low'], close=df['Close'], window=14)
         df['ATR'] = atr.average_true_range()
+        
+        # ADX 14
+        adx = ADXIndicator(high=df['High'], low=df['Low'], close=df['Close'], window=14)
+        df['ADX'] = adx.adx()
         
         # --- Canales de Keltner (20, 10, 1.5) ---
         kc_middle = EMAIndicator(close=df['Close'], window=20).ema_indicator()

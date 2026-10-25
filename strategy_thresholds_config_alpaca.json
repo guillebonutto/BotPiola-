@@ -6,7 +6,10 @@
         "USDCAD": 0.45,
         "USDJPY": 0.45,
         "SPY": 0.45,
-        "AAPL": 0.45
+        "AAPL": 0.45,
+        "META": 0.45,
+        "MSFT": 0.45,
+        "QQQ": 0.45
     },
     "WaveTrend + Keltner Channel Reversion": {
         "EURUSD": 0.45,
@@ -15,7 +18,8 @@
         "USDCAD": 0.45,
         "USDJPY": 0.45,
         "SPY": 0.45,
-        "AAPL": 0.45
+        "AAPL": 0.45,
+        "MSFT": 0.45
     },
     "Alpha Convergence (Bollinger + Fibo + Stoch)": {
         "EURUSD": 0.45,
@@ -51,9 +55,724 @@
         "USDCAD": 0.45,
         "USDJPY": 0.45,
         "SPY": 0.45,
-        "AAPL": 0.45
+        "AAPL": 0.45,
+        "META": 0.45,
+        "MSFT": 0.45
     },
     "Patrones de Continuaci\u00f3n (Chartismo)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Alpaca Order": {
+        "AAPL": 0.45,
+        "AMZN": 0.45,
+        "BA": 0.45,
+        "INTC": 0.45,
+        "META": 0.9745,
+        "MSFT": 0.45,
+        "NVDA": 0.45,
+        "PFE": 0.45,
+        "QQQ": 0.45,
+        "SPY": 0.45
+    },
+    "Alpaca Strategy": {
+        "META": 0.45,
+        "QQQ": 0.45,
+        "SPY": 0.45
+    },
+    "RSI Divergence + Pivot Reversion": {
+        "AAPL": 0.6311,
+        "META": 0.6311,
+        "QQQ": 0.6311,
+        "SPY": 0.6311,
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "BTCUSD": 0.6311,
+        "ETHUSD": 0.6311,
+        "MSFT": 0.6311
+    },
+    "SMC \u00c9lite (ChoCH + MTF + MACD)": {
+        "QQQ": 0.45,
+        "SPY": 0.45,
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Trend Pullback Momentum (EMA + Stoch)": {
+        "BTCUSD": 0.45,
+        "META": 0.45,
+        "MSFT": 0.45,
+        "NVDA": 0.45,
+        "SOLUSD": 0.45,
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45,
+        "QQQ": 0.45
+    },
+    "Bollinger Extreme (2.5 Dev) + RSI Reversion": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Chartist Master (Wedges & Triangles)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Fibonacci Master Sniper (Golden Zone + Matrix)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "HYBRID Ultra-Sniper (WaveTrend + BB 2.5 + RSI + SMA200)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Price Action Envolvente en Extremo Bollinger 2.5": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "Squeeze Expansion + Volume Spike": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "TTM Volatility Squeeze Breakout": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[BB] Burst Dev2.4 + RSI Exhaustion": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 10/18 (Gen3)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 10/18 (Gen40)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 10/18 (Gen5)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 10/20 (Gen24)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 10/20 (Gen42)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 10/22 (Gen37)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 6/16 (Gen41)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 6/18 (Gen54)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 6/20 (Gen57)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 6/22 (Gen64)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 7/15 (Gen19)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 7/15 (Gen27)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 7/15 (Gen48)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 7/19 (Gen53)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 7/21 (Gen4)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 8/20 (Gen61)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 8/22 (Gen17)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 8/22 (Gen50)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 8/22 (Gen58)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 9/21": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] EMA Pullback 9/21 (Gen15)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Fast EMA Scalp 7/16": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Breakout 4v (Gen22)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Breakout 4v (Gen29)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Breakout 4v (Gen44)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Breakout 4v (Gen7)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Breakout 5v (Gen43)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Breakout 6v (Gen45)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Micro Range Breakout 5v": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 11p (Gen10)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 11p (Gen39)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 6p (Gen21)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 6p (Gen34)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 6p (Gen47)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 7p": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 7p (Gen18)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 7p (Gen23)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 7p (Gen56)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 9p (Gen11)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 9p (Gen2)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 9p (Gen52)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 9p (Gen60)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 9p (Gen63)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] RSI Velocity 9p (Gen66)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 5/4+BB18 (Gen46)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 6/2+BB16 (Gen14)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 6/4+BB14 (Gen49)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 7/3+BB18 (Gen36)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 7/4+BB16 (Gen12)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 8/2+BB20 (Gen8)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch 8/3+BB12 (Gen16)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch BB Dev2.0/W20 (Gen51)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch BB Dev2.0/W20 (Gen59)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch BB Dev2.0/W20 (Gen62)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch BB Dev2.0/W20 (Gen65)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch BB Dev2.2/W14 (Gen55)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch Burst 5/3 + BB14": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[RAPID] Stoch Scalp 8/3 + BB20": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[SMC] Liquidity Sweep & FVG (Gen1)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[SQZ] Volatility Fired Pro": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[\u00c9LITE] Micro Breakout 7v (Gen35)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[\u00c9LITE] VSA Volume Climax Reversal": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[\u00c9LITE] Order Block MTF & ChoCH": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[\u00c9LITE] VWAP Mean Reversion (3.0 Dev)": {
+        "EURUSD": 0.45,
+        "GBPUSD": 0.45,
+        "AUDUSD": 0.45,
+        "USDCAD": 0.45,
+        "USDJPY": 0.45,
+        "SPY": 0.45,
+        "AAPL": 0.45
+    },
+    "[\u00c9LITE] Momentum Trend Pullback Confluence": {
         "EURUSD": 0.45,
         "GBPUSD": 0.45,
         "AUDUSD": 0.45,

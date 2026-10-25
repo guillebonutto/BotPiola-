@@ -56,13 +56,16 @@ class StrategyExpertVision(Strategy):
         short_term_bullish = close_val > last.get('EMA_20', close_val) and last.get('RSI', 50) > 50
         short_term_bearish = close_val < last.get('EMA_20', close_val) and last.get('RSI', 50) < 50
         
+        # Duración dinámica según el timeframe de la vela analizada
+        target_duration = int(time_diff) if time_diff in [60, 300, 900] else 300
+
         # Condición BUY: Toca el suelo, sin spike de rango, con filtro escalera alcista y sin micro-tendencia bajista
         if low_val <= lower_channel and not range_spike and is_uptrend and not short_term_bearish:
-            return 'BUY', f"Suelo Tocado ({low_val:.5f} <= {lower_channel:.5f}) + Volatilidad Segura ({range_ratio:.2f}x) + Escalera Confirmada", 300
+            return 'BUY', f"Suelo Tocado ({low_val:.5f} <= {lower_channel:.5f}) + Volatilidad Segura ({range_ratio:.2f}x) + Escalera Confirmada", target_duration
             
         # Condición SELL: Toca el techo, sin spike de rango, con filtro escalera bajista y sin micro-tendencia alcista
         if high_val >= upper_channel and not range_spike and is_downtrend and not short_term_bullish:
-            return 'SELL', f"Techo Tocado ({high_val:.5f} >= {upper_channel:.5f}) + Volatilidad Segura ({range_ratio:.2f}x) + Escalera Confirmada", 300
+            return 'SELL', f"Techo Tocado ({high_val:.5f} >= {upper_channel:.5f}) + Volatilidad Segura ({range_ratio:.2f}x) + Escalera Confirmada", target_duration
             
         # Mensaje informativo de HOLD
         status_msg = f"Rango Donchian: [{lower_channel:.5f}, {upper_channel:.5f}] | Price: {close_val:.5f} | Spike Ratio: {range_ratio:.2f}x"

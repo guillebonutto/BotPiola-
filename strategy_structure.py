@@ -22,6 +22,12 @@ class StrategyStructure(Strategy):
         double_top_detected = recent['Pattern_DoubleTop'].max() == 1
         double_bottom_detected = recent['Pattern_DoubleBottom'].max() == 1
         
+        try:
+            time_diff = int((df.iloc[-1]['Timestamp'] - df.iloc[-2]['Timestamp']).total_seconds())
+        except Exception:
+            time_diff = 60 # Default a 1m
+        target_duration = int(time_diff) if time_diff in [60, 300, 900] else 300
+        
         # Cambio a Bajista (Doble Techo + Ruptura de Soporte/Neckline)
         if double_top_detected:
             # Recuperar el nivel del neckline (el último valor no nulo detectado)
@@ -46,7 +52,7 @@ class StrategyStructure(Strategy):
                               break
                       
                      if macd_cross_bear:
-                          return 'SELL', f"Cambio Estructura: Doble Techo + Ruptura FRESCA de {neckline:.5f} + Cruce MACD Bajista", 300
+                          return 'SELL', f"Cambio Estructura: Doble Techo + Ruptura FRESCA de {neckline:.5f} + Cruce MACD Bajista", target_duration
                   
         # Cambio a Alcista (Doble Suelo + Ruptura de Resistencia/Neckline)
         if double_bottom_detected:
@@ -71,6 +77,6 @@ class StrategyStructure(Strategy):
                               break
                               
                     if macd_cross_bull:
-                        return 'BUY', f"Cambio Estructura: Doble Suelo + Ruptura FRESCA de {neckline:.5f} + Cruce MACD Alcista", 300
+                        return 'BUY', f"Cambio Estructura: Doble Suelo + Ruptura FRESCA de {neckline:.5f} + Cruce MACD Alcista", target_duration
                 
         return 'HOLD', f"No Confirmed Pattern (DT={double_top_detected}, DB={double_bottom_detected})", 0

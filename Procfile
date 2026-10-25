@@ -1,1 +1,1 @@
-worker: python main.py config.json
+web: python main.py

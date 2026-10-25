@@ -1,0 +1,410 @@
+[
+  {
+    "params": "W30/Dev3.0/Wick32/RSI25-75",
+    "w": 30,
+    "dev": 3.0,
+    "min_wick": 0.32,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 514,
+    "global_wr": 48.1,
+    "elite_pairs_count": 2,
+    "elite_trades": 22,
+    "elite_wr": 77.3,
+    "elite_pnl": 10.64,
+    "elite_pairs": {
+      "BTCUSD_otc_300s": {
+        "trades": 11,
+        "wins": 7,
+        "losses": 4,
+        "wr": 63.6
+      },
+      "EURGBP_otc_300s": {
+        "trades": 11,
+        "wins": 10,
+        "losses": 1,
+        "wr": 90.9
+      }
+    }
+  },
+  {
+    "params": "W30/Dev3.0/Wick25/RSI25-75",
+    "w": 30,
+    "dev": 3.0,
+    "min_wick": 0.25,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 564,
+    "global_wr": 48.9,
+    "elite_pairs_count": 3,
+    "elite_trades": 28,
+    "elite_wr": 75.0,
+    "elite_pnl": 12.32,
+    "elite_pairs": {
+      "#BA_otc_300s": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "wr": 66.7
+      },
+      "BTCUSD_otc_300s": {
+        "trades": 11,
+        "wins": 7,
+        "losses": 4,
+        "wr": 63.6
+      },
+      "EURGBP_otc_300s": {
+        "trades": 11,
+        "wins": 10,
+        "losses": 1,
+        "wr": 90.9
+      }
+    }
+  },
+  {
+    "params": "W20/Dev2.2/Wick32/RSI30-70",
+    "w": 20,
+    "dev": 2.2,
+    "min_wick": 0.32,
+    "rsi_lim": [
+      30,
+      70
+    ],
+    "global_trades": 6565,
+    "global_wr": 50.0,
+    "elite_pairs_count": 1,
+    "elite_trades": 22,
+    "elite_wr": 72.7,
+    "elite_pnl": 8.72,
+    "elite_pairs": {
+      "EURUSD_otc_60s": {
+        "trades": 22,
+        "wins": 16,
+        "losses": 6,
+        "wr": 72.7
+      }
+    }
+  },
+  {
+    "params": "W20/Dev3.0/Wick32/RSI30-70",
+    "w": 20,
+    "dev": 3.0,
+    "min_wick": 0.32,
+    "rsi_lim": [
+      30,
+      70
+    ],
+    "global_trades": 383,
+    "global_wr": 49.6,
+    "elite_pairs_count": 8,
+    "elite_trades": 72,
+    "elite_wr": 72.2,
+    "elite_pnl": 27.84,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 13,
+        "wins": 9,
+        "losses": 4,
+        "wr": 69.2
+      },
+      "AUDUSD_otc_300s": {
+        "trades": 8,
+        "wins": 8,
+        "losses": 0,
+        "wr": 100.0
+      },
+      "EURJPY_otc_60s": {
+        "trades": 11,
+        "wins": 7,
+        "losses": 4,
+        "wr": 63.6
+      },
+      "EURUSD_otc_300s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "USDCAD_otc_300s": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "wr": 66.7
+      },
+      "USDCHF_otc_300s": {
+        "trades": 6,
+        "wins": 5,
+        "losses": 1,
+        "wr": 83.3
+      },
+      "USDCOP_otc_60s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      },
+      "USDINR_otc_300s": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "wr": 66.7
+      }
+    }
+  },
+  {
+    "params": "W20/Dev3.0/Wick25/RSI30-70",
+    "w": 20,
+    "dev": 3.0,
+    "min_wick": 0.25,
+    "rsi_lim": [
+      30,
+      70
+    ],
+    "global_trades": 399,
+    "global_wr": 49.9,
+    "elite_pairs_count": 8,
+    "elite_trades": 76,
+    "elite_wr": 71.1,
+    "elite_pnl": 27.68,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      },
+      "AUDUSD_otc_300s": {
+        "trades": 8,
+        "wins": 8,
+        "losses": 0,
+        "wr": 100.0
+      },
+      "EURJPY_otc_60s": {
+        "trades": 12,
+        "wins": 8,
+        "losses": 4,
+        "wr": 66.7
+      },
+      "EURUSD_otc_300s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "USDCAD_otc_300s": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "wr": 66.7
+      },
+      "USDCHF_otc_300s": {
+        "trades": 6,
+        "wins": 5,
+        "losses": 1,
+        "wr": 83.3
+      },
+      "USDCOP_otc_60s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      },
+      "USDINR_otc_300s": {
+        "trades": 8,
+        "wins": 5,
+        "losses": 3,
+        "wr": 62.5
+      }
+    }
+  },
+  {
+    "params": "W30/Dev2.5/Wick25/RSI25-75",
+    "w": 30,
+    "dev": 2.5,
+    "min_wick": 0.25,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 3121,
+    "global_wr": 49.2,
+    "elite_pairs_count": 2,
+    "elite_trades": 40,
+    "elite_wr": 70.0,
+    "elite_pnl": 13.76,
+    "elite_pairs": {
+      "#BA_otc_300s": {
+        "trades": 26,
+        "wins": 19,
+        "losses": 7,
+        "wr": 73.1
+      },
+      "USDCHF_otc_60s": {
+        "trades": 14,
+        "wins": 9,
+        "losses": 5,
+        "wr": 64.3
+      }
+    }
+  },
+  {
+    "params": "W20/Dev2.8/Wick25/RSI25-75",
+    "w": 20,
+    "dev": 2.8,
+    "min_wick": 0.25,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 344,
+    "global_wr": 50.0,
+    "elite_pairs_count": 3,
+    "elite_trades": 30,
+    "elite_wr": 70.0,
+    "elite_pnl": 10.32,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "USDCOP_otc_300s": {
+        "trades": 10,
+        "wins": 7,
+        "losses": 3,
+        "wr": 70.0
+      },
+      "USDINR_otc_60s": {
+        "trades": 12,
+        "wins": 8,
+        "losses": 4,
+        "wr": 66.7
+      }
+    }
+  },
+  {
+    "params": "W30/Dev2.8/Wick25/RSI25-75",
+    "w": 30,
+    "dev": 2.8,
+    "min_wick": 0.25,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 1234,
+    "global_wr": 49.5,
+    "elite_pairs_count": 6,
+    "elite_trades": 106,
+    "elite_wr": 69.8,
+    "elite_pnl": 36.08,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 30,
+        "wins": 19,
+        "losses": 11,
+        "wr": 63.3
+      },
+      "#AAPL_otc_60s": {
+        "trades": 8,
+        "wins": 5,
+        "losses": 3,
+        "wr": 62.5
+      },
+      "#BA_otc_300s": {
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0
+      },
+      "AUDJPY_otc_300s": {
+        "trades": 9,
+        "wins": 6,
+        "losses": 3,
+        "wr": 66.7
+      },
+      "EURGBP_otc_300s": {
+        "trades": 23,
+        "wins": 17,
+        "losses": 6,
+        "wr": 73.9
+      },
+      "EURGBP_otc_60s": {
+        "trades": 28,
+        "wins": 21,
+        "losses": 7,
+        "wr": 75.0
+      }
+    }
+  },
+  {
+    "params": "W30/Dev2.2/Wick32/RSI25-75",
+    "w": 30,
+    "dev": 2.2,
+    "min_wick": 0.32,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 4798,
+    "global_wr": 50.6,
+    "elite_pairs_count": 2,
+    "elite_trades": 36,
+    "elite_wr": 69.4,
+    "elite_pnl": 12.0,
+    "elite_pairs": {
+      "#MCD_otc_60s": {
+        "trades": 16,
+        "wins": 10,
+        "losses": 6,
+        "wr": 62.5
+      },
+      "GBPUSD_otc_60s": {
+        "trades": 20,
+        "wins": 15,
+        "losses": 5,
+        "wr": 75.0
+      }
+    }
+  },
+  {
+    "params": "W20/Dev2.8/Wick32/RSI25-75",
+    "w": 20,
+    "dev": 2.8,
+    "min_wick": 0.32,
+    "rsi_lim": [
+      25,
+      75
+    ],
+    "global_trades": 324,
+    "global_wr": 49.7,
+    "elite_pairs_count": 3,
+    "elite_trades": 29,
+    "elite_wr": 69.0,
+    "elite_pnl": 9.4,
+    "elite_pairs": {
+      "#AAPL_otc_300s": {
+        "trades": 7,
+        "wins": 5,
+        "losses": 2,
+        "wr": 71.4
+      },
+      "USDCOP_otc_300s": {
+        "trades": 10,
+        "wins": 7,
+        "losses": 3,
+        "wr": 70.0
+      },
+      "USDINR_otc_60s": {
+        "trades": 12,
+        "wins": 8,
+        "losses": 4,
+        "wr": 66.7
+      }
+    }
+  }
+]

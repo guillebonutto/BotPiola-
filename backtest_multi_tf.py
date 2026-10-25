@@ -180,57 +180,75 @@ def precompute_chart_patterns(df, lookback=60):
     df['Pattern_DoubleBottom'] = db_col
     df['Pattern_DoubleBottom_Neck'] = db_neck_col
     df['Pattern_Triangle'] = tri_col
-    
     return df
 
-async def fetch_historical_candles_large(api, pair, interval, total_candles=10000):
+async def fetch_historical_candles_large(api, pair, interval, total_candles=50000):
     """
     Descarga hasta total_candles (máximo que permita la API) o carga desde cache local en CSV.
+    Si la cache tiene pocas velas en comparación a lo solicitado, se fuerza una redescarga profunda.
+    Si el broker falla, usa la cache disponible sin importar la cantidad.
     """
     cache_dir = Path("historical_data")
     cache_dir.mkdir(exist_ok=True)
     cache_file = cache_dir / f"{pair}_{interval}s.csv"
     
+    cached_df = None
     if cache_file.exists():
         try:
             df = pd.read_csv(cache_file)
-            if len(df) >= total_candles * 0.9:
+            df['Timestamp'] = pd.to_datetime(df['Timestamp'], utc=True)
+            cached_df = df
+            # Si el archivo en cache contiene al menos el 80% de lo solicitado, lo usamos directamente
+            if len(df) >= total_candles * 0.8:
                 print(f"  [CACHE] Cargando {len(df)} velas desde cache local: {cache_file.name}")
-                df['Timestamp'] = pd.to_datetime(df['Timestamp'], utc=True)
                 return df
+            else:
+                print(f"  [CACHE] Cache local tiene pocas velas ({len(df)} vs {total_candles} deseadas). Intentando descarga profunda desde el Broker...")
         except Exception as e:
-            print(f"  [CACHE] Error leyendo cache {cache_file.name}: {e}. Redescargando...")
+            print(f"  [CACHE] Error leyendo cache {cache_file.name}: {e}.")
 
-    print(f"  [API] Descargando {total_candles} velas para {pair} (TF: {interval}s)...")
+    print(f"  [API] Descargando de forma profunda hasta {total_candles} velas para {pair} (TF: {interval}s)...")
     all_candles = []
     
     try:
+        if api is None:
+            raise ConnectionError("Broker API no conectada. Modo offline.")
+            
         offset = interval * 300
         candles = await asyncio.wait_for(api.get_candles(pair, interval, offset), timeout=15.0)
         if not candles:
-            return pd.DataFrame()
+            raise ValueError("No candles returned")
             
         all_candles.extend(candles)
         time_key = next((k for k in candles[0].keys() if k.lower() in ['time', 'timestamp', 'date']), None)
         if not time_key:
-            return pd.DataFrame()
+            raise ValueError("Time key not found")
             
         current_end_time = int(candles[0][time_key])
         
         # Descargar chunks hasta alcanzar el límite del broker o el total solicitado
         chunk_idx = 1
+        consecutive_empty = 0
         while len(all_candles) < total_candles:
             await asyncio.sleep(0.3)
-            chunk = await asyncio.wait_for(
-                api.get_candles_advanced(pair, interval, offset, current_end_time),
-                timeout=12.0
-            )
-            if not chunk:
-                break
-            all_candles = chunk + all_candles
-            current_end_time = int(chunk[0][time_key])
-            chunk_idx += 1
-            if len(chunk) < 10: # Si devuelve un chunk casi vacío, es el final
+            try:
+                chunk = await asyncio.wait_for(
+                    api.get_candles_advanced(pair, interval, offset, current_end_time),
+                    timeout=12.0
+                )
+                if not chunk:
+                    consecutive_empty += 1
+                    if consecutive_empty >= 3:
+                        break
+                    continue
+                consecutive_empty = 0
+                all_candles = chunk + all_candles
+                current_end_time = int(chunk[0][time_key])
+                chunk_idx += 1
+                if len(chunk) < 5: # Si el broker devuelve casi nada, alcanzamos su límite histórico
+                    break
+            except Exception as e:
+                print(f"    [WARN] Error descargando chunk {chunk_idx}: {e}. Terminando descarga aquí.")
                 break
                 
         df = pd.DataFrame(all_candles)
@@ -258,7 +276,10 @@ async def fetch_historical_candles_large(api, pair, interval, total_candles=1000
             
         return df
     except Exception as e:
-        print(f"  [ERR] Error descargando {pair}: {e}")
+        if cached_df is not None:
+            print(f"  [OFFLINE FALLBACK] Fallo descarga ({e}). Utilizando cache local existente con {len(cached_df)} velas.")
+            return cached_df
+        print(f"  [ERR] Error descargando {pair} y no hay cache local: {e}")
         return pd.DataFrame()
 
 
@@ -337,7 +358,7 @@ def run_backtest_fast_routed(df, strategies, analyzer):
         if not allowed_types:
             continue
             
-        sub_df = df.iloc[:i+1]
+        sub_df = df.iloc[max(0, i-250):i+1]
         
         for stype in allowed_types:
             if stype not in strat_by_type:
@@ -426,18 +447,22 @@ async def main():
         StrategyWaveTrendKeltner(bypass_filter=True)
     ]
 
+    # Cargar pares dinámicamente de config.json, o usar fallback si no existen
+    pairs = config.get("trading", {}).get("pairs", [])
+    if not pairs:
+        pairs = [
+            "EURUSD_otc", "GBPUSD_otc", "AUDUSD_otc", 
+            "USDCAD_otc", "AUDCAD_otc", "GBPJPY_otc", 
+            "USDCHF_otc", "NZDUSD_otc", "AUDJPY_otc"
+        ]
     
-    pairs = [
-        "EURUSD_otc", "GBPUSD_otc", "AUDUSD_otc", 
-        "USDCAD_otc", "AUDCAD_otc", "GBPJPY_otc", 
-        "USDCHF_otc", "NZDUSD_otc", "AUDJPY_otc"
-    ]
-    
-    # Vamos a evaluar M15 (15m), M5 (5m) y M1 (1m)
+    # Evaluar M1 (1m), M5 (5m), M15 (15m), M30 (30m) y H1 (1h)
     timeframes = [
-        {"name": "M15 (15 Minutos)", "interval": 900, "candles": 10000},
-        {"name": "M5 (5 Minutos)", "interval": 300, "candles": 10000},
-        {"name": "M1 (1 Minuto)", "interval": 60, "candles": 5000}
+        {"name": "H1 (1 Hora)", "interval": 3600, "candles": 10000},
+        {"name": "M30 (30 Minutos)", "interval": 1800, "candles": 20000},
+        {"name": "M15 (15 Minutos)", "interval": 900, "candles": 35000},
+        {"name": "M5 (5 Minutos)", "interval": 300, "candles": 50000},
+        {"name": "M1 (1 Minuto)", "interval": 60, "candles": 50000}
     ]
     
     results = {}

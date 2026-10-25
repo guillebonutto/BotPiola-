@@ -46,7 +46,13 @@ class FeedbackDB:
                 'ai_decision': 'TEXT',
                 'ai_confidence': 'INTEGER',
                 'ai_reason': 'TEXT',
-                'ai_snapshot': 'TEXT'
+                'ai_snapshot': 'TEXT',
+                'close_timestamp': 'TEXT',
+                'rsi': 'REAL',
+                'stoch_k': 'REAL',
+                'macd_hist': 'REAL',
+                'ema_distance': 'REAL',
+                'atr': 'REAL'
             }
             
             for col_name, col_type in additional_columns.items():
@@ -66,7 +72,8 @@ class FeedbackDB:
         Args:
             trade_data: dict con keys: trade_id, pair, action, strategy, timeframe, 
                        amount, result, profit, telegram_message_id,
-                       ai_decision, ai_confidence, ai_reason, ai_snapshot
+                       ai_decision, ai_confidence, ai_reason, ai_snapshot,
+                       close_timestamp, rsi, stoch_k, macd_hist, ema_distance, atr
         
         Returns:
             trade_id de la operación guardada
@@ -78,8 +85,9 @@ class FeedbackDB:
             INSERT INTO trades (
                 trade_id, timestamp, pair, action, strategy, timeframe,
                 amount, open_price, close_price, result, profit, telegram_message_id,
-                ai_decision, ai_confidence, ai_reason, ai_snapshot
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ai_decision, ai_confidence, ai_reason, ai_snapshot,
+                close_timestamp, rsi, stoch_k, macd_hist, ema_distance, atr
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             trade_data['trade_id'],
             trade_data.get('timestamp') or datetime.now().isoformat(),
@@ -96,7 +104,13 @@ class FeedbackDB:
             trade_data.get('ai_decision'),
             trade_data.get('ai_confidence'),
             trade_data.get('ai_reason'),
-            trade_data.get('ai_snapshot')
+            trade_data.get('ai_snapshot'),
+            trade_data.get('close_timestamp'),
+            trade_data.get('rsi'),
+            trade_data.get('stoch_k'),
+            trade_data.get('macd_hist'),
+            trade_data.get('ema_distance'),
+            trade_data.get('atr')
         ))
         
         conn.commit()

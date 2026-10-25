@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Reporte Visual Backtest Alpaca ($100 USD Real)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.85);
+            --border-card: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent-green: #10b981;
+            --accent-green-bg: rgba(16, 185, 129, 0.15);
+            --accent-red: #ef4444;
+            --accent-red-bg: rgba(239, 68, 68, 0.15);
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-rules {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+
+        .badge-item span {
+            color: #38bdf8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 16px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .stat-card .label {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-card h2 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* FIX CRÍTICO: Wrapper de altura fija estricta para evitar estiramiento vertical */
+        .chart-wrapper {
+            position: relative;
+            height: 260px;
+            width: 100%;
+        }
+
+        .select-filter {
+            background: #1e293b;
+            color: #f8fafc;
+            border: 1px solid var(--border-card);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .table-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .table-scroll-container {
+            max-height: 480px;
+            overflow-y: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: #0f172a;
+            color: var(--text-sub);
+            font-weight: 600;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-card);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+        }
+
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .pair-badge {
+            font-weight: 700;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .status-badge {
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        .status-pass {
+            background: var(--accent-green-bg);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-fail {
+            background: var(--accent-red-bg);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .pnl-pos {
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .pnl-neg {
+            color: var(--accent-red);
+            font-weight: 700;
+        }
+
+        .wr-pill {
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>📊 Alpaca Backtest Cuantitativo</h1>
+                <p style="color: var(--text-sub); font-size: 13px; margin-top: 4px;">Simulación estricta con $100 USD iniciales e <strong>Interés Compuesto Real Trade a Trade (1% del saldo actual)</strong></p>
+            </div>
+            <div class="badge-rules">
+                <div class="badge-item">Capital Inicial: <span>$100.00 USD</span></div>
+                <div class="badge-item">Riesgo por Trade: <span>1.0% Dinámico Compuesto</span></div>
+                <div class="badge-item">Ratio R:R: <span>1:2.0 (+2% Win / -1% Loss)</span></div>
+                <div class="badge-item">Frecuencia: <span>~2.1 trades/día</span></div>
+                <div class="badge-item">Límite Diario: <span>Máx 5 trades/día</span></div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Configuraciones</div>
+                <div class="value" id="stat-total-configs" style="color: #38bdf8;">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Mejor WinRate Forward</div>
+                <div class="value" id="stat-best-wr" style="color: var(--accent-green);">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Máximo Profit Generado</div>
+                <div class="value" id="stat-max-pnl" style="color: var(--accent-green);">$0.00</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Top Estrategia</div>
+                <div class="value" id="stat-best-strategy" style="color: var(--accent-purple); font-size: 15px; margin-top: 6px;">-</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h2>📈 In-Sample WR% vs Forward Test WR%</h2>
+                <div class="chart-wrapper">
+                    <canvas id="chart-wr-comparison"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>💵 PnL ($ USD) por Configuración</h2>
+                <div class="chart-wrapper">
+                    <canvas id="chart-pnl-distribution"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <h2 style="font-size: 17px; font-weight: 700;">📑 Resultados Detallados y Períodos Evaluados</h2>
+                    <p style="font-size: 12px; color: var(--text-sub); margin-top: 2px;">Data histórica: 15m = 85 Días (~2.8 meses) | 1h = 730 Días (2 Años)</p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <select id="filter-verdict" class="select-filter" onchange="renderReport()">
+                        <option value="ALL">Todos los Veredictos</option>
+                        <option value="APTO" selected>🟢 Solo Aptos para Real (Pasaron In-Sample + Forward)</option>
+                        <option value="NO_APTO">⚠️ No Aprobados</option>
+                    </select>
+                    <select id="filter-pair" class="select-filter" onchange="renderReport()">
+                        <option value="ALL">Todos los Pares</option>
+                    </select>
+                    <select id="filter-strategy" class="select-filter" onchange="renderReport()">
+                        <option value="ALL">Todas las Estrategias</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-scroll-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activo</th>
+                            <th>Timeframe</th>
+                            <th>Período Histórico</th>
+                            <th>Estrategia</th>
+                            <th>In-Sample (75%)</th>
+                            <th>Forward Test (25%)</th>
+                            <th>Trades</th>
+                            <th>PnL ($100 Base)</th>
+                            <th>Veredicto Final</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let rawData = [];
+
+        async function loadReportData() {
+            try {
+                const resp = await fetch('/api/backtest?t=' + Date.now());
+                rawData = await resp.json();
+                populateFilters();
+                renderReport();
+            } catch(e) {
+                console.error("Error cargando reporte:", e);
+            }
+        }
+
+        function populateFilters() {
+            const pairSelect = document.getElementById('filter-pair');
+            const stratSelect = document.getElementById('filter-strategy');
+
+            const pairs = [...new Set(rawData.map(d => d.pair))].sort();
+            const strats = [...new Set(rawData.map(d => d.strategy))].sort();
+
+            pairs.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p;
+                opt.textContent = p;
+                pairSelect.appendChild(opt);
+            });
+
+            strats.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s;
+                stratSelect.appendChild(opt);
+            });
+        }
+
+        let wrChart = null;
+        let pnlChart = null;
+
+        function renderReport() {
+            const pairFilter = document.getElementById('filter-pair').value;
+            const stratFilter = document.getElementById('filter-strategy').value;
+            const verdictFilter = document.getElementById('filter-verdict').value;
+
+            let filtered = rawData.filter(d => {
+                const matchPair = pairFilter === 'ALL' || d.pair === pairFilter;
+                const matchStrat = stratFilter === 'ALL' || d.strategy === stratFilter;
+                const isApto = d.combined.verdict && d.combined.verdict.includes('APTO');
+                const matchVerdict = verdictFilter === 'ALL' || 
+                                     (verdictFilter === 'APTO' && isApto) || 
+                                     (verdictFilter === 'NO_APTO' && !isApto);
+                return matchPair && matchStrat && matchVerdict;
+            });
+
+            // Ordenar: Aptos primero por PnL descendente, luego no aptos
+            filtered.sort((a, b) => {
+                const aApto = a.combined.verdict && a.combined.verdict.includes('APTO') ? 1 : 0;
+                const bApto = b.combined.verdict && b.combined.verdict.includes('APTO') ? 1 : 0;
+                if (aApto !== bApto) return bApto - aApto;
+                return b.combined.total_pnl_usd - a.combined.total_pnl_usd;
+            });
+
+            // Update stats
+            document.getElementById('stat-total-configs').textContent = filtered.length;
+            
+            let bestWr = 0;
+            let maxPnl = 0;
+            let bestStrat = '-';
+
+            const aptosList = rawData.filter(d => d.combined.verdict && d.combined.verdict.includes('APTO'))
+                                     .sort((a,b) => b.combined.total_pnl_usd - a.combined.total_pnl_usd);
+
+            if (aptosList.length > 0) {
+                const top1 = aptosList[0];
+                bestWr = top1.forward_out_of_sample.win_rate;
+                maxPnl = top1.combined.total_pnl_usd;
+                bestStrat = `${top1.pair} ${top1.interval.split(' ')[0]} - ${top1.strategy.split('+')[0]}`;
+            } else if (filtered.length > 0) {
+                const top1 = filtered[0];
+                bestWr = top1.forward_out_of_sample.win_rate;
+                maxPnl = top1.combined.total_pnl_usd;
+                bestStrat = `${top1.pair} ${top1.interval.split(' ')[0]} - ${top1.strategy.split('+')[0]}`;
+            }
+
+            document.getElementById('stat-best-wr').textContent = `${bestWr.toFixed(1)}%`;
+            document.getElementById('stat-max-pnl').textContent = `${maxPnl >= 0 ? '+' : ''}$${maxPnl.toFixed(2)} USD`;
+            document.getElementById('stat-best-strategy').textContent = bestStrat;
+
+            // Render Table
+            const tbody = document.getElementById('report-table-body');
+            tbody.innerHTML = '';
+
+            filtered.forEach(item => {
+                const tr = document.createElement('tr');
+                
+                const isPass = item.combined.verdict && item.combined.verdict.includes('APTO');
+                const pnlClass = item.combined.total_pnl_usd >= 0 ? 'pnl-pos' : 'pnl-neg';
+                const pnlSign = item.combined.total_pnl_usd >= 0 ? '+' : '';
+                const intervalText = item.interval ? item.interval.split(' ')[0] : '15m';
+                const periodText = intervalText === '15m' ? '85 Días (~2.8 Meses)' : '730 Días (2 Años)';
+
+                tr.innerHTML = `
+                    <td><span class="pair-badge">${item.pair}</span></td>
+                    <td><span style="font-weight: 700; color: #818cf8; background: rgba(129, 140, 248, 0.1); padding: 3px 8px; border-radius: 6px;">${intervalText}</span></td>
+                    <td><span style="font-size: 12px; color: var(--text-sub); font-weight: 600;">${periodText}</span></td>
+                    <td style="font-weight: 500;">${item.strategy}</td>
+                    <td>
+                        <span class="wr-pill">${item.in_sample.wins}W / ${item.in_sample.losses}L</span>
+                        <strong style="margin-left: 6px; color: #38bdf8;">${item.in_sample.win_rate.toFixed(1)}%</strong>
+                    </td>
+                    <td>
+                        <span class="wr-pill">${item.forward_out_of_sample.wins}W / ${item.forward_out_of_sample.losses}L</span>
+                        <strong style="margin-left: 6px; color: ${item.forward_out_of_sample.win_rate >= 50 ? '#10b981' : '#ef4444'};">${item.forward_out_of_sample.win_rate.toFixed(1)}%</strong>
+                    </td>
+                    <td style="font-weight: 600; text-align: center;">${item.combined.total_trades}</td>
+                    <td class="${pnlClass}">${pnlSign}$${item.combined.total_pnl_usd.toFixed(2)}</td>
+                    <td>
+                        <span class="status-badge ${isPass ? 'status-pass' : 'status-fail'}">
+                            ${isPass ? '🟢 APTO PARA REAL' : '⚠️ NO APROBADO'}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Render Charts for top items
+            renderCharts(filtered.slice(0, 8));
+        }
+
+        function renderCharts(items) {
+            const labels = items.map(i => `${i.pair} ${i.interval.split(' ')[0]} (${i.strategy.split(' ')[0]})`);
+            const inSampleWr = items.map(i => i.in_sample.win_rate);
+            const forwardWr = items.map(i => i.forward_out_of_sample.win_rate);
+            const pnls = items.map(i => i.combined.total_pnl_usd);
+
+            // Chart 1: Win Rate comparison
+            const ctx1 = document.getElementById('chart-wr-comparison').getContext('2d');
+            if (wrChart) wrChart.destroy();
+            wrChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'In-Sample WR%',
+                            data: inSampleWr,
+                            backgroundColor: 'rgba(56, 189, 248, 0.7)',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Forward WR%',
+                            data: forwardWr,
+                            backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8', font: { size: 10 } } },
+                        y: { ticks: { color: '#94a3b8' }, max: 100 }
+                    }
+                }
+            });
+
+            // Chart 2: PnL Distribution
+            const ctx2 = document.getElementById('chart-pnl-distribution').getContext('2d');
+            if (pnlChart) pnlChart.destroy();
+            pnlChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'PnL ($ USD)',
+                        data: pnls,
+                        backgroundColor: pnls.map(v => v >= 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(239, 68, 68, 0.8)'),
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' } },
+                        y: { ticks: { color: '#94a3b8', font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        window.onload = loadReportData;
+    </script>
+</body>
+</html>
+<style>canvas { touch-action: auto !important; }</style>

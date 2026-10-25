@@ -1,0 +1,55 @@
+{
+    "broker": "alpaca",
+    "alpaca_key_id": "PONER_ALPACA_KEY_ID_AQUI",
+    "alpaca_secret_key": "PONER_ALPACA_SECRET_KEY_AQUI",
+    "alpaca_paper": true,
+    "telegram_token": "PONER_TELEGRAM_BOT_TOKEN_AQUI",
+    "telegram_chat_id": "-100XXXXXXXXXX",
+    "telegram_owner_id": "123456789",
+    "security_pin": "0000",
+    "supabase_url": "https://tu-proyecto.supabase.co",
+    "supabase_key": "tu_supabase_anon_o_service_key",
+    "gemini_api_key": "tu_gemini_api_key",
+    "use_gemini_live": false,
+    "trading": {
+        "initial_balance_usd": 10000.0,
+        "pairs_with_timeframe": {
+            "NVDA": 300,
+            "MSFT": 300,
+            "QQQ": 300,
+            "AAPL": 900,
+            "SPY": 900,
+            "META": 900
+        },
+        "pairs": [
+            "NVDA",
+            "MSFT",
+            "QQQ",
+            "AAPL",
+            "SPY",
+            "META"
+        ],
+        "interval": 300,
+        "intervals": [300, 900],
+        "lookback": 220,
+        "verbose": true,
+        "verbose_telegram": true,
+        "amount": 100.0,
+        "daily_stop_loss": -50.0,
+        "daily_take_profit": 100.0,
+        "take_profit_atr_multiplier": 2.0,
+        "stop_loss_atr_multiplier": 1.5,
+        "allow_fractional": false,
+        "risk_per_trade_usd": 10.0,
+        "holding_period_seconds": 14400,
+        "telegram_listen": false,
+        "enabled_strategies": [
+            "WaveTrend + Keltner Channel Reversion",
+            "Alpha Convergence (Bollinger + Fibo + Stoch)"
+        ],
+        "money_management": {
+            "mode": "fixed",
+            "fixed_amount": 100.0
+        }
+    }
+}
