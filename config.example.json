@@ -25,30 +25,25 @@
             "EURGBP_otc": 300
         },
         "pairs": [
-            "AUDNZD_otc",
             "AUDCAD_otc",
-            "USDARS_otc",
-            "#CSCO_otc",
-            "#MSFT_otc",
-            "USDCAD_otc",
-            "AUDCHF_otc",
-            "EURGBP_otc"
+            "EURUSD_otc",
+            "USDCAD_otc"
         ],
         "interval": 300,
         "intervals": [300],
         "lookback": 220,
         "verbose": true,
         "verbose_telegram": true,
-        "amount": 2.0,
-        "daily_stop_loss": -60.0,
-        "daily_take_profit": 25.0,
+        "amount": 1.0,
+        "daily_stop_loss": -15.0,
+        "daily_take_profit": 10.0,
         "news_window": 15,
         "money_management": {
-            "mode": "martingale",
-            "fixed_amount": 2.0,
+            "mode": "compound",
+            "fixed_amount": 1.0,
             "compound_percentage": 0.01,
-            "martingale_multiplier": 2.0,
-            "martingale_max_steps": 3
+            "martingale_multiplier": 1.5,
+            "martingale_max_steps": 1
         }
     }
 }

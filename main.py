@@ -1,5 +1,6 @@
 import asyncio
 import pandas as pd
+import numpy as np
 import html
 import os
 from datetime import datetime, timezone, timedelta
@@ -22,6 +23,7 @@ from strategy_trend_pullback import StrategyTrendPullback
 from strategy_divergence_pivot import StrategyDivergencePivot
 from strategy_smart_money_smc import StrategySmartMoneySMC
 from strategy_fibonacci_master import StrategyFibonacciMasterSniper
+from strategy_smc_elite import StrategySMCElite
 from strategy_chartist_patterns import StrategyChartistPatterns
 from strategy_micro_breakout_7v import StrategyMicroBreakout7v
 from strategy_bb_burst_pro import StrategyBBBurstPro
@@ -118,30 +120,15 @@ class TradingBot:
         
         # Inicializar lista de estrategias activas
         is_alpaca = self.broker == 'alpaca'
+        # ESTRATEGIAS BLINDADAS: Solo estrategias con ventaja estadística en tendencia y estructura
+        # WaveTrendKeltner y reversiones descontroladas desactivadas por alto índice de fallas (WR < 20% en OTC).
         all_strategies = [
-            StrategyHybridSniper(bypass_filter=True),
-            StrategyBollingerRSI(bypass_filter=True),
-            StrategyPriceActionEngulfing(bypass_filter=True),
-            StrategyTrendPullback(bypass_filter=True),
-            StrategyWaveTrendKeltner(bypass_filter=True),
-            StrategyTTMSqueeze(bypass_filter=True),
+            StrategySMCElite(bypass_filter=False),
+            StrategyTrendPullback(bypass_filter=False),
             StrategyStochastic(bypass_filter=False),
-            StrategyAlphaConvergence(bypass_filter=True),
-            StrategyFibonacci(bypass_filter=True),
-            StrategyStructure(),
-            StrategyExpertVision(bypass_filter=True),
-            StrategyContinuation(),
-            StrategyDivergencePivot(bypass_filter=True),
-            StrategySmartMoneySMC(bypass_filter=True),
-            StrategyFibonacciMasterSniper(bypass_filter=True),
-            StrategyChartistPatterns(bypass_filter=True),
-            StrategyMicroBreakout7v(bypass_filter=True),
-            StrategyBBBurstPro(bypass_filter=True),
-            StrategyTTMSqueezePro(bypass_filter=True),
-            StrategyVSAClimax(bypass_filter=True),
-            StrategyOrderBlockMTF(bypass_filter=True),
-            StrategyVWAPReversion(bypass_filter=True),
-            StrategyMomentumConfluence(bypass_filter=True)
+            StrategySmartMoneySMC(bypass_filter=False),
+            StrategyMomentumConfluence(bypass_filter=False),
+            StrategyContinuation()
         ]
         
         enabled_list = self.config.get('enabled_strategies')
@@ -549,8 +536,7 @@ class TradingBot:
             print(f"[WARN] Error en filtro de feedback: {e}")
 
         # 3. Filtro de Inteligencia Estática (trading_intelligence.json)
-        # DESACTIVADO TEMPORALMENTE por pedido del usuario para operar basándose únicamente en análisis técnico (Opción 3).
-        return True, "Approved (Filtros históricos de IA desactivados)"
+        # Reactivado para bloquear zonas horarias perdedoras y estrategias sin edge estadístico.
             
         # Obtener la hora actual en GMT-3 (coincidiendo con los logs y la base de datos de inteligencia)
         tz_gmt3 = timezone(timedelta(hours=-3))
@@ -651,12 +637,151 @@ class TradingBot:
             print(f"[WARN] Error calculando score MTF: {e}")
             return 0, {}
 
+    def check_chop_entropy(self, df):
+        """
+        INNOVACIÓN 3: Detector dinámico de pares tóxicos y ruido (Anti-Chop).
+        Analiza las últimas 12 velas. Si hay demasiados Dojis o cuerpos ínfimos, el par se bloquea.
+        """
+        if df is None or len(df) < 12:
+            return True, "Datos insuficientes para filtro de ruido"
+        
+        recent = df.iloc[-12:].copy()
+        highs = recent['High'].values
+        lows = recent['Low'].values
+        opens = recent['Open'].values
+        closes = recent['Close'].values
+
+        ranges = np.maximum(highs - lows, 0.00001)
+        bodies = np.abs(closes - opens)
+        
+        # Un Doji en OTC tiene cuerpo menor al 12% del rango total de la vela
+        dojis = (bodies / ranges) <= 0.12
+        doji_count = int(np.sum(dojis))
+
+        # Si 3 o más velas de las últimas 12 son Dojis, el mercado está en indecisión errática
+        if doji_count >= 3:
+            return False, f"Mercado Tóxico en Vivo: {doji_count}/12 velas Doji detectadas (Chop market)"
+
+        # Ratio promedio de cuerpo vs mecha
+        mean_body_ratio = float(np.mean(bodies / ranges))
+        if mean_body_ratio < 0.25:
+            return False, f"Mercado sin Volumen: Cuerpos de vela anémicos ({mean_body_ratio*100:.1f}% del rango)"
+
+        return True, "Volumen y estructura de velas saludable"
+
+    def check_wick_absorption(self, latest_candle, action):
+        """
+        INNOVACIÓN 1: Detector de Absorción de Mechas OTC (Liquidity Vacuum).
+        Bloquea señales si la vela gatillo sufrió un rechazo violento contrario a la dirección deseada.
+        """
+        high = latest_candle.get('High', 0)
+        low = latest_candle.get('Low', 0)
+        open_p = latest_candle.get('Open', 0)
+        close_p = latest_candle.get('Close', 0)
+
+        total_range = max(high - low, 0.00001)
+        upper_shadow = high - max(open_p, close_p)
+        lower_shadow = min(open_p, close_p) - low
+
+        upper_wick_ratio = upper_shadow / total_range
+        lower_wick_ratio = lower_shadow / total_range
+
+        # En compras (BUY): Si dejó más de 38% de mecha superior, hubo absorción institucional bajista
+        if action == "BUY":
+            if upper_wick_ratio >= 0.38:
+                return False, f"Absorción Bajista OTC: Mecha superior excesiva ({upper_wick_ratio*100:.1f}% de rechazo)"
+
+        # En ventas (SELL): Si dejó más de 38% de mecha inferior, hubo absorción institucional alcista
+        elif action == "SELL":
+            if lower_wick_ratio >= 0.38:
+                return False, f"Absorción Alcista OTC: Mecha inferior excesiva ({lower_wick_ratio*100:.1f}% de rechazo)"
+
+        return True, "Sin absorción contraria peligrosa"
+
+    def evaluate_candle_footprint(self, latest_candle, action, market_state, df=None):
+        """
+        INNOVACIÓN 4: Huella de Vela Cuantitativa (Candle Footprint Score de 0 a 10).
+        Solo autoriza la orden si el score de calidad de la vela gatillo es >= 7.5 / 10.
+        """
+        score = 0.0
+        details = []
+
+        close_p = latest_candle.get('Close', 0)
+        open_p = latest_candle.get('Open', 0)
+        high = latest_candle.get('High', 0)
+        low = latest_candle.get('Low', 0)
+        ema_20 = latest_candle.get('EMA_20', 0)
+        total_range = max(high - low, 0.00001)
+        body = abs(close_p - open_p)
+
+        # 1. Dirección del cuerpo de la vela (+3.0 pts)
+        if action == "BUY" and close_p > open_p:
+            score += 3.0
+            details.append("Cuerpo alcista (+3)")
+        elif action == "SELL" and close_p < open_p:
+            score += 3.0
+            details.append("Cuerpo bajista (+3)")
+
+        # 2. Dominancia del cuerpo vs mechas (+2.5 pts)
+        body_ratio = body / total_range
+        if body_ratio >= 0.50:
+            score += 2.5
+            details.append(f"Cuerpo sólido {body_ratio*100:.0f}% (+2.5)")
+        elif body_ratio >= 0.35:
+            score += 1.5
+            details.append(f"Cuerpo moderado {body_ratio*100:.0f}% (+1.5)")
+
+        # 3. Alineación con EMA20 (+2.5 pts)
+        if action == "BUY" and ema_20 > 0 and close_p > ema_20:
+            score += 2.5
+            details.append("Sobre EMA20 (+2.5)")
+        elif action == "SELL" and ema_20 > 0 and close_p < ema_20:
+            score += 2.5
+            details.append("Bajo EMA20 (+2.5)")
+
+        # 4. Régimen de mercado favorable (+2.0 pts)
+        if action == "BUY" and market_state in ["TRENDING_UP", "NEUTRAL"]:
+            score += 2.0
+            details.append("Régimen afín (+2)")
+        elif action == "SELL" and market_state in ["TRENDING_DOWN", "NEUTRAL"]:
+            score += 2.0
+            details.append("Régimen afín (+2)")
+
+        passed_fp = score >= 7.5
+        reason_fp = f"Footprint Score: {score:.1f}/10 ({', '.join(details)})"
+        return passed_fp, reason_fp, score
+
     def local_risk_fallback(self, snapshot):
         """
-        Filtro técnico local directo cuando Gemini está desactivado (Modo Cuantitativo Puro de Backtest).
-        Permite la ejecución 1:1 idéntica a los modelos validados en el backtesting.
+        Filtro técnico local directo de protección de capital (Candado anti-cuchillo cayendo y anti-OTC rally).
+        Bloquea compras cuando el precio se desploma y ventas cuando el precio sube verticalmente.
         """
-        return True, "Aprobado (Modo Cuantitativo Puro de Backtest)"
+        action = snapshot.get("action")
+        close = snapshot.get("close", 0)
+        ema_20 = snapshot.get("ema_20", 0)
+        ema_50 = snapshot.get("ema_50", 0)
+        rsi = snapshot.get("rsi", 50)
+        stoch_k = snapshot.get("stoch_k", 50)
+        market_state = snapshot.get("market_state", "")
+
+        # 1. Candado Anti-Cuchillo Cayendo en BUY
+        if action == "BUY":
+            # Si el mercado está en tendencia bajista fuerte o el precio está muy por debajo de ambas EMAs con RSI aplastado
+            if market_state == "TRENDING_DOWN" and ema_20 > 0 and close < ema_20 and rsi < 35:
+                return False, f"Bloqueado por Candado Técnico: Compra en caída libre sin soporte (RSI={rsi:.1f}, Close < EMA20)"
+            if stoch_k > 85:
+                return False, f"Bloqueado por Agotamiento: Compra en sobrecompra extrema (Stoch_K={stoch_k:.1f})"
+
+        # 2. Candado Anti-Rally Vertical en SELL
+        elif action == "SELL":
+            # Si el mercado está en tendencia alcista fuerte o el precio está disparado por encima de ambas EMAs con RSI sobreextendido
+            if market_state == "TRENDING_UP" and ema_20 > 0 and close > ema_20 and rsi > 65:
+                return False, f"Bloqueado por Candado Técnico: Venta contra tendencia alcista vertical (RSI={rsi:.1f}, Close > EMA20)"
+            if stoch_k < 15:
+                return False, f"Bloqueado por Agotamiento: Venta en sobreventa extrema (Stoch_K={stoch_k:.1f})"
+
+        return True, "Aprobado (Validación técnica local superada)"
+
 
     async def validate_signal_with_ai(self, pair, action, strategy_name, latest_candle, rich_ctx):
         """
@@ -1525,6 +1650,28 @@ Devuelve SOLO este JSON:
                                 cycle_report[-1] += f"\n   🛡️ <b>TREND SHIELD:</b> SELL bloqueado por sobre-extensión sobre SMA200"
                                 continue
 
+                    # --- INNOVACIÓN 3: DETECTOR DINÁMICO DE PARES TÓXICOS / CHOP MARKET ---
+                    chop_ok, chop_reason = self.check_chop_entropy(df)
+                    if not chop_ok:
+                        print(f"  [ANTI-CHOP] Par {pair} bloqueado: {chop_reason}")
+                        cycle_report[-1] += f"\n   🛡️ <b>ANTI-CHOP:</b> {chop_reason}"
+                        continue
+
+                    # --- INNOVACIÓN 1: ABSORCIÓN DE MECHAS OTC (LIQUIDITY VACUUM) ---
+                    wick_ok, wick_reason = self.check_wick_absorption(latest_data, action)
+                    if not wick_ok:
+                        print(f"  [WICK REJECTION] Entrada bloqueada en {pair}: {wick_reason}")
+                        cycle_report[-1] += f"\n   🛡️ <b>WICK SHIELD:</b> {wick_reason}"
+                        continue
+
+                    # --- INNOVACIÓN 4: HUELLA DE VELA CUANTITATIVA (FOOTPRINT SCORE) ---
+                    m_state = ctx.get("market_state", "UNKNOWN") if isinstance(ctx, dict) else "UNKNOWN"
+                    fp_ok, fp_reason, fp_score = self.evaluate_candle_footprint(latest_data, action, m_state, df)
+                    if not fp_ok:
+                        print(f"  [FOOTPRINT] Entrada descartada por baja calidad: {fp_reason}")
+                        cycle_report[-1] += f"\n   🛡️ <b>FOOTPRINT:</b> Calidad insuficiente ({fp_score:.1f}/10)"
+                        continue
+
                     # --- FILTRO IA HISTÓRICO (trading_intelligence.json) ---
                     allowed, reason = self.is_allowed_by_ai(pair, strat_name, interval)
                     if not allowed:
@@ -1795,6 +1942,10 @@ Devuelve SOLO este JSON:
                             break # Salir del loop de pares para este ciclo
 
                         # --- PROCESO EXCLUSIVO POCKETOPTION (Bloqueante con Espera) ---
+                        # INNOVACIÓN 2: MICRO-TIMING PULLBACK TRIGGER (Entrada con descuento)
+                        # Espera una micro-fluctuación de 2 a 4 segundos para evitar comprar en el pico o vender en el fondo absoluto.
+                        await asyncio.sleep(2.5)
+
                         placed_id = None
                         balance_before = await self.get_balance()
                         try:
