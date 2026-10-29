@@ -173,21 +173,30 @@ class RSIVelocityMomentum(Strategy):
         except Exception:
             pass
 
-        # Disparo Alcista: Cruce con aceleración hacia arriba (>52 viniendo de <48) o rebote desde sobreventa (<30)
+        # Filtro de Tendencia y Agotamiento:
+        # En OTC, aceleraciones de RSI en contra de la tendencia mayor (SMA200 o EMA20) son trampas de reversión inmediata.
+        sma_200 = df.get('SMA_200', close.rolling(min(len(df), 200)).mean()).iloc[-1]
+        ema_20 = df.get('EMA_20', close.ewm(span=20, adjust=False).mean()).iloc[-1]
+
+        # Disparo Alcista: Cruce con aceleración hacia arriba (>52 viniendo de <48) o rebote desde sobreventa (<32)
+        # Exigencia: Precio sobre EMA20 y no comprar en techo agotado (curr_rsi < 62)
         cruce_arriba = (prev_rsi <= 50 and curr_rsi >= 53 and curr_close > curr_open)
         rebote_sobreventa = (prev_rsi < 32 and curr_rsi > 35 and curr_close > curr_open)
-        if cruce_arriba or rebote_sobreventa:
-            reason = "Aceleración RSI 50+" if cruce_arriba else f"Rebote sobreventa RSI ({curr_rsi:.1f})"
-            return 'BUY', reason, time_diff
+        if (cruce_arriba or rebote_sobreventa) and (curr_close >= ema_20) and (curr_rsi <= 62):
+            if curr_close >= sma_200 or rebote_sobreventa:
+                reason = "Aceleración RSI 50+ con Tendencia" if cruce_arriba else f"Rebote sobreventa RSI ({curr_rsi:.1f})"
+                return 'BUY', reason, time_diff
 
-        # Disparo Bajista: Cruce con aceleración hacia abajo (<48 viniendo de >52) o rechazo desde sobrecompra (>70)
+        # Disparo Bajista: Cruce con aceleración hacia abajo (<48 viniendo de >52) o rechazo desde sobrecompra (>68)
+        # Exigencia: Precio bajo EMA20 y no vender en piso agotado (curr_rsi > 38)
         cruce_abajo = (prev_rsi >= 50 and curr_rsi <= 47 and curr_close < curr_open)
         rebote_sobrecompra = (prev_rsi > 68 and curr_rsi < 65 and curr_close < curr_open)
-        if cruce_abajo or rebote_sobrecompra:
-            reason = "Aceleración RSI 50-" if cruce_abajo else f"Rechazo sobrecompra RSI ({curr_rsi:.1f})"
-            return 'SELL', reason, time_diff
+        if (cruce_abajo or rebote_sobrecompra) and (curr_close <= ema_20) and (curr_rsi >= 38):
+            if curr_close <= sma_200 or rebote_sobrecompra:
+                reason = "Aceleración RSI 50- con Tendencia" if cruce_abajo else f"Rechazo sobrecompra RSI ({curr_rsi:.1f})"
+                return 'SELL', reason, time_diff
 
-        return 'HOLD', "Sin impulso RSI suficiente", 0
+        return 'HOLD', "Sin impulso RSI suficiente o contra tendencia", 0
 
 
 class MicroRangeBreakout(Strategy):

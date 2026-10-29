@@ -1,935 +1,1967 @@
 {
-  "last_fetch": "2026-10-25T18:14:09.411798",
+  "last_fetch": "2026-10-28T21:58:31.661155",
   "events": [
     {
-      "time": "2026-10-25T18:10:00",
-      "currency": "AUD",
+      "time": "2026-10-28T18:00:00",
+      "currency": "KRW",
       "impact": 2,
-      "event": "RBA Jones Speech"
+      "event": "Business Confidence"
     },
     {
-      "time": "2026-10-25T21:00:00",
+      "time": "2026-10-28T20:50:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Foreign Bond Investment"
+    },
+    {
+      "time": "2026-10-28T20:50:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Stock Investment by Foreigners"
+    },
+    {
+      "time": "2026-10-28T21:00:00",
+      "currency": "TRY",
+      "impact": 1,
+      "event": "Republic Day"
+    },
+    {
+      "time": "2026-10-28T21:00:00",
+      "currency": "NZD",
+      "impact": 2,
+      "event": "ANZ Business Confidence"
+    },
+    {
+      "time": "2026-10-28T21:00:00",
       "currency": "CNY",
       "impact": 2,
       "event": "Communist Party Fifth Plenum"
     },
     {
-      "time": "2026-10-25T21:00:00",
-      "currency": "MMK",
+      "time": "2026-10-28T21:00:00",
+      "currency": "KHR",
       "impact": 1,
-      "event": "Full Moon Day of Thadingyut"
+      "event": "King Sihamoni’s Coronation Day"
     },
     {
-      "time": "2026-10-25T21:00:00",
-      "currency": "EUR",
+      "time": "2026-10-28T21:01:00",
+      "currency": "GBP",
       "impact": 1,
-      "event": "October Bank Holiday"
+      "event": "Car Production YoY"
     },
     {
-      "time": "2026-10-25T21:00:00",
-      "currency": "NZD",
+      "time": "2026-10-28T21:30:00",
+      "currency": "AUD",
       "impact": 1,
-      "event": "Labor Day"
+      "event": "Import Prices QoQ"
     },
     {
-      "time": "2026-10-25T21:00:00",
-      "currency": "EUR",
+      "time": "2026-10-28T21:30:00",
+      "currency": "AUD",
       "impact": 1,
-      "event": "National Day"
+      "event": "Export Prices QoQ"
     },
     {
-      "time": "2026-10-25T23:00:00",
+      "time": "2026-10-28T23:30:00",
       "currency": "BHD",
       "impact": 1,
       "event": "GDP Growth Rate YoY"
     },
     {
-      "time": "2026-10-25T23:30:00",
-      "currency": "KRW",
-      "impact": 1,
-      "event": "5-Year KTB Auction"
-    },
-    {
-      "time": "2026-10-26T00:30:00",
-      "currency": "THB",
-      "impact": 1,
-      "event": "Exports YoY"
-    },
-    {
-      "time": "2026-10-26T00:30:00",
-      "currency": "THB",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-26T00:30:00",
-      "currency": "THB",
-      "impact": 1,
-      "event": "Imports YoY"
-    },
-    {
-      "time": "2026-10-26T01:00:00",
-      "currency": "THB",
-      "impact": 1,
-      "event": "New Car Sales YoY"
-    },
-    {
-      "time": "2026-10-26T02:00:00",
+      "time": "2026-10-29T00:30:00",
       "currency": "SGD",
-      "impact": 1,
-      "event": "Industrial Production MoM"
-    },
-    {
-      "time": "2026-10-26T02:00:00",
-      "currency": "JPY",
-      "impact": 1,
-      "event": "Leading Economic Index Final"
-    },
-    {
-      "time": "2026-10-26T02:00:00",
-      "currency": "JPY",
-      "impact": 1,
-      "event": "Coincident Index Final"
-    },
-    {
-      "time": "2026-10-26T02:00:00",
-      "currency": "SGD",
-      "impact": 1,
-      "event": "Industrial Production YoY"
-    },
-    {
-      "time": "2026-10-26T03:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "ECB Elderson Speech"
-    },
-    {
-      "time": "2026-10-26T03:00:00",
-      "currency": "SAR",
-      "impact": 1,
-      "event": "Imports"
-    },
-    {
-      "time": "2026-10-26T03:00:00",
-      "currency": "SAR",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-26T03:00:00",
-      "currency": "SAR",
-      "impact": 1,
-      "event": "Exports"
-    },
-    {
-      "time": "2026-10-26T03:00:00",
-      "currency": "EUR",
       "impact": 1,
       "event": "Export Prices YoY"
     },
     {
-      "time": "2026-10-26T03:00:00",
-      "currency": "EUR",
+      "time": "2026-10-29T00:30:00",
+      "currency": "SGD",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-29T00:30:00",
+      "currency": "SGD",
       "impact": 1,
       "event": "Import Prices YoY"
     },
     {
-      "time": "2026-10-26T03:00:00",
-      "currency": "EUR",
+      "time": "2026-10-29T00:35:00",
+      "currency": "JPY",
       "impact": 1,
-      "event": "PPI YoY"
+      "event": "2-Year JGB Auction"
     },
     {
-      "time": "2026-10-26T04:00:00",
-      "currency": "SEK",
+      "time": "2026-10-29T00:35:00",
+      "currency": "JPY",
       "impact": 1,
-      "event": "PPI YoY"
+      "event": "3-Month Bill Auction"
     },
     {
-      "time": "2026-10-26T04:00:00",
-      "currency": "SEK",
-      "impact": 1,
-      "event": "PPI MoM"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "CZK",
-      "impact": 1,
-      "event": "Consumer Confidence"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "AMD",
-      "impact": 1,
-      "event": "PPI YoY"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "AMD",
-      "impact": 1,
-      "event": "Economic Activity YoY"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "AMD",
-      "impact": 1,
-      "event": "Industrial Production YoY"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "AMD",
-      "impact": 1,
-      "event": "Retail Sales YoY"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "CZK",
-      "impact": 1,
-      "event": "Business Confidence"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "PPI YoY"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "AMD",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "TWD",
-      "impact": 1,
-      "event": "Retail Sales YoY"
-    },
-    {
-      "time": "2026-10-26T05:00:00",
-      "currency": "AMD",
-      "impact": 1,
-      "event": "Construction Output YoY"
-    },
-    {
-      "time": "2026-10-26T05:20:00",
-      "currency": "TWD",
-      "impact": 1,
-      "event": "M2 Money Supply YoY"
-    },
-    {
-      "time": "2026-10-26T06:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Ifo Expectations"
-    },
-    {
-      "time": "2026-10-26T06:00:00",
-      "currency": "EUR",
+      "time": "2026-10-29T02:00:00",
+      "currency": "JPY",
       "impact": 3,
-      "event": "Ifo Business Climate"
-    },
-    {
-      "time": "2026-10-26T06:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Ifo Current Conditions"
-    },
-    {
-      "time": "2026-10-26T06:30:00",
-      "currency": "ZAR",
-      "impact": 1,
-      "event": "364-Day T-Bill Auction"
-    },
-    {
-      "time": "2026-10-26T06:30:00",
-      "currency": "ZAR",
-      "impact": 1,
-      "event": "273-Day T-Bill Auction"
-    },
-    {
-      "time": "2026-10-26T06:30:00",
-      "currency": "ZAR",
-      "impact": 1,
-      "event": "182-Day T-Bill Auction"
-    },
-    {
-      "time": "2026-10-26T06:30:00",
-      "currency": "ZAR",
-      "impact": 1,
-      "event": "91-Day T-Bill Auction"
-    },
-    {
-      "time": "2026-10-26T06:30:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Business Confidence"
-    },
-    {
-      "time": "2026-10-26T07:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-26T07:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-26T07:30:00",
-      "currency": "PKR",
-      "impact": 1,
-      "event": "Interest Rate Decision"
-    },
-    {
-      "time": "2026-10-26T08:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "2036 OLO Auction"
-    },
-    {
-      "time": "2026-10-26T08:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "2040 OLO Auctio"
-    },
-    {
-      "time": "2026-10-26T08:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "2033 OLO Auction"
-    },
-    {
-      "time": "2026-10-26T08:00:00",
-      "currency": "BRL",
-      "impact": 1,
-      "event": "FGV Consumer Confidence"
-    },
-    {
-      "time": "2026-10-26T08:00:00",
-      "currency": "GBP",
-      "impact": 2,
-      "event": "CBI Distributive Trades"
-    },
-    {
-      "time": "2026-10-26T08:10:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "2036 EU-Bonds Auction"
-    },
-    {
-      "time": "2026-10-26T08:10:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "2051 EU-Bonds Auction"
-    },
-    {
-      "time": "2026-10-26T08:10:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "2029 EU-Bonds Auction"
-    },
-    {
-      "time": "2026-10-26T08:30:00",
-      "currency": "BRL",
-      "impact": 2,
-      "event": "BCB Focus Market Readout"
-    },
-    {
-      "time": "2026-10-26T08:30:00",
-      "currency": "BRL",
-      "impact": 1,
-      "event": "Current Account"
-    },
-    {
-      "time": "2026-10-26T08:30:00",
-      "currency": "BRL",
-      "impact": 1,
-      "event": "Foreign Direct Investment"
-    },
-    {
-      "time": "2026-10-26T09:30:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "Chicago Fed National Activity Index"
-    },
-    {
-      "time": "2026-10-26T10:00:00",
-      "currency": "KWD",
-      "impact": 1,
-      "event": "M2 Money Supply YoY"
-    },
-    {
-      "time": "2026-10-26T10:00:00",
-      "currency": "KWD",
-      "impact": 1,
-      "event": "Private Bank Lending YoY"
-    },
-    {
-      "time": "2026-10-26T11:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "6-Month BTF Auction"
-    },
-    {
-      "time": "2026-10-26T11:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "12-Month BTF Auction"
-    },
-    {
-      "time": "2026-10-26T11:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "3-Month BTF Auction"
-    },
-    {
-      "time": "2026-10-26T11:30:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "Dallas Fed Manufacturing Index"
-    },
-    {
-      "time": "2026-10-26T12:30:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "6-Month Bill Auction"
-    },
-    {
-      "time": "2026-10-26T12:30:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "3-Month Bill Auction"
-    },
-    {
-      "time": "2026-10-26T14:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "2-Year Note Auction"
-    },
-    {
-      "time": "2026-10-26T18:00:00",
-      "currency": "KRW",
-      "impact": 2,
       "event": "Consumer Confidence"
     },
     {
-      "time": "2026-10-26T20:00:00",
-      "currency": "SVC",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-26T20:00:00",
-      "currency": "KRW",
-      "impact": 2,
-      "event": "GDP Growth Rate QoQ Adv"
-    },
-    {
-      "time": "2026-10-26T20:00:00",
-      "currency": "KRW",
-      "impact": 2,
-      "event": "GDP Growth Rate YoY Adv"
-    },
-    {
-      "time": "2026-10-26T21:00:00",
-      "currency": "MMK",
-      "impact": 1,
-      "event": "Full Moon Day of Thadingyut"
-    },
-    {
-      "time": "2026-10-26T21:00:00",
-      "currency": "ILS",
-      "impact": 1,
-      "event": "Legislative Elections"
-    },
-    {
-      "time": "2026-10-26T21:00:00",
-      "currency": "CNY",
-      "impact": 2,
-      "event": "Communist Party Fifth Plenum"
-    },
-    {
-      "time": "2026-10-26T21:01:00",
-      "currency": "GBP",
-      "impact": 1,
-      "event": "BRC Shop Price Inflation"
-    },
-    {
-      "time": "2026-10-26T22:30:00",
-      "currency": "CNY",
-      "impact": 1,
-      "event": "Industrial Profits (YTD) YoY"
-    },
-    {
-      "time": "2026-10-26T22:35:00",
-      "currency": "NZD",
-      "impact": 1,
-      "event": "1-Year Bill Auction"
-    },
-    {
-      "time": "2026-10-26T22:35:00",
-      "currency": "NZD",
-      "impact": 1,
-      "event": "3-Month Bill Auction"
-    },
-    {
-      "time": "2026-10-26T22:35:00",
-      "currency": "NZD",
-      "impact": 1,
-      "event": "6-Month Bill Auction"
-    },
-    {
-      "time": "2026-10-26T23:00:00",
-      "currency": "TWD",
-      "impact": 1,
-      "event": "Consumer Confidence"
-    },
-    {
-      "time": "2026-10-26T23:30:00",
-      "currency": "KRW",
-      "impact": 1,
-      "event": "20-Year KTB Auction"
-    },
-    {
-      "time": "2026-10-27T01:00:00",
-      "currency": "KGS",
-      "impact": 1,
-      "event": "Interest Rate Decision"
-    },
-    {
-      "time": "2026-10-27T02:00:00",
-      "currency": "SGD",
-      "impact": 1,
-      "event": "MAS 12-Week Bill Auction"
-    },
-    {
-      "time": "2026-10-27T02:00:00",
-      "currency": "SGD",
-      "impact": 1,
-      "event": "MAS 36-Week Bill Auction"
-    },
-    {
-      "time": "2026-10-27T02:00:00",
-      "currency": "SGD",
-      "impact": 1,
-      "event": "MAS 4-Week Bill Auction"
-    },
-    {
-      "time": "2026-10-27T03:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Consumer Confidence"
-    },
-    {
-      "time": "2026-10-27T03:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Business Confidence"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
-      "currency": "SEK",
-      "impact": 1,
-      "event": "Balance of Trade"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
+      "time": "2026-10-29T03:00:00",
       "currency": "EUR",
       "impact": 1,
       "event": "Retail Sales YoY"
     },
     {
-      "time": "2026-10-27T04:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Industrial Production MoM"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Industrial Production YoY"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
-      "currency": "SEK",
-      "impact": 1,
-      "event": "Household Lending Growth YoY"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
-      "currency": "TRY",
-      "impact": 1,
-      "event": "Participation Rate"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
-      "currency": "TRY",
-      "impact": 2,
-      "event": "Unemployment Rate"
-    },
-    {
-      "time": "2026-10-27T04:00:00",
+      "time": "2026-10-29T03:00:00",
       "currency": "ZAR",
-      "impact": 1,
-      "event": "Leading Business Cycle Indicator MoM"
-    },
-    {
-      "time": "2026-10-27T04:45:00",
-      "currency": "EUR",
-      "impact": 2,
-      "event": "Consumer Confidence"
-    },
-    {
-      "time": "2026-10-27T05:00:00",
-      "currency": "EUR",
-      "impact": 2,
-      "event": "Unemployment Rate"
-    },
-    {
-      "time": "2026-10-27T05:30:00",
-      "currency": "BHD",
-      "impact": 1,
-      "event": "Inflation Rate YoY"
-    },
-    {
-      "time": "2026-10-27T06:00:00",
-      "currency": "EUR",
       "impact": 1,
       "event": "M3 Money Supply YoY"
     },
     {
-      "time": "2026-10-27T06:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Loans to Households YoY"
-    },
-    {
-      "time": "2026-10-27T06:00:00",
-      "currency": "EUR",
-      "impact": 1,
-      "event": "Loans to Companies YoY"
-    },
-    {
-      "time": "2026-10-27T06:30:00",
+      "time": "2026-10-29T03:00:00",
       "currency": "ZAR",
       "impact": 1,
-      "event": "2039 Bond Auction"
+      "event": "Private Sector Credit YoY"
     },
     {
-      "time": "2026-10-27T06:30:00",
-      "currency": "ZAR",
-      "impact": 1,
-      "event": "2042 Bond Auction"
-    },
-    {
-      "time": "2026-10-27T06:30:00",
-      "currency": "ZAR",
-      "impact": 1,
-      "event": "2040 Bond Auction"
-    },
-    {
-      "time": "2026-10-27T07:00:00",
-      "currency": "GBP",
-      "impact": 1,
-      "event": "Treasury Gilt 2032 Auction"
-    },
-    {
-      "time": "2026-10-27T07:00:00",
+      "time": "2026-10-29T03:00:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "ATB 2027-04-29 Auction"
+      "event": "Retail Sales MoM"
     },
     {
-      "time": "2026-10-27T07:00:00",
+      "time": "2026-10-29T03:00:00",
+      "currency": "UZS",
+      "impact": 1,
+      "event": "Interest Rate Decision"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "Consumer Confidence"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "GDP MoM"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "Consumer Inflation Expectations"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "Economic Tendency Indicator"
+    },
+    {
+      "time": "2026-10-29T04:00:00",
+      "currency": "SEK",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-29T04:30:00",
+      "currency": "HUF",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-29T04:30:00",
+      "currency": "HUF",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-29T05:00:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "ATB 2027-01-28 Auction"
+      "event": "Consumer Confidence"
     },
     {
-      "time": "2026-10-27T07:00:00",
-      "currency": "BAM",
+      "time": "2026-10-29T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-29T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-29T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-29T05:30:00",
+      "currency": "ZMW",
       "impact": 1,
       "event": "Inflation Rate YoY"
     },
     {
-      "time": "2026-10-27T07:00:00",
-      "currency": "BAM",
+      "time": "2026-10-29T05:30:00",
+      "currency": "ZMW",
       "impact": 1,
       "event": "Inflation Rate MoM"
     },
     {
-      "time": "2026-10-27T07:00:00",
+      "time": "2026-10-29T06:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-29T06:00:00",
+      "currency": "ISK",
+      "impact": 1,
+      "event": "Inflation Rate MoM"
+    },
+    {
+      "time": "2026-10-29T06:00:00",
+      "currency": "ISK",
+      "impact": 1,
+      "event": "Inflation Rate YoY"
+    },
+    {
+      "time": "2026-10-29T06:00:00",
+      "currency": "BGN",
+      "impact": 1,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "GBP",
+      "impact": 2,
+      "event": "Mortgage Approvals"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "GBP",
+      "impact": 2,
+      "event": "Mortgage Lending"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "ZAR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Consumer Confidence"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "ZAR",
+      "impact": 1,
+      "event": "PPI MoM"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "GBP",
+      "impact": 1,
+      "event": "Net Lending to Individuals MoM"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "GBP",
+      "impact": 1,
+      "event": "M4 Money Supply MoM"
+    },
+    {
+      "time": "2026-10-29T06:30:00",
+      "currency": "GBP",
+      "impact": 2,
+      "event": "BoE Consumer Credit"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "HRK",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Tourist Arrivals YoY"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Adv"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Industrial Sentiment"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Adv"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Consumer Confidence Final"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Services Sentiment"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Consumer Inflation Expectations"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Selling Price Expectations"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Economic Sentiment"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-29T07:00:00",
       "currency": "EUR",
       "impact": 2,
       "event": "Consumer Confidence"
     },
     {
-      "time": "2026-10-27T07:05:00",
-      "currency": "SEK",
+      "time": "2026-10-29T07:00:00",
+      "currency": "GBP",
       "impact": 1,
-      "event": "83-Day T-Bill Auction"
+      "event": "Conventional/Index-linked Gilt Tender"
     },
     {
-      "time": "2026-10-27T07:10:00",
+      "time": "2026-10-29T07:10:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "30-Year BTP€i Auction"
+      "event": "10-Year BTP Auction"
     },
     {
-      "time": "2026-10-27T07:10:00",
+      "time": "2026-10-29T07:10:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "15-Year BTP€i Auction"
+      "event": "7-Year BTP Auction"
     },
     {
-      "time": "2026-10-27T07:10:00",
+      "time": "2026-10-29T07:10:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "2-Year BTP Short Term Auction"
+      "event": "5-Year BTP Auction"
     },
     {
-      "time": "2026-10-27T07:15:00",
+      "time": "2026-10-29T07:15:00",
+      "currency": "BWP",
+      "impact": 1,
+      "event": "Interest Rate Decision"
+    },
+    {
+      "time": "2026-10-29T07:30:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "13-Week Bill Auction"
+      "event": "Inflation Rate MoM"
     },
     {
-      "time": "2026-10-27T07:30:00",
+      "time": "2026-10-29T07:30:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "2-Year Schatz Auction"
+      "event": "Harmonised Inflation Rate YoY Prel"
     },
     {
-      "time": "2026-10-27T07:30:00",
+      "time": "2026-10-29T07:30:00",
       "currency": "HUF",
       "impact": 1,
-      "event": "3-Month DTB Auction"
+      "event": "10-Year Bond Auction"
     },
     {
-      "time": "2026-10-27T08:00:00",
+      "time": "2026-10-29T07:30:00",
+      "currency": "HUF",
+      "impact": 1,
+      "event": "5-Year Bond Auction"
+    },
+    {
+      "time": "2026-10-29T07:30:00",
+      "currency": "HUF",
+      "impact": 1,
+      "event": "3-Year Bond Auction"
+    },
+    {
+      "time": "2026-10-29T07:30:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "Wholesale Prices MoM"
+      "event": "Inflation Rate YoY"
     },
     {
-      "time": "2026-10-27T08:00:00",
+      "time": "2026-10-29T08:00:00",
+      "currency": "BRL",
+      "impact": 1,
+      "event": "IGP-M Inflation MoM"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
+      "currency": "ILS",
+      "impact": 1,
+      "event": "Inflation Expectations"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "Wholesale Prices YoY"
+      "event": "GDP Growth Rate QoQ Prel"
     },
     {
-      "time": "2026-10-27T08:00:00",
+      "time": "2026-10-29T08:00:00",
       "currency": "EUR",
       "impact": 1,
-      "event": "Total Credit YoY"
+      "event": "GDP Growth Rate YoY Prel"
     },
     {
-      "time": "2026-10-27T09:00:00",
-      "currency": "MXN",
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Wage Growth YoY"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
       "impact": 2,
-      "event": "Balance of Trade"
+      "event": "Business Confidence"
     },
     {
-      "time": "2026-10-27T09:00:00",
-      "currency": "BRL",
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
       "impact": 1,
-      "event": "PPI MoM"
+      "event": "Unemployment Rate"
     },
     {
-      "time": "2026-10-27T09:00:00",
-      "currency": "BRL",
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Consumer Confidence"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-29T08:00:00",
+      "currency": "EUR",
       "impact": 1,
       "event": "PPI YoY"
     },
     {
-      "time": "2026-10-27T09:00:00",
+      "time": "2026-10-29T08:00:00",
+      "currency": "UAH",
+      "impact": 1,
+      "event": "Interest Rate Decision"
+    },
+    {
+      "time": "2026-10-29T08:20:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "RFGB ORI Auction"
+    },
+    {
+      "time": "2026-10-29T08:30:00",
+      "currency": "BRL",
+      "impact": 1,
+      "event": "Bank Lending MoM"
+    },
+    {
+      "time": "2026-10-29T09:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
       "currency": "USD",
       "impact": 1,
-      "event": "Building Permits Final"
+      "event": "Real Personal Spending MoM"
     },
     {
-      "time": "2026-10-27T09:00:00",
+      "time": "2026-10-29T09:30:00",
       "currency": "USD",
       "impact": 2,
-      "event": "Building Permits MoM Final"
+      "event": "GDP Price Index QoQ Adv"
     },
     {
-      "time": "2026-10-27T09:15:00",
+      "time": "2026-10-29T09:30:00",
       "currency": "USD",
       "impact": 2,
-      "event": "ADP Employment Change Weekly"
+      "event": "Initial Jobless Claims"
     },
     {
-      "time": "2026-10-27T09:30:00",
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Continuing Jobless Claims"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "PCE Price Index YoY"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "PCE Price Index MoM"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Jobless Claims 4-week Average"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "GDP Sales QoQ Adv"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
       "currency": "USD",
       "impact": 3,
-      "event": "Durable Goods Orders MoM"
+      "event": "Core PCE Price Index MoM"
     },
     {
-      "time": "2026-10-27T09:30:00",
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 3,
+      "event": "GDP Growth Rate QoQ Adv"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Real Consumer Spending QoQ Adv"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 3,
+      "event": "Personal Income MoM"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Core PCE Prices QoQ Adv"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 3,
+      "event": "Personal Spending MoM"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Core PCE Price Index YoY"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "PCE Prices QoQ Adv"
+    },
+    {
+      "time": "2026-10-29T09:30:00",
       "currency": "CAD",
       "impact": 1,
-      "event": "Wholesale Sales MoM Prel"
+      "event": "Average Weekly Earnings YoY"
     },
     {
-      "time": "2026-10-27T09:30:00",
-      "currency": "USD",
+      "time": "2026-10-29T10:15:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "Deposit Facility Rate"
+    },
+    {
+      "time": "2026-10-29T10:15:00",
+      "currency": "EUR",
       "impact": 1,
-      "event": "Durable Goods Orders ex Defense MoM"
+      "event": "Marginal Lending Rate"
     },
     {
-      "time": "2026-10-27T09:30:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Non Defense Goods Orders Ex Air"
-    },
-    {
-      "time": "2026-10-27T09:30:00",
-      "currency": "USD",
+      "time": "2026-10-29T10:15:00",
+      "currency": "EUR",
       "impact": 2,
-      "event": "Durable Goods Orders Ex Transp MoM"
+      "event": "ECB Monetary Policy Statement"
     },
     {
-      "time": "2026-10-27T09:55:00",
+      "time": "2026-10-29T10:15:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "ECB Interest Rate Decision"
+    },
+    {
+      "time": "2026-10-29T10:45:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "ECB Press Conference"
+    },
+    {
+      "time": "2026-10-29T11:00:00",
+      "currency": "SAR",
+      "impact": 1,
+      "event": "Private Bank Lending YoY"
+    },
+    {
+      "time": "2026-10-29T11:00:00",
+      "currency": "SAR",
+      "impact": 1,
+      "event": "M3 Money Supply YoY"
+    },
+    {
+      "time": "2026-10-29T11:10:00",
+      "currency": "COP",
+      "impact": 1,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-29T11:30:00",
       "currency": "USD",
       "impact": 1,
-      "event": "Redbook YoY"
+      "event": "EIA Natural Gas Stocks Change"
     },
     {
-      "time": "2026-10-27T10:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "House Price Index"
-    },
-    {
-      "time": "2026-10-27T10:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "House Price Index YoY"
-    },
-    {
-      "time": "2026-10-27T10:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "S&P/Case-Shiller Home Price MoM"
-    },
-    {
-      "time": "2026-10-27T10:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "House Price Index MoM"
-    },
-    {
-      "time": "2026-10-27T10:00:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "S&P/Case-Shiller Home Price YoY"
-    },
-    {
-      "time": "2026-10-27T11:00:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "CB Consumer Confidence"
-    },
-    {
-      "time": "2026-10-27T11:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Richmond Fed Manufacturing Index"
-    },
-    {
-      "time": "2026-10-27T11:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Richmond Fed Services Revenues Index"
-    },
-    {
-      "time": "2026-10-27T11:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Richmond Fed Manufacturing Shipments Index"
-    },
-    {
-      "time": "2026-10-27T11:00:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "New Home Sales"
-    },
-    {
-      "time": "2026-10-27T11:00:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "New Home Sales MoM"
-    },
-    {
-      "time": "2026-10-27T11:30:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Dallas Fed Services Revenues Index"
-    },
-    {
-      "time": "2026-10-27T11:30:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Dallas Fed Services Index"
-    },
-    {
-      "time": "2026-10-27T12:00:00",
+      "time": "2026-10-29T12:00:00",
       "currency": "USD",
       "impact": 2,
       "event": "Atlanta Fed GDPNow"
     },
     {
-      "time": "2026-10-27T12:30:00",
+      "time": "2026-10-29T12:30:00",
       "currency": "USD",
       "impact": 1,
-      "event": "6-Week Bill Auction"
+      "event": "4-Week Bill Auction"
     },
     {
-      "time": "2026-10-27T12:30:00",
+      "time": "2026-10-29T12:30:00",
       "currency": "USD",
       "impact": 1,
-      "event": "52-Week Bill Auction"
+      "event": "8-Week Bill Auction"
     },
     {
-      "time": "2026-10-27T14:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "5-Year Note Auction"
-    },
-    {
-      "time": "2026-10-27T14:00:00",
-      "currency": "USD",
-      "impact": 1,
-      "event": "Money Supply"
-    },
-    {
-      "time": "2026-10-27T14:00:00",
-      "currency": "EUR",
-      "impact": 2,
-      "event": "ECB President Lagarde Speech"
-    },
-    {
-      "time": "2026-10-27T17:30:00",
-      "currency": "USD",
-      "impact": 2,
-      "event": "API Crude Oil Stock Change"
-    },
-    {
-      "time": "2026-10-27T18:00:00",
-      "currency": "CLF",
+      "time": "2026-10-29T13:00:00",
+      "currency": "EGP",
       "impact": 1,
       "event": "Interest Rate Decision"
     },
     {
-      "time": "2026-10-27T20:01:00",
+      "time": "2026-10-29T13:00:00",
+      "currency": "EGP",
+      "impact": 1,
+      "event": "Overnight Lending Rate"
+    },
+    {
+      "time": "2026-10-29T13:00:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "30-Year Mortgage Rate"
+    },
+    {
+      "time": "2026-10-29T13:00:00",
+      "currency": "CAD",
+      "impact": 1,
+      "event": "10-Year Bond Auction"
+    },
+    {
+      "time": "2026-10-29T13:00:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "15-Year Mortgage Rate"
+    },
+    {
+      "time": "2026-10-29T14:00:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "7-Year Note Auction"
+    },
+    {
+      "time": "2026-10-29T14:30:00",
+      "currency": "BRL",
+      "impact": 1,
+      "event": "Net Payrolls"
+    },
+    {
+      "time": "2026-10-29T14:30:00",
+      "currency": "CHF",
+      "impact": 2,
+      "event": "SNB Tschudin Speech"
+    },
+    {
+      "time": "2026-10-29T14:50:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "ECB Cipollone Speech"
+    },
+    {
+      "time": "2026-10-29T17:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Reserve Balances with Fed Banks"
+    },
+    {
+      "time": "2026-10-29T17:30:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Fed Balance Sheet"
+    },
+    {
+      "time": "2026-10-29T18:00:00",
+      "currency": "NZD",
+      "impact": 1,
+      "event": "ANZ Roy Morgan Consumer Confidence"
+    },
+    {
+      "time": "2026-10-29T20:00:00",
+      "currency": "KRW",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-29T20:00:00",
+      "currency": "KRW",
+      "impact": 1,
+      "event": "Industrial Production MoM"
+    },
+    {
+      "time": "2026-10-29T20:00:00",
+      "currency": "KRW",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-29T20:01:00",
       "currency": "EUR",
       "impact": 1,
       "event": "Consumer Confidence"
+    },
+    {
+      "time": "2026-10-29T20:30:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Tokyo CPI Ex Food and Energy YoY"
+    },
+    {
+      "time": "2026-10-29T20:30:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Jobs/applications ratio"
+    },
+    {
+      "time": "2026-10-29T20:30:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Tokyo CPI YoY"
+    },
+    {
+      "time": "2026-10-29T20:30:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Tokyo Core CPI YoY"
+    },
+    {
+      "time": "2026-10-29T20:30:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-29T20:50:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Industrial Production YoY Prel"
+    },
+    {
+      "time": "2026-10-29T20:50:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-29T20:50:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "Industrial Production MoM Prel"
+    },
+    {
+      "time": "2026-10-29T20:50:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-29T21:30:00",
+      "currency": "AUD",
+      "impact": 1,
+      "event": "Private Sector Credit MoM"
+    },
+    {
+      "time": "2026-10-29T21:30:00",
+      "currency": "AUD",
+      "impact": 2,
+      "event": "PPI QoQ"
+    },
+    {
+      "time": "2026-10-29T21:30:00",
+      "currency": "AUD",
+      "impact": 1,
+      "event": "Private Sector Credit YoY"
+    },
+    {
+      "time": "2026-10-29T21:30:00",
+      "currency": "AUD",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-29T21:30:00",
+      "currency": "AUD",
+      "impact": 1,
+      "event": "Housing Credit MoM"
+    },
+    {
+      "time": "2026-10-29T22:00:00",
+      "currency": "PHP",
+      "impact": 1,
+      "event": "Exports YoY"
+    },
+    {
+      "time": "2026-10-29T22:00:00",
+      "currency": "PHP",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-29T22:00:00",
+      "currency": "PHP",
+      "impact": 1,
+      "event": "Imports YoY"
+    },
+    {
+      "time": "2026-10-29T22:00:00",
+      "currency": "PHP",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-29T23:00:00",
+      "currency": "SGD",
+      "impact": 1,
+      "event": "Bank Lending"
+    },
+    {
+      "time": "2026-10-29T23:00:00",
+      "currency": "SGD",
+      "impact": 1,
+      "event": "Unemployment Rate Prel"
+    },
+    {
+      "time": "2026-10-30T00:00:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "BoJ Monetary Policy Statement"
+    },
+    {
+      "time": "2026-10-30T00:00:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "BoJ Quarterly Outlook Report"
+    },
+    {
+      "time": "2026-10-30T00:00:00",
+      "currency": "JPY",
+      "impact": 3,
+      "event": "BoJ Interest Rate Decision"
+    },
+    {
+      "time": "2026-10-30T01:00:00",
+      "currency": "THB",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-30T02:00:00",
+      "currency": "JPY",
+      "impact": 1,
+      "event": "Construction Orders YoY"
+    },
+    {
+      "time": "2026-10-30T02:00:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "Housing Starts YoY"
+    },
+    {
+      "time": "2026-10-30T02:00:00",
+      "currency": "SGD",
+      "impact": 1,
+      "event": "Business Confidence"
+    },
+    {
+      "time": "2026-10-30T03:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP YoY"
+    },
+    {
+      "time": "2026-10-30T03:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T03:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T03:30:00",
+      "currency": "JPY",
+      "impact": 2,
+      "event": "BoJ Press Conference"
+    },
+    {
+      "time": "2026-10-30T03:30:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T03:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Household Consumption MoM"
+    },
+    {
+      "time": "2026-10-30T03:30:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "THB",
+      "impact": 1,
+      "event": "Private Investment MoM"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "RON",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "GBP",
+      "impact": 2,
+      "event": "Nationwide Housing Prices MoM"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "GBP",
+      "impact": 2,
+      "event": "Nationwide Housing Prices YoY"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "GEL",
+      "impact": 1,
+      "event": "GDP YoY"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "NOK",
+      "impact": 1,
+      "event": "Registered Jobless Rate"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "NOK",
+      "impact": 1,
+      "event": "Unemployed Persons"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "MYR",
+      "impact": 1,
+      "event": "M3 Money Supply YoY"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "THB",
+      "impact": 1,
+      "event": "Current Account"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Import Prices MoM"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Import Prices YoY"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "DKK",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "TRY",
+      "impact": 1,
+      "event": "Tourism Revenues"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "TRY",
+      "impact": 1,
+      "event": "Economic Confidence Index"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "THB",
+      "impact": 1,
+      "event": "Private Consumption MoM"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-30T04:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-30T04:30:00",
+      "currency": "HUF",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T04:30:00",
+      "currency": "HUF",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T04:30:00",
+      "currency": "CHF",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-30T04:30:00",
+      "currency": "THB",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T04:30:00",
+      "currency": "CHF",
+      "impact": 2,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI MoM"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Private Non Farm Payrolls QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T04:45:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "KES",
+      "impact": 1,
+      "event": "Inflation Rate YoY"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI MoM"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "CHF",
+      "impact": 2,
+      "event": "KOF Leading Indicators"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "CZK",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "CZK",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Core Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "TRY",
+      "impact": 1,
+      "event": "Tourist Arrivals YoY"
+    },
+    {
+      "time": "2026-10-30T05:00:00",
+      "currency": "TWD",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Adv"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "MOP",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "MOP",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "UGX",
+      "impact": 1,
+      "event": "Inflation Rate YoY"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "MOP",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "PLN",
+      "impact": 2,
+      "event": "Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-30T05:30:00",
+      "currency": "PLN",
+      "impact": 1,
+      "event": "Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T05:55:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T05:55:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Unemployment Change"
+    },
+    {
+      "time": "2026-10-30T05:55:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Unemployed Persons"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Saxony CPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate QoQ Adv"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "NGN",
+      "impact": 1,
+      "event": "Foreign Exchange Reserves"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Hesse CPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "North Rhine Westphalia CPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Baden Wuerttemberg CPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "North Rhine Westphalia CPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Current Account"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Brandenburg CPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Hesse CPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Baden Wuerttemberg CPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Brandenburg CPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "GBP",
+      "impact": 1,
+      "event": "BoE Mills Speech"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "CZK",
+      "impact": 1,
+      "event": "M3 Money Supply YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "BGN",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Bavaria CPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "BGN",
+      "impact": 1,
+      "event": "PPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate YoY Adv"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Saxony CPI MoM"
+    },
+    {
+      "time": "2026-10-30T06:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Bavaria CPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:25:00",
+      "currency": "DKK",
+      "impact": 1,
+      "event": "T-Bill 2026/IV Auction"
+    },
+    {
+      "time": "2026-10-30T06:25:00",
+      "currency": "DKK",
+      "impact": 1,
+      "event": "T-Bill 2027/I Auction"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "LKR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "LKR",
+      "impact": 1,
+      "event": "Inflation Rate YoY"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate YoY"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Inflation Rate YoY"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Inflation Rate MoM"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "GBP",
+      "impact": 1,
+      "event": "DMP 3M Output Price Expectations"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T06:30:00",
+      "currency": "GBP",
+      "impact": 1,
+      "event": "DMP 1Y CPI Expectations"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "HRK",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "HRK",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate QoQ Flash"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "GDP Growth Rate YoY Flash"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T07:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T07:30:00",
+      "currency": "INR",
+      "impact": 1,
+      "event": "Government Budget Value"
+    },
+    {
+      "time": "2026-10-30T07:30:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "MKD",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "RSD",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "RSD",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "TRY",
+      "impact": 1,
+      "event": "MPC Meeting Summary"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "RSD",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "PPI YoY"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "ZAR",
+      "impact": 1,
+      "event": "Budget Balance"
+    },
+    {
+      "time": "2026-10-30T08:00:00",
+      "currency": "MKD",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T08:30:00",
+      "currency": "INR",
+      "impact": 1,
+      "event": "Deposit Growth YoY"
+    },
+    {
+      "time": "2026-10-30T08:30:00",
+      "currency": "INR",
+      "impact": 1,
+      "event": "Foreign Exchange Reserves"
+    },
+    {
+      "time": "2026-10-30T08:30:00",
+      "currency": "INR",
+      "impact": 1,
+      "event": "Bank Loan Growth YoY"
+    },
+    {
+      "time": "2026-10-30T08:30:00",
+      "currency": "BRL",
+      "impact": 1,
+      "event": "Gross Debt to GDP"
+    },
+    {
+      "time": "2026-10-30T08:30:00",
+      "currency": "BRL",
+      "impact": 1,
+      "event": "Nominal Budget Balance"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "ZAR",
+      "impact": 2,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "MXN",
+      "impact": 2,
+      "event": "GDP Growth Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "MXN",
+      "impact": 2,
+      "event": "GDP Growth Rate QoQ Prel"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Industrial Production YoY"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Retail Sales YoY"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Manufacturing Production YoY"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Copper Production YoY"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Retail Sales MoM"
+    },
+    {
+      "time": "2026-10-30T09:00:00",
+      "currency": "BRL",
+      "impact": 2,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T09:30:00",
+      "currency": "CAD",
+      "impact": 2,
+      "event": "GDP MoM Prel"
+    },
+    {
+      "time": "2026-10-30T09:30:00",
+      "currency": "CAD",
+      "impact": 2,
+      "event": "GDP MoM"
+    },
+    {
+      "time": "2026-10-30T09:30:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "Employment Cost Index QoQ"
+    },
+    {
+      "time": "2026-10-30T09:30:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "Employment Cost - Wages QoQ"
+    },
+    {
+      "time": "2026-10-30T09:30:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "Employment Cost - Benefits QoQ"
+    },
+    {
+      "time": "2026-10-30T10:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T10:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Harmonised Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T10:00:00",
+      "currency": "EUR",
+      "impact": 2,
+      "event": "Inflation Rate MoM Prel"
+    },
+    {
+      "time": "2026-10-30T10:00:00",
+      "currency": "EUR",
+      "impact": 3,
+      "event": "Inflation Rate YoY Prel"
+    },
+    {
+      "time": "2026-10-30T10:45:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "Chicago PMI"
+    },
+    {
+      "time": "2026-10-30T12:00:00",
+      "currency": "CAD",
+      "impact": 1,
+      "event": "Budget Balance"
+    },
+    {
+      "time": "2026-10-30T12:00:00",
+      "currency": "COP",
+      "impact": 1,
+      "event": "Unemployment Rate"
+    },
+    {
+      "time": "2026-10-30T12:50:00",
+      "currency": "LKR",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-30T13:00:00",
+      "currency": "UAH",
+      "impact": 1,
+      "event": "Current Account"
+    },
+    {
+      "time": "2026-10-30T13:10:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "ECB Lane Speech"
+    },
+    {
+      "time": "2026-10-30T13:30:00",
+      "currency": "USD",
+      "impact": 2,
+      "event": "Fed Musalem Speech"
+    },
+    {
+      "time": "2026-10-30T14:00:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Baker Hughes Oil Rig Count"
+    },
+    {
+      "time": "2026-10-30T14:00:00",
+      "currency": "USD",
+      "impact": 1,
+      "event": "Baker Hughes Total Rigs Count"
+    },
+    {
+      "time": "2026-10-30T14:10:00",
+      "currency": "UYI",
+      "impact": 1,
+      "event": "Balance of Trade"
+    },
+    {
+      "time": "2026-10-30T15:00:00",
+      "currency": "COP",
+      "impact": 1,
+      "event": "Interest Rate Decision"
+    },
+    {
+      "time": "2026-10-30T16:00:00",
+      "currency": "MXN",
+      "impact": 1,
+      "event": "Fiscal Balance"
+    },
+    {
+      "time": "2026-10-30T16:00:00",
+      "currency": "COP",
+      "impact": 1,
+      "event": "Cement Production YoY"
+    },
+    {
+      "time": "2026-10-30T21:00:00",
+      "currency": "EUR",
+      "impact": 1,
+      "event": "Reformation Day"
+    },
+    {
+      "time": "2026-10-30T21:00:00",
+      "currency": "CLF",
+      "impact": 1,
+      "event": "Reformation Day"
+    },
+    {
+      "time": "2026-10-30T22:30:00",
+      "currency": "CNY",
+      "impact": 3,
+      "event": "NBS Manufacturing PMI"
+    },
+    {
+      "time": "2026-10-30T22:30:00",
+      "currency": "CNY",
+      "impact": 2,
+      "event": "NBS Non Manufacturing PMI"
+    },
+    {
+      "time": "2026-10-30T22:30:00",
+      "currency": "CNY",
+      "impact": 1,
+      "event": "NBS General PMI"
     }
   ]
 }

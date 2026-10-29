@@ -40,11 +40,23 @@
   },
   "[RAPID] RSI Velocity 6p (Gen34)": {
     "graduated_at": "2026-10-14T12:07:16.865331",
+    "last_updated": "2026-10-28T09:15:00.000000",
     "win_rate": 62.9,
     "trades": 35,
     "wins": 22,
     "losses": 13,
-    "status": "INCUBATING_IN_PAPER"
+    "status": "READY_FOR_LIVE_ACCOUNT",
+    "graduation_type": "CLUSTER_SPECIALIZED",
+    "pairs": [
+      "#TSLA_otc",
+      "#AAPL_otc",
+      "AUDCAD_otc"
+    ],
+    "toxic_pairs": [
+      "EURCHF_otc",
+      "EURGBP_otc",
+      "AUDUSD_otc"
+    ]
   },
   "[ÉLITE] Micro Breakout 7v (Gen35)": {
     "graduated_at": "2026-10-14T13:19:00.000000",
@@ -96,28 +108,25 @@
     "wins": 87,
     "losses": 30,
     "pairs": [
-      "#INTC_otc",
+      "#MSFT_otc",
+      "#AAPL_otc",
       "#MCD_otc",
-      "AUDNZD_otc",
-      "AUDUSD_otc",
-      "CADCHF_otc",
-      "CADJPY_otc",
-      "CHFJPY_otc",
-      "ETHUSD_otc",
-      "NZDJPY_otc",
-      "USDCAD_otc",
-      "USDCHF_otc",
-      "XAGUSD_otc"
+      "#INTC_otc"
     ],
     "toxic_pairs": [
       "#FB_otc",
       "AUDJPY_otc",
+      "AUDNZD_otc",
+      "AUDUSD_otc",
       "BTCUSD_otc",
       "EURGBP_otc",
       "EURUSD_otc",
       "GBPAUD_otc",
+      "GBPUSD_otc",
       "LTCUSD_otc",
       "USDARS_otc",
+      "USDCAD_otc",
+      "USDCOP_otc",
       "USDMXN_otc"
     ],
     "allowed_hours_utc": [
@@ -234,7 +243,7 @@
   },
   "SMC Élite (ChoCH + MTF + MACD)": {
     "graduated_at": "2026-10-16T11:50:07.484534",
-    "last_updated": "2026-10-16T11:50:07.484534",
+    "last_updated": "2026-10-28T09:15:00.000000",
     "win_rate": 63.2,
     "trades": 359,
     "wins": 227,
@@ -242,11 +251,11 @@
     "pairs": [
       "#CSCO_otc",
       "#MSFT_otc",
-      "AUDCHF_otc",
-      "AUDNZD_otc",
       "USDCAD_otc"
     ],
     "toxic_pairs": [
+      "AUDCHF_otc",
+      "AUDNZD_otc",
       "#AAPL_otc",
       "#TSLA_otc",
       "CADCHF_otc",

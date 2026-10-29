@@ -85,13 +85,26 @@ class StrategySMCElite(Strategy):
                 bias_4h = 1 if df["Close"].iloc[-1] > ema_50_h else -1
                 bias_1d = 1 if df["Close"].iloc[-1] > sma_200_h else -1
 
+        # 4. Filtro de Agotamiento y Respaldo Dinámico (Stochastic K & EMA 20)
+        # En OTC, entrar en BUY con sobrecompra extrema (K > 95) o en SELL con sobreventa extrema (K < 20)
+        # tras un ChoCH resulta en reversión inmediata en contra de la operación.
+        low_14 = df['Low'].rolling(14).min()
+        high_14 = df['High'].rolling(14).max()
+        denom = (high_14 - low_14).replace(0, 0.00001)
+        stoch_k = 100 * ((df['Close'] - low_14) / denom)
+        curr_stoch_k = stoch_k.iloc[-1]
+        ema_20 = df['Close'].ewm(span=20, adjust=False).mean().iloc[-1]
+        curr_close = df['Close'].iloc[-1]
+
         # Gatillos Élite con confluencia total
         if (bos_bull or sweep_bull) and (bias_1d == 1) and (bias_4h == 1) and macd_bull:
-            trigger_type = "ChoCH Alcista" if bos_bull else "Toma de Liquidez (Sweep) Alcista"
-            return 'BUY', f"SMC Élite Long: {trigger_type} + MTF 1D/4H Alineado + MACD Momentum Positivo", target_duration
+            if curr_stoch_k <= 95 and curr_close >= ema_20 * 0.9995:
+                trigger_type = "ChoCH Alcista" if bos_bull else "Toma de Liquidez (Sweep) Alcista"
+                return 'BUY', f"SMC Élite Long: {trigger_type} + MTF 1D/4H Alineado + MACD Momentum Positivo (K={curr_stoch_k:.1f})", target_duration
 
         if (bos_bear or sweep_bear) and (bias_1d == -1) and (bias_4h == -1) and macd_bear:
-            trigger_type = "ChoCH Bajista" if bos_bear else "Toma de Liquidez (Sweep) Bajista"
-            return 'SELL', f"SMC Élite Short: {trigger_type} + MTF 1D/4H Alineado + MACD Momentum Negativo", target_duration
+            if curr_stoch_k >= 22 and curr_close <= ema_20 * 1.0005:
+                trigger_type = "ChoCH Bajista" if bos_bear else "Toma de Liquidez (Sweep) Bajista"
+                return 'SELL', f"SMC Élite Short: {trigger_type} + MTF 1D/4H Alineado + MACD Momentum Negativo (K={curr_stoch_k:.1f})", target_duration
 
-        return 'HOLD', "Sin confluencia SMC Élite (Filtro MTF/ChoCH/Sweep no completado)", 0
+        return 'HOLD', "Sin confluencia SMC Élite (Filtro MTF/ChoCH/Sweep/Stoch no completado)", 0

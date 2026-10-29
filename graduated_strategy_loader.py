@@ -33,6 +33,7 @@ from strategy_wavetrend_keltner import StrategyWaveTrendKeltner
 from strategy_fibonacci_master import StrategyFibonacciMasterSniper
 from strategy_chartist_patterns import StrategyChartistPatterns
 from strategy_alpha_convergence import StrategyAlphaConvergence
+from strategy_smc_elite import StrategySMCElite
 
 
 def parse_and_instantiate_strategy(name: str, meta: Optional[dict] = None):
@@ -113,13 +114,16 @@ def parse_and_instantiate_strategy(name: str, meta: Optional[dict] = None):
 
     # --- ESTRATEGIAS CLÁSICAS GRADUADAS POR ESPECIALIZACIÓN (CLUSTER) ---
     elif "Estocástico" in name or "Stochastic" in name:
-        strat = StrategyStochastic(bypass_filter=True)
+        strat = StrategyStochastic(bypass_filter=False)
         strat.name = name
     elif "Envolvente" in name or "Engulfing" in name or "Price Action" in name:
         strat = StrategyPriceActionEngulfing(bypass_filter=True)
         strat.name = name
     elif "Divergence" in name or "Divergencia" in name:
         strat = StrategyDivergencePivot(bypass_filter=True)
+        strat.name = name
+    elif "SMC Élite" in name or "SMC Elite" in name:
+        strat = StrategySMCElite(bypass_filter=True)
         strat.name = name
     elif "SMC" in name or "Smart Money" in name:
         strat = StrategySmartMoneySMC(bypass_filter=True)
