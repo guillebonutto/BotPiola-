@@ -1,18 +1,52 @@
-# Configuraciones con credenciales y sesiones
+# =============================================================
+#  .gitignore — Bot Trading IA  |  Seguridad y privacidad
+# =============================================================
+
+# ── CREDENCIALES Y CONFIGS CON SECRETOS ──────────────────────
+# Archivos reales con claves API, tokens, contraseñas, ssid, etc.
 config.json
 config_alpaca.json
 config_paper.json
 email_config.json
+
+# Variables de entorno (cualquier variante)
 .env
+.env.*
 *.env
 *.env.*
+env.local
+env.production
+env.development
 
-# Llaves y autenticación biométrica / facial
+# ── CLAVES, CERTIFICADOS Y AUTENTICACIÓN ─────────────────────
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.der
+*.pub
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.ppk
+
+# Biometría y autenticación facial
 .bio_key
 biometric_url.txt
 master_face_features.enc
 
-# Bases de datos y snapshots
+# ── TOKENS Y SESIONES ────────────────────────────────────────
+.telegram_offset
+session_state.json
+cookies.txt
+*.token
+*.session
+ssid.txt
+
+# ── BASES DE DATOS (pueden contener datos sensibles) ─────────
 *.db
 *.db.bak*
 *.sqlite
@@ -20,7 +54,7 @@ master_face_features.enc
 feedback.db
 feedback.db.*
 
-# Logs y terminales
+# ── LOGS (pueden contener IPs, tokens, trazas internas) ──────
 *.log
 logs/
 !logs/trades/
@@ -31,31 +65,51 @@ alpaca_stdout.log
 pibot_service.log
 optimizer_daemon.log
 web_server.log
+bot_output.log
 
-# Caché y archivos temporales de Python
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-pytest.ini
-
-# Estados de sesión y sincronización en runtime
-.telegram_offset
+# ── ESTADOS DE RUNTIME ───────────────────────────────────────
 alpaca_status.json
 pocketoption_status.json
-session_state.json
 paper_pending.json
 restart.signal
 *.bak*
 
-# Backups y binarios
+# ── CACHÉ Y COMPILADOS PYTHON ────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.pytest_cache/
+pytest.ini
+.mypy_cache/
+.ruff_cache/
+
+# ── ENTORNOS VIRTUALES ───────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+.Python
+
+# ── IDEs Y EDITORES ─────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── BACKUPS Y BINARIOS ───────────────────────────────────────
 backups/
 bin/
+*.bak
+*.tmp
 
-# Carpetas de desarrollo y scratch con pruebas internas
-scratch/
-
-# Archivos pesados / PDFs
+# ── ARCHIVOS PESADOS / DOCUMENTOS ────────────────────────────
 *.pdf
 *.docx
 *.xlsx
+
+# ── CARPETAS DE DESARROLLO INTERNO ───────────────────────────
+scratch/
